@@ -89,14 +89,14 @@
                         android:layout_marginTop="10dp">
 
                         <LinearLayout
-                            android:id="@+id/breakfast_linear_layout"
-                            android:tooltipText="Frühstück"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@color/foreground">
 
-                            <TextView
+                            <LinearLayout
+                                android:id="@+id/breakfast_linear_layout"
+                                android:tooltipText="Frühstück"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="2dp"
@@ -104,21 +104,28 @@
                                 android:layout_marginBottom="1dp"
                                 android:layout_marginLeft="2dp"
                                 android:background="@color/white"
-                                android:text="@string/breakfast"
-                                android:gravity="center"
-                                android:textColor="@color/text_color"/>
+                                android:onClick="saveFilterValue">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:text="@string/breakfast"
+                                    android:textColor="@color/text_color"/>
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/lunch_linear_layout"
-                            android:tooltipText="Mittagessen"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@color/foreground">
 
-                            <TextView
+                            <LinearLayout
+                                android:id="@+id/lunch_linear_layout"
+                                android:tooltipText="Mittagessen"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="2dp"
@@ -126,21 +133,28 @@
                                 android:layout_marginBottom="1dp"
                                 android:layout_marginLeft="1dp"
                                 android:background="@color/white"
-                                android:text="@string/lunch"
-                                android:gravity="center"
-                                android:textColor="@color/text_color"/>
+                                android:onClick="saveFilterValue">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="@string/lunch"
+                                    android:gravity="center"
+                                    android:textColor="@color/text_color"/>
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/dinner_linear_layout"
-                            android:tooltipText="Abendessen"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@color/foreground">
 
-                            <TextView
+                            <LinearLayout
+                                android:id="@+id/dinner_linear_layout"
+                                android:tooltipText="Abendessen"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="2dp"
@@ -148,9 +162,16 @@
                                 android:layout_marginBottom="1dp"
                                 android:layout_marginLeft="1dp"
                                 android:background="@color/white"
-                                android:text="@string/dinner"
-                                android:gravity="center"
-                                android:textColor="@color/text_color"/>
+                                android:onClick="saveFilterValue">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="@string/dinner"
+                                    android:gravity="center"
+                                    android:textColor="@color/text_color"/>
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
@@ -164,14 +185,14 @@
                         android:layout_marginBottom="20dp">
 
                         <LinearLayout
-                            android:id="@+id/dessert_linear_layout"
-                            android:tooltipText="Dessert"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@color/foreground">
 
-                            <TextView
+                            <LinearLayout
+                                android:id="@+id/dessert_linear_layout"
+                                android:tooltipText="Dessert"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="1dp"
@@ -179,21 +200,28 @@
                                 android:layout_marginBottom="2dp"
                                 android:layout_marginLeft="2dp"
                                 android:background="@color/white"
-                                android:text="@string/dessert"
-                                android:gravity="center"
-                                android:textColor="@color/text_color"/>
+                                android:onClick="saveFilterValue">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="@string/dessert"
+                                    android:gravity="center"
+                                    android:textColor="@color/text_color"/>
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/snack_linear_layout"
-                            android:tooltipText="Snack"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@color/foreground">
 
-                            <TextView
+                            <LinearLayout
+                                android:id="@+id/snack_linear_layout"
+                                android:tooltipText="Snack"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="1dp"
@@ -201,21 +229,29 @@
                                 android:layout_marginBottom="2dp"
                                 android:layout_marginLeft="1dp"
                                 android:background="@color/white"
-                                android:text="@string/snack"
-                                android:gravity="center"
-                                android:textColor="@color/text_color"/>
+                                android:onClick="saveFilterValue">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="@string/snack"
+                                    android:gravity="center"
+                                    android:textColor="@color/text_color"/>
+
+                            </LinearLayout>
+
 
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/drink_linear_layout"
-                            android:tooltipText="Getränk"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@color/foreground">
 
-                            <TextView
+                            <LinearLayout
+                                android:id="@+id/drink_linear_layout"
+                                android:tooltipText="Getränk"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="1dp"
@@ -223,9 +259,16 @@
                                 android:layout_marginBottom="2dp"
                                 android:layout_marginLeft="1dp"
                                 android:background="@color/white"
-                                android:text="@string/drink"
-                                android:gravity="center"
-                                android:textColor="@color/text_color"/>
+                                android:onClick="saveFilterValue">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="@string/drink"
+                                    android:gravity="center"
+                                    android:textColor="@color/text_color"/>
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
@@ -239,14 +282,14 @@
                         android:layout_marginHorizontal="10dp">
 
                         <LinearLayout
-                            android:id="@+id/diff1_linear_layout"
-                            android:tooltipText="Einfach"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@color/foreground">
 
                             <LinearLayout
+                                android:id="@+id/diff1_linear_layout"
+                                android:tooltipText="Einfach"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="2dp"
@@ -255,7 +298,8 @@
                                 android:layout_marginBottom="2dp"
                                 android:background="@color/white"
                                 android:orientation="horizontal"
-                                android:gravity="center">
+                                android:gravity="center"
+                                android:onClick="saveFilterValue">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
@@ -267,14 +311,14 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/diff2_linear_layout"
-                            android:tooltipText="Mittel"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@color/foreground">
 
                             <LinearLayout
+                                android:id="@+id/diff2_linear_layout"
+                                android:tooltipText="Mittel"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="1dp"
@@ -283,7 +327,8 @@
                                 android:layout_marginBottom="2dp"
                                 android:background="@color/white"
                                 android:orientation="horizontal"
-                                android:gravity="center">
+                                android:gravity="center"
+                                android:onClick="saveFilterValue">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
@@ -302,14 +347,14 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/diff3_linear_layout"
-                            android:tooltipText="Schwierig"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@color/foreground">
 
                             <LinearLayout
+                                android:id="@+id/diff3_linear_layout"
+                                android:tooltipText="Schwierig"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="1dp"
@@ -318,7 +363,8 @@
                                 android:layout_marginBottom="2dp"
                                 android:background="@color/white"
                                 android:orientation="horizontal"
-                                android:gravity="center">
+                                android:gravity="center"
+                                android:onClick="saveFilterValue">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
@@ -360,8 +406,8 @@
                             app:right_thumb_color_pressed="@color/background"
                             app:bar_highlight_color="@color/foreground"
                             app:bar_color="@color/foreground"
-                            app:left_thumb_color="@color/background"
-                            app:right_thumb_color="@color/background"/>
+                            app:left_thumb_color="@color/foreground"
+                            app:right_thumb_color="@color/foreground"/>
 
                         <TextView
                             android:id="@+id/time_text_view"
@@ -387,8 +433,8 @@
                             app:right_thumb_color_pressed="@color/background"
                             app:bar_highlight_color="@color/foreground"
                             app:bar_color="@color/foreground"
-                            app:left_thumb_color="@color/background"
-                            app:right_thumb_color="@color/background"/>
+                            app:left_thumb_color="@color/foreground"
+                            app:right_thumb_color="@color/foreground"/>
 
                         <TextView
                             android:id="@+id/calories_text_view"
@@ -423,7 +469,7 @@
                                 android:background="@color/white"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:onClick="saveFilterValues">
+                                android:onClick="saveFilterValue">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -445,7 +491,7 @@
                                 android:layout_weight="1"
                                 android:orientation="horizontal"
                                 android:gravity="center"
-                                android:onClick="saveFilterValues">
+                                android:onClick="saveFilterValue">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
@@ -467,7 +513,7 @@
                                 android:layout_weight="1"
                                 android:orientation="horizontal"
                                 android:gravity="center"
-                                android:onClick="saveFilterValues">
+                                android:onClick="saveFilterValue">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
@@ -489,7 +535,7 @@
                                 android:layout_weight="1"
                                 android:orientation="horizontal"
                                 android:gravity="center"
-                                android:onClick="saveFilterValues">
+                                android:onClick="saveFilterValue">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -511,7 +557,7 @@
                                 android:background="@color/white"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:onClick="saveFilterValues">
+                                android:onClick="saveFilterValue">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
@@ -533,7 +579,7 @@
                                 android:layout_weight="1"
                                 android:orientation="horizontal"
                                 android:gravity="center"
-                                android:onClick="saveFilterValues">
+                                android:onClick="saveFilterValue">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -555,7 +601,7 @@
                                 android:background="@color/white"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:onClick="saveFilterValues">
+                                android:onClick="saveFilterValue">
 
                                 <ImageView
                                     android:layout_width="wrap_content"

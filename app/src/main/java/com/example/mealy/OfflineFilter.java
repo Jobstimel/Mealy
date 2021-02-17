@@ -18,4 +18,8 @@ public class OfflineFilter extends Fragment {
         return view;
     }
 
+    public void saveFilterValues(View v) {
+
+    }
+
 }

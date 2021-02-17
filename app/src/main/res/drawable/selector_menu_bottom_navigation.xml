@@ -3,10 +3,10 @@
 
     <item
         android:state_checked="true"
-        android:color="@color/gradient_start"/>
+        android:color="@color/gradient_end"/>
 
     <item
         android:state_checked="false"
-        android:color="@color/black"/>
+        android:color="@color/bottom_menu_not_focused"/>
 
 </selector>

@@ -7,4 +7,14 @@
     tools:context=".CreateLobby"
     android:background="@drawable/background_gradient">
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_navigation"
+        app:itemBackground="@color/white"
+        app:itemTextColor="@drawable/selector_menu_bottom_navigation"
+        app:itemIconTint="@drawable/selector_menu_bottom_navigation"
+        app:menu="@menu/menu_bottom_navigation"
+        android:layout_alignParentBottom="true"/>
+
 </RelativeLayout>

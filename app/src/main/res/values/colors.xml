@@ -7,10 +7,19 @@
     <color name="teal_700">#018786</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="red">#EE1C25</color>
+    <color name="green">#32BA7C</color>
+    <color name="grey">#BDBDBD</color>
+    <color name="yellow">#FFF200</color>
+
+    <color name="white_transparent">#80FFFFFF</color>
+    <color name="foreground">#80015AA2</color>
+    <color name="text_color">#6E6E6E</color>
 
     <color name="gradient_start">#243949</color>
     <color name="gradient_end">#517fa4</color>
 
     <color name="bottom_menu_not_focused">#80000000</color>
+    <color name="background">#015AA2</color>
 
 </resources>

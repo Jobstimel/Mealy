@@ -3,7 +3,7 @@
 
     <item
         android:state_checked="true"
-        android:color="@color/gradient_end"/>
+        android:color="@color/background"/>
 
     <item
         android:state_checked="false"

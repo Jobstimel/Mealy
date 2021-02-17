@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mealy">
         <activity android:name=".PlayAlone"></activity>
-        <activity android:name=".CreateLobby" />
-        <activity android:name=".JoinLobby">
+        <activity android:name=".CreateGroup" />
+        <activity android:name=".JoinGroup">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

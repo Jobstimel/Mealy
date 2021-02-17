@@ -10,10 +10,10 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class CreateLobby extends AppCompatActivity {
+public class JoinGroup extends AppCompatActivity {
 
     //General
-    private static final String TAG = "CreateLobbyActivity";
+    private static final String TAG = "JoinLobbyActivity";
     private Context mContext;
 
     //Views
@@ -22,7 +22,7 @@ public class CreateLobby extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_lobby);
+        setContentView(R.layout.activity_join_group);
 
         mContext = getApplicationContext();
 
@@ -33,7 +33,7 @@ public class CreateLobby extends AppCompatActivity {
 
     private void setupViews() {
         mBottomNavigationView = findViewById(R.id.bottom_navigation);
-        mBottomNavigationView.setSelectedItemId(R.id.create_group);
+        mBottomNavigationView.setSelectedItemId(R.id.join_group);
     }
 
     private void setupBottomNavigationBar() {
@@ -46,10 +46,10 @@ public class CreateLobby extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.join_group:
-                        startActivity(new Intent(getApplicationContext(), JoinLobby.class));
-                        overridePendingTransition(0,0);
                         return true;
                     case R.id.create_group:
+                        startActivity(new Intent(getApplicationContext(), CreateGroup.class));
+                        overridePendingTransition(0,0);
                         return true;
                 }
                 return false;

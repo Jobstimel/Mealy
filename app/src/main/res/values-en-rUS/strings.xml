@@ -4,4 +4,10 @@
     <string name="play_alone">Play Alone</string>
     <string name="join_group">Join Group</string>
     <string name="create_group">Create Group</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="lunch">Lunch</string>
+    <string name="dinner">Dinner</string>
+    <string name="dessert">Dessert</string>
+    <string name="snack">Snack</string>
+    <string name="drink">Drink</string>
 </resources>

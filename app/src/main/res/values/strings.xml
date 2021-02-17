@@ -7,4 +7,57 @@
     <string name="play_alone">Solomodus</string>
     <string name="join_group">Gruppe beitreten</string>
     <string name="create_group">Gruppe erstellen</string>
+
+    //Filter
+    <string name="breakfast">Frühstück</string>
+    <string name="lunch">Mittagessen</string>
+    <string name="dinner">Abendessen</string>
+    <string name="dessert">Dessert</string>
+    <string name="snack">Snack</string>
+    <string name="drink">Getränk</string>
+
+    <string-array name="meal_allergies">
+        <item>Eier</item>
+        <item>Fisch</item>
+        <item>Gluten</item>
+        <item>Laktose</item>
+        <item>Nüsse</item>
+        <item>Sellerie</item>
+        <item>Senf</item>
+        <item>Sesam</item>
+        <item>Soja</item>
+    </string-array>
+
+    <string-array name="preparation_type">
+        <item>backen</item>
+        <item>braten</item>
+        <item>grillen</item>
+        <item>kochen</item>
+        <item>roh</item>
+    </string-array>
+
+    <string-array name="eating_type">
+        <item>abnehmen</item>
+        <item>fettarm</item>
+        <item>lowcarb</item>
+        <item>vegan</item>
+        <item>vegetarisch</item>
+    </string-array>
+
+    <string-array name="meal_category">
+        <item>Auflauf</item>
+        <item>Brot</item>
+        <item>Burger</item>
+        <item>Kuchen</item>
+        <item>Pasta</item>
+        <item>Pfannkuchen</item>
+        <item>Pizza</item>
+        <item>Plätzchen</item>
+        <item>Quiche</item>
+        <item>Reis</item>
+        <item>Salat</item>
+        <item>Smoothie</item>
+        <item>Suppe</item>
+    </string-array>
+
 </resources>

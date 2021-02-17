@@ -1,3 +1,10 @@
 <resources>
+
+    //General
     <string name="app_name">Mealy</string>
+
+    //Bottom Navigation Menu
+    <string name="play_alone">Solomodus</string>
+    <string name="join_group">Gruppe beitreten</string>
+    <string name="create_group">Gruppe erstellen</string>
 </resources>

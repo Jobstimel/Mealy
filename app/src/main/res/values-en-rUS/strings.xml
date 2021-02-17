@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mealy</string>
+    <string name="play_alone">Play Alone</string>
+    <string name="join_group">Join Group</string>
+    <string name="create_group">Create Group</string>
+</resources>

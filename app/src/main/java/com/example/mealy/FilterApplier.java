@@ -1,6 +1,7 @@
 package com.example.mealy;
 
 import android.content.SharedPreferences;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +15,6 @@ public class FilterApplier {
     private final String[] COUNTRIES = {"Deutschland","Spanien","Asien","Italien","Frankreich","Italien","Griechenland","Indien"};
     private final String[] DIFFICULTIES = {"Einfach","Mittel","Schwierig"};
 
-    private Integer count;
     private String prefix;
     private SharedPreferences mSharedPreferences;
     private List<Recipe> mAllRecipesList;
@@ -27,24 +27,16 @@ public class FilterApplier {
         this.mAllRecipesList = allRecipesList;
     }
 
-    public String getPrefix() {
-        return prefix;
-    }
+    public void applyFilter(TextView textView) {
 
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-
-    public void applyFilter() {
-
-        mFilteredRecipeList = new ArrayList<Recipe>();
+        mFilteredRecipeList = new ArrayList<>();
         List<String> mTypeFilter = getFilterValues(TYPES);
         List<String> mCounFilter = getFilterValues(COUNTRIES);
         List<String> mDiffFilter = getFilterValues(DIFFICULTIES);
 
-        for (int i = 0; i < mAllRecipesList.size(); i++) {
+        for (int i = 0; i < this.mAllRecipesList.size(); i++) {
 
-            Recipe recipe = mAllRecipesList.get(i);
+            Recipe recipe = this.mAllRecipesList.get(i);
             String[] tags = recipe.getTags();
             Boolean status = true;
 
@@ -64,16 +56,16 @@ public class FilterApplier {
                 status = checkCalories(recipe);
             }
             if (status) {
-                status = checkTagsSingleValue(recipe.getAllergies(), "AllergiesSpinnerValue" + this.prefix);
+                status = checkTagsSingleValue(recipe.getAllergies(), "AllergiesSpinner"+this.prefix+"Value");
             }
             if (status) {
-                status = checkTagsSingleValue(tags, "PreparationTypeSpinnerValue" + this.prefix);
+                status = checkTagsSingleValue(tags, "PreparationTypeSpinner"+this.prefix+"Value");
             }
             if (status) {
-                status = checkTagsSingleValue(tags, "CategorySpinnerValue" + this.prefix);
+                status = checkTagsSingleValue(tags, "CategorySpinner"+this.prefix+"Value");
             }
             if (status) {
-                status = checkTagsSingleValue(tags, "EatingTypeSpinnerValue" + this.prefix);
+                status = checkTagsSingleValue(tags, "EatingTypeSpinner"+this.prefix+"Value");
             }
 
             if (status) {
@@ -81,7 +73,7 @@ public class FilterApplier {
             }
         }
         saveFilteredIDs();
-        this.count = mFilteredRecipeList.size();
+        textView.setText(mFilteredRecipeList.size() + " Rezepte gefunden");
     }
 
     private Boolean checkTagsMultipleSelections(String[] tags, List<String> filterValues) {
@@ -114,8 +106,8 @@ public class FilterApplier {
     }
 
     private Boolean checkTime(Recipe recipe) {
-        int timeSeekbarMin = mSharedPreferences.getInt("TimeSeekbarMin",0);
-        int timeSeekbarMax = mSharedPreferences.getInt("TimeSeekbarMax", MAX_TIME);
+        int timeSeekbarMin = mSharedPreferences.getInt("TimeSeekbar"+this.prefix+"Min",0);
+        int timeSeekbarMax = mSharedPreferences.getInt("TimeSeekbar"+this.prefix+"Max", MAX_TIME);
         if (recipe.getTotal() >= timeSeekbarMin && recipe.getTotal() <= timeSeekbarMax) {
             return true;
         }
@@ -123,8 +115,8 @@ public class FilterApplier {
     }
 
     private Boolean checkCalories(Recipe recipe) {
-        int kcalSeekbarMin = mSharedPreferences.getInt("CaloriesSeekbarMin",0);
-        int kcalSeekbarMax = mSharedPreferences.getInt("CaloriesSeekbarMax", MAX_CALORIES);
+        int kcalSeekbarMin = mSharedPreferences.getInt("CaloriesSeekbar"+this.prefix+"Min",0);
+        int kcalSeekbarMax = mSharedPreferences.getInt("CaloriesSeekbar"+this.prefix+"Max", MAX_CALORIES);
         if (recipe.getKcal() >= kcalSeekbarMin && recipe.getKcal() <= kcalSeekbarMax) {
             return true;
         }
@@ -166,7 +158,7 @@ public class FilterApplier {
             }
         }
         SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putString("FilteredIDs", tmp);
+        editor.putString("Filtered"+this.prefix+"IDs", tmp);
         editor.commit();
     }
 }

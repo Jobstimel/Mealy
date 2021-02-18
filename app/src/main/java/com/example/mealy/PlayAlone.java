@@ -45,6 +45,7 @@ public class PlayAlone extends FragmentActivity {
 
     //Views
     private BottomNavigationView mBottomNavigationView;
+    private TextView mTextViewRecipeCount;
 
     //Lists
     private List<Recipe> mAllRecipesList;
@@ -80,13 +81,14 @@ public class PlayAlone extends FragmentActivity {
         }
         editor.putBoolean("ChangeStatus", true);
         editor.commit();
-        mFilterApplier.applyFilter();
+        mFilterApplier.applyFilter(mTextViewRecipeCount);
     }
 
     private void setupElements() {
         mBottomNavigationView = findViewById(R.id.bottom_navigation);
         mBottomNavigationView.setSelectedItemId(R.id.play_alone);
         mSharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        mTextViewRecipeCount = findViewById(R.id.text_view_recipe_count);
         mAllRecipesList = Loader.loadRecipies(mContext);
         mFilterApplier = new FilterApplier("Offline", mSharedPreferences, mAllRecipesList);
         mFilterSpinnerHandler = new FilterSpinnerHandler("Offline", mSharedPreferences, mContext);
@@ -94,6 +96,7 @@ public class PlayAlone extends FragmentActivity {
         setupSpinners();
 
         mFilterSpinnerHandler.loadSpinnerStates(mPowerSpinnerAllergies, mPowerSpinnerPreparation, mPowerSpinnerCategories, mPowerSpinnerEating);
+        mFilterApplier.applyFilter(mTextViewRecipeCount);
     }
 
     private void setupSpinners() {
@@ -104,22 +107,22 @@ public class PlayAlone extends FragmentActivity {
 
         mPowerSpinnerEating.setOnSpinnerItemSelectedListener((OnSpinnerItemSelectedListener<String>) (oldIndex, oldItem, newIndex, newItem) -> {
             mFilterSpinnerHandler.applySpinner(mPowerSpinnerEating, "EatingTypeSpinner", newItem, newIndex);
-            mFilterApplier.applyFilter();
+            mFilterApplier.applyFilter(mTextViewRecipeCount);
         });
 
         mPowerSpinnerCategories.setOnSpinnerItemSelectedListener((OnSpinnerItemSelectedListener<String>) (oldIndex, oldItem, newIndex, newItem) -> {
             mFilterSpinnerHandler.applySpinner(mPowerSpinnerCategories, "CategorySpinner", newItem, newIndex);
-            mFilterApplier.applyFilter();
+            mFilterApplier.applyFilter(mTextViewRecipeCount);
         });
 
         mPowerSpinnerAllergies.setOnSpinnerItemSelectedListener((OnSpinnerItemSelectedListener<String>) (oldIndex, oldItem, newIndex, newItem) -> {
             mFilterSpinnerHandler.applySpinner(mPowerSpinnerAllergies, "AllergiesSpinner", newItem, newIndex);
-            mFilterApplier.applyFilter();
+            mFilterApplier.applyFilter(mTextViewRecipeCount);
         });
 
         mPowerSpinnerPreparation.setOnSpinnerItemSelectedListener((OnSpinnerItemSelectedListener<String>) (oldIndex, oldItem, newIndex, newItem) -> {
             mFilterSpinnerHandler.applySpinner(mPowerSpinnerPreparation, "PreparationTypeSpinner", newItem, newIndex);
-            mFilterApplier.applyFilter();
+            mFilterApplier.applyFilter(mTextViewRecipeCount);
         });
     }
 
@@ -146,21 +149,21 @@ public class PlayAlone extends FragmentActivity {
 
     public void resetSpinnerAllergies(View v) {
         mFilterSpinnerHandler.resetSpinner(findViewById(R.id.allergies_power_spinner), "AllergiesSpinner");
-        mFilterApplier.applyFilter();
+        mFilterApplier.applyFilter(mTextViewRecipeCount);
     }
 
     public void resetSpinnerPreparationType(View v) {
         mFilterSpinnerHandler.resetSpinner(findViewById(R.id.preparation_type_power_spinner), "PreparationTypeSpinner");
-        mFilterApplier.applyFilter();
+        mFilterApplier.applyFilter(mTextViewRecipeCount);
     }
 
     public void resetSpinnerCategory(View v) {
         mFilterSpinnerHandler.resetSpinner(findViewById(R.id.category_power_spinner), "CategorySpinner");
-        mFilterApplier.applyFilter();
+        mFilterApplier.applyFilter(mTextViewRecipeCount);
     }
 
     public void resetSpinnerEatingType(View v) {
         mFilterSpinnerHandler.resetSpinner(findViewById(R.id.eating_type_power_spinner), "EatingTypeSpinner");
-        mFilterApplier.applyFilter();
+        mFilterApplier.applyFilter(mTextViewRecipeCount);
     }
 }

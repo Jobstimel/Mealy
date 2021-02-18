@@ -15,14 +15,14 @@ public class FilterApplier {
     private final String[] COUNTRIES = {"Deutschland","Spanien","Asien","Italien","Frankreich","Italien","Griechenland","Indien"};
     private final String[] DIFFICULTIES = {"Einfach","Mittel","Schwierig"};
 
-    private String prefix;
+    private String mMode;
     private SharedPreferences mSharedPreferences;
     private List<Recipe> mAllRecipesList;
     private List<Recipe> mFilteredRecipeList;
     private List<Integer> mFilteredIDs;
 
-    public FilterApplier(String prefix, SharedPreferences sharedPreferences, List<Recipe> allRecipesList) {
-        this.prefix = prefix;
+    public FilterApplier(String mode, SharedPreferences sharedPreferences, List<Recipe> allRecipesList) {
+        this.mMode = mode;
         this.mSharedPreferences = sharedPreferences;
         this.mAllRecipesList = allRecipesList;
     }
@@ -56,16 +56,16 @@ public class FilterApplier {
                 status = checkCalories(recipe);
             }
             if (status) {
-                status = checkTagsSingleValue(recipe.getAllergies(), "AllergiesSpinner"+this.prefix+"Value");
+                status = checkTagsSingleValue(recipe.getAllergies(), "AllergiesSpinner"+this.mMode+"Value");
             }
             if (status) {
-                status = checkTagsSingleValue(tags, "PreparationTypeSpinner"+this.prefix+"Value");
+                status = checkTagsSingleValue(tags, "PreparationTypeSpinner"+this.mMode+"Value");
             }
             if (status) {
-                status = checkTagsSingleValue(tags, "CategorySpinner"+this.prefix+"Value");
+                status = checkTagsSingleValue(tags, "CategorySpinner"+this.mMode+"Value");
             }
             if (status) {
-                status = checkTagsSingleValue(tags, "EatingTypeSpinner"+this.prefix+"Value");
+                status = checkTagsSingleValue(tags, "EatingTypeSpinner"+this.mMode+"Value");
             }
 
             if (status) {
@@ -106,18 +106,18 @@ public class FilterApplier {
     }
 
     private Boolean checkTime(Recipe recipe) {
-        int timeSeekbarMin = mSharedPreferences.getInt("TimeSeekbar"+this.prefix+"Min",0);
-        int timeSeekbarMax = mSharedPreferences.getInt("TimeSeekbar"+this.prefix+"Max", MAX_TIME);
-        if (recipe.getTotal() >= timeSeekbarMin && recipe.getTotal() <= timeSeekbarMax) {
+        int timeSeekBarMin = mSharedPreferences.getInt("TimeSeekBar"+this.mMode+"Min",0);
+        int timeSeekBarMax = mSharedPreferences.getInt("TimeSeekBar"+this.mMode+"Max", MAX_TIME);
+        if (recipe.getTotal() >= timeSeekBarMin && recipe.getTotal() <= timeSeekBarMax) {
             return true;
         }
         return false;
     }
 
     private Boolean checkCalories(Recipe recipe) {
-        int kcalSeekbarMin = mSharedPreferences.getInt("CaloriesSeekbar"+this.prefix+"Min",0);
-        int kcalSeekbarMax = mSharedPreferences.getInt("CaloriesSeekbar"+this.prefix+"Max", MAX_CALORIES);
-        if (recipe.getKcal() >= kcalSeekbarMin && recipe.getKcal() <= kcalSeekbarMax) {
+        int kcalSeekBarMin = mSharedPreferences.getInt("CaloriesSeekBar"+this.mMode+"Min",0);
+        int kcalSeekBarMax = mSharedPreferences.getInt("CaloriesSeekBar"+this.mMode+"Max", MAX_CALORIES);
+        if (recipe.getKcal() >= kcalSeekBarMin && recipe.getKcal() <= kcalSeekBarMax) {
             return true;
         }
         return false;
@@ -139,7 +139,7 @@ public class FilterApplier {
     private List<String> getFilterValues(String[] values) {
         List<String> tmp = new ArrayList<String>();
         for (int i = 0; i < values.length; i++) {
-            if (mSharedPreferences.getBoolean(values[i], false)) {
+            if (mSharedPreferences.getBoolean(values[i]+mMode, false)) {
                 tmp.add(values[i].toLowerCase());
             }
         }
@@ -158,7 +158,7 @@ public class FilterApplier {
             }
         }
         SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putString("Filtered"+this.prefix+"IDs", tmp);
+        editor.putString("Filtered"+this.mMode+"IDs", tmp);
         editor.commit();
     }
 }

@@ -8,8 +8,8 @@ import java.util.List;
 
 public class FilterApplier {
 
-    private final Integer MAX_TIME = 300;
-    private final Integer MAX_CALORIES = 2000;
+    public final Integer MAX_TIME = 300;
+    public final Integer MAX_CALORIES = 2000;
     private final String[] TYPES = {"Frühstück","Mittagessen","Abendessen","Dessert","Snack","Getränk"};
     private final String[] COUNTRIES = {"Deutschland","Spanien","Asien","Italien","Frankreich","Italien","Griechenland","Indien"};
     private final String[] DIFFICULTIES = {"Einfach","Mittel","Schwierig"};

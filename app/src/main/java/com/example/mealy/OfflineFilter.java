@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -17,9 +16,4 @@ public class OfflineFilter extends Fragment {
         View view  = inflater.inflate(R.layout.offline_filter_layout, container, false);
         return view;
     }
-
-    public void saveFilterValues(View v) {
-
-    }
-
 }

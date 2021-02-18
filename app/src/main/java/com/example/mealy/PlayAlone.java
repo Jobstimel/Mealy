@@ -19,6 +19,9 @@ import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.List;
+import java.util.Locale;
+
 public class PlayAlone extends FragmentActivity {
 
     //General
@@ -26,8 +29,14 @@ public class PlayAlone extends FragmentActivity {
     private SharedPreferences mSharedPreferences;
     private Context mContext;
 
+    //Class Objects
+    private FilterApplier mFilterApplier;
+
     //Views
     private BottomNavigationView mBottomNavigationView;
+
+    //Lists
+    private List<Recipe> mAllRecipesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,26 +51,32 @@ public class PlayAlone extends FragmentActivity {
 
     }
 
+    /**
+     * Changes the background color of the pressed filter value
+     * Calls the applyFilter() method to update the filtered recipes
+     * @calls applyFilter()
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void saveFilterValue(View v) {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
-        if (!mSharedPreferences.getBoolean(String.valueOf(v.getTooltipText()),false)) {
-            editor.putBoolean(String.valueOf(v.getTooltipText()), true);
+        if (!mSharedPreferences.getBoolean(String.valueOf(v.getTooltipText()+"Offline"),false)) {
+            editor.putBoolean(String.valueOf(v.getTooltipText()+"Offline"), true);
             v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.green));
         }
         else {
-            editor.putBoolean(String.valueOf(v.getTooltipText()), false);
+            editor.putBoolean(String.valueOf(v.getTooltipText()+"Offline"), false);
             v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
         }
-        editor.putBoolean("ChangeStatus", true);
         editor.commit();
-        //applyFilter(v);
+        mFilterApplier.applyFilter();
     }
 
     private void setupElements() {
         mBottomNavigationView = findViewById(R.id.bottom_navigation);
         mBottomNavigationView.setSelectedItemId(R.id.play_alone);
         mSharedPreferences = getSharedPreferences("SavedData", Context.MODE_PRIVATE);
+        mAllRecipesList = Loader.loadRecipies(mContext);
+        mFilterApplier = new FilterApplier("Offline", mSharedPreferences, mAllRecipesList);
 
         Fragment newFragment = new OfflineFilter();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

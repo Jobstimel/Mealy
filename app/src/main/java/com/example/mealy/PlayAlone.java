@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Filter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,12 +48,18 @@ public class PlayAlone extends FragmentActivity {
     private SharedPreferences mSharedPreferences;
     private Context mContext;
 
+    //Public
+    public static List<Integer> mStackIDs;
+    public static List<Integer> mLikedIDs;
+    public static List<Integer> mDislikedIDs;
+    public static List<Object> mResolvers;
+
     //Class Objects
+    private SwipeHandler mSwipeHandler;
     private FilterApplier mFilterApplier;
     private FilterSpinnerHandler mFilterSpinnerHandler;
     private FilterLinearLayoutHandler mFilterLinearLayoutHandler;
     private FilterSeekBarHandler mFilterSeekBarHandler;
-    private SwipeHandler mSwipeHandler;
     private SwipePlaceHolderViewHandler mSwipePlaceHolderViewHandler;
 
     //Views
@@ -61,6 +68,7 @@ public class PlayAlone extends FragmentActivity {
     private TextView mTextViewRecipeCount;
     private TextView mTextViewCalories;
     private TextView mTextViewTime;
+    private ListView mResultListView;
 
     //Lists
     private List<Recipe> mAllRecipesList;
@@ -104,8 +112,13 @@ public class PlayAlone extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_alone);
-
         setupElements();
+    }
+
+    protected void onPause() {
+        mSwipeHandler.saveLikedIndices(mLikedIDs);
+        mSwipeHandler.saveDislikedIndices(mDislikedIDs);
+        super.onPause();
     }
 
     private void loadFilterStates() {
@@ -175,12 +188,28 @@ public class PlayAlone extends FragmentActivity {
         loadCorrectPage();
     }
 
+    public void switchPage3(View v) {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putInt("PageOffline", 3);
+        editor.commit();
+        loadCorrectPage();
+    }
+
+    private void loadResults() {
+        mSwipeHandler.loadOfflineResults(mAllRecipesList, mLikedIDs);
+        ListViewAdapter adapter = new ListViewAdapter(this, R.layout.list_view_apdapter_layout, mSwipeHandler.mOfflineResults, "Offline");
+        mResultListView.setAdapter(adapter);
+    }
+
     private void loadCorrectPage() {
         setupPages();
         Integer mPage = mSharedPreferences.getInt("PageOffline", 1);
         if (mPage == 1) {
             mPage1.setVisibility(View.VISIBLE);
             mPage2.setVisibility(View.GONE);
+            mPage3.setVisibility(View.GONE);
+            mSwipeHandler.saveLikedIndices(mLikedIDs);
+            mSwipeHandler.saveDislikedIndices(mDislikedIDs);
             setupViews();
             setupClasses();
             setupLinearLayouts();
@@ -192,31 +221,52 @@ public class PlayAlone extends FragmentActivity {
         else if (mPage == 2) {
             mPage1.setVisibility(View.GONE);
             mPage2.setVisibility(View.VISIBLE);
-            mSwipeHandler = new SwipeHandler("Offline", mSharedPreferences, mContext);
-            mSwipePlaceHolderViewHandler = new SwipePlaceHolderViewHandler("Offline", mSharedPreferences, mContext);
-            mSwipeHandler.loadSelectedIndices();
+            mPage3.setVisibility(View.GONE);
             setupSwipePlaceholderView();
         }
-    }
-
-    private void setupSwipePlaceholderView() {
-        mSwipePlaceHolderView = findViewById(R.id.swipeView);
-        mSwipePlaceHolderViewHandler.setSwipePlaceHolderViewBuilder(mSwipePlaceHolderView);
-        mSwipePlaceHolderViewHandler.loadSwipePlaceholderView(mSwipeHandler.mSelectedIDs, mAllRecipesList, mSwipePlaceHolderView);
+        else if (mPage == 3) {
+            mPage1.setVisibility(View.GONE);
+            mPage2.setVisibility(View.GONE);
+            mPage3.setVisibility(View.VISIBLE);
+            loadResults();
+        }
     }
 
     private void setupElements() {
         mSharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
         mContext = getApplicationContext();
-        mAllRecipesList = Loader.loadRecipies(mContext);
-        mContext = getApplicationContext();
+        setupLists();
+        setupClasses();
+        mSwipeHandler.loadLikedIndices();
+        mSwipeHandler.loadDislikedIndices();
+        mLikedIDs = mSwipeHandler.mLikedIDs;
+        mDislikedIDs = mSwipeHandler.mDislikedIDs;
+        mResultListView = findViewById(R.id.list_view_result);
         loadCorrectPage();
         setupBottomNavigationBar();
+    }
+
+    private void setupSwipePlaceholderView() {
+        mSwipeHandler.loadSelectedIndices();
+        mSwipePlaceHolderView = findViewById(R.id.swipeView);
+        mSwipePlaceHolderViewHandler.setSwipePlaceHolderViewBuilder(mSwipePlaceHolderView);
+        mSwipePlaceHolderViewHandler.loadSwipePlaceholderView(mSwipeHandler.mSelectedIDs, mAllRecipesList, mSwipePlaceHolderView);
+        mStackIDs = mSwipePlaceHolderViewHandler.mStackIDs;
+        mResolvers = mSwipePlaceHolderViewHandler.mResolvers;
+    }
+
+    private void setupLists() {
+        mAllRecipesList = Loader.loadRecipies(mContext);
+        mLikedIDs = new ArrayList<>();
+        mDislikedIDs = new ArrayList<>();
+        mStackIDs = new ArrayList<>();
+        mResolvers = new ArrayList<>();
     }
 
     private void setupPages() {
         mPage1 = findViewById(R.id.page_1);
         mPage2 = findViewById(R.id.page_2);
+        mPage3 = findViewById(R.id.page_3);
     }
 
     private void setupViews() {
@@ -230,6 +280,8 @@ public class PlayAlone extends FragmentActivity {
         mFilterSpinnerHandler = new FilterSpinnerHandler("Offline", mSharedPreferences, mContext);
         mFilterLinearLayoutHandler = new FilterLinearLayoutHandler("Offline", mSharedPreferences, mContext);
         mFilterSeekBarHandler = new FilterSeekBarHandler("Offline", mSharedPreferences, mContext);
+        mSwipeHandler = new SwipeHandler("Offline", mSharedPreferences, mContext);
+        mSwipePlaceHolderViewHandler = new SwipePlaceHolderViewHandler("Offline", mSharedPreferences, mContext);
     }
 
     private void setupSeekBars() {

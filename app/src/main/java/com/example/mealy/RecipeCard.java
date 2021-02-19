@@ -68,6 +68,12 @@ public class RecipeCard {
 
     @SwipeOut
     private void onSwipedOut() {
+        List<Object> tmp = mSwipeView.getAllResolvers();
+        for (int i = 0; i < PlayAlone.mResolvers.size(); i++) {
+            if (PlayAlone.mResolvers.get(i) == tmp.get(0)) {
+                PlayAlone.mDislikedIDs.add(PlayAlone.mStackIDs.get(i));
+            }
+        }
     }
 
     @SwipeCancelState
@@ -75,6 +81,12 @@ public class RecipeCard {
 
     @SwipeIn
     private void onSwipeIn() {
+        List<Object> tmp = mSwipeView.getAllResolvers();
+        for (int i = 0; i < PlayAlone.mResolvers.size(); i++) {
+            if (PlayAlone.mResolvers.get(i) == tmp.get(0)) {
+                PlayAlone.mLikedIDs.add(PlayAlone.mStackIDs.get(i));
+            }
+        }
     }
 
     @SwipeInState

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PlayAlone"
-    android:background="@drawable/background3"
+    android:background="@drawable/background_image_cork"
     android:orientation="vertical">
 
     <LinearLayout
@@ -46,7 +46,9 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/icon_result_black_white"
                 android:layout_weight="1"
-                android:paddingVertical="5dp"/>
+                android:paddingVertical="5dp"
+                android:clickable="true"
+                android:onClick="switchPage3"/>
 
         </LinearLayout>
 
@@ -913,7 +915,9 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/icon_result_black_white"
                 android:layout_weight="1"
-                android:paddingVertical="5dp"/>
+                android:paddingVertical="5dp"
+                android:clickable="true"
+                android:onClick="switchPage3"/>
 
         </LinearLayout>
 
@@ -921,6 +925,67 @@
             android:id="@+id/swipeView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/page_3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:elevation="5dp"
+            android:gravity="center"
+            android:weightSum="3">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_filter_black_white"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:onClick="switchPage1"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_swipe_black_white"
+                android:layout_weight="1"
+                android:paddingVertical="5dp"
+                android:clickable="true"
+                android:onClick="switchPage2"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_result"
+                android:layout_weight="1"
+                android:paddingVertical="5dp"
+                android:clickable="true"
+                android:onClick="switchPage3"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="56dp"
+            android:layout_marginHorizontal="20dp">
+
+            <ListView
+                android:id="@+id/list_view_result"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="horizontal"
+                android:dividerHeight="20dp"
+                android:divider="@android:color/transparent"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

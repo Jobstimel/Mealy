@@ -8,9 +8,13 @@ import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SwipePlaceHolderViewHandler {
+
+    public List<Integer> mStackIDs;
+    public List<Object> mResolvers;
 
     private String mMode;
     private SharedPreferences mSharedPreferences;
@@ -25,15 +29,19 @@ public class SwipePlaceHolderViewHandler {
     public void loadSwipePlaceholderView(List<Integer> selectedIndices, List<Recipe> allRecipes, SwipePlaceHolderView swipePlaceHolderView) {
         swipePlaceHolderView.removeAllViews();
         if (!(selectedIndices.size() == 0)) {
+            mStackIDs = new ArrayList<>();
+            mResolvers = new ArrayList<>();
             for(int i = 0; i < selectedIndices.size(); i++){
-                try {
-                    swipePlaceHolderView.addView(new RecipeCard(mContext, allRecipes.get(selectedIndices.get(i)), swipePlaceHolderView));
-                    //mStackIDs.add(mSwipeHandler.mSelectedIDs.get(i));
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (!PlayAlone.mLikedIDs.contains(selectedIndices.get(i)) && !PlayAlone.mDislikedIDs.contains(selectedIndices.get(i))) {
+                    try {
+                        swipePlaceHolderView.addView(new RecipeCard(mContext, allRecipes.get(selectedIndices.get(i)), swipePlaceHolderView));
+                        mStackIDs.add(selectedIndices.get(i));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
-            //mResolvers = mSwipePlaceHolderView.getAllResolvers();
+            mResolvers = swipePlaceHolderView.getAllResolvers();
         }
     }
 

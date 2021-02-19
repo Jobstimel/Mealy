@@ -1,7 +1,9 @@
 package com.example.mealy;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -79,6 +81,8 @@ public class FilterApplier {
         saveFilteredIDs();
         if (mSharedPreferences.getBoolean("ChangeStatus"+mMode, false)) {
             selectIndices(mFilteredIDs);
+            deleteLikedIDs();
+            deleteDislikedIDs();
         }
         textView.setText(mFilteredIDs.size() + " Rezepte gefunden");
     }
@@ -202,6 +206,18 @@ public class FilterApplier {
     private void setChangeStatusFalse() {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putBoolean("ChangeStatus"+mMode, false);
+        editor.commit();
+    }
+
+    private void deleteLikedIDs() {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putString("Liked"+mMode+"IDs", "");
+        editor.commit();
+    }
+
+    private void deleteDislikedIDs() {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putString("Disliked"+mMode+"IDs", "");
         editor.commit();
     }
 }

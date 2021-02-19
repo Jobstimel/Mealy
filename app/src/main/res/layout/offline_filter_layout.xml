@@ -29,25 +29,31 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/icon_swipe"
+                android:src="@drawable/icon_swipe_black_white"
                 android:layout_weight="1"
                 android:paddingVertical="5dp"/>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/icon_result_black_white"
+                android:src="@drawable/icon_result"
                 android:layout_weight="1"
                 android:paddingVertical="5dp"/>
 
         </LinearLayout>
 
-        <com.mindorks.placeholderview.SwipePlaceHolderView
-            android:id="@+id/swipeView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="56dp">
 
-        </com.mindorks.placeholderview.SwipePlaceHolderView>
+            <ListView
+                android:id="@+id/list_view_result"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="horizontal"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

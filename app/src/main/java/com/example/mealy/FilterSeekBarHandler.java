@@ -31,6 +31,7 @@ public class FilterSeekBarHandler {
             SharedPreferences.Editor editor = mSharedPreferences.edit();
             editor.putInt(key+mMode+"Min", min);
             editor.putInt(key+mMode+"Max", max);
+            editor.putBoolean("ChangeStatus"+mMode, true);
             editor.commit();
         }
         if (min != 0 || max != def) {
@@ -44,6 +45,17 @@ public class FilterSeekBarHandler {
     public void loadSeekBarStates(CrystalRangeSeekbar seekBar1, String key1, CrystalRangeSeekbar seekBar2, String key2) {
         loadSeekBarState(seekBar1, key1);
         loadSeekBarState(seekBar2, key2);
+    }
+
+    public void resetSeekBarStates(CrystalRangeSeekbar seekBar1, CrystalRangeSeekbar seekBar2) {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putInt("CaloriesSeekBar"+mMode+"Min", 0);
+        editor.putInt("CaloriesSeekBar"+mMode+"Max", this.MAX_CALORIES);
+        editor.putInt("TimeSeekBar"+mMode+"Min", 0);
+        editor.putInt("TimeSeekBar"+mMode+"Max", this.MAX_TIME);
+        editor.commit();
+        toggleSeekBarBackgroundColor(seekBar1, 0);
+        toggleSeekBarBackgroundColor(seekBar2, 0);
     }
 
     private void loadSeekBarState(CrystalRangeSeekbar seekBar, String key) {

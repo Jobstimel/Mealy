@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginBottom="56dp">
+
+    <androidx.cardview.widget.CardView
+        android:orientation="vertical"
+        android:layout_width="371dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/background1"
+        app:cardCornerRadius="30dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/background_round_corners_top"
+                    android:elevation="3dp"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/recipe_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_marginHorizontal="15dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="260dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:elevation="3dp"
+                    android:background="@color/grey">
+
+                    <ImageView
+                        android:id="@+id/recipe_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_gravity="bottom"
+                    android:background="@color/grey"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:elevation="3dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_time_total"
+                            app:tint="@color/black"
+                            android:layout_marginRight="2dp"/>
+
+                        <TextView
+                            android:id="@+id/recipe_total"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_time_preparation"
+                            app:tint="@color/black"
+                            android:layout_marginRight="2dp"/>
+
+                        <TextView
+                            android:id="@+id/recipe_prepare"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_level"
+                            app:tint="@color/black"
+                            android:layout_marginRight="2dp"/>
+
+                        <TextView
+                            android:id="@+id/recipe_difficulty"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginHorizontal="5dp">
+
+                    <TextView
+                        android:id="@+id/recipe_ingredients"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:justificationMode="inter_word" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@color/grey">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_weight="2"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="0.5dp"
+                        android:background="@color/white">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Brennwert"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="5dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="650 kcal"
+                            android:gravity="end|center_vertical"
+                            android:textColor="@color/black"
+                            android:layout_marginRight="5dp"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_weight="2"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginVertical="0.5dp"
+                        android:background="@color/white">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="Fett"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="5dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="end|center_vertical"
+                            android:layout_weight="1"
+                            android:text="25 g"
+                            android:textColor="@color/black"
+                            android:layout_marginRight="5dp"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_weight="2"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginVertical="0.5dp"
+                        android:background="@color/white">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Kohlenhydrate"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="5dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="75 g"
+                            android:gravity="end|center_vertical"
+                            android:textColor="@color/black"
+                            android:layout_marginRight="5dp"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_weight="2"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginVertical="0.5dp"
+                        android:background="@color/white">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="Eiweiss"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="5dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="end|center_vertical"
+                            android:layout_weight="1"
+                            android:text="28 g"
+                            android:textColor="@color/black"
+                            android:layout_marginRight="5dp"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_weight="2"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginTop="0.5dp"
+                        android:layout_marginBottom="1dp"
+                        android:background="@color/white">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="Ballaststoffe"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="5dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="end|center_vertical"
+                            android:layout_weight="1"
+                            android:text="4 g"
+                            android:textColor="@color/black"
+                            android:layout_marginRight="5dp"/>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+</FrameLayout>

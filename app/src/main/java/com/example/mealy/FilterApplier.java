@@ -1,14 +1,17 @@
 package com.example.mealy;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class FilterApplier {
 
+    private final Integer MAX_RECIPES = 10;
     public final Integer MAX_TIME = 300;
     public final Integer MAX_CALORIES = 2000;
     private final String[] TYPES = {"Frühstück","Mittagessen","Abendessen","Dessert","Snack","Getränk"};
@@ -20,6 +23,7 @@ public class FilterApplier {
     private List<Recipe> mAllRecipesList;
     private List<Recipe> mFilteredRecipeList;
     private List<Integer> mFilteredIDs;
+    private List<Integer> mSelectedIDs;
 
     public FilterApplier(String mode, SharedPreferences sharedPreferences, List<Recipe> allRecipesList) {
         this.mMode = mode;
@@ -29,7 +33,7 @@ public class FilterApplier {
 
     public void applyFilter(TextView textView) {
 
-        mFilteredRecipeList = new ArrayList<>();
+        mFilteredIDs = new ArrayList<>();
         List<String> mTypeFilter = getFilterValues(TYPES);
         List<String> mCounFilter = getFilterValues(COUNTRIES);
         List<String> mDiffFilter = getFilterValues(DIFFICULTIES);
@@ -69,11 +73,14 @@ public class FilterApplier {
             }
 
             if (status) {
-                mFilteredRecipeList.add(recipe);
+                mFilteredIDs.add(recipe.getIndex());
             }
         }
         saveFilteredIDs();
-        textView.setText(mFilteredRecipeList.size() + " Rezepte gefunden");
+        if (mSharedPreferences.getBoolean("ChangeStatus"+mMode, false)) {
+            selectIndices(mFilteredIDs);
+        }
+        textView.setText(mFilteredIDs.size() + " Rezepte gefunden");
     }
 
     private Boolean checkTagsMultipleSelections(String[] tags, List<String> filterValues) {
@@ -148,17 +155,53 @@ public class FilterApplier {
 
     private void saveFilteredIDs() {
         String tmp = "";
-        mFilteredIDs = new ArrayList<Integer>();
-        if (mFilteredRecipeList.size() > 0) {
-            tmp = String.valueOf(mFilteredRecipeList.get(0).getIndex());
-            mFilteredIDs.add(mFilteredRecipeList.get(0).getIndex());
-            for (int i = 1; i < mFilteredRecipeList.size(); i++) {
-                tmp = tmp+"#"+ mFilteredRecipeList.get(i).getIndex();
-                mFilteredIDs.add(mFilteredRecipeList.get(i).getIndex());
+        if (mFilteredIDs.size() > 0) {
+            tmp = String.valueOf(mFilteredIDs.get(0));
+            for (int i = 1; i < mFilteredIDs.size(); i++) {
+                tmp = tmp + "#" + mFilteredIDs.get(i);
             }
         }
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putString("Filtered"+this.mMode+"IDs", tmp);
+        editor.commit();
+    }
+
+    private void selectIndices(List<Integer> filteredIDs) {
+        mSelectedIDs = new ArrayList<>();
+        if (this.MAX_RECIPES < filteredIDs.size()) {
+            Random random = new Random();
+            while (mSelectedIDs.size() < this.MAX_RECIPES) {
+                int randomInt = random.nextInt(filteredIDs.size());
+                if (!mSelectedIDs.contains(filteredIDs.get(randomInt))) {
+                    mSelectedIDs.add(filteredIDs.get(randomInt));
+                }
+            }
+        }
+        else {
+            for (int i = 0; i < filteredIDs.size(); i++) {
+                mSelectedIDs.add(filteredIDs.get(i));
+            }
+        }
+        saveSelectedIndices();
+        setChangeStatusFalse();
+    }
+
+    private void saveSelectedIndices() {
+        String tmp = "";
+        if (mSelectedIDs.size() > 0) {
+            tmp = String.valueOf(mSelectedIDs.get(0));
+            for (int i = 1; i < mSelectedIDs.size(); i++) {
+                tmp = tmp + "#" + mSelectedIDs.get(i);
+            }
+        }
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putString("Selected"+mMode+"IDs", tmp);
+        editor.commit();
+    }
+
+    private void setChangeStatusFalse() {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putBoolean("ChangeStatus"+mMode, false);
         editor.commit();
     }
 }

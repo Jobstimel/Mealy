@@ -47,4 +47,13 @@ public class FilterLinearLayoutHandler {
             }
         }
     }
+
+    public void resetLayouts(List<LinearLayout> list) {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        for (int i = 0; i < list.size(); i++) {
+            editor.putBoolean(this.TOOLTIPS.get(i)+mMode, false);
+            list.get(i).setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
+        }
+        editor.commit();
+    }
 }

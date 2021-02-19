@@ -8,11 +8,15 @@ import androidx.core.content.ContextCompat;
 
 import com.skydoves.powerspinner.PowerSpinnerView;
 
+import java.util.List;
+
 public class FilterSpinnerHandler {
 
     private String mMode;
     private SharedPreferences mSharedPreferences;
     private Context mContext;
+
+    private final String[] SPINNER_KEYS = {"AllergiesSpinner", "PreparationTypeSpinner", "CategorySpinner", "EatingTypeSpinner"};
 
     public FilterSpinnerHandler(String mode, SharedPreferences sharedPreferences, Context context) {
         this.mMode = mode;
@@ -34,6 +38,7 @@ public class FilterSpinnerHandler {
             SharedPreferences.Editor editor = mSharedPreferences.edit();
             editor.putInt(key+mMode+"Index", newIndex);
             editor.putString(key+mMode+"Value", newItem.toLowerCase());
+            editor.putBoolean("ChangeStatus"+mMode, true);
             editor.commit();
             spinner.setBackgroundColor(ContextCompat.getColor(mContext, R.color.green));
         }
@@ -47,5 +52,11 @@ public class FilterSpinnerHandler {
         view2.selectItemByIndex(mSharedPreferences.getInt("PreparationTypeSpinnerOfflineIndex",-1));
         view3.selectItemByIndex(mSharedPreferences.getInt("CategorySpinnerOfflineIndex",-1));
         view4.selectItemByIndex(mSharedPreferences.getInt("EatingTypeSpinnerOfflineIndex",-1));
+    }
+
+    public void resetSpinnerStates(List<PowerSpinnerView> list) {
+        for (int i = 0; i < list.size(); i++) {
+            resetSpinner(list.get(i), this.SPINNER_KEYS[i]);
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.mealy;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ViewGroup;
@@ -27,6 +28,9 @@ import java.util.List;
 
 @Layout(R.layout.recipe_card_view)
 public class RecipeCard {
+
+    private List<Integer> mLikedIDs;
+    private List<Integer> mDislikedIDs;
 
     @View(R.id.recipe_image)
     private ImageView recipeImage;

@@ -30,7 +30,7 @@ public class FilterSpinnerHandler {
         editor.putInt(key+mMode+"Index", -1);
         editor.putString(key+mMode+"Value", "");
         editor.commit();
-        powerSpinnerView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
+        //powerSpinnerView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
     }
 
     public void applySpinner(PowerSpinnerView spinner, String key, String newItem, int newIndex) {
@@ -40,10 +40,10 @@ public class FilterSpinnerHandler {
             editor.putString(key+mMode+"Value", newItem.toLowerCase());
             editor.putBoolean("ChangeStatus"+mMode, true);
             editor.commit();
-            spinner.setBackgroundColor(ContextCompat.getColor(mContext, R.color.green));
+            //spinner.setBackgroundColor(ContextCompat.getColor(mContext, R.color.green));
         }
         if (newIndex != -1) {
-            spinner.setBackgroundColor(ContextCompat.getColor(mContext, R.color.green));
+            //spinner.setBackgroundColor(ContextCompat.getColor(mContext, R.color.green));
         }
     }
 

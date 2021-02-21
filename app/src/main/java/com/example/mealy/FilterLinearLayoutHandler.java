@@ -31,11 +31,11 @@ public class FilterLinearLayoutHandler {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         if (!mSharedPreferences.getBoolean(v.getTooltipText() +mMode,false)) {
             editor.putBoolean(v.getTooltipText() +mMode, true);
-            v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.green));
+            //v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.green));
         }
         else {
             editor.putBoolean(v.getTooltipText() +mMode, false);
-            v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
+            //v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
         }
         editor.commit();
     }
@@ -43,7 +43,7 @@ public class FilterLinearLayoutHandler {
     public void loadFilterLayoutStates(List<LinearLayout> list) {
         for (int i = 0; i < list.size(); i++) {
             if (mSharedPreferences.getBoolean(this.TOOLTIPS.get(i)+mMode, false)) {
-                list.get(i).setBackgroundColor(ContextCompat.getColor(mContext, R.color.green));
+                //list.get(i).setBackgroundColor(ContextCompat.getColor(mContext, R.color.green));
             }
         }
     }
@@ -52,7 +52,7 @@ public class FilterLinearLayoutHandler {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         for (int i = 0; i < list.size(); i++) {
             editor.putBoolean(this.TOOLTIPS.get(i)+mMode, false);
-            list.get(i).setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
+            //list.get(i).setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
         }
         editor.commit();
     }

@@ -3,6 +3,7 @@ package com.example.mealy;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -25,29 +26,26 @@ public class FilterSpinnerHandler {
         this.mContext = context;
     }
 
-    public void resetSpinner(PowerSpinnerView powerSpinnerView, String key, FilterApplier filterApplier, TextView textView) {
+    public void resetSpinner(PowerSpinnerView powerSpinnerView, String key, FilterApplier filterApplier, TextView textView, LinearLayout layout) {
         powerSpinnerView.clearSelectedItem();
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putInt(key+mMode+"Index", -1);
         editor.putString(key+mMode+"Value", "");
         editor.putBoolean("ChangeStatus"+mMode, true);
         editor.commit();
-        //powerSpinnerView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
+        layout.setBackground(ContextCompat.getDrawable(mContext, R.drawable.block_sheet));
         filterApplier.applyFilter(textView);
     }
 
-    public void applySpinner(PowerSpinnerView spinner, String key, String newItem, int newIndex) {
+    public void applySpinner(LinearLayout layout, String key, String newItem, int newIndex) {
         if (!mSharedPreferences.getString(key+mMode+"Value", "").equals(newItem.toLowerCase())) {
             SharedPreferences.Editor editor = mSharedPreferences.edit();
             editor.putInt(key+mMode+"Index", newIndex);
             editor.putString(key+mMode+"Value", newItem.toLowerCase());
             editor.putBoolean("ChangeStatus"+mMode, true);
             editor.commit();
-            spinner.setBackgroundColor(ContextCompat.getColor(mContext, R.color.green));
         }
-        if (newIndex != -1) {
-            spinner.setBackgroundColor(ContextCompat.getColor(mContext, R.color.green));
-        }
+        layout.setBackground(ContextCompat.getDrawable(mContext, R.drawable.block_sheet_green));
     }
 
     public void loadSpinnerStates(PowerSpinnerView view1, PowerSpinnerView view2, PowerSpinnerView view3, PowerSpinnerView view4) {
@@ -57,9 +55,9 @@ public class FilterSpinnerHandler {
         view4.selectItemByIndex(mSharedPreferences.getInt("EatingTypeSpinner"+mMode+"Index",-1));
     }
 
-    public void resetSpinnerStates(List<PowerSpinnerView> list, FilterApplier filterApplier, TextView textView) {
+    public void resetSpinnerStates(List<PowerSpinnerView> list, List<LinearLayout> layout_list, FilterApplier filterApplier, TextView textView) {
         for (int i = 0; i < list.size(); i++) {
-            resetSpinner(list.get(i), this.SPINNER_KEYS[i], filterApplier, textView);
+            resetSpinner(list.get(i), this.SPINNER_KEYS[i], filterApplier, textView, layout_list.get(i));
         }
         loadSpinnerStates(list.get(0), list.get(1), list.get(2), list.get(3));
     }

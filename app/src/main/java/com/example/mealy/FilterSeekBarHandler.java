@@ -31,10 +31,6 @@ public class FilterSeekBarHandler {
             editor.putBoolean("ChangeStatus"+mMode, true);
             editor.commit();
         }
-        toggleSeekBarBackgroundColor(seekBarCalories, 0);
-        if (min != 0 || max != MAX_CALORIES) {
-            toggleSeekBarBackgroundColor(seekBarCalories, 1);
-        }
         filterApplier.applyFilter(textView);
     }
 
@@ -46,10 +42,6 @@ public class FilterSeekBarHandler {
             editor.putBoolean("ChangeStatus"+mMode, true);
             editor.commit();
         }
-        toggleSeekBarBackgroundColor(seekBarTime, 0);
-        if (min != 0 || max != MAX_TIME) {
-            toggleSeekBarBackgroundColor(seekBarTime, 1);
-        }
         filterApplier.applyFilter(textView);
     }
 
@@ -60,8 +52,6 @@ public class FilterSeekBarHandler {
         editor.putInt("TimeSeekBar"+mMode+"Min", 0);
         editor.putInt("TimeSeekBar"+mMode+"Max", this.MAX_TIME);
         editor.commit();
-        toggleSeekBarBackgroundColor(seekBarCalories, 0);
-        toggleSeekBarBackgroundColor(seekBarTime, 0);
         loadSeekBarStates(seekBarCalories, seekBarTime);
     }
 
@@ -69,27 +59,8 @@ public class FilterSeekBarHandler {
         seekBarCalories.setMinStartValue(mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Min",0));
         seekBarCalories.setMaxStartValue(mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Max", this.MAX_CALORIES));
         seekBarCalories.apply();
-        if (mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Min",0) != 0 || mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Max", MAX_CALORIES) != MAX_CALORIES) {
-            toggleSeekBarBackgroundColor(seekBarCalories, 1);
-        }
         seekBarTime.setMinStartValue(mSharedPreferences.getInt("TimeSeekBar"+mMode+"Min",0));
         seekBarTime.setMaxStartValue(mSharedPreferences.getInt("TimeSeekBar"+mMode+"Max", this.MAX_TIME));
         seekBarTime.apply();
-        if (mSharedPreferences.getInt("TimeSeekBar"+mMode+"Min",0) != 0 || mSharedPreferences.getInt("TimeSeekBar"+mMode+"Max", MAX_TIME) != MAX_TIME) {
-            toggleSeekBarBackgroundColor(seekBarCalories, 1);
-        }
-    }
-
-    private void toggleSeekBarBackgroundColor(CrystalRangeSeekbar seekBar, int state) {
-        if (state == 0) {
-            seekBar.setLeftThumbColor(ContextCompat.getColor(mContext, R.color.foreground));
-            seekBar.setRightThumbColor(ContextCompat.getColor(mContext, R.color.foreground));
-            seekBar.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.foreground));
-        }
-        else {
-            seekBar.setLeftThumbColor(ContextCompat.getColor(mContext, R.color.green));
-            seekBar.setRightThumbColor(ContextCompat.getColor(mContext, R.color.green));
-            seekBar.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.green));
-        }
     }
 }

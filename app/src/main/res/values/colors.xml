@@ -15,6 +15,7 @@
     <color name="white_transparent">#80FFFFFF</color>
     <color name="foreground">#BDBDBD</color>
     <color name="text_color">#6E6E6E</color>
+    <color name="post_it">#EEE886</color>
 
     <color name="gradient_start">#243949</color>
     <color name="gradient_end">#517fa4</color>

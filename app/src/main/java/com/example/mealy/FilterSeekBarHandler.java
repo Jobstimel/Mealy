@@ -2,6 +2,7 @@ package com.example.mealy;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
@@ -22,52 +23,60 @@ public class FilterSeekBarHandler {
         this.mContext = mContext;
     }
 
-    public void applySeekBar(CrystalRangeSeekbar seekBar, String key, int min, int max) {
-        int def = this.MAX_TIME;
-        if (key.equals("CaloriesSeekBar")) {
-            def = this.MAX_CALORIES;
-        }
-        if (!(mSharedPreferences.getInt(key+mMode+"Min", 0) == min) || !(mSharedPreferences.getInt(key+mMode+"Max", def) == max)) {
+    public void applyCaloriesSeekBar(CrystalRangeSeekbar seekBarCalories, int min, int max, FilterApplier filterApplier, TextView textView) {
+        if (!(mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Min", 0) == min) || !(mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Max", MAX_CALORIES) == max)) {
             SharedPreferences.Editor editor = mSharedPreferences.edit();
-            editor.putInt(key+mMode+"Min", min);
-            editor.putInt(key+mMode+"Max", max);
+            editor.putInt("CaloriesSeekBar"+mMode+"Min", min);
+            editor.putInt("CaloriesSeekBar"+mMode+"Max", max);
             editor.putBoolean("ChangeStatus"+mMode, true);
             editor.commit();
         }
-        if (min != 0 || max != def) {
-            toggleSeekBarBackgroundColor(seekBar, 1);
+        toggleSeekBarBackgroundColor(seekBarCalories, 0);
+        if (min != 0 || max != MAX_CALORIES) {
+            toggleSeekBarBackgroundColor(seekBarCalories, 1);
         }
-        else if (min == 0 && max == def) {
-            toggleSeekBarBackgroundColor(seekBar, 0);
-        }
+        filterApplier.applyFilter(textView);
     }
 
-    public void loadSeekBarStates(CrystalRangeSeekbar seekBar1, String key1, CrystalRangeSeekbar seekBar2, String key2) {
-        loadSeekBarState(seekBar1, key1);
-        loadSeekBarState(seekBar2, key2);
+    public void applyTimeSeekBar(CrystalRangeSeekbar seekBarTime, int min, int max, FilterApplier filterApplier, TextView textView) {
+        if (!(mSharedPreferences.getInt("TimeSeekBar"+mMode+"Min", 0) == min) || !(mSharedPreferences.getInt("TimeSeekBar"+mMode+"Max", MAX_TIME) == max)) {
+            SharedPreferences.Editor editor = mSharedPreferences.edit();
+            editor.putInt("TimeSeekBar"+mMode+"Min", min);
+            editor.putInt("TimeSeekBar"+mMode+"Max", max);
+            editor.putBoolean("ChangeStatus"+mMode, true);
+            editor.commit();
+        }
+        toggleSeekBarBackgroundColor(seekBarTime, 0);
+        if (min != 0 || max != MAX_TIME) {
+            toggleSeekBarBackgroundColor(seekBarTime, 1);
+        }
+        filterApplier.applyFilter(textView);
     }
 
-    public void resetSeekBarStates(CrystalRangeSeekbar seekBar1, CrystalRangeSeekbar seekBar2) {
+    public void resetSeekBarStates(CrystalRangeSeekbar seekBarCalories, CrystalRangeSeekbar seekBarTime) {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putInt("CaloriesSeekBar"+mMode+"Min", 0);
         editor.putInt("CaloriesSeekBar"+mMode+"Max", this.MAX_CALORIES);
         editor.putInt("TimeSeekBar"+mMode+"Min", 0);
         editor.putInt("TimeSeekBar"+mMode+"Max", this.MAX_TIME);
         editor.commit();
-        toggleSeekBarBackgroundColor(seekBar1, 0);
-        toggleSeekBarBackgroundColor(seekBar2, 0);
+        toggleSeekBarBackgroundColor(seekBarCalories, 0);
+        toggleSeekBarBackgroundColor(seekBarTime, 0);
+        loadSeekBarStates(seekBarCalories, seekBarTime);
     }
 
-    private void loadSeekBarState(CrystalRangeSeekbar seekBar, String key) {
-        int def = this.MAX_TIME;
-        if (key.equals("CaloriesSeekBar")) {
-            def = this.MAX_CALORIES;
+    public void loadSeekBarStates(CrystalRangeSeekbar seekBarCalories, CrystalRangeSeekbar seekBarTime) {
+        seekBarCalories.setMinStartValue(mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Min",0));
+        seekBarCalories.setMaxStartValue(mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Max", this.MAX_CALORIES));
+        seekBarCalories.apply();
+        if (mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Min",0) != 0 || mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Max", MAX_CALORIES) != MAX_CALORIES) {
+            toggleSeekBarBackgroundColor(seekBarCalories, 1);
         }
-        seekBar.setMinStartValue(mSharedPreferences.getInt(key+mMode+"Min",0));
-        seekBar.setMaxStartValue(mSharedPreferences.getInt(key+mMode+"Max", def));
-        seekBar.apply();
-        if (mSharedPreferences.getInt(key+mMode+"Min",0) != 0 || mSharedPreferences.getInt(key+mMode+"Max", def) != def) {
-            toggleSeekBarBackgroundColor(seekBar, 1);
+        seekBarTime.setMinStartValue(mSharedPreferences.getInt("TimeSeekBar"+mMode+"Min",0));
+        seekBarTime.setMaxStartValue(mSharedPreferences.getInt("TimeSeekBar"+mMode+"Max", this.MAX_TIME));
+        seekBarTime.apply();
+        if (mSharedPreferences.getInt("TimeSeekBar"+mMode+"Min",0) != 0 || mSharedPreferences.getInt("TimeSeekBar"+mMode+"Max", MAX_TIME) != MAX_TIME) {
+            toggleSeekBarBackgroundColor(seekBarCalories, 1);
         }
     }
 

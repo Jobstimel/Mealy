@@ -91,7 +91,9 @@ public class ListViewAdapter extends ArrayAdapter<Recipe> {
 
         imageLoader.displayImage(url1, holder.url1, options);
 
-        convertView.setElevation(5.00f);
+        if (mMode.equals("Offline")) {
+            convertView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.green_transparent));
+        }
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

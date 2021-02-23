@@ -10,4 +10,16 @@
     <string name="dessert">Dessert</string>
     <string name="snack">Snack</string>
     <string name="drink">Drink</string>
+    <string name="type_of_meal">Type of meal</string>
+    <string name="time_and_calories">Preparation time and calories</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+    <string name="country">Country</string>
+    <string name="additional">Additional</string>
+    <string name="allergies">Allergies</string>
+    <string name="preparation">Preparation</string>
+    <string name="category">Category</string>
+    <string name="nutrition">Nutrition</string>
 </resources>

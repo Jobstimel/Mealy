@@ -31,6 +31,10 @@ public class FilterSeekBarHandler {
             editor.putBoolean("ChangeStatus"+mMode, true);
             editor.commit();
         }
+        seekBarCalories.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.filter_text_color));
+        if (min > 0 || max < MAX_CALORIES) {
+            seekBarCalories.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.green_transparent));
+        }
         filterApplier.applyFilter(textView);
     }
 
@@ -41,6 +45,10 @@ public class FilterSeekBarHandler {
             editor.putInt("TimeSeekBar"+mMode+"Max", max);
             editor.putBoolean("ChangeStatus"+mMode, true);
             editor.commit();
+        }
+        seekBarTime.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.filter_text_color));
+        if (min > 0 || max < MAX_TIME) {
+            seekBarTime.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.green_transparent));
         }
         filterApplier.applyFilter(textView);
     }
@@ -56,11 +64,26 @@ public class FilterSeekBarHandler {
     }
 
     public void loadSeekBarStates(CrystalRangeSeekbar seekBarCalories, CrystalRangeSeekbar seekBarTime) {
-        seekBarCalories.setMinStartValue(mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Min",0));
-        seekBarCalories.setMaxStartValue(mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Max", this.MAX_CALORIES));
+        int min_calories = mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Min",0);
+        int max_calories = mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Max", this.MAX_CALORIES);
+        seekBarCalories.setMinStartValue(min_calories);
+        seekBarCalories.setMaxStartValue(max_calories);
         seekBarCalories.apply();
-        seekBarTime.setMinStartValue(mSharedPreferences.getInt("TimeSeekBar"+mMode+"Min",0));
-        seekBarTime.setMaxStartValue(mSharedPreferences.getInt("TimeSeekBar"+mMode+"Max", this.MAX_TIME));
+
+        int min_time = mSharedPreferences.getInt("TimeSeekBar"+mMode+"Min",0);
+        int max_time = mSharedPreferences.getInt("TimeSeekBar"+mMode+"Max", this.MAX_TIME);
+        seekBarTime.setMinStartValue(min_time);
+        seekBarTime.setMaxStartValue(max_time);
         seekBarTime.apply();
+
+        seekBarCalories.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.filter_text_color));
+        if (min_calories > 0 || max_calories < MAX_CALORIES) {
+            seekBarCalories.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.green_transparent));
+        }
+
+        seekBarTime.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.filter_text_color));
+        if (min_time > 0 || max_time < MAX_TIME) {
+            seekBarTime.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.green_transparent));
+        }
     }
 }

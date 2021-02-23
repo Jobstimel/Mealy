@@ -15,6 +15,18 @@
     <string name="dessert">Dessert</string>
     <string name="snack">Snack</string>
     <string name="drink">Getränk</string>
+    <string name="easy">Einfach</string>
+    <string name="medium">Mittel</string>
+    <string name="hard">Schwer</string>
+    <string name="type_of_meal">Art der Mahlzeit</string>
+    <string name="time_and_calories">Zubereitungszeit und Kalorien</string>
+    <string name="difficulty">Schwierigkeit</string>
+    <string name="country">Länderküche</string>
+    <string name="additional">Sonstiges</string>
+    <string name="allergies">Allergien</string>
+    <string name="preparation">Zubereitung</string>
+    <string name="category">Kategorie</string>
+    <string name="nutrition">Ernährung</string>
 
     <string-array name="meal_allergies">
         <item>Eier</item>

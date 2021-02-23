@@ -35,11 +35,11 @@ public class FilterLinearLayoutCountryHandler {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         if (!mSharedPreferences.getBoolean(v.getTooltipText() +mMode,false)) {
             editor.putBoolean(v.getTooltipText() +mMode, true);
-            v.setBackground(ContextCompat.getDrawable(mContext, R.drawable.post_it_small_green));
+            v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.green_transparent));
         }
         else {
             editor.putBoolean(v.getTooltipText() +mMode, false);
-            v.setBackground(ContextCompat.getDrawable(mContext, R.drawable.post_it_small));
+            v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.background));
         }
         editor.putBoolean("ChangeStatusOffline", true);
         editor.commit();
@@ -49,7 +49,7 @@ public class FilterLinearLayoutCountryHandler {
     public void loadCountryFilterLayoutStates(List<LinearLayout> list) {
         for (int i = 0; i < list.size(); i++) {
             if (mSharedPreferences.getBoolean(this.TOOLTIPS.get(i)+mMode, false)) {
-                list.get(i).setBackground(ContextCompat.getDrawable(mContext, R.drawable.post_it_small_green));
+                list.get(i).setBackgroundColor(ContextCompat.getColor(mContext, R.color.green_transparent));
             }
         }
     }
@@ -58,7 +58,7 @@ public class FilterLinearLayoutCountryHandler {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         for (int i = 0; i < list.size(); i++) {
             editor.putBoolean(this.TOOLTIPS.get(i)+mMode, false);
-            list.get(i).setBackground(ContextCompat.getDrawable(mContext, R.drawable.post_it_small));
+            list.get(i).setBackgroundColor(ContextCompat.getColor(mContext, R.color.background));
         }
         editor.putBoolean("ChangeStatusOffline", true);
         editor.commit();

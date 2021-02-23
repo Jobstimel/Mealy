@@ -12,15 +12,23 @@
     <color name="grey">#BDBDBD</color>
     <color name="yellow">#FFF200</color>
 
-    <color name="white_transparent">#80FFFFFF</color>
     <color name="foreground">#BDBDBD</color>
-    <color name="text_color">#6E6E6E</color>
-    <color name="post_it">#EEE886</color>
+    <color name="text_color">#80FFFFFF</color>
+    <color name="post_it">#E9CB97</color>
+
+    <color name="black_transparent">#80000000</color>
+    <color name="white_transparent">#80FFFFFF</color>
+    <color name="green_transparent">#8000FF00</color>
+    <color name="red_transparent">#80EE1C25</color>
 
     <color name="gradient_start">#243949</color>
     <color name="gradient_end">#517fa4</color>
 
     <color name="bottom_menu_not_focused">#80000000</color>
     <color name="background">#015AA2</color>
+
+    //Filter
+    <color name="filter_text_color">#80FFFFFF</color>
+    <color name="filter_border_color">#80FFFFFF</color>
 
 </resources>

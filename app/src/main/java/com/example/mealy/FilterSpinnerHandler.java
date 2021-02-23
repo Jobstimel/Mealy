@@ -26,18 +26,18 @@ public class FilterSpinnerHandler {
         this.mContext = context;
     }
 
-    public void resetSpinner(PowerSpinnerView powerSpinnerView, String key, FilterApplier filterApplier, TextView textView, LinearLayout layout) {
+    public void resetSpinner(PowerSpinnerView powerSpinnerView, String key, FilterApplier filterApplier, TextView textView) {
         powerSpinnerView.clearSelectedItem();
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putInt(key+mMode+"Index", -1);
         editor.putString(key+mMode+"Value", "");
         editor.putBoolean("ChangeStatus"+mMode, true);
         editor.commit();
-        layout.setBackground(ContextCompat.getDrawable(mContext, R.drawable.block_sheet));
+        powerSpinnerView.setTextColor(ContextCompat.getColor(mContext, R.color.filter_text_color));
         filterApplier.applyFilter(textView);
     }
 
-    public void applySpinner(LinearLayout layout, String key, String newItem, int newIndex) {
+    public void applySpinner(PowerSpinnerView powerSpinnerView, String key, String newItem, int newIndex) {
         if (!mSharedPreferences.getString(key+mMode+"Value", "").equals(newItem.toLowerCase())) {
             SharedPreferences.Editor editor = mSharedPreferences.edit();
             editor.putInt(key+mMode+"Index", newIndex);
@@ -45,7 +45,7 @@ public class FilterSpinnerHandler {
             editor.putBoolean("ChangeStatus"+mMode, true);
             editor.commit();
         }
-        layout.setBackground(ContextCompat.getDrawable(mContext, R.drawable.block_sheet_green));
+        powerSpinnerView.setTextColor(ContextCompat.getColor(mContext, R.color.green_transparent));
     }
 
     public void loadSpinnerStates(PowerSpinnerView view1, PowerSpinnerView view2, PowerSpinnerView view3, PowerSpinnerView view4) {
@@ -55,9 +55,9 @@ public class FilterSpinnerHandler {
         view4.selectItemByIndex(mSharedPreferences.getInt("EatingTypeSpinner"+mMode+"Index",-1));
     }
 
-    public void resetSpinnerStates(List<PowerSpinnerView> list, List<LinearLayout> layout_list, FilterApplier filterApplier, TextView textView) {
+    public void resetSpinnerStates(List<PowerSpinnerView> list, FilterApplier filterApplier, TextView textView) {
         for (int i = 0; i < list.size(); i++) {
-            resetSpinner(list.get(i), this.SPINNER_KEYS[i], filterApplier, textView, layout_list.get(i));
+            resetSpinner(list.get(i), this.SPINNER_KEYS[i], filterApplier, textView);
         }
         loadSpinnerStates(list.get(0), list.get(1), list.get(2), list.get(3));
     }

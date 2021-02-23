@@ -6,7 +6,6 @@ public class Recipe {
     private String url1;
     private String url2;
     private String title;
-    private String rating;
     private Integer total;
     private Integer prepare;
     private String difficulty;
@@ -15,6 +14,11 @@ public class Recipe {
     private String[] tags;
     private String ingredients;
     private Integer score;
+    private String calories;
+    private String carbs;
+    private String protein;
+    private String fiber;
+    private String fat;
 
     public Integer getIndex() {
         return index;
@@ -30,10 +34,6 @@ public class Recipe {
 
     public String getTitle() {
         return title;
-    }
-
-    public String getRating() {
-        return rating;
     }
 
     public Integer getTotal() {
@@ -60,6 +60,26 @@ public class Recipe {
 
     public Integer getScore() { return score; }
 
+    public String getCalories() {
+        return calories;
+    }
+
+    public String getCarbs() {
+        return carbs;
+    }
+
+    public String getProtein() {
+        return protein;
+    }
+
+    public String getFiber() {
+        return fiber;
+    }
+
+    public String getFat() {
+        return fat;
+    }
+
     public void setIndex(Integer index) {
         this.index = index;
     }
@@ -74,10 +94,6 @@ public class Recipe {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setRating(String rating) {
-        this.rating = rating;
     }
 
     public void setTotal(Integer total) {
@@ -103,4 +119,24 @@ public class Recipe {
     public void setIngredients(String ingredients) { this.ingredients = ingredients; }
 
     public void setScore(Integer score) { this.score = score; }
+
+    public void setCalories(String calories) {
+        this.calories = calories;
+    }
+
+    public void setCarbs(String carbs) {
+        this.carbs = carbs;
+    }
+
+    public void setProtein(String protein) {
+        this.protein = protein;
+    }
+
+    public void setFiber(String fiber) {
+        this.fiber = fiber;
+    }
+
+    public void setFat(String fat) {
+        this.fat = fat;
+    }
 }

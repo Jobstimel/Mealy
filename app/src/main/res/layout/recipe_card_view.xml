@@ -183,10 +183,10 @@
                             android:layout_marginLeft="5dp"/>
 
                         <TextView
+                            android:id="@+id/text_view_calories"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="650 kcal"
                             android:gravity="end|center_vertical"
                             android:textColor="@color/black"
                             android:layout_marginRight="5dp"/>
@@ -213,11 +213,11 @@
                             android:layout_marginLeft="5dp"/>
 
                         <TextView
+                            android:id="@+id/text_view_fat"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="end|center_vertical"
                             android:layout_weight="1"
-                            android:text="25 g"
                             android:textColor="@color/black"
                             android:layout_marginRight="5dp"/>
 
@@ -243,10 +243,10 @@
                             android:layout_marginLeft="5dp"/>
 
                         <TextView
+                            android:id="@+id/text_view_carbs"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="75 g"
                             android:gravity="end|center_vertical"
                             android:textColor="@color/black"
                             android:layout_marginRight="5dp"/>
@@ -273,11 +273,11 @@
                             android:layout_marginLeft="5dp"/>
 
                         <TextView
+                            android:id="@+id/text_view_protein"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="end|center_vertical"
                             android:layout_weight="1"
-                            android:text="28 g"
                             android:textColor="@color/black"
                             android:layout_marginRight="5dp"/>
 
@@ -304,11 +304,11 @@
                             android:layout_marginLeft="5dp"/>
 
                         <TextView
+                            android:id="@+id/text_view_fiber"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="end|center_vertical"
                             android:layout_weight="1"
-                            android:text="4 g"
                             android:textColor="@color/black"
                             android:layout_marginRight="5dp"/>
 

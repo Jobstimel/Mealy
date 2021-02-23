@@ -5,15 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PlayAlone"
-    android:background="@drawable/background_image_cork"
+    android:background="@color/background"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/page_1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/background">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,15 +67,20 @@
                 android:layout_height="match_parent"
                 android:layout_weight="13.5"
                 android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="80dp"
+                android:layout_marginTop="20dp"
                 android:elevation="5dp">
 
                 <TextView
                     android:id="@+id/text_view_recipe_count"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:fontFamily="@font/indie_flower"
+                    android:background="@drawable/plaque"
                     android:gravity="center"
                     android:textSize="17dp"
                     android:textStyle="bold"
+                    android:text="2693 Rezepte gefunden"
                     android:textColor="@color/black"/>
 
             </LinearLayout>
@@ -363,9 +367,12 @@
 
                         <TextView
                             android:id="@+id/time_text_view"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="130dp"
+                            android:layout_height="20dp"
+                            android:textColor="@color/black"
+                            android:background="@drawable/plaque"
                             android:fontFamily="@font/indie_flower"
+                            android:layout_gravity="center"
                             android:gravity="center"/>
 
                     </LinearLayout>
@@ -376,7 +383,7 @@
                         android:orientation="vertical"
                         android:layout_marginLeft="14dp"
                         android:layout_marginRight="17dp"
-                        android:layout_marginBottom="20dp">
+                        android:layout_marginBottom="40dp">
 
                         <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
                             android:id="@+id/calories_seek_bar"
@@ -392,9 +399,12 @@
 
                         <TextView
                             android:id="@+id/calories_text_view"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="130dp"
+                            android:layout_height="20dp"
+                            android:textColor="@color/black"
+                            android:background="@drawable/plaque"
                             android:fontFamily="@font/indie_flower"
+                            android:layout_gravity="center"
                             android:gravity="center"/>
 
                     </LinearLayout>
@@ -567,7 +577,7 @@
                         android:layout_height="40dp"
                         android:layout_marginLeft="14dp"
                         android:layout_marginRight="17dp"
-                        android:layout_marginBottom="5dp"
+                        android:layout_marginBottom="10dp"
                         android:weightSum="2">
 
                         <LinearLayout
@@ -576,7 +586,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/block_sheet"
                             android:orientation="horizontal"
-                            android:layout_marginRight="2.5dp"
+                            android:layout_marginRight="5dp"
                             android:layout_weight="1"
                             android:weightSum="10">
 
@@ -623,7 +633,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/block_sheet"
                             android:orientation="horizontal"
-                            android:layout_marginLeft="2.5dp"
+                            android:layout_marginLeft="5dp"
                             android:layout_weight="1"
                             android:weightSum="10">
 
@@ -680,7 +690,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/block_sheet"
                             android:orientation="horizontal"
-                            android:layout_marginRight="2.5dp"
+                            android:layout_marginRight="5dp"
                             android:layout_weight="1"
                             android:weightSum="10">
 
@@ -727,7 +737,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/block_sheet"
                             android:orientation="horizontal"
-                            android:layout_marginLeft="2.5dp"
+                            android:layout_marginLeft="5dp"
                             android:layout_weight="1"
                             android:weightSum="10">
 
@@ -781,11 +791,15 @@
                 android:gravity="center"
                 android:layout_weight="13.5"
                 android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="80dp"
+                android:layout_marginBottom="20dp"
                 android:elevation="5dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/plaque"
+                    android:fontFamily="@font/indie_flower"
                     android:text="Filter zurücksetzen"
                     android:gravity="center"
                     android:textSize="17dp"

@@ -46,6 +46,21 @@ public class RecipeCard {
     @View(R.id.recipe_ingredients)
     private TextView recipeIngredients;
 
+    @View(R.id.text_view_calories)
+    private TextView recipeCalories;
+
+    @View(R.id.text_view_fat)
+    private TextView recipeFat;
+
+    @View(R.id.text_view_carbs)
+    private TextView recipeCarbs;
+
+    @View(R.id.text_view_protein)
+    private TextView recipeProtein;
+
+    @View(R.id.text_view_fiber)
+    private TextView recipeFiber;
+
     private Recipe mRecipe;
     private Context mContext;
     private SwipePlaceHolderView mSwipeView;
@@ -64,6 +79,11 @@ public class RecipeCard {
         recipePrepare.setText(mRecipe.getTotal()+" min");
         recipeDifficulty.setText(mRecipe.getDifficulty());
         recipeIngredients.setText(mRecipe.getIngredients());
+        recipeCalories.setText(mRecipe.getCalories());
+        recipeFat.setText(mRecipe.getFat());
+        recipeCarbs.setText(mRecipe.getCarbs());
+        recipeProtein.setText(mRecipe.getProtein());
+        recipeFiber.setText(mRecipe.getFiber());
     }
 
     @SwipeOut

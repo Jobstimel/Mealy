@@ -233,6 +233,8 @@ public class PlayAlone extends FragmentActivity {
     private void setupElements() {
         mSharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
         mContext = getApplicationContext();
+        //resetSharedPreferences();
+
         setupPages();
         setupLists();
         setupClasses();
@@ -397,5 +399,11 @@ public class PlayAlone extends FragmentActivity {
                 return false;
             }
         });
+    }
+
+    private void resetSharedPreferences() {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.clear();
+        editor.commit();
     }
 }

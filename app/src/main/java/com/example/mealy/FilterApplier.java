@@ -46,10 +46,10 @@ public class FilterApplier {
             String[] tags = recipe.getTags();
             Boolean status = true;
 
-            if (status && mTypeFilter.size() > 0) {
+            if (mTypeFilter.size() > 0) {
                 status = checkTagsMultipleSelections(tags, mTypeFilter);
             }
-            if (mDiffFilter.size() > 0) {
+            if (status && mDiffFilter.size() > 0) {
                 status = checkDifficulty(recipe, mDiffFilter);
             }
             if (status && mCounFilter.size() > 0) {

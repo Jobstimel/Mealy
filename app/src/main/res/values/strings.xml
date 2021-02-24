@@ -28,6 +28,21 @@
     <string name="category">Kategorie</string>
     <string name="nutrition">Ernährung</string>
 
+    //Recipe Card
+    <string name="calories">Brennwert</string>
+    <string name="fat">Fett</string>
+    <string name="carbohydrates">Kohlenhydrate</string>
+    <string name="protein">Eiweiss</string>
+    <string name="fiber">Ballaststoffe</string>
+    <string name="time_total">Gesamtzeit</string>
+    <string name="time_preparation">Vorbereitungszeit</string>
+
+    //Result
+    <string name="result_placeholder">Du musst erst Rezepte bewerten bevor du hier Ergebnisse sehen kannst.</string>
+    <string name="results">Auswertung</string>
+    <string name="offline_participants">Teilnehmer: 1</string>
+    <string name="tooltip_votes">Anzahl der Stimmen</string>
+
     <string-array name="meal_allergies">
         <item>Eier</item>
         <item>Fisch</item>

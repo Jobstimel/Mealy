@@ -22,4 +22,15 @@
     <string name="preparation">Preparation</string>
     <string name="category">Category</string>
     <string name="nutrition">Nutrition</string>
+    <string name="calories">Calories</string>
+    <string name="fat">Fat</string>
+    <string name="carbohydrates">Carbohydrates</string>
+    <string name="protein">Protein</string>
+    <string name="fiber">Fiber</string>
+    <string name="time_total">Total time</string>
+    <string name="time_preparation">Preparation Time</string>
+    <string name="result_placeholder">You have to swipe recipes before you can see results here.</string>
+    <string name="results">Results</string>
+    <string name="offline_participants">Participants: 1</string>
+    <string name="tooltip_votes">Number of votes</string>
 </resources>

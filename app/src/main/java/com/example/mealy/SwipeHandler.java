@@ -60,7 +60,9 @@ public class SwipeHandler {
     public void loadOfflineResults(List<Recipe> recipes, List<Integer> liked) {
         mOfflineResults = new ArrayList<>();
         for (int i = 0; i < liked.size(); i++) {
-            mOfflineResults.add(recipes.get(liked.get(i)));
+            Recipe recipe = recipes.get(liked.get(i));
+            recipe.setScore(1);
+            mOfflineResults.add(recipe);
         }
     }
 

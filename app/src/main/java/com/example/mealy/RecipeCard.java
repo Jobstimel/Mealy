@@ -64,11 +64,12 @@ public class RecipeCard {
     private Recipe mRecipe;
     private Context mContext;
     private SwipePlaceHolderView mSwipeView;
+    private TextView mPlaceholder;
 
     public RecipeCard(Context context, Recipe recipe, SwipePlaceHolderView swipeView) throws JSONException {
-        mContext = context;
-        mRecipe = recipe;
-        mSwipeView = swipeView;
+        this.mContext = context;
+        this.mRecipe = recipe;
+        this.mSwipeView = swipeView;
     }
 
     @Resolve
@@ -94,6 +95,7 @@ public class RecipeCard {
                 PlayAlone.mDislikedIDs.add(PlayAlone.mStackIDs.get(i));
             }
         }
+
     }
 
     @SwipeCancelState

@@ -89,7 +89,7 @@ public class FilterApplier {
             deleteDislikedIDs();
         }
         int size = mFilteredIDs.size();
-        textView.setTextColor(ContextCompat.getColor(mContext, R.color.green_transparent));
+        textView.setTextColor(ContextCompat.getColor(mContext, R.color.filter_green));
         if (size == 0) {
             textView.setTextColor(ContextCompat.getColor(mContext, R.color.red));
         }

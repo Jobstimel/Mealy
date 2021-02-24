@@ -28,7 +28,10 @@
     <color name="background">#015AA2</color>
 
     //Filter
-    <color name="filter_text_color">#80FFFFFF</color>
-    <color name="filter_border_color">#80FFFFFF</color>
+    <color name="filter_text_color">#BDBDBD</color>
+    <color name="filter_border_color">#F2F2F2</color>
+    <color name="filter_background_color">#FFFFFF</color>
+    <color name="filter_green">#228B22</color>
+    <color name="filter_green_transparent">#80228B22</color>
 
 </resources>

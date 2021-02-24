@@ -74,8 +74,8 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:tooltipText="@string/time_total"
                             android:src="@drawable/icon_time_total"
-                            app:tint="@color/black"
                             android:layout_marginRight="2dp"/>
 
                         <TextView
@@ -98,8 +98,8 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:tooltipText="@string/time_preparation"
                             android:src="@drawable/icon_time_preparation"
-                            app:tint="@color/black"
                             android:layout_marginRight="2dp"/>
 
                         <TextView
@@ -122,8 +122,8 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:tooltipText="@string/difficulty"
                             android:src="@drawable/icon_level"
-                            app:tint="@color/black"
                             android:layout_marginRight="2dp"/>
 
                         <TextView
@@ -177,7 +177,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="Brennwert"
+                            android:text="@string/calories"
                             android:gravity="center_vertical"
                             android:textColor="@color/black"
                             android:layout_marginLeft="5dp"/>
@@ -208,7 +208,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Fett"
+                            android:text="@string/fat"
                             android:textColor="@color/black"
                             android:layout_marginLeft="5dp"/>
 
@@ -237,7 +237,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="Kohlenhydrate"
+                            android:text="@string/carbohydrates"
                             android:gravity="center_vertical"
                             android:textColor="@color/black"
                             android:layout_marginLeft="5dp"/>
@@ -268,7 +268,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Eiweiss"
+                            android:text="@string/protein"
                             android:textColor="@color/black"
                             android:layout_marginLeft="5dp"/>
 
@@ -299,7 +299,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Ballaststoffe"
+                            android:text="@string/fiber"
                             android:textColor="@color/black"
                             android:layout_marginLeft="5dp"/>
 

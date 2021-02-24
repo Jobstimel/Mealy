@@ -31,9 +31,9 @@ public class FilterSeekBarHandler {
             editor.putBoolean("ChangeStatus"+mMode, true);
             editor.commit();
         }
-        seekBarCalories.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.filter_text_color));
+        setSeekBarColorUnselected(seekBarCalories);
         if (min > 0 || max < MAX_CALORIES) {
-            seekBarCalories.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.green_transparent));
+            setSeekBarColorSelected(seekBarCalories);
         }
         filterApplier.applyFilter(textView);
     }
@@ -46,9 +46,9 @@ public class FilterSeekBarHandler {
             editor.putBoolean("ChangeStatus"+mMode, true);
             editor.commit();
         }
-        seekBarTime.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.filter_text_color));
+        setSeekBarColorUnselected(seekBarTime);
         if (min > 0 || max < MAX_TIME) {
-            seekBarTime.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.green_transparent));
+            setSeekBarColorSelected(seekBarTime);
         }
         filterApplier.applyFilter(textView);
     }
@@ -76,14 +76,26 @@ public class FilterSeekBarHandler {
         seekBarTime.setMaxStartValue(max_time);
         seekBarTime.apply();
 
-        seekBarCalories.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.filter_text_color));
+        setSeekBarColorUnselected(seekBarCalories);
         if (min_calories > 0 || max_calories < MAX_CALORIES) {
-            seekBarCalories.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.green_transparent));
+            setSeekBarColorSelected(seekBarCalories);
         }
 
-        seekBarTime.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.filter_text_color));
+        setSeekBarColorUnselected(seekBarTime);
         if (min_time > 0 || max_time < MAX_TIME) {
-            seekBarTime.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.green_transparent));
+            setSeekBarColorSelected(seekBarTime);
         }
+    }
+
+    private void setSeekBarColorSelected(CrystalRangeSeekbar seekBar) {
+        seekBar.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.filter_green_transparent));
+        seekBar.setLeftThumbColor(ContextCompat.getColor(mContext, R.color.filter_green));
+        seekBar.setRightThumbColor(ContextCompat.getColor(mContext, R.color.filter_green));
+    }
+
+    private void setSeekBarColorUnselected(CrystalRangeSeekbar seekBar) {
+        seekBar.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.filter_border_color));
+        seekBar.setLeftThumbColor(ContextCompat.getColor(mContext, R.color.filter_border_color));
+        seekBar.setRightThumbColor(ContextCompat.getColor(mContext, R.color.filter_border_color));
     }
 }

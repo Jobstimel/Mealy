@@ -28,38 +28,53 @@ public class FilterLinearLayoutHandler {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void saveFilterValue(View v, FilterApplier filterApplier, TextView recipeCount, List<TextView> textViewList)  {
+    public void saveFilterValue(View v, FilterApplier filterApplier, TextView recipeCount)  {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
-        TextView textView = textViewList.get(TOOLTIPS.indexOf(v.getTooltipText()));
         if (!mSharedPreferences.getBoolean(v.getTooltipText() +mMode,false)) {
             editor.putBoolean(v.getTooltipText() +mMode, true);
-            textView.setTextColor(ContextCompat.getColor(mContext, R.color.green_transparent));
+            setViewSelected(v);
         }
         else {
             editor.putBoolean(v.getTooltipText() +mMode, false);
-            textView.setTextColor(ContextCompat.getColor(mContext, R.color.filter_text_color));
+            setViewUnselected(v);
         }
         editor.putBoolean("ChangeStatusOffline", true);
         editor.commit();
         filterApplier.applyFilter(recipeCount);
     }
 
-    public void loadFilterLayoutStates(List<TextView> list) {
+    public void loadFilterLayoutStates(List<LinearLayout> list) {
         for (int i = 0; i < list.size(); i++) {
             if (mSharedPreferences.getBoolean(this.TOOLTIPS.get(i)+mMode, false)) {
-                list.get(i).setTextColor(ContextCompat.getColor(mContext, R.color.green_transparent));
+                setLayoutSelected(list.get(i));
             }
         }
     }
 
-    public void resetLayouts(List<TextView> list) {
+    public void resetLayouts(List<LinearLayout> list) {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         for (int i = 0; i < list.size(); i++) {
             editor.putBoolean(this.TOOLTIPS.get(i)+mMode, false);
-            list.get(i).setTextColor(ContextCompat.getColor(mContext, R.color.filter_text_color));
+            setLayoutUnselected(list.get(i));
         }
         editor.putBoolean("ChangeStatusOffline", true);
         editor.commit();
         loadFilterLayoutStates(list);
+    }
+
+    private void setLayoutSelected(LinearLayout layout) {
+        layout.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_green_transparent));
+    }
+
+    private void setLayoutUnselected(LinearLayout layout) {
+        layout.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_background_color));
+    }
+
+    private void setViewSelected(View view) {
+        view.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_green_transparent));
+    }
+
+    private void setViewUnselected(View view) {
+        view.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_background_color));
     }
 }

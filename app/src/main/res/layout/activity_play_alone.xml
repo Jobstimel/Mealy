@@ -23,33 +23,32 @@
             android:gravity="center"
             android:weightSum="3">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/icon_filter"
                 android:layout_weight="1"
                 android:clickable="true"
-                android:onClick="switchPage1"/>
+                android:onClick="switchPage1"
+                app:tint="@color/filter_green_transparent"/>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/icon_swipe_black_white"
+                android:src="@drawable/icon_swipe"
                 android:layout_weight="1"
-                android:paddingVertical="5dp"
-                android:alpha="0.1"
                 android:clickable="true"
-                android:onClick="switchPage2"/>
+                android:onClick="switchPage2"
+                app:tint="@color/filter_border_color"/>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/icon_result_black_white"
+                android:src="@drawable/icon_results"
                 android:layout_weight="1"
-                android:paddingVertical="5dp"
-                android:alpha="0.1"
                 android:clickable="true"
-                android:onClick="switchPage3"/>
+                android:onClick="switchPage3"
+                app:tint="@color/filter_border_color"/>
 
         </LinearLayout>
 
@@ -900,33 +899,32 @@
             android:gravity="center"
             android:weightSum="3">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/icon_filter_black_white"
+                android:src="@drawable/icon_filter"
                 android:layout_weight="1"
-                android:alpha="0.1"
                 android:clickable="true"
-                android:onClick="switchPage1"/>
+                android:onClick="switchPage1"
+                app:tint="@color/filter_border_color"/>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/icon_swipe"
                 android:layout_weight="1"
-                android:paddingVertical="5dp"
                 android:clickable="true"
-                android:onClick="switchPage2"/>
+                android:onClick="switchPage2"
+                app:tint="@color/filter_green_transparent"/>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/icon_result_black_white"
+                android:src="@drawable/icon_results"
                 android:layout_weight="1"
-                android:paddingVertical="5dp"
-                android:alpha="0.1"
                 android:clickable="true"
-                android:onClick="switchPage3"/>
+                android:onClick="switchPage3"
+                app:tint="@color/filter_border_color"/>
 
         </LinearLayout>
 
@@ -952,33 +950,32 @@
             android:gravity="center"
             android:weightSum="3">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/icon_filter_black_white"
+                android:src="@drawable/icon_filter"
                 android:layout_weight="1"
-                android:alpha="0.1"
                 android:clickable="true"
-                android:onClick="switchPage1"/>
+                android:onClick="switchPage1"
+                app:tint="@color/filter_border_color"/>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/icon_swipe_black_white"
+                android:src="@drawable/icon_swipe"
                 android:layout_weight="1"
-                android:paddingVertical="5dp"
-                android:alpha="0.1"
                 android:clickable="true"
-                android:onClick="switchPage2"/>
+                android:onClick="switchPage2"
+                app:tint="@color/filter_border_color"/>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/icon_result"
+                android:src="@drawable/icon_results"
                 android:layout_weight="1"
-                android:paddingVertical="5dp"
                 android:clickable="true"
-                android:onClick="switchPage3"/>
+                android:onClick="switchPage3"
+                app:tint="@color/filter_green_transparent"/>
 
         </LinearLayout>
 

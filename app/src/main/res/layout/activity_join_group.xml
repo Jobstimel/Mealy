@@ -2,19 +2,162 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    style="@style/container"
     tools:context=".JoinGroup"
     android:background="@color/background">
 
+    <LinearLayout
+        style="@style/linear_layout_page"
+        android:id="@+id/page_1">
+
+        <LinearLayout
+            style="@style/linear_layout_top_bar"
+            android:weightSum="3">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/image_view_top_bar"
+                android:src="@drawable/icon_connect"
+                android:layout_weight="1"
+                app:tint="@color/filter_green"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/image_view_top_bar"
+                android:src="@drawable/icon_swipe"
+                android:layout_weight="1"
+                app:tint="@color/filter_border_color"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/image_view_top_bar"
+                android:src="@drawable/icon_results"
+                android:layout_weight="1"
+                app:tint="@color/filter_border_color"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/linear_layout_page"
+        android:id="@+id/page_2">
+
+        <LinearLayout
+            style="@style/linear_layout_top_bar"
+            android:weightSum="3">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/image_view_top_bar"
+                android:src="@drawable/icon_connect"
+                android:layout_weight="1"
+                app:tint="@color/filter_border_color"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/image_view_top_bar"
+                android:src="@drawable/icon_swipe"
+                android:layout_weight="1"
+                app:tint="@color/filter_green"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/image_view_top_bar"
+                android:src="@drawable/icon_results"
+                android:layout_weight="1"
+                app:tint="@color/filter_border_color"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linear_layout_placeholder_swipe_no_filter_hits_container"
+            android:id="@+id/swipe_placeholder_no_filter_results">
+
+            <TextView
+                style="@style/text_view_placeholder_swipe_no_filter_hits"
+                android:text="@string/swipe_placeholder"/>
+
+        </LinearLayout>
+
+        <com.mindorks.placeholderview.SwipePlaceHolderView
+            android:id="@+id/swipeView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/linear_layout_page"
+        android:id="@+id/page_3">
+
+        <LinearLayout
+            style="@style/linear_layout_top_bar"
+            android:weightSum="3">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/image_view_top_bar"
+                android:src="@drawable/icon_connect"
+                android:layout_weight="1"
+                app:tint="@color/filter_border_color"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/image_view_top_bar"
+                android:src="@drawable/icon_swipe"
+                android:layout_weight="1"
+                app:tint="@color/filter_border_color"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/image_view_top_bar"
+                android:src="@drawable/icon_results"
+                android:layout_weight="1"
+                app:tint="@color/filter_green"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linear_layout_card_design">
+
+            <TextView
+                style="@style/text_view_top_bot"
+                android:background="@drawable/background_round_corners_top"
+                android:text="@string/results"/>
+
+            <LinearLayout
+                style="@style/linear_layout_card_design_middle_part">
+
+                <LinearLayout
+                    style="@style/linear_layout_placeholder_results_container_outside"
+                    android:id="@+id/linear_layout_result_page_placeholder">
+
+                    <LinearLayout
+                        style="@style/linear_layout_placeholder_results_container_inside">
+
+                        <TextView
+                            style="@style/text_view_placeholder_results"
+                            android:text="@string/result_placeholder_join_lobby"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <ListView
+                    style="@style/list_view_results"
+                    android:id="@+id/list_view_result"
+                    android:layout_marginHorizontal="10dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/text_view_top_bot"
+                android:background="@drawable/background_round_corners_bottom"
+                android:text="@string/offline_participants"
+                android:layout_weight="14"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/bottom_navigation_view"
         android:id="@+id/bottom_navigation"
         app:itemBackground="@color/white"
         app:itemTextColor="@drawable/selector_menu_bottom_navigation"
         app:itemIconTint="@drawable/selector_menu_bottom_navigation"
-        app:menu="@menu/menu_bottom_navigation"
-        android:layout_alignParentBottom="true"/>
+        app:menu="@menu/menu_bottom_navigation"/>
 
 </RelativeLayout>

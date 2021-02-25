@@ -2,91 +2,51 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    style="@style/container"
     tools:context=".PlayAlone"
-    android:background="@color/background"
-    android:orientation="vertical">
+    android:background="@color/background">
 
     <LinearLayout
-        android:id="@+id/page_1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        style="@style/linear_layout_page"
+        android:id="@+id/page_1">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp"
-            android:background="@color/white"
-            android:gravity="center"
+            style="@style/linear_layout_top_bar"
             android:weightSum="3">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/image_view_top_bar"
                 android:src="@drawable/icon_filter"
                 android:layout_weight="1"
-                android:clickable="true"
                 android:onClick="switchPage1"
                 app:tint="@color/filter_green"/>
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/image_view_top_bar"
                 android:src="@drawable/icon_swipe"
                 android:layout_weight="1"
-                android:clickable="true"
                 android:onClick="switchPage2"
                 app:tint="@color/filter_border_color"/>
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/image_view_top_bar"
                 android:src="@drawable/icon_results"
                 android:layout_weight="1"
-                android:clickable="true"
                 android:onClick="switchPage3"
                 app:tint="@color/filter_border_color"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginBottom="76dp"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/background_round_corners"
-            android:elevation="5dp"
-            android:weightSum="30">
+            style="@style/linear_layout_card_design">
+
+            <TextView
+                style="@style/text_view_top_bot"
+                android:id="@+id/text_view_recipe_count"
+                android:background="@drawable/background_round_corners_top"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="14"
-                android:layout_gravity="center"
-                android:background="@drawable/background_round_corners_top">
-
-                <TextView
-                    android:id="@+id/text_view_recipe_count"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/background_round_corners_top"
-                    android:layout_margin="2dp"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="17dp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/filter_background_color"
-                android:layout_weight="2">
+                style="@style/linear_layout_card_design_middle_part">
 
                 <ScrollView
                     android:layout_width="match_parent"
@@ -99,171 +59,115 @@
                         android:layout_margin="10dp">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:background="@color/filter_border_color"
-                            android:layout_marginBottom="20dp">
+                            style="@style/linear_layout_filter_section_container">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:background="@color/filter_background_color"
+                                style="@style/linear_layout_filter_section"
                                 android:layout_marginHorizontal="2dp"
                                 android:layout_marginTop="2dp"
                                 android:weightSum="3">
 
                                 <LinearLayout
+                                    style="@style/linear_layout_6_3"
                                     android:id="@+id/breakfast_linear_layout"
                                     android:tooltipText="Frühstück"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
                                     android:layout_marginTop="2dp"
                                     android:layout_marginRight="1dp"
                                     android:layout_marginBottom="1dp"
-                                    android:layout_marginLeft="2dp"
-                                    android:onClick="saveFilterValue"
-                                    android:layout_weight="1">
+                                    android:layout_marginLeft="2dp">
 
                                     <TextView
+                                        style="@style/text_view_filter_6_3"
                                         android:id="@+id/breakfast_text_view"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_margin="2dp"
-                                        android:background="@color/filter_background_color"
-                                        android:gravity="center"
-                                        android:text="@string/breakfast"
-                                        android:textColor="@color/filter_text_color" />
+                                        android:text="@string/breakfast"/>
 
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    style="@style/linear_layout_6_3"
                                     android:id="@+id/lunch_linear_layout"
                                     android:tooltipText="Mittagessen"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
                                     android:layout_marginTop="2dp"
                                     android:layout_marginRight="1dp"
                                     android:layout_marginBottom="1dp"
-                                    android:layout_marginLeft="1dp"
-                                    android:onClick="saveFilterValue"
-                                    android:layout_weight="1">
+                                    android:layout_marginLeft="1dp">
 
                                     <TextView
+                                        style="@style/text_view_filter_6_3"
                                         android:id="@+id/lunch_text_view"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_margin="2dp"
-                                        android:background="@color/filter_background_color"
-                                        android:text="@string/lunch"
-                                        android:gravity="center"
-                                        android:textColor="@color/filter_text_color"/>
+                                        android:text="@string/lunch"/>
 
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    style="@style/linear_layout_6_3"
                                     android:id="@+id/dinner_linear_layout"
                                     android:tooltipText="Abendessen"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
                                     android:layout_marginTop="2dp"
                                     android:layout_marginRight="2dp"
                                     android:layout_marginBottom="1dp"
-                                    android:layout_marginLeft="1dp"
-                                    android:onClick="saveFilterValue"
-                                    android:layout_weight="1">
+                                    android:layout_marginLeft="1dp">
 
                                     <TextView
+                                        style="@style/text_view_filter_6_3"
                                         android:id="@+id/dinner_text_view"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_margin="2dp"
-                                        android:background="@color/filter_background_color"
-                                        android:text="@string/dinner"
-                                        android:gravity="center"
-                                        android:textColor="@color/filter_text_color"/>
+                                        android:text="@string/dinner"/>
 
                                 </LinearLayout>
 
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:background="@color/filter_background_color"
+                                style="@style/linear_layout_filter_section"
                                 android:layout_marginHorizontal="2dp"
                                 android:layout_marginBottom="2dp"
                                 android:weightSum="3">
 
                                 <LinearLayout
+                                    style="@style/linear_layout_6_3"
                                     android:id="@+id/dessert_linear_layout"
                                     android:tooltipText="Dessert"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginRight="1dp"
                                     android:layout_marginBottom="2dp"
-                                    android:layout_marginLeft="1dp"
-                                    android:onClick="saveFilterValue"
-                                    android:layout_weight="1">
+                                    android:layout_marginLeft="1dp">
 
                                     <TextView
+                                        style="@style/text_view_filter_6_3"
                                         android:id="@+id/dessert_text_view"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_margin="2dp"
-                                        android:background="@color/filter_background_color"
-                                        android:text="@string/dessert"
-                                        android:gravity="center"
-                                        android:textColor="@color/filter_text_color"/>
+                                        android:text="@string/dessert"/>
 
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    style="@style/linear_layout_6_3"
                                     android:id="@+id/snack_linear_layout"
                                     android:tooltipText="Snack"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginRight="1dp"
                                     android:layout_marginBottom="2dp"
-                                    android:layout_marginLeft="1dp"
-                                    android:onClick="saveFilterValue"
-                                    android:layout_weight="1">
+                                    android:layout_marginLeft="1dp">
 
                                     <TextView
+                                        style="@style/text_view_filter_6_3"
                                         android:id="@+id/snack_text_view"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_margin="2dp"
-                                        android:background="@color/filter_background_color"
-                                        android:text="@string/snack"
-                                        android:gravity="center"
-                                        android:textColor="@color/filter_text_color"/>
+                                        android:text="@string/snack"/>
 
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    style="@style/linear_layout_6_3"
                                     android:id="@+id/drink_linear_layout"
                                     android:tooltipText="Getränk"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginRight="2dp"
                                     android:layout_marginBottom="2dp"
-                                    android:layout_marginLeft="1dp"
-                                    android:onClick="saveFilterValue"
-                                    android:layout_weight="1">
+                                    android:layout_marginLeft="1dp">
 
                                     <TextView
+                                        style="@style/text_view_filter_6_3"
                                         android:id="@+id/drink_text_view"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_margin="2dp"
-                                        android:background="@color/filter_background_color"
-                                        android:text="@string/drink"
-                                        android:gravity="center"
-                                        android:textColor="@color/filter_text_color"/>
+                                        android:text="@string/drink"/>
 
                                 </LinearLayout>
 
@@ -272,11 +176,7 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:background="@color/filter_border_color"
-                            android:layout_marginBottom="20dp">
+                            style="@style/linear_layout_filter_section_container">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -348,90 +248,54 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:background="@color/filter_border_color"
-                            android:layout_marginBottom="20dp">
+                            style="@style/linear_layout_filter_section_container">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
+                                style="@style/linear_layout_filter_section"
                                 android:layout_margin="2dp"
-                                android:background="@color/filter_background_color"
                                 android:weightSum="3">
 
                                 <LinearLayout
+                                    style="@style/linear_layout_6_3"
                                     android:id="@+id/diff1_linear_layout"
                                     android:tooltipText="Einfach"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
                                     android:layout_marginLeft="2dp"
                                     android:layout_marginRight="1dp"
-                                    android:layout_marginVertical="2dp"
-                                    android:orientation="horizontal"
-                                    android:gravity="center"
-                                    android:onClick="saveFilterValue"
-                                    android:layout_weight="1">
+                                    android:layout_marginVertical="2dp">
 
                                     <TextView
+                                        style="@style/text_view_filter_6_3"
                                         android:id="@+id/diff1_text_view"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_margin="2dp"
-                                        android:background="@color/filter_background_color"
-                                        android:text="@string/easy"
-                                        android:gravity="center"
-                                        android:textColor="@color/filter_text_color"/>
+                                        android:text="@string/easy"/>
 
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    style="@style/linear_layout_6_3"
                                     android:id="@+id/diff2_linear_layout"
                                     android:tooltipText="Mittel"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
                                     android:layout_marginHorizontal="1dp"
-                                    android:layout_marginVertical="2dp"
-                                    android:orientation="horizontal"
-                                    android:gravity="center"
-                                    android:onClick="saveFilterValue"
-                                    android:layout_weight="1">
+                                    android:layout_marginVertical="2dp">
 
                                     <TextView
+                                        style="@style/text_view_filter_6_3"
                                         android:id="@+id/diff2_text_view"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_margin="2dp"
-                                        android:background="@color/filter_background_color"
-                                        android:text="@string/medium"
-                                        android:gravity="center"
-                                        android:textColor="@color/filter_text_color"/>
+                                        android:text="@string/medium"/>
 
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    style="@style/linear_layout_6_3"
                                     android:id="@+id/diff3_linear_layout"
                                     android:tooltipText="Schwierig"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginRight="2dp"
-                                    android:layout_marginVertical="2dp"
-                                    android:orientation="horizontal"
-                                    android:gravity="center"
-                                    android:onClick="saveFilterValue"
-                                    android:layout_weight="1">
+                                    android:layout_marginVertical="2dp">
 
                                     <TextView
+                                        style="@style/text_view_filter_6_3"
                                         android:id="@+id/diff3_text_view"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_margin="2dp"
-                                        android:background="@color/filter_background_color"
-                                        android:text="@string/hard"
-                                        android:gravity="center"
-                                        android:textColor="@color/filter_text_color"/>
+                                        android:text="@string/hard"/>
 
                                 </LinearLayout>
 
@@ -440,147 +304,87 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:background="@color/filter_border_color"
-                            android:layout_marginBottom="20dp">
+                            style="@style/linear_layout_filter_section_container">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:weightSum="7"
-                                android:orientation="horizontal"
+                                style="@style/linear_layout_filter_section"
                                 android:layout_margin="2dp"
-                                android:background="@color/filter_background_color">
+                                android:weightSum="7">
 
                                 <LinearLayout
+                                    style="@style/linear_layout_country"
                                     android:id="@+id/germany_linear_layout"
-                                    android:tooltipText="Deutschland"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:onClick="saveFilterCountryValue">
+                                    android:tooltipText="Deutschland">
 
                                     <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/icon_germany"
-                                        android:gravity="center"
-                                        android:layout_marginVertical="8dp"/>
+                                        style="@style/image_view_country"
+                                        android:src="@drawable/icon_germany"/>
 
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    style="@style/linear_layout_country"
                                     android:id="@+id/spain_linear_layout"
-                                    android:tooltipText="Spanien"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:orientation="horizontal"
-                                    android:gravity="center"
-                                    android:onClick="saveFilterCountryValue">
+                                    android:tooltipText="Spanien">
 
                                     <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/icon_spain"
-                                        android:gravity="center"
-                                        android:layout_marginVertical="8dp"/>
+                                        style="@style/image_view_country"
+                                        android:src="@drawable/icon_spain"/>
 
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    style="@style/linear_layout_country"
                                     android:id="@+id/asia_linear_layout"
-                                    android:tooltipText="Asien"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:orientation="horizontal"
-                                    android:gravity="center"
-                                    android:onClick="saveFilterCountryValue">
+                                    android:tooltipText="Asien">
 
                                     <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/icon_china"
-                                        android:gravity="center"
-                                        android:layout_marginVertical="8dp"/>
+                                        style="@style/image_view_country"
+                                        android:src="@drawable/icon_china"/>
 
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    style="@style/linear_layout_country"
                                     android:id="@+id/italy_linear_layout"
-                                    android:tooltipText="Italien"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:orientation="horizontal"
-                                    android:gravity="center"
-                                    android:onClick="saveFilterCountryValue">
+                                    android:tooltipText="Italien">
 
                                     <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/icon_italy"
-                                        android:gravity="center"
-                                        android:layout_marginVertical="8dp"/>
+                                        style="@style/image_view_country"
+                                        android:src="@drawable/icon_italy"/>
 
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    style="@style/linear_layout_country"
                                     android:id="@+id/india_linear_layout"
-                                    android:tooltipText="Indien"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:onClick="saveFilterCountryValue">
+                                    android:tooltipText="Indien">
 
                                     <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/icon_india"
-                                        android:gravity="center"
-                                        android:layout_marginVertical="8dp"/>
+                                        style="@style/image_view_country"
+                                        android:src="@drawable/icon_india"/>
 
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    style="@style/linear_layout_country"
                                     android:id="@+id/france_linear_layout"
-                                    android:tooltipText="Frankreich"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:orientation="horizontal"
-                                    android:gravity="center"
-                                    android:onClick="saveFilterCountryValue">
+                                    android:tooltipText="Frankreich">
 
                                     <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/icon_france"
-                                        android:gravity="center"
-                                        android:layout_marginVertical="8dp"/>
+                                        style="@style/image_view_country"
+                                        android:src="@drawable/icon_france"/>
 
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    style="@style/linear_layout_country"
                                     android:id="@+id/greece_linear_layout"
-                                    android:tooltipText="Griechenland"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:onClick="saveFilterCountryValue">
+                                    android:tooltipText="Griechenland">
 
                                     <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/icon_greece"
-                                        android:gravity="center"
-                                        android:layout_marginVertical="8dp"/>
+                                        style="@style/image_view_country"
+                                        android:src="@drawable/icon_greece" />
 
                                 </LinearLayout>
 
@@ -589,260 +393,135 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:background="@color/filter_border_color"
-                            android:layout_marginBottom="20dp">
+                            style="@style/linear_layout_filter_section_container">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
+                                style="@style/linear_layout_filter_section"
                                 android:layout_marginHorizontal="2dp"
                                 android:layout_marginTop="2dp"
-                                android:background="@color/filter_background_color"
-                                android:orientation="horizontal"
                                 android:weightSum="2">
 
                                 <LinearLayout
+                                    style="@style/linear_layout_power_spinner"
                                     android:id="@+id/allergies_linear_layout"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
                                     android:layout_marginLeft="2dp"
                                     android:layout_marginTop="2dp"
                                     android:layout_marginRight="1dp"
-                                    android:layout_marginBottom="1dp"
-                                    android:orientation="horizontal"
-                                    android:layout_weight="1"
-                                    android:weightSum="10">
+                                    android:layout_marginBottom="1dp">
 
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:background="@color/filter_background_color"
-                                        android:layout_margin="2dp">
+                                    <com.skydoves.powerspinner.PowerSpinnerView
+                                        style="@style/power_spinner"
+                                        android:id="@+id/allergies_power_spinner"
+                                        app:spinner_arrow_tint="@color/filter_text_color"
+                                        app:spinner_arrow_gravity="end"
+                                        app:spinner_divider_color="@color/filter_border_color"
+                                        app:spinner_divider_show="true"
+                                        app:spinner_divider_size="0.4dp"
+                                        app:spinner_item_array="@array/meal_allergies"
+                                        app:spinner_popup_animation="dropdown"
+                                        app:spinner_popup_background="@color/filter_background_color"
+                                        app:spinner_popup_elevation="14dp"/>
 
-                                        <com.skydoves.powerspinner.PowerSpinnerView
-                                            android:id="@+id/allergies_power_spinner"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:gravity="center_vertical"
-                                            android:hint="@string/allergies"
-                                            android:padding="5dp"
-                                            android:textColor="@color/filter_text_color"
-                                            android:textColorHint="@color/filter_text_color"
-                                            android:textSize="14.5sp"
-                                            android:layout_weight="2"
-                                            app:spinner_arrow_tint="@color/filter_text_color"
-                                            app:spinner_arrow_gravity="end"
-                                            app:spinner_divider_color="@color/filter_border_color"
-                                            app:spinner_divider_show="true"
-                                            app:spinner_divider_size="0.4dp"
-                                            app:spinner_item_array="@array/meal_allergies"
-                                            app:spinner_popup_animation="dropdown"
-                                            app:spinner_popup_background="@color/filter_background_color"
-                                            app:spinner_popup_elevation="14dp"/>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:layout_weight="8"
-                                            android:onClick="resetSpinnerAllergies">
-
-                                            <androidx.appcompat.widget.AppCompatImageView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="match_parent"
-                                                android:layout_marginVertical="4dp"
-                                                android:src="@drawable/icon_delete"
-                                                app:tint="@color/filter_text_color"/>
-
-                                        </LinearLayout>
-
-                                    </LinearLayout>
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        style="@style/image_view_power_spinner_reset"
+                                        android:src="@drawable/icon_delete"
+                                        android:onClick="resetSpinnerAllergies"
+                                        app:tint="@color/filter_text_color"/>
 
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    style="@style/linear_layout_power_spinner"
                                     android:id="@+id/preparation_linear_layout"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="2dp"
                                     android:layout_marginRight="2dp"
-                                    android:layout_marginBottom="1dp"
-                                    android:orientation="horizontal"
-                                    android:layout_weight="1"
-                                    android:weightSum="10">
+                                    android:layout_marginBottom="1dp">
 
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:background="@color/filter_background_color"
-                                        android:layout_margin="2dp">
+                                    <com.skydoves.powerspinner.PowerSpinnerView
+                                        style="@style/power_spinner"
+                                        android:id="@+id/preparation_type_power_spinner"
+                                        app:spinner_arrow_tint="@color/filter_text_color"
+                                        app:spinner_arrow_gravity="end"
+                                        app:spinner_divider_color="@color/filter_border_color"
+                                        app:spinner_divider_show="true"
+                                        app:spinner_divider_size="0.4dp"
+                                        app:spinner_item_array="@array/preparation_type"
+                                        app:spinner_popup_animation="dropdown"
+                                        app:spinner_popup_background="@color/filter_background_color"
+                                        app:spinner_popup_elevation="14dp"/>
 
-                                        <com.skydoves.powerspinner.PowerSpinnerView
-                                            android:id="@+id/preparation_type_power_spinner"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:gravity="center_vertical"
-                                            android:hint="@string/preparation"
-                                            android:padding="5dp"
-                                            android:textColor="@color/filter_text_color"
-                                            android:textColorHint="@color/filter_text_color"
-                                            android:textSize="14.5sp"
-                                            android:layout_weight="2"
-                                            app:spinner_arrow_tint="@color/filter_text_color"
-                                            app:spinner_arrow_gravity="end"
-                                            app:spinner_divider_color="@color/filter_border_color"
-                                            app:spinner_divider_show="true"
-                                            app:spinner_divider_size="0.4dp"
-                                            app:spinner_item_array="@array/preparation_type"
-                                            app:spinner_popup_animation="dropdown"
-                                            app:spinner_popup_background="@color/filter_background_color"
-                                            app:spinner_popup_elevation="14dp"/>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:layout_weight="8"
-                                            android:onClick="resetSpinnerPreparationType">
-
-                                            <androidx.appcompat.widget.AppCompatImageView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="match_parent"
-                                                android:layout_marginVertical="4dp"
-                                                android:src="@drawable/icon_delete"
-                                                app:tint="@color/filter_text_color"/>
-
-                                        </LinearLayout>
-
-                                    </LinearLayout>
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        style="@style/image_view_power_spinner_reset"
+                                        android:src="@drawable/icon_delete"
+                                        android:onClick="resetSpinnerPreparationType"
+                                        app:tint="@color/filter_text_color" />
 
                                 </LinearLayout>
 
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
+                                style="@style/linear_layout_filter_section"
                                 android:layout_marginHorizontal="2dp"
                                 android:layout_marginBottom="2dp"
-                                android:background="@color/filter_background_color"
                                 android:weightSum="2">
 
                                 <LinearLayout
+                                    style="@style/linear_layout_power_spinner"
                                     android:id="@+id/category_linear_layout"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
                                     android:layout_marginLeft="2dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginRight="1dp"
-                                    android:layout_marginBottom="2dp"
-                                    android:orientation="horizontal"
-                                    android:layout_weight="1"
-                                    android:weightSum="10">
+                                    android:layout_marginBottom="2dp">
 
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:background="@color/filter_background_color"
-                                        android:layout_margin="2dp">
+                                    <com.skydoves.powerspinner.PowerSpinnerView
+                                        style="@style/power_spinner"
+                                        android:id="@+id/category_power_spinner"
+                                        app:spinner_arrow_tint="@color/filter_text_color"
+                                        app:spinner_arrow_gravity="end"
+                                        app:spinner_divider_color="@color/filter_border_color"
+                                        app:spinner_divider_show="true"
+                                        app:spinner_divider_size="0.4dp"
+                                        app:spinner_item_array="@array/meal_category"
+                                        app:spinner_popup_animation="dropdown"
+                                        app:spinner_popup_elevation="14dp"
+                                        app:spinner_popup_background="@color/filter_background_color"/>
 
-                                        <com.skydoves.powerspinner.PowerSpinnerView
-                                            android:id="@+id/category_power_spinner"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:gravity="center_vertical"
-                                            android:hint="@string/category"
-                                            android:padding="5dp"
-                                            android:textColor="@color/filter_text_color"
-                                            android:textColorHint="@color/filter_text_color"
-                                            android:textSize="14.5sp"
-                                            android:layout_weight="2"
-                                            app:spinner_arrow_tint="@color/filter_text_color"
-                                            app:spinner_arrow_gravity="end"
-                                            app:spinner_divider_color="@color/filter_border_color"
-                                            app:spinner_divider_show="true"
-                                            app:spinner_divider_size="0.4dp"
-                                            app:spinner_item_array="@array/meal_category"
-                                            app:spinner_popup_animation="dropdown"
-                                            app:spinner_popup_elevation="14dp"
-                                            app:spinner_popup_background="@color/filter_background_color"/>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:layout_weight="8"
-                                            android:onClick="resetSpinnerCategory">
-
-                                            <androidx.appcompat.widget.AppCompatImageView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="match_parent"
-                                                android:layout_marginVertical="4dp"
-                                                android:src="@drawable/icon_delete"
-                                                app:tint="@color/filter_text_color"/>
-
-                                        </LinearLayout>
-
-                                    </LinearLayout>
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        style="@style/image_view_power_spinner_reset"
+                                        android:src="@drawable/icon_delete"
+                                        android:onClick="resetSpinnerCategory"
+                                        app:tint="@color/filter_text_color"/>
 
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    style="@style/linear_layout_power_spinner"
                                     android:id="@+id/eating_linear_layout"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
                                     android:layout_marginLeft="1dp"
                                     android:layout_marginTop="1dp"
                                     android:layout_marginRight="2dp"
-                                    android:layout_marginBottom="2dp"
-                                    android:orientation="horizontal"
-                                    android:layout_weight="1"
-                                    android:weightSum="10">
+                                    android:layout_marginBottom="2dp">
 
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:background="@color/filter_background_color"
-                                        android:layout_margin="2dp">
+                                    <com.skydoves.powerspinner.PowerSpinnerView
+                                        style="@style/power_spinner"
+                                        android:id="@+id/eating_type_power_spinner"
+                                        app:spinner_arrow_tint="@color/filter_text_color"
+                                        app:spinner_arrow_gravity="end"
+                                        app:spinner_divider_color="@color/filter_border_color"
+                                        app:spinner_divider_show="true"
+                                        app:spinner_divider_size="0.4dp"
+                                        app:spinner_item_array="@array/eating_type"
+                                        app:spinner_popup_animation="dropdown"
+                                        app:spinner_popup_elevation="14dp"
+                                        app:spinner_popup_background="@color/filter_background_color"/>
 
-                                        <com.skydoves.powerspinner.PowerSpinnerView
-                                            android:id="@+id/eating_type_power_spinner"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:gravity="center_vertical"
-                                            android:hint="@string/nutrition"
-                                            android:padding="5dp"
-                                            android:textColor="@color/filter_text_color"
-                                            android:textColorHint="@color/filter_text_color"
-                                            android:textSize="14.5sp"
-                                            android:layout_weight="2"
-                                            app:spinner_arrow_tint="@color/filter_text_color"
-                                            app:spinner_arrow_gravity="end"
-                                            app:spinner_divider_color="@color/filter_border_color"
-                                            app:spinner_divider_show="true"
-                                            app:spinner_divider_size="0.4dp"
-                                            app:spinner_item_array="@array/eating_type"
-                                            app:spinner_popup_animation="dropdown"
-                                            app:spinner_popup_elevation="14dp"
-                                            app:spinner_popup_background="@color/filter_background_color"/>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:layout_weight="8"
-                                            android:onClick="resetSpinnerEatingType">
-
-                                            <androidx.appcompat.widget.AppCompatImageView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="match_parent"
-                                                android:layout_marginVertical="4dp"
-                                                android:src="@drawable/icon_delete"
-                                                app:tint="@color/filter_text_color"/>
-
-                                        </LinearLayout>
-
-                                    </LinearLayout>
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        style="@style/image_view_power_spinner_reset"
+                                        android:src="@drawable/icon_delete"
+                                        android:onClick="resetSpinnerEatingType"
+                                        app:tint="@color/filter_text_color"/>
 
                                 </LinearLayout>
 
@@ -856,107 +535,54 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:layout_weight="14"
-                android:clickable="true">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Filter zurücksetzen"
-                    android:background="@drawable/selector_reset_filter_button"
-                    android:gravity="center"
-                    android:textSize="17dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:onClick="resetFilter"/>
-
-            </LinearLayout>
+            <TextView
+                style="@style/text_view_top_bot"
+                android:text="Filter zurücksetzen"
+                android:background="@drawable/selector_reset_filter_button"
+                android:onClick="resetFilter"/>
 
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/page_2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        style="@style/linear_layout_page"
+        android:id="@+id/page_2">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:orientation="horizontal"
-            android:background="@color/white"
-            android:elevation="5dp"
-            android:gravity="center"
+            style="@style/linear_layout_top_bar"
             android:weightSum="3">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/image_view_top_bar"
                 android:src="@drawable/icon_filter"
                 android:layout_weight="1"
-                android:clickable="true"
                 android:onClick="switchPage1"
                 app:tint="@color/filter_border_color"/>
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/image_view_top_bar"
                 android:src="@drawable/icon_swipe"
                 android:layout_weight="1"
-                android:clickable="true"
                 android:onClick="switchPage2"
                 app:tint="@color/filter_green"/>
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/image_view_top_bar"
                 android:src="@drawable/icon_results"
                 android:layout_weight="1"
-                android:clickable="true"
                 android:onClick="switchPage3"
                 app:tint="@color/filter_border_color"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/swipe_placeholder_no_filter_results"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            style="@style/linear_layout_placeholder_swipe_no_filter_hits_container"
+            android:id="@+id/swipe_placeholder_no_filter_results">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@color/filter_background_color"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginBottom="10dp"
-                android:elevation="5dp"
-                android:gravity="center">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:textColor="@color/red"
-                        android:textStyle="bold"
-                        android:text="@string/swipe_placeholder"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
+            <TextView
+                style="@style/text_view_placeholder_swipe_no_filter_hits"
+                android:text="@string/swipe_placeholder"/>
 
         </LinearLayout>
 
@@ -968,162 +594,85 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/page_3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        style="@style/linear_layout_page"
+        android:id="@+id/page_3">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:orientation="horizontal"
-            android:background="@color/white"
-            android:elevation="5dp"
-            android:gravity="center"
+            style="@style/linear_layout_top_bar"
             android:weightSum="3">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/image_view_top_bar"
                 android:src="@drawable/icon_filter"
                 android:layout_weight="1"
-                android:clickable="true"
                 android:onClick="switchPage1"
                 app:tint="@color/filter_border_color"/>
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/image_view_top_bar"
                 android:src="@drawable/icon_swipe"
                 android:layout_weight="1"
-                android:clickable="true"
                 android:onClick="switchPage2"
                 app:tint="@color/filter_border_color"/>
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/image_view_top_bar"
                 android:src="@drawable/icon_results"
                 android:layout_weight="1"
-                android:clickable="true"
                 android:onClick="switchPage3"
                 app:tint="@color/filter_green"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="76dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/background_round_corners"
-            android:orientation="vertical"
-            android:weightSum="30">
+            style="@style/linear_layout_card_design">
+
+            <TextView
+                style="@style/text_view_top_bot"
+                android:background="@drawable/background_round_corners_top"
+                android:text="@string/results"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="14"
-                android:layout_gravity="center"
-                android:background="@drawable/background_round_corners_top">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/background_round_corners_top"
-                    android:layout_margin="2dp"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    android:text="@string/results"
-                    android:textSize="17dp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="2">
+                style="@style/linear_layout_card_design_middle_part">
 
                 <LinearLayout
-                    android:id="@+id/linear_layout_result_page_placeholder"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@color/filter_border_color"
-                    android:layout_marginHorizontal="10dp">
+                    style="@style/linear_layout_placeholder_results_container_outside"
+                    android:id="@+id/linear_layout_result_page_placeholder">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/filter_background_color"
-                        android:layout_margin="2dp">
+                        style="@style/linear_layout_placeholder_results_container_inside">
 
                         <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="5dp"
-                            android:background="@color/filter_background_color"
-                            android:textColor="@color/filter_text_color"
-                            android:textStyle="bold"
-                            android:gravity="center"
+                            style="@style/text_view_placeholder_results"
                             android:text="@string/result_placeholder"/>
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp">
-
-                    <ListView
-                        android:id="@+id/list_view_result"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/filter_background_color"
-                        android:scrollbars="horizontal"
-                        android:dividerHeight="20dp"
-                        android:divider="@android:color/transparent"/>
-
-                </LinearLayout>
+                <ListView
+                    style="@style/list_view_results"
+                    android:id="@+id/list_view_result"
+                    android:layout_marginHorizontal="10dp"/>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <TextView
+                style="@style/text_view_top_bot"
                 android:background="@drawable/background_round_corners_bottom"
-                android:layout_weight="14">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/background_round_corners_bottom"
-                    android:layout_margin="2dp"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    android:text="@string/offline_participants"
-                    android:textSize="17dp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
+                android:text="@string/offline_participants"
+                android:layout_weight="14"/>
 
         </LinearLayout>
 
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/bottom_navigation_view"
         android:id="@+id/bottom_navigation"
         app:itemBackground="@color/white"
         app:itemTextColor="@drawable/selector_menu_bottom_navigation"
         app:itemIconTint="@drawable/selector_menu_bottom_navigation"
-        app:menu="@menu/menu_bottom_navigation"
-        android:layout_alignParentBottom="true"/>
+        app:menu="@menu/menu_bottom_navigation"/>
 
 </RelativeLayout>

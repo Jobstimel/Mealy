@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    //LinearLayouts
+
+    <style name="linear_layout_card_design">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/background_round_corners</item>
+        <item name="android:layout_marginBottom">76dp</item>
+        <item name="android:layout_marginHorizontal">20dp</item>
+        <item name="android:elevation">5dp</item>
+        <item name="android:weightSum">30</item>
+    </style>
+
+    <style name="linear_layout_placeholder_swipe_no_filter_hits_container">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:background">@color/filter_background_color</item>
+        <item name="android:layout_marginHorizontal">20dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:elevation">5dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="linear_layout_placeholder_results_container_outside">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/filter_border_color</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_marginHorizontal">10dp</item>
+    </style>
+
+    //ImageViews
+
+    <style name="image_view_country">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginVertical">8dp</item>
+    </style>
+
+    <style name="image_view_power_spinner_reset">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginVertical">4dp</item>
+        <item name="android:layout_weight">8</item>
+    </style>
+
+</resources>

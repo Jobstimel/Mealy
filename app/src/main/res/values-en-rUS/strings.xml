@@ -34,4 +34,5 @@
     <string name="offline_participants">Participants: 1</string>
     <string name="tooltip_votes">Number of votes</string>
     <string name="swipe_placeholder">No filter hits</string>
+    <string name="result_placeholder_join_lobby">The vote is still ongoing. As soon as the host closes voting, you can view the results here.</string>
 </resources>

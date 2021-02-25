@@ -33,7 +33,7 @@ public class FilterSpinnerHandler {
         editor.putString(key+mMode+"Value", "");
         editor.putBoolean("ChangeStatus"+mMode, true);
         editor.commit();
-        layout.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_background_color));
+        setLayoutUnselected(layout);
         filterApplier.applyFilter(textView);
     }
 
@@ -45,7 +45,7 @@ public class FilterSpinnerHandler {
             editor.putBoolean("ChangeStatus"+mMode, true);
             editor.commit();
         }
-        layout.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_green_transparent));
+        setLayoutSelected(layout);
     }
 
     public void loadSpinnerStates(PowerSpinnerView view1, PowerSpinnerView view2, PowerSpinnerView view3, PowerSpinnerView view4) {
@@ -60,5 +60,13 @@ public class FilterSpinnerHandler {
             resetSpinner(list.get(i), this.SPINNER_KEYS[i], filterApplier, textView, layouts.get(i));
         }
         loadSpinnerStates(list.get(0), list.get(1), list.get(2), list.get(3));
+    }
+
+    private void setLayoutSelected(LinearLayout layout) {
+        layout.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_green));
+    }
+
+    private void setLayoutUnselected(LinearLayout layout) {
+        layout.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_background_color));
     }
 }

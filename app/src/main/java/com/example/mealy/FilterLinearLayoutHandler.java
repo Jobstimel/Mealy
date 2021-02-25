@@ -63,7 +63,7 @@ public class FilterLinearLayoutHandler {
     }
 
     private void setLayoutSelected(LinearLayout layout) {
-        layout.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_green_transparent));
+        layout.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_green));
     }
 
     private void setLayoutUnselected(LinearLayout layout) {
@@ -71,7 +71,7 @@ public class FilterLinearLayoutHandler {
     }
 
     private void setViewSelected(View view) {
-        view.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_green_transparent));
+        view.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_green));
     }
 
     private void setViewUnselected(View view) {

@@ -31,9 +31,9 @@ public class FilterSeekBarHandler {
             editor.putBoolean("ChangeStatus"+mMode, true);
             editor.commit();
         }
-        setSeekBarColorUnselected(seekBarCalories);
+        setSeekBarUnselected(seekBarCalories);
         if (min > 0 || max < MAX_CALORIES) {
-            setSeekBarColorSelected(seekBarCalories);
+            setSeekBarSelected(seekBarCalories);
         }
         filterApplier.applyFilter(textView);
     }
@@ -46,9 +46,9 @@ public class FilterSeekBarHandler {
             editor.putBoolean("ChangeStatus"+mMode, true);
             editor.commit();
         }
-        setSeekBarColorUnselected(seekBarTime);
+        setSeekBarUnselected(seekBarTime);
         if (min > 0 || max < MAX_TIME) {
-            setSeekBarColorSelected(seekBarTime);
+            setSeekBarSelected(seekBarTime);
         }
         filterApplier.applyFilter(textView);
     }
@@ -76,24 +76,24 @@ public class FilterSeekBarHandler {
         seekBarTime.setMaxStartValue(max_time);
         seekBarTime.apply();
 
-        setSeekBarColorUnselected(seekBarCalories);
+        setSeekBarUnselected(seekBarCalories);
         if (min_calories > 0 || max_calories < MAX_CALORIES) {
-            setSeekBarColorSelected(seekBarCalories);
+            setSeekBarSelected(seekBarCalories);
         }
 
-        setSeekBarColorUnselected(seekBarTime);
+        setSeekBarUnselected(seekBarTime);
         if (min_time > 0 || max_time < MAX_TIME) {
-            setSeekBarColorSelected(seekBarTime);
+            setSeekBarSelected(seekBarTime);
         }
     }
 
-    private void setSeekBarColorSelected(CrystalRangeSeekbar seekBar) {
-        seekBar.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.filter_green_transparent));
+    private void setSeekBarSelected(CrystalRangeSeekbar seekBar) {
+        seekBar.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.filter_green));
         seekBar.setLeftThumbColor(ContextCompat.getColor(mContext, R.color.filter_green));
         seekBar.setRightThumbColor(ContextCompat.getColor(mContext, R.color.filter_green));
     }
 
-    private void setSeekBarColorUnselected(CrystalRangeSeekbar seekBar) {
+    private void setSeekBarUnselected(CrystalRangeSeekbar seekBar) {
         seekBar.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.filter_border_color));
         seekBar.setLeftThumbColor(ContextCompat.getColor(mContext, R.color.filter_border_color));
         seekBar.setRightThumbColor(ContextCompat.getColor(mContext, R.color.filter_border_color));

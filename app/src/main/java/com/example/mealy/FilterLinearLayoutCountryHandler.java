@@ -35,11 +35,11 @@ public class FilterLinearLayoutCountryHandler {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         if (!mSharedPreferences.getBoolean(v.getTooltipText() +mMode,false)) {
             editor.putBoolean(v.getTooltipText() +mMode, true);
-            v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_green_transparent));
+            setViewSelected(v);
         }
         else {
             editor.putBoolean(v.getTooltipText() +mMode, false);
-            v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_background_color));
+            setViewUnselected(v);
         }
         editor.putBoolean("ChangeStatusOffline", true);
         editor.commit();
@@ -49,7 +49,7 @@ public class FilterLinearLayoutCountryHandler {
     public void loadCountryFilterLayoutStates(List<LinearLayout> list) {
         for (int i = 0; i < list.size(); i++) {
             if (mSharedPreferences.getBoolean(this.TOOLTIPS.get(i)+mMode, false)) {
-                list.get(i).setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_green_transparent));
+                setLayoutSelected(list.get(i));
             }
         }
     }
@@ -58,10 +58,26 @@ public class FilterLinearLayoutCountryHandler {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         for (int i = 0; i < list.size(); i++) {
             editor.putBoolean(this.TOOLTIPS.get(i)+mMode, false);
-            list.get(i).setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_background_color));
+            setLayoutUnselected(list.get(i));
         }
         editor.putBoolean("ChangeStatusOffline", true);
         editor.commit();
         loadCountryFilterLayoutStates(list);
+    }
+
+    private void setLayoutSelected(LinearLayout layout) {
+        layout.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_green));
+    }
+
+    private void setViewSelected(View view) {
+        view.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_green));
+    }
+
+    private void setLayoutUnselected(LinearLayout layout) {
+        layout.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_background_color));
+    }
+
+    private void setViewUnselected(View view) {
+        view.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_background_color));
     }
 }

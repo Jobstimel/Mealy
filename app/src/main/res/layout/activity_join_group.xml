@@ -34,6 +34,28 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            style="@style/linear_layout_card_design">
+
+            <TextView
+                style="@style/text_view_top_bot"
+                android:background="@drawable/background_round_corners_top"
+                android:text="Gruppe beitreten"/>
+
+            <LinearLayout
+                style="@style/linear_layout_card_design_middle_part">
+
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/text_view_top_bot"
+                android:background="@drawable/selector_reset_filter_button"
+                android:text="Bestätigen"
+                android:layout_weight="14"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout

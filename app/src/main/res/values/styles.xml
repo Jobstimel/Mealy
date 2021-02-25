@@ -87,6 +87,7 @@
         <item name="android:textSize">17dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_weight">14</item>
+        <item name="android:clickable">true</item>
     </style>
 
     <style name="text_view_placeholder_results">

@@ -37,6 +37,9 @@
     <string name="time_total">Gesamtzeit</string>
     <string name="time_preparation">Vorbereitungszeit</string>
 
+    //Swipe
+    <string name="swipe_placeholder">Keine Filter Treffer</string>
+
     //Result
     <string name="result_placeholder">Du musst erst Rezepte bewerten bevor du hier Ergebnisse sehen kannst.</string>
     <string name="results">Auswertung</string>

@@ -53,7 +53,10 @@ public class PlayAlone extends FragmentActivity {
     public static List<Integer> mLikedIDs;
     public static List<Integer> mDislikedIDs;
     public static List<Object> mResolvers;
-    public static LinearLayout mLinearLayoutResultPlaceholder;
+
+    //Placeholders
+    private LinearLayout mLinearLayoutResultPlaceholder;
+    private LinearLayout mLinearLayoutSwipePlaceholderNoFilterResults;
 
     //Class Objects
     private SwipeHandler mSwipeHandler;
@@ -256,6 +259,10 @@ public class PlayAlone extends FragmentActivity {
 
     private void setupSwipePlaceholderView() {
         mSwipeHandler.loadSelectedIndices();
+        mLinearLayoutSwipePlaceholderNoFilterResults.setVisibility(View.VISIBLE);
+        if (mSwipeHandler.mSelectedIDs.size() > 0) {
+            mLinearLayoutSwipePlaceholderNoFilterResults.setVisibility(View.GONE);
+        }
         mSwipePlaceHolderView = findViewById(R.id.swipeView);
         mSwipePlaceHolderViewHandler.setSwipePlaceHolderViewBuilder(mSwipePlaceHolderView);
         mSwipePlaceHolderViewHandler.loadSwipePlaceholderView(mSwipeHandler.mSelectedIDs, mAllRecipesList, mSwipePlaceHolderView);
@@ -349,6 +356,7 @@ public class PlayAlone extends FragmentActivity {
         mSpinnerLayoutList = Arrays.asList(mLinearLayoutAllergiesSpinner, mLinearLayoutPreparationsSpinner, mLinearLayoutCategoriesSpinner, mLinearLayoutEatingSpinner);
 
         mLinearLayoutResultPlaceholder = findViewById(R.id.linear_layout_result_page_placeholder);
+        mLinearLayoutSwipePlaceholderNoFilterResults = findViewById(R.id.swipe_placeholder_no_filter_results);
     }
 
     private void setupSpinners() {

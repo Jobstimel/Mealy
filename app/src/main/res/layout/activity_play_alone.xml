@@ -925,6 +925,41 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/swipe_placeholder_no_filter_results"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/filter_background_color"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="10dp"
+                android:elevation="5dp"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textColor="@color/red"
+                        android:textStyle="bold"
+                        android:text="@string/swipe_placeholder"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
         <com.mindorks.placeholderview.SwipePlaceHolderView
             android:id="@+id/swipeView"
             android:layout_width="match_parent"

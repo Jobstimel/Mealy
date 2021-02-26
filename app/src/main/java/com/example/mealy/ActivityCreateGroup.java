@@ -10,7 +10,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class CreateGroup extends AppCompatActivity {
+public class ActivityCreateGroup extends AppCompatActivity {
 
     //General
     private static final String TAG = "CreateLobbyActivity";
@@ -42,11 +42,11 @@ public class CreateGroup extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch(menuItem.getItemId()) {
                     case R.id.play_alone:
-                        startActivity(new Intent(getApplicationContext(), PlayAlone.class));
+                        startActivity(new Intent(getApplicationContext(), ActivityPlayAlone.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.join_group:
-                        startActivity(new Intent(getApplicationContext(), JoinGroup.class));
+                        startActivity(new Intent(getApplicationContext(), ActivityJoinGroup.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.create_group:

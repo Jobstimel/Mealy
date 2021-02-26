@@ -2,7 +2,6 @@ package com.example.mealy;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,29 +19,43 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mindorks.placeholderview.SwipePlaceHolderView;
+import com.mindorks.placeholderview.listeners.ItemRemovedListener;
 import com.raycoarana.codeinputview.CodeInputView;
-import com.raycoarana.codeinputview.OnCodeCompleteListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class JoinGroup extends AppCompatActivity {
+public class ActivityJoinGroup extends AppCompatActivity {
 
     //General
     private static final String TAG = "JOIN_LOBBY_ACTIVITY";
     private SharedPreferences mSharedPreferences;
     private Context mContext;
 
+    //Public
+    public static List<Integer> mStackIDs;
+    public static List<Integer> mLikedIDs;
+    public static List<Integer> mDislikedIDs;
+    public static List<Object> mResolvers;
+
     //Classes
     private JoinGroupCodeInputStatusHandler mJoinGroupCodeInputStatusHandler;
+    private SwipePlaceHolderViewHandlerJoinGroup mSwipePlaceHolderViewHandlerJoinGroup;
+    private SwipeHandler mSwipeHandler;
 
     //Pages
     private LinearLayout mPage1;
     private LinearLayout mPage2;
     private LinearLayout mPage3;
 
+    //Lists
+    private List<Recipe> mAllRecipesList;
+    private List<Integer> mCounter;
+
     //Views
     private BottomNavigationView mBottomNavigationView;
+    private SwipePlaceHolderView mSwipePlaceHolderView;
     private CodeInputView mCodeInputView;
     private TextView mTextViewCodeInputStatus;
     private TextView mTextViewJoinGroupButton;
@@ -58,15 +71,28 @@ public class JoinGroup extends AppCompatActivity {
         setupElements();
     }
 
-    private void checkUserInputCode(String code) {
+    protected void onPause() {
+        mSwipeHandler.saveLikedIndices(mLikedIDs);
+        mSwipeHandler.saveDislikedIndices(mDislikedIDs);
+        super.onPause();
+    }
+
+    private void uploadRatings() {
+
+    }
+
+    private void checkUserInputCode(String code, int status) {
         mDatabaseReference = mDatabaseReference.child(code);
-        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<Integer> selectedIDs = (ArrayList<Integer>) dataSnapshot.child("selected_ids").getValue();
                 if (!(selectedIDs == null)) {
-                    mJoinGroupCodeInputStatusHandler.setInputCodeStatusFound(mTextViewCodeInputStatus, mCodeInputView, mTextViewJoinGroupButton);
-                    mJoinGroupCodeInputStatusHandler.saveSelectedIDs(selectedIDs);
+                    if (status == 0) {
+                        mJoinGroupCodeInputStatusHandler.setInputCodeStatusFound(mTextViewCodeInputStatus, mCodeInputView, mTextViewJoinGroupButton);
+                        mJoinGroupCodeInputStatusHandler.saveSelectedIDs(selectedIDs);
+                        mJoinGroupCodeInputStatusHandler.saveJoinedGroupCode(code);
+                    }
                 }
                 else {
                     restartActivity();
@@ -80,6 +106,17 @@ public class JoinGroup extends AppCompatActivity {
         });
     }
 
+    public void switchToPage2(View v) {
+        savePage(2);
+        loadCorrectPage();
+    }
+
+    private void savePage(int page) {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putInt("PageJoin", page);
+        editor.commit();
+    }
+
     private void loadCorrectPage() {
         Integer currentPage = mSharedPreferences.getInt("PageJoin", 1);
         if (currentPage == 1) {
@@ -91,6 +128,8 @@ public class JoinGroup extends AppCompatActivity {
             mPage1.setVisibility(View.GONE);
             mPage2.setVisibility(View.VISIBLE);
             mPage3.setVisibility(View.GONE);
+            setupLists();
+            setupSwipePlaceholderView();
         }
         else {
             mPage1.setVisibility(View.GONE);
@@ -102,6 +141,7 @@ public class JoinGroup extends AppCompatActivity {
     private void setupElements() {
         mSharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
         mContext = getApplicationContext();
+        resetSharedPreferences();
         setupClasses();
         setupViews();
         setupPages();
@@ -110,8 +150,38 @@ public class JoinGroup extends AppCompatActivity {
         setupDatabase();
     }
 
+    private void setupSwipePlaceholderView() {
+        mJoinGroupCodeInputStatusHandler.loadSelectedIDs();
+        mSwipePlaceHolderView = findViewById(R.id.swipeView);
+        mSwipePlaceHolderViewHandlerJoinGroup.setSwipePlaceHolderViewBuilder(mSwipePlaceHolderView);
+        mSwipePlaceHolderViewHandlerJoinGroup.loadSwipePlaceholderView(mJoinGroupCodeInputStatusHandler.mSelectedIDs, mAllRecipesList, mSwipePlaceHolderView);
+        mStackIDs = mSwipePlaceHolderViewHandlerJoinGroup.mStackIDs;
+        mResolvers = mSwipePlaceHolderViewHandlerJoinGroup.mResolvers;
+        mSwipePlaceHolderView.addItemRemoveListener(new ItemRemovedListener() {
+            @Override
+            public void onItemRemoved(int count) {
+                Log.d("ONRESUME", "Size: "+mSwipePlaceHolderView.getAllResolvers().size());
+                if (mSwipePlaceHolderView.getAllResolvers().size() == 0) {
+                    uploadRatings();
+                }
+            }
+        });
+    }
+
     private void setupClasses() {
         mJoinGroupCodeInputStatusHandler = new JoinGroupCodeInputStatusHandler(mContext, mSharedPreferences);
+        mSwipePlaceHolderViewHandlerJoinGroup = new SwipePlaceHolderViewHandlerJoinGroup(mContext);
+        mSwipeHandler = new SwipeHandler("Join", mSharedPreferences);
+
+        mSwipeHandler.loadLikedIndices();
+        mSwipeHandler.loadDislikedIndices();
+    }
+
+    private void setupLists() {
+        mAllRecipesList = Loader.loadRecipies(mContext);
+        mLikedIDs = mSwipeHandler.mLikedIDs;
+        mDislikedIDs = mSwipeHandler.mDislikedIDs;
+        mCounter = new ArrayList<>();
     }
 
     private void setupPages() {
@@ -129,7 +199,7 @@ public class JoinGroup extends AppCompatActivity {
         mTextViewJoinGroupButton.setClickable(false);
 
         mCodeInputView = findViewById(R.id.code_input_view);
-        mCodeInputView.addOnCompleteListener(code -> checkUserInputCode(code));
+        mCodeInputView.addOnCompleteListener(code -> checkUserInputCode(code, 0));
     }
 
     private void setupDatabase() {
@@ -142,13 +212,13 @@ public class JoinGroup extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch(menuItem.getItemId()) {
                     case R.id.play_alone:
-                        startActivity(new Intent(getApplicationContext(), PlayAlone.class));
+                        startActivity(new Intent(getApplicationContext(), ActivityPlayAlone.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.join_group:
                         return true;
                     case R.id.create_group:
-                        startActivity(new Intent(getApplicationContext(), CreateGroup.class));
+                        startActivity(new Intent(getApplicationContext(), ActivityCreateGroup.class));
                         overridePendingTransition(0,0);
                         return true;
                 }
@@ -162,5 +232,11 @@ public class JoinGroup extends AppCompatActivity {
         finish();
         overridePendingTransition(0,0);
         startActivity(intent);
+    }
+
+    private void resetSharedPreferences() {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.clear();
+        editor.commit();
     }
 }

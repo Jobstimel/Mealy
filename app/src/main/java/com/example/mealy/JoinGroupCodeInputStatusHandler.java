@@ -8,12 +8,14 @@ import androidx.core.content.ContextCompat;
 
 import com.raycoarana.codeinputview.CodeInputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JoinGroupCodeInputStatusHandler {
 
     private Context mContext;
     private SharedPreferences mSharedPreferences;
+    public List<Integer> mSelectedIDs;
 
     public JoinGroupCodeInputStatusHandler(Context mContext, SharedPreferences sharedPreferences) {
         this.mContext = mContext;
@@ -38,5 +40,22 @@ public class JoinGroupCodeInputStatusHandler {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putString("JoinGroupIDs", tmp);
         editor.commit();
+    }
+
+    public void saveJoinedGroupCode(String code) {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putString("JoinedGroupCode", code);
+        editor.commit();
+    }
+
+    public void loadSelectedIDs() {
+        mSelectedIDs = new ArrayList<>();
+        String tmp1 = mSharedPreferences.getString("JoinGroupIDs", "");
+        if (!tmp1.equals("")) {
+            String[] tmp2 = tmp1.split("#");
+            for (int i = 0; i < tmp2.length; i++) {
+                mSelectedIDs.add(Integer.parseInt(tmp2[i]));
+            }
+        }
     }
 }

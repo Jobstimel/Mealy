@@ -1,47 +1,31 @@
 package com.example.mealy;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Filter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
-import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
 import com.skydoves.powerspinner.PowerSpinnerView;
 
-import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
-public class PlayAlone extends FragmentActivity {
+public class ActivityPlayAlone extends FragmentActivity {
 
     //General
     private static final String TAG = "PLAY_ALONE_ACTIVITY";
@@ -65,7 +49,7 @@ public class PlayAlone extends FragmentActivity {
     private FilterLinearLayoutHandler mFilterLinearLayoutHandler;
     private FilterLinearLayoutCountryHandler mFilterLinearLayoutCountryHandler;
     private FilterSeekBarHandler mFilterSeekBarHandler;
-    private SwipePlaceHolderViewHandler mSwipePlaceHolderViewHandler;
+    private SwipePlaceHolderViewHandlerPlayAlone mSwipePlaceHolderViewHandler;
 
     //Views
     private BottomNavigationView mBottomNavigationView;
@@ -302,8 +286,8 @@ public class PlayAlone extends FragmentActivity {
         mFilterLinearLayoutHandler = new FilterLinearLayoutHandler("Offline", mSharedPreferences, mContext);
         mFilterLinearLayoutCountryHandler = new FilterLinearLayoutCountryHandler("Offline", mSharedPreferences, mContext);
         mFilterSeekBarHandler = new FilterSeekBarHandler("Offline", mSharedPreferences, mContext);
-        mSwipeHandler = new SwipeHandler("Offline", mSharedPreferences, mContext);
-        mSwipePlaceHolderViewHandler = new SwipePlaceHolderViewHandler("Offline", mSharedPreferences, mContext);
+        mSwipeHandler = new SwipeHandler("Offline", mSharedPreferences);
+        mSwipePlaceHolderViewHandler = new SwipePlaceHolderViewHandlerPlayAlone(mContext);
 
         mSwipeHandler.loadLikedIndices();
         mSwipeHandler.loadDislikedIndices();
@@ -402,11 +386,11 @@ public class PlayAlone extends FragmentActivity {
                     case R.id.play_alone:
                         return true;
                     case R.id.join_group:
-                        startActivity(new Intent(getApplicationContext(), JoinGroup.class));
+                        startActivity(new Intent(getApplicationContext(), ActivityJoinGroup.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.create_group:
-                        startActivity(new Intent(getApplicationContext(), CreateGroup.class));
+                        startActivity(new Intent(getApplicationContext(), ActivityCreateGroup.class));
                         overridePendingTransition(0,0);
                         return true;
                 }

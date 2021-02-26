@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/container"
-    tools:context=".CreateGroup"
+    tools:context=".ActivityCreateGroup"
     android:background="@color/background">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

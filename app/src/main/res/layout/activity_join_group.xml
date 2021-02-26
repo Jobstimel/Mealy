@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/container"
-    tools:context=".JoinGroup"
+    tools:context=".ActivityJoinGroup"
     android:background="@color/background">
 
     <LinearLayout
@@ -156,7 +156,8 @@
                 android:id="@+id/text_view_join_group"
                 android:background="@drawable/selector_reset_filter_button"
                 android:text="Gruppe beitreten"
-                android:layout_weight="14"/>
+                android:layout_weight="14"
+                android:onClick="switchToPage2"/>
 
         </LinearLayout>
 
@@ -164,7 +165,7 @@
 
     <LinearLayout
         style="@style/linear_layout_page"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:id="@+id/page_2">
 
         <LinearLayout
@@ -188,16 +189,6 @@
                 android:src="@drawable/icon_results"
                 android:layout_weight="1"
                 app:tint="@color/filter_border_color"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/linear_layout_placeholder_swipe_no_filter_hits_container"
-            android:id="@+id/swipe_placeholder_no_filter_results">
-
-            <TextView
-                style="@style/text_view_placeholder_swipe_no_filter_hits"
-                android:text="@string/swipe_placeholder"/>
 
         </LinearLayout>
 

@@ -1,17 +1,11 @@
 package com.example.mealy;
 
 import android.content.Context;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
-import com.mindorks.placeholderview.annotations.Click;
 import com.mindorks.placeholderview.annotations.Layout;
 import com.mindorks.placeholderview.annotations.Resolve;
 import com.mindorks.placeholderview.annotations.View;
@@ -26,7 +20,7 @@ import org.json.JSONException;
 import java.util.List;
 
 @Layout(R.layout.recipe_card_view)
-public class RecipeCard {
+public class RecipeCardHandlerPlayAlone {
 
     @View(R.id.recipe_image)
     private ImageView recipeImage;
@@ -66,7 +60,7 @@ public class RecipeCard {
     private SwipePlaceHolderView mSwipeView;
     private TextView mPlaceholder;
 
-    public RecipeCard(Context context, Recipe recipe, SwipePlaceHolderView swipeView) throws JSONException {
+    public RecipeCardHandlerPlayAlone(Context context, Recipe recipe, SwipePlaceHolderView swipeView) throws JSONException {
         this.mContext = context;
         this.mRecipe = recipe;
         this.mSwipeView = swipeView;
@@ -90,31 +84,34 @@ public class RecipeCard {
     @SwipeOut
     private void onSwipedOut() {
         List<Object> tmp = mSwipeView.getAllResolvers();
-        for (int i = 0; i < PlayAlone.mResolvers.size(); i++) {
-            if (PlayAlone.mResolvers.get(i) == tmp.get(0)) {
-                PlayAlone.mDislikedIDs.add(PlayAlone.mStackIDs.get(i));
+        for (int i = 0; i < ActivityPlayAlone.mResolvers.size(); i++) {
+            if (ActivityPlayAlone.mResolvers.get(i) == tmp.get(0)) {
+                ActivityPlayAlone.mDislikedIDs.add(ActivityPlayAlone.mStackIDs.get(i));
             }
         }
-
     }
 
     @SwipeCancelState
-    private void onSwipeCancelState() { }
+    private void onSwipeCancelState() {
+
+    }
 
     @SwipeIn
     private void onSwipeIn() {
         List<Object> tmp = mSwipeView.getAllResolvers();
-        for (int i = 0; i < PlayAlone.mResolvers.size(); i++) {
-            if (PlayAlone.mResolvers.get(i) == tmp.get(0)) {
-                PlayAlone.mLikedIDs.add(PlayAlone.mStackIDs.get(i));
+        for (int i = 0; i < ActivityPlayAlone.mResolvers.size(); i++) {
+            if (ActivityPlayAlone.mResolvers.get(i) == tmp.get(0)) {
+                ActivityPlayAlone.mLikedIDs.add(ActivityPlayAlone.mStackIDs.get(i));
             }
         }
     }
 
     @SwipeInState
-    private void onSwipeInState(){ }
+    private void onSwipeInState() {
+
+    }
 
     @SwipeOutState
-    private void onSwipeOutState(){
+    private void onSwipeOutState() {
     }
 }

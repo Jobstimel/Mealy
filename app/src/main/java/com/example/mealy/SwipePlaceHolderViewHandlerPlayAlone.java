@@ -1,8 +1,6 @@
 package com.example.mealy;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.widget.TextView;
 
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
@@ -12,18 +10,14 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SwipePlaceHolderViewHandler {
+public class SwipePlaceHolderViewHandlerPlayAlone {
 
     public List<Integer> mStackIDs;
     public List<Object> mResolvers;
 
-    private String mMode;
-    private SharedPreferences mSharedPreferences;
     private Context mContext;
 
-    public SwipePlaceHolderViewHandler(String mMode, SharedPreferences mSharedPreferences, Context mContext) {
-        this.mMode = mMode;
-        this.mSharedPreferences = mSharedPreferences;
+    public SwipePlaceHolderViewHandlerPlayAlone(Context mContext) {
         this.mContext = mContext;
     }
 
@@ -33,9 +27,9 @@ public class SwipePlaceHolderViewHandler {
             mStackIDs = new ArrayList<>();
             mResolvers = new ArrayList<>();
             for(int i = 0; i < selectedIndices.size(); i++){
-                if (!PlayAlone.mLikedIDs.contains(selectedIndices.get(i)) && !PlayAlone.mDislikedIDs.contains(selectedIndices.get(i))) {
+                if (!ActivityPlayAlone.mLikedIDs.contains(selectedIndices.get(i)) && !ActivityPlayAlone.mDislikedIDs.contains(selectedIndices.get(i))) {
                     try {
-                        swipePlaceHolderView.addView(new RecipeCard(mContext, allRecipes.get(selectedIndices.get(i)), swipePlaceHolderView));
+                        swipePlaceHolderView.addView(new RecipeCardHandlerPlayAlone(mContext, allRecipes.get(selectedIndices.get(i)), swipePlaceHolderView));
                         mStackIDs.add(selectedIndices.get(i));
                     } catch (JSONException e) {
                         e.printStackTrace();

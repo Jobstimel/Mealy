@@ -11,17 +11,15 @@ public class SwipeHandler {
 
     private String mMode;
     private SharedPreferences mSharedPreferences;
-    private Context mContext;
 
     public List<Integer> mSelectedIDs;
     public List<Integer> mLikedIDs;
     public List<Integer> mDislikedIDs;
     public List<Recipe> mOfflineResults;
 
-    public SwipeHandler(String mMode, SharedPreferences mSharedPreferences, Context mContext) {
+    public SwipeHandler(String mMode, SharedPreferences mSharedPreferences) {
         this.mMode = mMode;
         this.mSharedPreferences = mSharedPreferences;
-        this.mContext = mContext;
     }
 
     public void loadSelectedIndices() {
@@ -57,15 +55,6 @@ public class SwipeHandler {
         }
     }
 
-    public void loadOfflineResults(List<Recipe> recipes, List<Integer> liked) {
-        mOfflineResults = new ArrayList<>();
-        for (int i = 0; i < liked.size(); i++) {
-            Recipe recipe = recipes.get(liked.get(i));
-            recipe.setScore(1);
-            mOfflineResults.add(recipe);
-        }
-    }
-
     public void saveLikedIndices(List<Integer> liked) {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         String tmp = "";
@@ -90,5 +79,14 @@ public class SwipeHandler {
         }
         editor.putString("Disliked"+mMode+"IDs", tmp);
         editor.commit();
+    }
+
+    public void loadOfflineResults(List<Recipe> recipes, List<Integer> liked) {
+        mOfflineResults = new ArrayList<>();
+        for (int i = 0; i < liked.size(); i++) {
+            Recipe recipe = recipes.get(liked.get(i));
+            recipe.setScore(1);
+            mOfflineResults.add(recipe);
+        }
     }
 }

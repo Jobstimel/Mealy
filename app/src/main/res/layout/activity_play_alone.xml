@@ -130,7 +130,7 @@
                                     android:layout_marginTop="1dp"
                                     android:layout_marginRight="1dp"
                                     android:layout_marginBottom="2dp"
-                                    android:layout_marginLeft="1dp">
+                                    android:layout_marginLeft="2dp">
 
                                     <TextView
                                         style="@style/text_view_filter_6_3"
@@ -314,7 +314,9 @@
                                 <LinearLayout
                                     style="@style/linear_layout_country"
                                     android:id="@+id/germany_linear_layout"
-                                    android:tooltipText="Deutschland">
+                                    android:tooltipText="Deutschland"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_marginRight="1dp">
 
                                     <ImageView
                                         style="@style/image_view_country"
@@ -325,7 +327,8 @@
                                 <LinearLayout
                                     style="@style/linear_layout_country"
                                     android:id="@+id/spain_linear_layout"
-                                    android:tooltipText="Spanien">
+                                    android:tooltipText="Spanien"
+                                    android:layout_marginHorizontal="1dp">
 
                                     <ImageView
                                         style="@style/image_view_country"
@@ -336,7 +339,8 @@
                                 <LinearLayout
                                     style="@style/linear_layout_country"
                                     android:id="@+id/asia_linear_layout"
-                                    android:tooltipText="Asien">
+                                    android:tooltipText="Asien"
+                                    android:layout_marginHorizontal="1dp">
 
                                     <ImageView
                                         style="@style/image_view_country"
@@ -347,7 +351,8 @@
                                 <LinearLayout
                                     style="@style/linear_layout_country"
                                     android:id="@+id/italy_linear_layout"
-                                    android:tooltipText="Italien">
+                                    android:tooltipText="Italien"
+                                    android:layout_marginHorizontal="1dp">
 
                                     <ImageView
                                         style="@style/image_view_country"
@@ -358,7 +363,8 @@
                                 <LinearLayout
                                     style="@style/linear_layout_country"
                                     android:id="@+id/india_linear_layout"
-                                    android:tooltipText="Indien">
+                                    android:tooltipText="Indien"
+                                    android:layout_marginHorizontal="1dp">
 
                                     <ImageView
                                         style="@style/image_view_country"
@@ -369,7 +375,8 @@
                                 <LinearLayout
                                     style="@style/linear_layout_country"
                                     android:id="@+id/france_linear_layout"
-                                    android:tooltipText="Frankreich">
+                                    android:tooltipText="Frankreich"
+                                    android:layout_marginHorizontal="1dp">
 
                                     <ImageView
                                         style="@style/image_view_country"
@@ -380,11 +387,13 @@
                                 <LinearLayout
                                     style="@style/linear_layout_country"
                                     android:id="@+id/greece_linear_layout"
-                                    android:tooltipText="Griechenland">
+                                    android:tooltipText="Griechenland"
+                                    android:layout_marginRight="2dp"
+                                    android:layout_marginLeft="1dp">
 
                                     <ImageView
                                         style="@style/image_view_country"
-                                        android:src="@drawable/icon_greece" />
+                                        android:src="@drawable/icon_greece"/>
 
                                 </LinearLayout>
 

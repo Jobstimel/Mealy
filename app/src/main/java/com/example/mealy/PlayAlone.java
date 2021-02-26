@@ -44,7 +44,7 @@ import java.util.Locale;
 public class PlayAlone extends FragmentActivity {
 
     //General
-    private static final String TAG = "PlayAloneActivity";
+    private static final String TAG = "PLAY_ALONE_ACTIVITY";
     private SharedPreferences mSharedPreferences;
     private Context mContext;
 

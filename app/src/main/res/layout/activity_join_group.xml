@@ -43,15 +43,119 @@
                 android:text="Gruppe beitreten"/>
 
             <LinearLayout
-                style="@style/linear_layout_card_design_middle_part">
+                style="@style/linear_layout_card_design_middle_part"
+                android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:background="@color/filter_border_color"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/filter_background_color"
+                            android:orientation="vertical"
+                            android:layout_margin="2dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="5dp"
+                                android:textColor="@color/black"
+                                android:text="Um einer Gruppe beitreten zu können brauchst du den 8-stelligen Zugangscode. Du erhältst ihn vom Ersteller der Gruppe."/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingHorizontal="5dp"
+                                android:paddingBottom="5dp"
+                                android:textColor="@color/black"
+                                android:text="Gib diesen Code in das Eingabefeld ein. Sobald der Code überprüft wurde kannst der Gruppe mit einem Klick auf 'Gruppe beitreten' beitreten."/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/filter_border_color"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/filter_background_color"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_marginTop="2dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:padding="5dp"
+                            android:text="Zugangscode:"/>
+
+                    </LinearLayout>
+
+                    <com.raycoarana.codeinputview.CodeInputView
+                        android:id="@+id/code_input_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="2dp"
+                        android:background="@color/filter_background_color"
+                        app:code_text_size="25dp"
+                        app:underline_color="@color/black"
+                        app:underline_selected_color="@android:color/black"
+                        app:code_text_color="@color/black"
+                        app:animate_on_complete="false"
+                        app:input_type="numeric"
+                        app:length_of_code="8"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/filter_background_color"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_marginBottom="2dp">
+
+                        <TextView
+                            android:id="@+id/text_view_code_status"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/yellow"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:padding="5dp"
+                            android:layout_margin="2dp"
+                            android:text="Status: Keine Lobby gefunden"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
             <TextView
                 style="@style/text_view_top_bot"
+                android:id="@+id/text_view_join_group"
                 android:background="@drawable/selector_reset_filter_button"
-                android:text="Bestätigen"
+                android:text="Gruppe beitreten"
                 android:layout_weight="14"/>
 
         </LinearLayout>
@@ -60,6 +164,7 @@
 
     <LinearLayout
         style="@style/linear_layout_page"
+        android:layout_height="0dp"
         android:id="@+id/page_2">
 
         <LinearLayout
@@ -105,6 +210,7 @@
 
     <LinearLayout
         style="@style/linear_layout_page"
+        android:layout_height="0dp"
         android:id="@+id/page_3">
 
         <LinearLayout

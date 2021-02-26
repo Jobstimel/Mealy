@@ -25,14 +25,6 @@
         <item name="android:weightSum">10</item>
     </style>
 
-    <style name="linear_layout_country">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:onClick">saveFilterCountryValue</item>
-    </style>
-
     <style name="linear_layout_6_3">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>

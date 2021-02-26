@@ -58,7 +58,6 @@ public class RecipeCardHandlerJoinGroup {
     private Recipe mRecipe;
     private Context mContext;
     private SwipePlaceHolderView mSwipeView;
-    private TextView mPlaceholder;
 
     public RecipeCardHandlerJoinGroup(Context context, Recipe recipe, SwipePlaceHolderView swipeView) throws JSONException {
         this.mContext = context;

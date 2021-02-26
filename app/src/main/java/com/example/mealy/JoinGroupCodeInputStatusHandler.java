@@ -29,10 +29,15 @@ public class JoinGroupCodeInputStatusHandler {
         button.setClickable(true);
     }
 
-    public void saveSelectedIDs(List<Integer> selectedIDs) {
+    public void setInputCodeStatusNotFound(TextView status, CodeInputView codeInputView) {
+        status.setText("Status: Keine Gruppe gefunden");
+        status.setBackgroundColor(ContextCompat.getColor(mContext, R.color.red));
+    }
+
+    public void saveSelectedIDs(List<String> selectedIDs) {
         String tmp = "";
         if (selectedIDs.size() > 0) {
-            tmp = String.valueOf(selectedIDs.get(0));
+            tmp = selectedIDs.get(0);
             for (int i = 1; i < selectedIDs.size(); i++) {
                 tmp = tmp+ "#" + selectedIDs.get(i);
             }
@@ -44,7 +49,7 @@ public class JoinGroupCodeInputStatusHandler {
 
     public void saveJoinedGroupCode(String code) {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putString("JoinedGroupCode", code);
+        editor.putString("JoinGroupCode", code);
         editor.commit();
     }
 

@@ -62,6 +62,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
 
     //Database
     private DatabaseReference mDatabaseReference;
+    private DataSnapshot mDataSnapshot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,37 +78,40 @@ public class ActivityJoinGroup extends AppCompatActivity {
         super.onPause();
     }
 
-    private void uploadRatings() {
-
+    private void generateUserID() {
+        if (mSharedPreferences.getString("UserID", "").equals("")) {
+            UserIDGenerator randomStringBuilder = new UserIDGenerator(mSharedPreferences);
+            randomStringBuilder.generateRandomID(30);
+        }
     }
 
-    private void checkUserInputCode(String code, int status) {
-        mDatabaseReference = mDatabaseReference.child(code);
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<Integer> selectedIDs = (ArrayList<Integer>) dataSnapshot.child("selected_ids").getValue();
-                if (!(selectedIDs == null)) {
-                    if (status == 0) {
-                        mJoinGroupCodeInputStatusHandler.setInputCodeStatusFound(mTextViewCodeInputStatus, mCodeInputView, mTextViewJoinGroupButton);
-                        mJoinGroupCodeInputStatusHandler.saveSelectedIDs(selectedIDs);
-                        mJoinGroupCodeInputStatusHandler.saveJoinedGroupCode(code);
-                    }
-                }
-                else {
-                    restartActivity();
-                }
-            }
+    private void uploadRatings() {
+        DatabaseHandlerJoinGroup  mDatabaseHandlerJoinGroup = new DatabaseHandlerJoinGroup(mSharedPreferences);
+        mDatabaseHandlerJoinGroup.updateGroupCounter(mDataSnapshot, mLikedIDs, mDatabaseReference);
+        mDatabaseHandlerJoinGroup.updateGroupCompletedUserList(mDataSnapshot, mDatabaseReference);
+        mDatabaseHandlerJoinGroup.updateGroupPeopleNumber(mDataSnapshot, mDatabaseReference);
+        switchToPage3();
+    }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.d("TAG", "DATABASE ERROR: ", databaseError.toException());
-            }
-        });
+    private void checkUserInputCode(String code) {
+        if (mDataSnapshot.child(code).exists()) {
+            mJoinGroupCodeInputStatusHandler.setInputCodeStatusFound(mTextViewCodeInputStatus, mCodeInputView, mTextViewJoinGroupButton);
+            mJoinGroupCodeInputStatusHandler.saveSelectedIDs((ArrayList<String>) mDataSnapshot.child(code).child("selected_ids").getValue());
+            mJoinGroupCodeInputStatusHandler.saveJoinedGroupCode(code);
+        }
+        else {
+            mJoinGroupCodeInputStatusHandler.setInputCodeStatusNotFound(mTextViewCodeInputStatus, mCodeInputView);
+            mCodeInputView.setEditable(true);
+        }
     }
 
     public void switchToPage2(View v) {
         savePage(2);
+        loadCorrectPage();
+    }
+
+    private void switchToPage3() {
+        savePage(3);
         loadCorrectPage();
     }
 
@@ -141,7 +145,8 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private void setupElements() {
         mSharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
         mContext = getApplicationContext();
-        resetSharedPreferences();
+        //resetSharedPreferences();
+        generateUserID();
         setupClasses();
         setupViews();
         setupPages();
@@ -160,7 +165,6 @@ public class ActivityJoinGroup extends AppCompatActivity {
         mSwipePlaceHolderView.addItemRemoveListener(new ItemRemovedListener() {
             @Override
             public void onItemRemoved(int count) {
-                Log.d("ONRESUME", "Size: "+mSwipePlaceHolderView.getAllResolvers().size());
                 if (mSwipePlaceHolderView.getAllResolvers().size() == 0) {
                     uploadRatings();
                 }
@@ -172,12 +176,11 @@ public class ActivityJoinGroup extends AppCompatActivity {
         mJoinGroupCodeInputStatusHandler = new JoinGroupCodeInputStatusHandler(mContext, mSharedPreferences);
         mSwipePlaceHolderViewHandlerJoinGroup = new SwipePlaceHolderViewHandlerJoinGroup(mContext);
         mSwipeHandler = new SwipeHandler("Join", mSharedPreferences);
-
-        mSwipeHandler.loadLikedIndices();
-        mSwipeHandler.loadDislikedIndices();
     }
 
     private void setupLists() {
+        mSwipeHandler.loadLikedIndices();
+        mSwipeHandler.loadDislikedIndices();
         mAllRecipesList = Loader.loadRecipies(mContext);
         mLikedIDs = mSwipeHandler.mLikedIDs;
         mDislikedIDs = mSwipeHandler.mDislikedIDs;
@@ -199,11 +202,23 @@ public class ActivityJoinGroup extends AppCompatActivity {
         mTextViewJoinGroupButton.setClickable(false);
 
         mCodeInputView = findViewById(R.id.code_input_view);
-        mCodeInputView.addOnCompleteListener(code -> checkUserInputCode(code, 0));
+        mCodeInputView.addOnCompleteListener(code -> checkUserInputCode(code));
     }
 
     private void setupDatabase() {
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mDataSnapshot = dataSnapshot;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d("TAG", "DATABASE ERROR: ", databaseError.toException());
+            }
+        });
     }
 
     private void setupBottomNavigationBar() {
@@ -225,13 +240,6 @@ public class ActivityJoinGroup extends AppCompatActivity {
                 return false;
             }
         });
-    }
-
-    private void restartActivity() {
-        Intent intent = getIntent();
-        finish();
-        overridePendingTransition(0,0);
-        startActivity(intent);
     }
 
     private void resetSharedPreferences() {

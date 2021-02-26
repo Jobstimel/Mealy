@@ -58,7 +58,7 @@ public class SwipeHandler {
     public void saveLikedIndices(List<Integer> liked) {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         String tmp = "";
-        if (liked.size() > 0) {
+        if (liked != null && liked.size() > 0) {
             tmp = String.valueOf(liked.get(0));
             for (int i = 1; i < liked.size(); i++) {
                 tmp = tmp + "#" + liked.get(i);
@@ -71,7 +71,7 @@ public class SwipeHandler {
     public void saveDislikedIndices(List<Integer> disliked) {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         String tmp = "";
-        if (disliked.size() > 0) {
+        if (disliked != null && disliked.size() > 0) {
             tmp = String.valueOf(disliked.get(0));
             for (int i = 1; i < disliked.size(); i++) {
                 tmp = tmp + "#" + disliked.get(i);

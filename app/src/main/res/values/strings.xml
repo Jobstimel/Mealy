@@ -42,7 +42,7 @@
 
     //Result
     <string name="result_placeholder">Du musst erst Rezepte bewerten bevor du hier Ergebnisse sehen kannst.</string>
-    <string name="result_placeholder_join_lobby">Die Abstimmung läuft noch. Sobald der Host die Abstimmung beendet kannst du die Ergebnisse hier abrufen.</string>
+    <string name="result_placeholder_join_lobby">Die Abstimmung läuft noch. Die Ergebnisse werden veröffentlicht sobald der Host die Abtimmung beendet hat.</string>
     <string name="results">Auswertung</string>
     <string name="offline_participants">Teilnehmer: 1</string>
     <string name="tooltip_votes">Anzahl der Stimmen</string>

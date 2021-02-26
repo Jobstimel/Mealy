@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -51,7 +52,6 @@ public class ActivityJoinGroup extends AppCompatActivity {
 
     //Lists
     private List<Recipe> mAllRecipesList;
-    private List<Integer> mCounter;
 
     //Views
     private BottomNavigationView mBottomNavigationView;
@@ -59,10 +59,15 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private CodeInputView mCodeInputView;
     private TextView mTextViewCodeInputStatus;
     private TextView mTextViewJoinGroupButton;
+    private TextView mTextViewLeaveGroupButton;
+    private ListView mResultListView;
 
     //Database
     private DatabaseReference mDatabaseReference;
     private DataSnapshot mDataSnapshot;
+
+    //Layouts
+    private LinearLayout mLinearLayoutPlaceholderResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,15 +99,34 @@ public class ActivityJoinGroup extends AppCompatActivity {
     }
 
     private void checkUserInputCode(String code) {
-        if (mDataSnapshot.child(code).exists()) {
-            mJoinGroupCodeInputStatusHandler.setInputCodeStatusFound(mTextViewCodeInputStatus, mCodeInputView, mTextViewJoinGroupButton);
-            mJoinGroupCodeInputStatusHandler.saveSelectedIDs((ArrayList<String>) mDataSnapshot.child(code).child("selected_ids").getValue());
-            mJoinGroupCodeInputStatusHandler.saveJoinedGroupCode(code);
+        mJoinGroupCodeInputStatusHandler.checkStatus(code, mDataSnapshot, mTextViewCodeInputStatus, mCodeInputView, mTextViewJoinGroupButton);
+    }
+
+    private void checkIfGroupIsCompleted() {
+        String code = mSharedPreferences.getString("JoinGroupCode", "");
+        String status = (String) mDataSnapshot.child(code).child("group_status").getValue();
+        if (status != null && status.equals("closed")) {
+            mLinearLayoutPlaceholderResults.setVisibility(View.GONE);
+            loadResults();
         }
-        else {
-            mJoinGroupCodeInputStatusHandler.setInputCodeStatusNotFound(mTextViewCodeInputStatus, mCodeInputView);
-            mCodeInputView.setEditable(true);
+    }
+
+    private void loadResults() {
+        if (mAllRecipesList == null) {
+            mAllRecipesList = Loader.loadRecipies(mContext);
         }
+        mSwipeHandler.loadOnlineResults(mDataSnapshot, mAllRecipesList);
+        mLinearLayoutPlaceholderResults.setVisibility(View.GONE);
+        ListViewAdapter adapter = new ListViewAdapter(this, R.layout.list_view_apdapter_layout, mSwipeHandler.mOnlineResults, "Online");
+        mResultListView.setAdapter(adapter);
+        mTextViewLeaveGroupButton.setText("Gruppe verlassen");
+        mTextViewLeaveGroupButton.setClickable(true);
+    }
+
+    public void leaveGroup(View v) {
+        savePage(1);
+        mJoinGroupCodeInputStatusHandler.deleteSavedOnlineData();
+        loadCorrectPage();
     }
 
     public void switchToPage2(View v) {
@@ -150,9 +174,14 @@ public class ActivityJoinGroup extends AppCompatActivity {
         setupClasses();
         setupViews();
         setupPages();
+        setupLayouts();
         setupBottomNavigationBar();
         loadCorrectPage();
         setupDatabase();
+    }
+
+    private void setupLayouts() {
+        mLinearLayoutPlaceholderResults = findViewById(R.id.linear_layout_result_page_placeholder);
     }
 
     private void setupSwipePlaceholderView() {
@@ -184,7 +213,6 @@ public class ActivityJoinGroup extends AppCompatActivity {
         mAllRecipesList = Loader.loadRecipies(mContext);
         mLikedIDs = mSwipeHandler.mLikedIDs;
         mDislikedIDs = mSwipeHandler.mDislikedIDs;
-        mCounter = new ArrayList<>();
     }
 
     private void setupPages() {
@@ -196,10 +224,14 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private void setupViews() {
         mBottomNavigationView = findViewById(R.id.bottom_navigation);
         mBottomNavigationView.setSelectedItemId(R.id.join_group);
+        mResultListView = findViewById(R.id.list_view_result);
 
         mTextViewCodeInputStatus = findViewById(R.id.text_view_code_status);
         mTextViewJoinGroupButton = findViewById(R.id.text_view_join_group);
         mTextViewJoinGroupButton.setClickable(false);
+
+        mTextViewLeaveGroupButton = findViewById(R.id.text_view_leave_group);
+        mTextViewLeaveGroupButton.setClickable(false);
 
         mCodeInputView = findViewById(R.id.code_input_view);
         mCodeInputView.addOnCompleteListener(code -> checkUserInputCode(code));
@@ -212,6 +244,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mDataSnapshot = dataSnapshot;
+                checkIfGroupIsCompleted();
             }
 
             @Override

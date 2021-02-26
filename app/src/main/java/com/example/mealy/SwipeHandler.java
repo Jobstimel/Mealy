@@ -4,8 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.google.firebase.database.DataSnapshot;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SwipeHandler {
 
@@ -16,6 +20,7 @@ public class SwipeHandler {
     public List<Integer> mLikedIDs;
     public List<Integer> mDislikedIDs;
     public List<Recipe> mOfflineResults;
+    public List<Recipe> mOnlineResults;
 
     public SwipeHandler(String mMode, SharedPreferences mSharedPreferences) {
         this.mMode = mMode;
@@ -87,6 +92,27 @@ public class SwipeHandler {
             Recipe recipe = recipes.get(liked.get(i));
             recipe.setScore(1);
             mOfflineResults.add(recipe);
+        }
+    }
+
+    public void loadOnlineResults(DataSnapshot dataSnapshot, List<Recipe> recipes) {
+        String code = mSharedPreferences.getString("JoinGroupCode", "");
+        List<String> counter = (List<String>) dataSnapshot.child(code).child("counter").getValue();
+        List<String> selectedIDs = (List<String>) dataSnapshot.child(code).child("selected_ids").getValue();
+        String peopleNumber = (String) dataSnapshot.child(code).child("people_number").getValue();
+        calculateOnlineStandings(counter, selectedIDs, peopleNumber, recipes);
+    }
+
+    private void calculateOnlineStandings(List<String> count, List<String> ids, String maxVotes, List<Recipe> recipes) {
+        mOnlineResults = new ArrayList<>();
+        for (int i = Integer.parseInt(maxVotes); i > -1; i--) {
+            for (int y = 0; y < ids.size(); y++) {
+                if (Integer.parseInt(count.get(y)) == i) {
+                    Recipe recipe = recipes.get(Integer.parseInt(ids.get(y)));
+                    recipe.setScore(i);
+                    mOnlineResults.add(recipe);
+                }
+            }
         }
     }
 }

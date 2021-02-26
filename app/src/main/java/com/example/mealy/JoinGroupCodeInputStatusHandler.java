@@ -2,10 +2,12 @@ package com.example.mealy;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
+import com.google.firebase.database.DataSnapshot;
 import com.raycoarana.codeinputview.CodeInputView;
 
 import java.util.ArrayList;
@@ -22,16 +24,52 @@ public class JoinGroupCodeInputStatusHandler {
         this.mSharedPreferences = sharedPreferences;
     }
 
-    public void setInputCodeStatusFound(TextView status, CodeInputView codeInputView, TextView button) {
+    public void checkStatus(String code, DataSnapshot dataSnapshot, TextView status, CodeInputView codeInputView, TextView button) {
+        if (dataSnapshot.child(code).exists()) {
+            String group_status = (String) dataSnapshot.child(code).child("group_status").getValue();
+            List<String> alreadyComplete = (List<String>) dataSnapshot.child(code).child("voting_completed").getValue();
+            if (group_status.equals("open")) {
+                if (!alreadyComplete.contains(mSharedPreferences.getString("UserID", ""))) {
+                    saveSelectedIDs((ArrayList<String>) dataSnapshot.child(code).child("selected_ids").getValue());
+                    saveJoinedGroupCode(code);
+                    setStatusFound(status, codeInputView, button);
+                }
+                else {
+                    setStatusAlreadyCompleted(status, codeInputView);
+                }
+            }
+            else {
+                setStatusClosed(status, codeInputView);
+            }
+        }
+        else {
+            setStatusNotFound(status, codeInputView);
+        }
+    }
+
+    private void setStatusFound(TextView status, CodeInputView codeInputView, TextView button) {
         status.setText("Status: Gruppe gefunden");
         status.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_green));
         codeInputView.setTextColor(ContextCompat.getColor(mContext, R.color.filter_green));
         button.setClickable(true);
     }
 
-    public void setInputCodeStatusNotFound(TextView status, CodeInputView codeInputView) {
+    private void setStatusAlreadyCompleted(TextView status, CodeInputView codeInputView) {
+        status.setText("Status: Bereits abgestimmt");
+        status.setBackgroundColor(ContextCompat.getColor(mContext, R.color.orange));
+        codeInputView.setEditable(true);
+    }
+
+    private void setStatusClosed(TextView status, CodeInputView codeInputView) {
+        status.setText("Status: Gruppe wurde geschlossen");
+        status.setBackgroundColor(ContextCompat.getColor(mContext, R.color.orange));
+        codeInputView.setEditable(true);
+    }
+
+    private void setStatusNotFound(TextView status, CodeInputView codeInputView) {
         status.setText("Status: Keine Gruppe gefunden");
         status.setBackgroundColor(ContextCompat.getColor(mContext, R.color.red));
+        codeInputView.setEditable(true);
     }
 
     public void saveSelectedIDs(List<String> selectedIDs) {
@@ -62,5 +100,14 @@ public class JoinGroupCodeInputStatusHandler {
                 mSelectedIDs.add(Integer.parseInt(tmp2[i]));
             }
         }
+    }
+
+    public void deleteSavedOnlineData() {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putString("JoinGroupIDs", "");
+        editor.putString("JoinGroupCode", "");
+        editor.putString("LikedJoinIDs", "");
+        editor.putString("DislikedJoinIDs", "");
+        editor.commit();
     }
 }

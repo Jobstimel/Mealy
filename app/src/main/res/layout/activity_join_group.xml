@@ -263,8 +263,10 @@
 
             <TextView
                 style="@style/text_view_top_bot"
-                android:background="@drawable/background_round_corners_bottom"
-                android:layout_weight="14"/>
+                android:id="@+id/text_view_leave_group"
+                android:background="@drawable/selector_reset_filter_button"
+                android:layout_weight="14"
+                android:onClick="leaveGroup"/>
 
         </LinearLayout>
 

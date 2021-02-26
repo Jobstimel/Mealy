@@ -11,6 +11,7 @@
     <color name="green">#32BA7C</color>
     <color name="grey">#BDBDBD</color>
     <color name="yellow">#FFF200</color>
+    <color name="orange">#DC7633</color>
 
     <color name="foreground">#BDBDBD</color>
     <color name="text_color">#80FFFFFF</color>

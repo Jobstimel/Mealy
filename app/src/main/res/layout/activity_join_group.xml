@@ -254,10 +254,266 @@
 
                 </LinearLayout>
 
-                <ListView
-                    style="@style/list_view_results"
-                    android:id="@+id/list_view_result"
-                    android:layout_marginHorizontal="10dp"/>
+                <ScrollView
+                    android:id="@+id/scroll_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/filter_background_color"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:background="@color/gold">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="5dp"
+                                    android:background="@color/filter_background_color"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="30dp"
+                                        android:layout_margin="5dp"
+                                        android:orientation="horizontal"
+                                        android:weightSum="10">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/gold"
+                                            android:layout_marginRight="2.5dp"
+                                            android:layout_weight="1">
+
+                                            <TextView
+                                                android:id="@+id/text_view_recipe_title_1"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_margin="5dp"
+                                                android:gravity="center_vertical"
+                                                android:textColor="@color/black"
+                                                android:textStyle="bold"
+                                                android:textSize="12dp"/>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:tooltipText="@string/tooltip_votes"
+                                            android:background="@color/gold"
+                                            android:layout_marginLeft="2.5dp"
+                                            android:layout_weight="9">
+
+                                            <TextView
+                                                android:id="@+id/text_view_recipe_score_1"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_margin="5dp"
+                                                android:gravity="center"
+                                                android:textColor="@color/black"
+                                                android:textStyle="bold"
+                                                android:textSize="12dp"/>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <ImageView
+                                        android:id="@+id/image_view_recipe_poster_1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="130dp"
+                                        android:layout_marginHorizontal="5dp"
+                                        android:layout_marginBottom="5dp"
+                                        android:scaleType="centerCrop"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/filter_background_color"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:background="@color/silver">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="5dp"
+                                    android:background="@color/filter_background_color"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="30dp"
+                                        android:layout_margin="5dp"
+                                        android:orientation="horizontal"
+                                        android:weightSum="10">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/silver"
+                                            android:layout_marginRight="2.5dp"
+                                            android:layout_weight="1">
+
+                                            <TextView
+                                                android:id="@+id/text_view_recipe_title_2"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_margin="5dp"
+                                                android:gravity="center_vertical"
+                                                android:textColor="@color/black"
+                                                android:textStyle="bold"
+                                                android:textSize="12dp"/>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:tooltipText="@string/tooltip_votes"
+                                            android:background="@color/silver"
+                                            android:layout_marginLeft="2.5dp"
+                                            android:layout_weight="9">
+
+                                            <TextView
+                                                android:id="@+id/text_view_recipe_score_2"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_margin="5dp"
+                                                android:gravity="center"
+                                                android:textColor="@color/black"
+                                                android:textStyle="bold"
+                                                android:textSize="12dp"/>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <ImageView
+                                        android:id="@+id/image_view_recipe_poster_2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="130dp"
+                                        android:layout_marginHorizontal="5dp"
+                                        android:layout_marginBottom="5dp"
+                                        android:scaleType="centerCrop"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/filter_background_color"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:background="@color/bronze">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="5dp"
+                                    android:background="@color/filter_background_color"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="30dp"
+                                        android:layout_margin="5dp"
+                                        android:orientation="horizontal"
+                                        android:weightSum="10">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/bronze"
+                                            android:layout_marginRight="2.5dp"
+                                            android:layout_weight="1">
+
+                                            <TextView
+                                                android:id="@+id/text_view_recipe_title_3"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_margin="5dp"
+                                                android:gravity="center_vertical"
+                                                android:textColor="@color/black"
+                                                android:textStyle="bold"
+                                                android:textSize="12dp"/>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:tooltipText="@string/tooltip_votes"
+                                            android:background="@color/bronze"
+                                            android:layout_marginLeft="2.5dp"
+                                            android:layout_weight="9">
+
+                                            <TextView
+                                                android:id="@+id/text_view_recipe_score_3"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_margin="5dp"
+                                                android:gravity="center"
+                                                android:textColor="@color/black"
+                                                android:textStyle="bold"
+                                                android:textSize="12dp"/>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <ImageView
+                                        android:id="@+id/image_view_recipe_poster_3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="130dp"
+                                        android:layout_marginHorizontal="5dp"
+                                        android:layout_marginBottom="5dp"
+                                        android:scaleType="centerCrop"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </ScrollView>
 
             </LinearLayout>
 

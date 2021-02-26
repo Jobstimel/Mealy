@@ -111,7 +111,13 @@ public class SwipeHandler {
                     Recipe recipe = recipes.get(Integer.parseInt(ids.get(y)));
                     recipe.setScore(i);
                     mOnlineResults.add(recipe);
+                    if (mOnlineResults.size() == 3) {
+                        break;
+                    }
                 }
+            }
+            if (mOnlineResults.size() == 3) {
+                break;
             }
         }
     }

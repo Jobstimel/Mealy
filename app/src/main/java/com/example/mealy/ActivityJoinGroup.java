@@ -10,10 +10,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -62,6 +64,17 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private TextView mTextViewLeaveGroupButton;
     private ListView mResultListView;
 
+    //Result
+    private TextView mTextViewTitle1;
+    private TextView mTextViewTitle2;
+    private TextView mTextViewTitle3;
+    private TextView mTextViewScore1;
+    private TextView mTextViewScore2;
+    private TextView mTextViewScore3;
+    private ImageView mImageViewPoster1;
+    private ImageView mImageViewPoster2;
+    private ImageView mImageViewPoster3;
+
     //Database
     private DatabaseReference mDatabaseReference;
     private DataSnapshot mDataSnapshot;
@@ -103,11 +116,13 @@ public class ActivityJoinGroup extends AppCompatActivity {
     }
 
     private void checkIfGroupIsCompleted() {
-        String code = mSharedPreferences.getString("JoinGroupCode", "");
-        String status = (String) mDataSnapshot.child(code).child("group_status").getValue();
-        if (status != null && status.equals("closed")) {
-            mLinearLayoutPlaceholderResults.setVisibility(View.GONE);
-            loadResults();
+        if (mDataSnapshot != null) {
+            String code = mSharedPreferences.getString("JoinGroupCode", "");
+            String status = (String) mDataSnapshot.child(code).child("group_status").getValue();
+            if (status != null && status.equals("closed")) {
+                mLinearLayoutPlaceholderResults.setVisibility(View.GONE);
+                loadResults();
+            }
         }
     }
 
@@ -117,16 +132,20 @@ public class ActivityJoinGroup extends AppCompatActivity {
         }
         mSwipeHandler.loadOnlineResults(mDataSnapshot, mAllRecipesList);
         mLinearLayoutPlaceholderResults.setVisibility(View.GONE);
-        ListViewAdapter adapter = new ListViewAdapter(this, R.layout.list_view_apdapter_layout, mSwipeHandler.mOnlineResults, "Online");
-        mResultListView.setAdapter(adapter);
+        setupResultPage();
+        ResultLoader mResultLoader = new ResultLoader(mContext);
+        mResultLoader.loadResult(mSwipeHandler.mOnlineResults.get(0), mTextViewTitle1, mTextViewScore1, mImageViewPoster1);
+        mResultLoader.loadResult(mSwipeHandler.mOnlineResults.get(1), mTextViewTitle2, mTextViewScore2, mImageViewPoster2);
+        mResultLoader.loadResult(mSwipeHandler.mOnlineResults.get(2), mTextViewTitle3, mTextViewScore3, mImageViewPoster3);
         mTextViewLeaveGroupButton.setText("Gruppe verlassen");
         mTextViewLeaveGroupButton.setClickable(true);
     }
 
     public void leaveGroup(View v) {
-        savePage(1);
-        mJoinGroupCodeInputStatusHandler.deleteSavedOnlineData();
-        loadCorrectPage();
+        deleteSavedOnlineData();
+        mLikedIDs = new ArrayList<>();
+        mDislikedIDs = new ArrayList<>();
+        restartActivity();
     }
 
     public void switchToPage2(View v) {
@@ -156,6 +175,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
             mPage1.setVisibility(View.GONE);
             mPage2.setVisibility(View.VISIBLE);
             mPage3.setVisibility(View.GONE);
+            Log.d("ONRESUME", "Size: "+mSharedPreferences.getString("LikedJoinIDs", ""));
             setupLists();
             setupSwipePlaceholderView();
         }
@@ -163,6 +183,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
             mPage1.setVisibility(View.GONE);
             mPage2.setVisibility(View.GONE);
             mPage3.setVisibility(View.VISIBLE);
+            checkIfGroupIsCompleted();
         }
     }
 
@@ -182,6 +203,18 @@ public class ActivityJoinGroup extends AppCompatActivity {
 
     private void setupLayouts() {
         mLinearLayoutPlaceholderResults = findViewById(R.id.linear_layout_result_page_placeholder);
+    }
+
+    private void setupResultPage() {
+        mTextViewTitle1 = findViewById(R.id.text_view_recipe_title_1);
+        mTextViewTitle2 = findViewById(R.id.text_view_recipe_title_2);
+        mTextViewTitle3 = findViewById(R.id.text_view_recipe_title_3);
+        mTextViewScore1 = findViewById(R.id.text_view_recipe_score_1);
+        mTextViewScore2 = findViewById(R.id.text_view_recipe_score_2);
+        mTextViewScore3 = findViewById(R.id.text_view_recipe_score_3);
+        mImageViewPoster1 = findViewById(R.id.image_view_recipe_poster_1);
+        mImageViewPoster2 = findViewById(R.id.image_view_recipe_poster_2);
+        mImageViewPoster3 = findViewById(R.id.image_view_recipe_poster_3);
     }
 
     private void setupSwipePlaceholderView() {
@@ -275,9 +308,26 @@ public class ActivityJoinGroup extends AppCompatActivity {
         });
     }
 
+    private void restartActivity() {
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0,0);
+    }
+
     private void resetSharedPreferences() {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.clear();
+        editor.commit();
+    }
+
+    private void deleteSavedOnlineData() {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putInt("PageJoin", 1);
+        editor.putString("JoinGroupIDs", "");
+        editor.putString("JoinGroupCode", "");
+        editor.putString("LikedJoinIDs", "");
+        editor.putString("DislikedJoinIDs", "");
         editor.commit();
     }
 }

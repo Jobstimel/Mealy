@@ -1,6 +1,7 @@
 package com.example.mealy;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;

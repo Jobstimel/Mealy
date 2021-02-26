@@ -155,7 +155,6 @@
                 style="@style/text_view_top_bot"
                 android:id="@+id/text_view_join_group"
                 android:background="@drawable/selector_reset_filter_button"
-                android:text="Gruppe beitreten"
                 android:layout_weight="14"
                 android:onClick="switchToPage2"/>
 
@@ -233,8 +232,9 @@
 
             <TextView
                 style="@style/text_view_top_bot"
-                android:background="@drawable/background_round_corners_top"
-                android:text="@string/results"/>
+                android:id="@+id/text_view_result_page_top"
+                android:text="Abstimmung läuft noch"
+                android:background="@drawable/background_round_corners_top"/>
 
             <LinearLayout
                 style="@style/linear_layout_card_design_middle_part">

@@ -51,6 +51,7 @@ public class JoinGroupCodeInputStatusHandler {
         status.setText("Status: Gruppe gefunden");
         status.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_green));
         codeInputView.setTextColor(ContextCompat.getColor(mContext, R.color.filter_green));
+        button.setText("Gruppe beitreten");
         button.setClickable(true);
     }
 

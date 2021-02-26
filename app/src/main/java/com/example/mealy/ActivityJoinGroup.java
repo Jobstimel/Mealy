@@ -62,6 +62,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private TextView mTextViewCodeInputStatus;
     private TextView mTextViewJoinGroupButton;
     private TextView mTextViewLeaveGroupButton;
+    private TextView mTextViewResultPageHeader;
     private ListView mResultListView;
 
     //Result
@@ -121,6 +122,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
             String status = (String) mDataSnapshot.child(code).child("group_status").getValue();
             if (status != null && status.equals("closed")) {
                 mLinearLayoutPlaceholderResults.setVisibility(View.GONE);
+                mTextViewResultPageHeader.setText("Teilnehmer: "+String.valueOf(mDataSnapshot.child(code).child("people_number").getValue()));
                 loadResults();
             }
         }
@@ -265,6 +267,8 @@ public class ActivityJoinGroup extends AppCompatActivity {
 
         mTextViewLeaveGroupButton = findViewById(R.id.text_view_leave_group);
         mTextViewLeaveGroupButton.setClickable(false);
+
+        mTextViewResultPageHeader = findViewById(R.id.text_view_result_page_top);
 
         mCodeInputView = findViewById(R.id.code_input_view);
         mCodeInputView.addOnCompleteListener(code -> checkUserInputCode(code));

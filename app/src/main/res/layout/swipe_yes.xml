@@ -2,8 +2,8 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:gravity="center_horizontal|center_vertical"
-    android:layout_width="371dp"
-    android:layout_height="616dp"
+    android:layout_width="350dp"
+    android:layout_height="546dp"
     android:background="@drawable/background_round_corners"
     android:backgroundTint="@color/white_transparent"
     android:layout_marginBottom="56dp">

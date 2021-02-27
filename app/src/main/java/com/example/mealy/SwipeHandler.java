@@ -4,24 +4,27 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.google.firebase.database.DataSnapshot;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SwipeHandler {
 
     private String mMode;
     private SharedPreferences mSharedPreferences;
-    private Context mContext;
 
     public List<Integer> mSelectedIDs;
     public List<Integer> mLikedIDs;
     public List<Integer> mDislikedIDs;
     public List<Recipe> mOfflineResults;
+    public List<Recipe> mOnlineResults;
 
-    public SwipeHandler(String mMode, SharedPreferences mSharedPreferences, Context mContext) {
+    public SwipeHandler(String mMode, SharedPreferences mSharedPreferences) {
         this.mMode = mMode;
         this.mSharedPreferences = mSharedPreferences;
-        this.mContext = mContext;
     }
 
     public void loadSelectedIndices() {
@@ -57,17 +60,10 @@ public class SwipeHandler {
         }
     }
 
-    public void loadOfflineResults(List<Recipe> recipes, List<Integer> liked) {
-        mOfflineResults = new ArrayList<>();
-        for (int i = 0; i < liked.size(); i++) {
-            mOfflineResults.add(recipes.get(liked.get(i)));
-        }
-    }
-
     public void saveLikedIndices(List<Integer> liked) {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         String tmp = "";
-        if (liked.size() > 0) {
+        if (liked != null && liked.size() > 0) {
             tmp = String.valueOf(liked.get(0));
             for (int i = 1; i < liked.size(); i++) {
                 tmp = tmp + "#" + liked.get(i);
@@ -80,7 +76,7 @@ public class SwipeHandler {
     public void saveDislikedIndices(List<Integer> disliked) {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         String tmp = "";
-        if (disliked.size() > 0) {
+        if (disliked != null && disliked.size() > 0) {
             tmp = String.valueOf(disliked.get(0));
             for (int i = 1; i < disliked.size(); i++) {
                 tmp = tmp + "#" + disliked.get(i);
@@ -88,5 +84,41 @@ public class SwipeHandler {
         }
         editor.putString("Disliked"+mMode+"IDs", tmp);
         editor.commit();
+    }
+
+    public void loadOfflineResults(List<Recipe> recipes, List<Integer> liked) {
+        mOfflineResults = new ArrayList<>();
+        for (int i = 0; i < liked.size(); i++) {
+            Recipe recipe = recipes.get(liked.get(i));
+            recipe.setScore(1);
+            mOfflineResults.add(recipe);
+        }
+    }
+
+    public void loadOnlineResults(DataSnapshot dataSnapshot, List<Recipe> recipes) {
+        String code = mSharedPreferences.getString("JoinGroupCode", "");
+        List<String> counter = (List<String>) dataSnapshot.child(code).child("counter").getValue();
+        List<String> selectedIDs = (List<String>) dataSnapshot.child(code).child("selected_ids").getValue();
+        String peopleNumber = (String) dataSnapshot.child(code).child("people_number").getValue();
+        calculateOnlineStandings(counter, selectedIDs, peopleNumber, recipes);
+    }
+
+    private void calculateOnlineStandings(List<String> count, List<String> ids, String maxVotes, List<Recipe> recipes) {
+        mOnlineResults = new ArrayList<>();
+        for (int i = Integer.parseInt(maxVotes); i > -1; i--) {
+            for (int y = 0; y < ids.size(); y++) {
+                if (Integer.parseInt(count.get(y)) == i) {
+                    Recipe recipe = recipes.get(Integer.parseInt(ids.get(y)));
+                    recipe.setScore(i);
+                    mOnlineResults.add(recipe);
+                    if (mOnlineResults.size() == 3) {
+                        break;
+                    }
+                }
+            }
+            if (mOnlineResults.size() == 3) {
+                break;
+            }
+        }
     }
 }

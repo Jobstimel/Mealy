@@ -2,19 +2,538 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".JoinGroup"
-    android:background="@drawable/background_image_cork">
+    style="@style/container"
+    tools:context=".ActivityJoinGroup"
+    android:background="@color/background">
+
+    <LinearLayout
+        style="@style/linear_layout_page"
+        android:id="@+id/page_1">
+
+        <LinearLayout
+            style="@style/linear_layout_top_bar"
+            android:weightSum="3">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/image_view_top_bar"
+                android:src="@drawable/icon_connect"
+                android:layout_weight="1"
+                app:tint="@color/filter_green"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/image_view_top_bar"
+                android:src="@drawable/icon_swipe"
+                android:layout_weight="1"
+                app:tint="@color/filter_border_color"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/image_view_top_bar"
+                android:src="@drawable/icon_results"
+                android:layout_weight="1"
+                app:tint="@color/filter_border_color"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linear_layout_card_design">
+
+            <TextView
+                style="@style/text_view_top_bot"
+                android:background="@drawable/background_round_corners_top"
+                android:text="Gruppe beitreten"/>
+
+            <LinearLayout
+                style="@style/linear_layout_card_design_middle_part"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:background="@color/filter_border_color"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/filter_background_color"
+                            android:orientation="vertical"
+                            android:layout_margin="2dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="5dp"
+                                android:textColor="@color/black"
+                                android:text="Um einer Gruppe beitreten zu können brauchst du den 8-stelligen Zugangscode. Du erhältst ihn vom Ersteller der Gruppe."/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingHorizontal="5dp"
+                                android:paddingBottom="5dp"
+                                android:textColor="@color/black"
+                                android:text="Gib diesen Code in das Eingabefeld ein. Sobald der Code überprüft wurde kannst der Gruppe mit einem Klick auf 'Gruppe beitreten' beitreten."/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/filter_border_color"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/filter_background_color"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_marginTop="2dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:padding="5dp"
+                            android:text="Zugangscode:"/>
+
+                    </LinearLayout>
+
+                    <com.raycoarana.codeinputview.CodeInputView
+                        android:id="@+id/code_input_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="2dp"
+                        android:background="@color/filter_background_color"
+                        app:code_text_size="25dp"
+                        app:underline_color="@color/black"
+                        app:underline_selected_color="@android:color/black"
+                        app:code_text_color="@color/black"
+                        app:animate_on_complete="false"
+                        app:input_type="numeric"
+                        app:length_of_code="8"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/filter_background_color"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_marginBottom="2dp">
+
+                        <TextView
+                            android:id="@+id/text_view_code_status"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/yellow"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:padding="5dp"
+                            android:layout_margin="2dp"
+                            android:text="Status: Warte auf Eingabe"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/text_view_top_bot"
+                android:id="@+id/text_view_join_group"
+                android:background="@drawable/selector_reset_filter_button"
+                android:layout_weight="14"
+                android:onClick="switchToPage2"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/linear_layout_page"
+        android:layout_height="match_parent"
+        android:id="@+id/page_2">
+
+        <LinearLayout
+            style="@style/linear_layout_top_bar"
+            android:weightSum="3">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/image_view_top_bar"
+                android:src="@drawable/icon_connect"
+                android:layout_weight="1"
+                app:tint="@color/filter_border_color"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/image_view_top_bar"
+                android:src="@drawable/icon_swipe"
+                android:layout_weight="1"
+                app:tint="@color/filter_green"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/image_view_top_bar"
+                android:src="@drawable/icon_results"
+                android:layout_weight="1"
+                app:tint="@color/filter_border_color"/>
+
+        </LinearLayout>
+
+        <com.mindorks.placeholderview.SwipePlaceHolderView
+            android:id="@+id/swipeView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/linear_layout_page"
+        android:layout_height="match_parent"
+        android:id="@+id/page_3">
+
+        <LinearLayout
+            style="@style/linear_layout_top_bar"
+            android:weightSum="3">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/image_view_top_bar"
+                android:src="@drawable/icon_connect"
+                android:layout_weight="1"
+                app:tint="@color/filter_border_color"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/image_view_top_bar"
+                android:src="@drawable/icon_swipe"
+                android:layout_weight="1"
+                app:tint="@color/filter_border_color"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/image_view_top_bar"
+                android:src="@drawable/icon_results"
+                android:layout_weight="1"
+                app:tint="@color/filter_green"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linear_layout_card_design">
+
+            <TextView
+                style="@style/text_view_top_bot"
+                android:id="@+id/text_view_result_page_top"
+                android:text="Abstimmung läuft noch"
+                android:background="@drawable/background_round_corners_top"/>
+
+            <LinearLayout
+                style="@style/linear_layout_card_design_middle_part">
+
+                <LinearLayout
+                    style="@style/linear_layout_placeholder_results_container_outside"
+                    android:id="@+id/linear_layout_result_page_placeholder">
+
+                    <LinearLayout
+                        style="@style/linear_layout_placeholder_results_container_inside">
+
+                        <TextView
+                            style="@style/text_view_placeholder_results"
+                            android:text="@string/result_placeholder_join_lobby"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <ScrollView
+                    android:id="@+id/scroll_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/filter_background_color"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:background="@color/gold">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="5dp"
+                                    android:background="@color/filter_background_color"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="30dp"
+                                        android:layout_margin="5dp"
+                                        android:orientation="horizontal"
+                                        android:weightSum="10">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/gold"
+                                            android:layout_marginRight="2.5dp"
+                                            android:layout_weight="1">
+
+                                            <TextView
+                                                android:id="@+id/text_view_recipe_title_1"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_margin="5dp"
+                                                android:gravity="center_vertical"
+                                                android:textColor="@color/black"
+                                                android:textStyle="bold"
+                                                android:textSize="12dp"/>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:tooltipText="@string/tooltip_votes"
+                                            android:background="@color/gold"
+                                            android:layout_marginLeft="2.5dp"
+                                            android:layout_weight="9">
+
+                                            <TextView
+                                                android:id="@+id/text_view_recipe_score_1"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_margin="5dp"
+                                                android:gravity="center"
+                                                android:textColor="@color/black"
+                                                android:textStyle="bold"
+                                                android:textSize="12dp"/>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <ImageView
+                                        android:id="@+id/image_view_recipe_poster_1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="130dp"
+                                        android:layout_marginHorizontal="5dp"
+                                        android:layout_marginBottom="5dp"
+                                        android:scaleType="centerCrop"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/filter_background_color"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:background="@color/silver">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="5dp"
+                                    android:background="@color/filter_background_color"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="30dp"
+                                        android:layout_margin="5dp"
+                                        android:orientation="horizontal"
+                                        android:weightSum="10">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/silver"
+                                            android:layout_marginRight="2.5dp"
+                                            android:layout_weight="1">
+
+                                            <TextView
+                                                android:id="@+id/text_view_recipe_title_2"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_margin="5dp"
+                                                android:gravity="center_vertical"
+                                                android:textColor="@color/black"
+                                                android:textStyle="bold"
+                                                android:textSize="12dp"/>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:tooltipText="@string/tooltip_votes"
+                                            android:background="@color/silver"
+                                            android:layout_marginLeft="2.5dp"
+                                            android:layout_weight="9">
+
+                                            <TextView
+                                                android:id="@+id/text_view_recipe_score_2"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_margin="5dp"
+                                                android:gravity="center"
+                                                android:textColor="@color/black"
+                                                android:textStyle="bold"
+                                                android:textSize="12dp"/>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <ImageView
+                                        android:id="@+id/image_view_recipe_poster_2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="130dp"
+                                        android:layout_marginHorizontal="5dp"
+                                        android:layout_marginBottom="5dp"
+                                        android:scaleType="centerCrop"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/filter_background_color"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:background="@color/bronze">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="5dp"
+                                    android:background="@color/filter_background_color"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="30dp"
+                                        android:layout_margin="5dp"
+                                        android:orientation="horizontal"
+                                        android:weightSum="10">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/bronze"
+                                            android:layout_marginRight="2.5dp"
+                                            android:layout_weight="1">
+
+                                            <TextView
+                                                android:id="@+id/text_view_recipe_title_3"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_margin="5dp"
+                                                android:gravity="center_vertical"
+                                                android:textColor="@color/black"
+                                                android:textStyle="bold"
+                                                android:textSize="12dp"/>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:tooltipText="@string/tooltip_votes"
+                                            android:background="@color/bronze"
+                                            android:layout_marginLeft="2.5dp"
+                                            android:layout_weight="9">
+
+                                            <TextView
+                                                android:id="@+id/text_view_recipe_score_3"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_margin="5dp"
+                                                android:gravity="center"
+                                                android:textColor="@color/black"
+                                                android:textStyle="bold"
+                                                android:textSize="12dp"/>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <ImageView
+                                        android:id="@+id/image_view_recipe_poster_3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="130dp"
+                                        android:layout_marginHorizontal="5dp"
+                                        android:layout_marginBottom="5dp"
+                                        android:scaleType="centerCrop"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/text_view_top_bot"
+                android:id="@+id/text_view_leave_group"
+                android:background="@drawable/selector_reset_filter_button"
+                android:layout_weight="14"
+                android:onClick="leaveGroup"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/bottom_navigation_view"
         android:id="@+id/bottom_navigation"
         app:itemBackground="@color/white"
         app:itemTextColor="@drawable/selector_menu_bottom_navigation"
         app:itemIconTint="@drawable/selector_menu_bottom_navigation"
-        app:menu="@menu/menu_bottom_navigation"
-        android:layout_alignParentBottom="true"/>
+        app:menu="@menu/menu_bottom_navigation"/>
 
 </RelativeLayout>

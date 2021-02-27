@@ -15,6 +15,37 @@
     <string name="dessert">Dessert</string>
     <string name="snack">Snack</string>
     <string name="drink">Getränk</string>
+    <string name="easy">Einfach</string>
+    <string name="medium">Mittel</string>
+    <string name="hard">Schwer</string>
+    <string name="type_of_meal">Art der Mahlzeit</string>
+    <string name="time_and_calories">Zubereitungszeit und Kalorien</string>
+    <string name="difficulty">Schwierigkeit</string>
+    <string name="country">Länderküche</string>
+    <string name="additional">Sonstiges</string>
+    <string name="allergies">Allergien</string>
+    <string name="preparation">Zubereitung</string>
+    <string name="category">Kategorie</string>
+    <string name="nutrition">Ernährung</string>
+
+    //Recipe Card
+    <string name="calories">Brennwert</string>
+    <string name="fat">Fett</string>
+    <string name="carbohydrates">Kohlenhydrate</string>
+    <string name="protein">Eiweiss</string>
+    <string name="fiber">Ballaststoffe</string>
+    <string name="time_total">Gesamtzeit</string>
+    <string name="time_preparation">Vorbereitungszeit</string>
+
+    //Swipe
+    <string name="swipe_placeholder">Keine Filter Treffer</string>
+
+    //Result
+    <string name="result_placeholder">Du musst erst Rezepte bewerten bevor du hier Ergebnisse sehen kannst.</string>
+    <string name="result_placeholder_join_lobby">Die Abstimmung läuft noch. Die Ergebnisse werden veröffentlicht sobald der Host die Abtimmung beendet hat.</string>
+    <string name="results">Auswertung</string>
+    <string name="offline_participants">Teilnehmer: 1</string>
+    <string name="tooltip_votes">Anzahl der Stimmen</string>
 
     <string-array name="meal_allergies">
         <item>Eier</item>

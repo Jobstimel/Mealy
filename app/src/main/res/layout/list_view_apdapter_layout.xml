@@ -2,24 +2,82 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:background="@drawable/paper_background"
+    android:layout_height="wrap_content"
+    android:background="@color/filter_background_color"
     android:orientation="horizontal">
 
     <LinearLayout
+        android:id="@+id/background_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="4dp"
-        android:orientation="horizontal">
+        android:layout_margin="2dp"
+        android:orientation="horizontal"
+        android:background="@color/filter_green_transparent">
 
-        <ImageView
-            android:id="@+id/image_view_recipe_poster"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp"
-            android:scaleType="centerCrop"
-            android:elevation="5dp"/>
+            android:layout_margin="2dp"
+            android:background="@color/filter_background_color"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/filter_border_color"
+                    android:layout_marginRight="2.5dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/text_view_recipe_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="12dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:tooltipText="@string/tooltip_votes"
+                    android:background="@color/filter_border_color"
+                    android:layout_marginLeft="2.5dp"
+                    android:layout_weight="9">
+
+                    <TextView
+                        android:id="@+id/text_view_recipe_score"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="12dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/image_view_recipe_poster"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginBottom="5dp"
+                android:scaleType="centerCrop"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

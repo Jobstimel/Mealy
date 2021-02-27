@@ -38,6 +38,7 @@ public class ListViewAdapter extends ArrayAdapter<Recipe> {
     static class ViewHolder {
         ImageView url1;
         TextView score;
+        TextView title;
     }
 
     public ListViewAdapter(@NonNull Context context, int resource, @NonNull List<Recipe> objects, String mode) {
@@ -57,6 +58,11 @@ public class ListViewAdapter extends ArrayAdapter<Recipe> {
         String url1 = getItem(position).getUrl1();
         final String url2 = getItem(position).getUrl2();
         String score = String.valueOf(getItem(position).getScore());
+        String title = getItem(position).getTitle();
+        if (title.length() > 45) {
+            title = title.substring(0, 41).trim();
+            title = title + "...";
+        }
 
         final View result;
         ViewHolder holder;
@@ -68,6 +74,8 @@ public class ListViewAdapter extends ArrayAdapter<Recipe> {
             result = convertView;
             holder = new ViewHolder();
             holder.url1 = convertView.findViewById(R.id.image_view_recipe_poster);
+            holder.title = convertView.findViewById(R.id.text_view_recipe_title);
+            holder.score = convertView.findViewById(R.id.text_view_recipe_score);
 
             convertView.setTag(holder);
         }
@@ -90,8 +98,12 @@ public class ListViewAdapter extends ArrayAdapter<Recipe> {
                 .showImageOnLoading(defaultImage).build();
 
         imageLoader.displayImage(url1, holder.url1, options);
+        holder.title.setText(title);
+        holder.score.setText(score);
 
-        convertView.setElevation(5.00f);
+        //if (mMode.equals("Offline")) {
+            //convertView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.green_transparent));
+        //}
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

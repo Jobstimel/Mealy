@@ -10,7 +10,7 @@
 
     <androidx.cardview.widget.CardView
         android:orientation="vertical"
-        android:layout_width="371dp"
+        android:layout_width="350dp"
         android:layout_height="match_parent"
         android:background="@color/white"
         app:cardCornerRadius="30dp">
@@ -22,7 +22,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:background="@drawable/background_round_corners_top"
                     android:elevation="3dp"
                     android:layout_marginBottom="5dp">
@@ -40,7 +40,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="260dp"
+                    android:layout_height="230dp"
                     android:layout_marginHorizontal="5dp"
                     android:layout_marginBottom="5dp"
                     android:elevation="3dp"
@@ -56,7 +56,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="35dp"
                     android:orientation="horizontal"
                     android:weightSum="3"
                     android:layout_gravity="bottom"
@@ -71,12 +71,14 @@
                         android:layout_weight="1"
                         android:gravity="center">
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginVertical="6dp"
+                            android:layout_marginRight="2dp"
                             android:src="@drawable/icon_time_total"
-                            app:tint="@color/black"
-                            android:layout_marginRight="2dp"/>
+                            android:tooltipText="@string/time_total"
+                            app:tint="@color/black"/>
 
                         <TextView
                             android:id="@+id/recipe_total"
@@ -84,6 +86,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:textStyle="bold"
+                            android:textSize="14dp"
                             android:gravity="center"
                             android:textColor="@color/black"/>
 
@@ -95,12 +98,14 @@
                         android:layout_weight="1"
                         android:gravity="center">
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:tooltipText="@string/time_preparation"
                             android:src="@drawable/icon_time_preparation"
-                            app:tint="@color/black"
-                            android:layout_marginRight="2dp"/>
+                            android:layout_marginVertical="6dp"
+                            android:layout_marginRight="2dp"
+                            app:tint="@color/black"/>
 
                         <TextView
                             android:id="@+id/recipe_prepare"
@@ -108,6 +113,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:textStyle="bold"
+                            android:textSize="14dp"
                             android:gravity="center"
                             android:textColor="@color/black"/>
 
@@ -119,12 +125,14 @@
                         android:layout_weight="1"
                         android:gravity="center">
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:tooltipText="@string/difficulty"
                             android:src="@drawable/icon_level"
-                            app:tint="@color/black"
-                            android:layout_marginRight="2dp"/>
+                            android:layout_marginVertical="6dp"
+                            android:layout_marginRight="2dp"
+                            app:tint="@color/black"/>
 
                         <TextView
                             android:id="@+id/recipe_difficulty"
@@ -132,6 +140,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:textStyle="bold"
+                            android:textSize="14dp"
                             android:gravity="center"
                             android:textColor="@color/black"/>
 
@@ -141,7 +150,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="80dp"
                     android:layout_marginHorizontal="5dp">
 
                     <TextView
@@ -149,6 +158,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginHorizontal="10dp"
+                        android:textSize="12dp"
                         android:gravity="center"
                         android:textColor="@color/black"
                         android:justificationMode="inter_word" />
@@ -177,18 +187,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="Brennwert"
+                            android:text="@string/calories"
                             android:gravity="center_vertical"
                             android:textColor="@color/black"
+                            android:textSize="12dp"
                             android:layout_marginLeft="5dp"/>
 
                         <TextView
+                            android:id="@+id/text_view_calories"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="650 kcal"
                             android:gravity="end|center_vertical"
                             android:textColor="@color/black"
+                            android:textSize="12dp"
                             android:layout_marginRight="5dp"/>
 
 
@@ -208,17 +220,19 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Fett"
+                            android:text="@string/fat"
                             android:textColor="@color/black"
+                            android:textSize="12dp"
                             android:layout_marginLeft="5dp"/>
 
                         <TextView
+                            android:id="@+id/text_view_fat"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="end|center_vertical"
                             android:layout_weight="1"
-                            android:text="25 g"
                             android:textColor="@color/black"
+                            android:textSize="12dp"
                             android:layout_marginRight="5dp"/>
 
 
@@ -237,18 +251,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="Kohlenhydrate"
+                            android:text="@string/carbohydrates"
                             android:gravity="center_vertical"
                             android:textColor="@color/black"
+                            android:textSize="12dp"
                             android:layout_marginLeft="5dp"/>
 
                         <TextView
+                            android:id="@+id/text_view_carbs"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="75 g"
                             android:gravity="end|center_vertical"
                             android:textColor="@color/black"
+                            android:textSize="12dp"
                             android:layout_marginRight="5dp"/>
 
 
@@ -268,17 +284,19 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Eiweiss"
+                            android:text="@string/protein"
                             android:textColor="@color/black"
+                            android:textSize="12dp"
                             android:layout_marginLeft="5dp"/>
 
                         <TextView
+                            android:id="@+id/text_view_protein"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="end|center_vertical"
                             android:layout_weight="1"
-                            android:text="28 g"
                             android:textColor="@color/black"
+                            android:textSize="12dp"
                             android:layout_marginRight="5dp"/>
 
 
@@ -299,17 +317,19 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Ballaststoffe"
+                            android:text="@string/fiber"
                             android:textColor="@color/black"
+                            android:textSize="12dp"
                             android:layout_marginLeft="5dp"/>
 
                         <TextView
+                            android:id="@+id/text_view_fiber"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="end|center_vertical"
                             android:layout_weight="1"
-                            android:text="4 g"
                             android:textColor="@color/black"
+                            android:textSize="12dp"
                             android:layout_marginRight="5dp"/>
 
 

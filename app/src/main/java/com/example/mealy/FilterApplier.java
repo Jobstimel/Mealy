@@ -7,6 +7,8 @@ import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,16 +24,18 @@ public class FilterApplier {
     private final String[] DIFFICULTIES = {"Einfach","Mittel","Schwierig"};
 
     private String mMode;
+    private Context mContext;
     private SharedPreferences mSharedPreferences;
     private List<Recipe> mAllRecipesList;
     private List<Recipe> mFilteredRecipeList;
     private List<Integer> mFilteredIDs;
     private List<Integer> mSelectedIDs;
 
-    public FilterApplier(String mode, SharedPreferences sharedPreferences, List<Recipe> allRecipesList) {
+    public FilterApplier(String mode, SharedPreferences sharedPreferences, List<Recipe> allRecipesList, Context context) {
         this.mMode = mode;
         this.mSharedPreferences = sharedPreferences;
         this.mAllRecipesList = allRecipesList;
+        this.mContext = context;
     }
 
     public void applyFilter(TextView textView) {
@@ -47,10 +51,10 @@ public class FilterApplier {
             String[] tags = recipe.getTags();
             Boolean status = true;
 
-            if (status && mTypeFilter.size() > 0) {
+            if (mTypeFilter.size() > 0) {
                 status = checkTagsMultipleSelections(tags, mTypeFilter);
             }
-            if (mDiffFilter.size() > 0) {
+            if (status && mDiffFilter.size() > 0) {
                 status = checkDifficulty(recipe, mDiffFilter);
             }
             if (status && mCounFilter.size() > 0) {
@@ -85,7 +89,12 @@ public class FilterApplier {
             deleteLikedIDs();
             deleteDislikedIDs();
         }
-        textView.setText(mFilteredIDs.size() + " Rezepte gefunden");
+        int size = mFilteredIDs.size();
+        textView.setTextColor(ContextCompat.getColor(mContext, R.color.filter_green));
+        if (size == 0) {
+            textView.setTextColor(ContextCompat.getColor(mContext, R.color.red));
+        }
+        textView.setText(size + " Rezepte gefunden");
     }
 
     private Boolean checkTagsMultipleSelections(String[] tags, List<String> filterValues) {

@@ -2,6 +2,7 @@ package com.example.mealy;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
@@ -22,65 +23,79 @@ public class FilterSeekBarHandler {
         this.mContext = mContext;
     }
 
-    public void applySeekBar(CrystalRangeSeekbar seekBar, String key, int min, int max) {
-        int def = this.MAX_TIME;
-        if (key.equals("CaloriesSeekBar")) {
-            def = this.MAX_CALORIES;
-        }
-        if (!(mSharedPreferences.getInt(key+mMode+"Min", 0) == min) || !(mSharedPreferences.getInt(key+mMode+"Max", def) == max)) {
+    public void applyCaloriesSeekBar(CrystalRangeSeekbar seekBarCalories, int min, int max, FilterApplier filterApplier, TextView textView) {
+        if (!(mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Min", 0) == min) || !(mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Max", MAX_CALORIES) == max)) {
             SharedPreferences.Editor editor = mSharedPreferences.edit();
-            editor.putInt(key+mMode+"Min", min);
-            editor.putInt(key+mMode+"Max", max);
+            editor.putInt("CaloriesSeekBar"+mMode+"Min", min);
+            editor.putInt("CaloriesSeekBar"+mMode+"Max", max);
             editor.putBoolean("ChangeStatus"+mMode, true);
             editor.commit();
         }
-        if (min != 0 || max != def) {
-            toggleSeekBarBackgroundColor(seekBar, 1);
+        setSeekBarUnselected(seekBarCalories);
+        if (min > 0 || max < MAX_CALORIES) {
+            setSeekBarSelected(seekBarCalories);
         }
-        else if (min == 0 && max == def) {
-            toggleSeekBarBackgroundColor(seekBar, 0);
-        }
+        filterApplier.applyFilter(textView);
     }
 
-    public void loadSeekBarStates(CrystalRangeSeekbar seekBar1, String key1, CrystalRangeSeekbar seekBar2, String key2) {
-        loadSeekBarState(seekBar1, key1);
-        loadSeekBarState(seekBar2, key2);
+    public void applyTimeSeekBar(CrystalRangeSeekbar seekBarTime, int min, int max, FilterApplier filterApplier, TextView textView) {
+        if (!(mSharedPreferences.getInt("TimeSeekBar"+mMode+"Min", 0) == min) || !(mSharedPreferences.getInt("TimeSeekBar"+mMode+"Max", MAX_TIME) == max)) {
+            SharedPreferences.Editor editor = mSharedPreferences.edit();
+            editor.putInt("TimeSeekBar"+mMode+"Min", min);
+            editor.putInt("TimeSeekBar"+mMode+"Max", max);
+            editor.putBoolean("ChangeStatus"+mMode, true);
+            editor.commit();
+        }
+        setSeekBarUnselected(seekBarTime);
+        if (min > 0 || max < MAX_TIME) {
+            setSeekBarSelected(seekBarTime);
+        }
+        filterApplier.applyFilter(textView);
     }
 
-    public void resetSeekBarStates(CrystalRangeSeekbar seekBar1, CrystalRangeSeekbar seekBar2) {
+    public void resetSeekBarStates(CrystalRangeSeekbar seekBarCalories, CrystalRangeSeekbar seekBarTime) {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putInt("CaloriesSeekBar"+mMode+"Min", 0);
         editor.putInt("CaloriesSeekBar"+mMode+"Max", this.MAX_CALORIES);
         editor.putInt("TimeSeekBar"+mMode+"Min", 0);
         editor.putInt("TimeSeekBar"+mMode+"Max", this.MAX_TIME);
         editor.commit();
-        toggleSeekBarBackgroundColor(seekBar1, 0);
-        toggleSeekBarBackgroundColor(seekBar2, 0);
+        loadSeekBarStates(seekBarCalories, seekBarTime);
     }
 
-    private void loadSeekBarState(CrystalRangeSeekbar seekBar, String key) {
-        int def = this.MAX_TIME;
-        if (key.equals("CaloriesSeekBar")) {
-            def = this.MAX_CALORIES;
+    public void loadSeekBarStates(CrystalRangeSeekbar seekBarCalories, CrystalRangeSeekbar seekBarTime) {
+        int min_calories = mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Min",0);
+        int max_calories = mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Max", this.MAX_CALORIES);
+        seekBarCalories.setMinStartValue(min_calories);
+        seekBarCalories.setMaxStartValue(max_calories);
+        seekBarCalories.apply();
+
+        int min_time = mSharedPreferences.getInt("TimeSeekBar"+mMode+"Min",0);
+        int max_time = mSharedPreferences.getInt("TimeSeekBar"+mMode+"Max", this.MAX_TIME);
+        seekBarTime.setMinStartValue(min_time);
+        seekBarTime.setMaxStartValue(max_time);
+        seekBarTime.apply();
+
+        setSeekBarUnselected(seekBarCalories);
+        if (min_calories > 0 || max_calories < MAX_CALORIES) {
+            setSeekBarSelected(seekBarCalories);
         }
-        seekBar.setMinStartValue(mSharedPreferences.getInt(key+mMode+"Min",0));
-        seekBar.setMaxStartValue(mSharedPreferences.getInt(key+mMode+"Max", def));
-        seekBar.apply();
-        if (mSharedPreferences.getInt(key+mMode+"Min",0) != 0 || mSharedPreferences.getInt(key+mMode+"Max", def) != def) {
-            toggleSeekBarBackgroundColor(seekBar, 1);
+
+        setSeekBarUnselected(seekBarTime);
+        if (min_time > 0 || max_time < MAX_TIME) {
+            setSeekBarSelected(seekBarTime);
         }
     }
 
-    private void toggleSeekBarBackgroundColor(CrystalRangeSeekbar seekBar, int state) {
-        if (state == 0) {
-            seekBar.setLeftThumbColor(ContextCompat.getColor(mContext, R.color.foreground));
-            seekBar.setRightThumbColor(ContextCompat.getColor(mContext, R.color.foreground));
-            seekBar.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.foreground));
-        }
-        else {
-            seekBar.setLeftThumbColor(ContextCompat.getColor(mContext, R.color.green));
-            seekBar.setRightThumbColor(ContextCompat.getColor(mContext, R.color.green));
-            seekBar.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.green));
-        }
+    private void setSeekBarSelected(CrystalRangeSeekbar seekBar) {
+        seekBar.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.filter_green));
+        seekBar.setLeftThumbColor(ContextCompat.getColor(mContext, R.color.filter_green));
+        seekBar.setRightThumbColor(ContextCompat.getColor(mContext, R.color.filter_green));
+    }
+
+    private void setSeekBarUnselected(CrystalRangeSeekbar seekBar) {
+        seekBar.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.filter_border_color));
+        seekBar.setLeftThumbColor(ContextCompat.getColor(mContext, R.color.filter_border_color));
+        seekBar.setRightThumbColor(ContextCompat.getColor(mContext, R.color.filter_border_color));
     }
 }

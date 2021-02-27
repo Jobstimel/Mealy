@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Loader {
+public class JsonLoader {
 
     public static List<Recipe> loadRecipies(Context context) {
         try {

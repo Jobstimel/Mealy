@@ -31,7 +31,7 @@ public class FilterLinearLayoutCountryHandler {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void saveCountryFilterValue(View v, FilterApplier filterApplier, TextView textView)  {
+    public void saveCountryFilterValue(View v, FilterApplier filterApplier, TextView textView, TextView button)  {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         if (!mSharedPreferences.getBoolean(v.getTooltipText() +mMode,false)) {
             editor.putBoolean(v.getTooltipText() +mMode, true);
@@ -41,9 +41,9 @@ public class FilterLinearLayoutCountryHandler {
             editor.putBoolean(v.getTooltipText() +mMode, false);
             setViewUnselected(v);
         }
-        editor.putBoolean("ChangeStatusOffline", true);
+        editor.putBoolean("ChangeStatus"+mMode, true);
         editor.commit();
-        filterApplier.applyFilter(textView);
+        filterApplier.applyFilter(textView, button);
     }
 
     public void loadCountryFilterLayoutStates(List<LinearLayout> list) {
@@ -60,7 +60,7 @@ public class FilterLinearLayoutCountryHandler {
             editor.putBoolean(this.TOOLTIPS.get(i)+mMode, false);
             setLayoutUnselected(list.get(i));
         }
-        editor.putBoolean("ChangeStatusOffline", true);
+        editor.putBoolean("ChangeStatus"+mMode, true);
         editor.commit();
         loadCountryFilterLayoutStates(list);
     }

@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class FilterApplier {
 
-    private final Integer MAX_RECIPES = 10;
+    public static final Integer MAX_RECIPES = 10;
     public final Integer MAX_TIME = 300;
     public final Integer MAX_CALORIES = 2000;
     private final String[] TYPES = {"Frühstück","Mittagessen","Abendessen","Dessert","Snack","Getränk"};
@@ -38,7 +38,7 @@ public class FilterApplier {
         this.mContext = context;
     }
 
-    public void applyFilter(TextView textView) {
+    public void applyFilter(TextView textView, TextView button) {
 
         mFilteredIDs = new ArrayList<>();
         List<String> mTypeFilter = getFilterValues(TYPES);
@@ -90,9 +90,21 @@ public class FilterApplier {
             deleteDislikedIDs();
         }
         int size = mFilteredIDs.size();
-        textView.setTextColor(ContextCompat.getColor(mContext, R.color.filter_green));
-        if (size == 0) {
+        if (size < 3) {
             textView.setTextColor(ContextCompat.getColor(mContext, R.color.red));
+            if (mMode.equals("Online")) {
+                button.setTextColor(ContextCompat.getColor(mContext, R.color.red));
+                button.setText("Zu wenige Treffer");
+                button.setClickable(false);
+            }
+        }
+        else {
+            textView.setTextColor(ContextCompat.getColor(mContext, R.color.filter_green));
+            if (mMode.equals("Online")) {
+                button.setTextColor(ContextCompat.getColor(mContext, R.color.filter_green));
+                button.setText("Gruppe erstellen");
+                button.setClickable(true);
+            }
         }
         textView.setText(size + " Rezepte gefunden");
     }

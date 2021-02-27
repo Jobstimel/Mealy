@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,7 +42,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
     public static List<Object> mResolvers;
 
     //Classes
-    private JoinGroupCodeInputStatusHandler mJoinGroupCodeInputStatusHandler;
+    private CodeInputHandler mCodeInputHandler;
     private SwipePlaceHolderViewHandlerJoinGroup mSwipePlaceHolderViewHandlerJoinGroup;
     private SwipeHandler mSwipeHandler;
 
@@ -99,21 +98,21 @@ public class ActivityJoinGroup extends AppCompatActivity {
 
     private void generateUserID() {
         if (mSharedPreferences.getString("UserID", "").equals("")) {
-            UserIDGenerator randomStringBuilder = new UserIDGenerator(mSharedPreferences);
-            randomStringBuilder.generateRandomID(30);
+            RandomGenerator randomStringBuilder = new RandomGenerator(mSharedPreferences);
+            randomStringBuilder.generateRandomUserID(30);
         }
     }
 
     private void uploadRatings() {
-        DatabaseHandlerJoinGroup  mDatabaseHandlerJoinGroup = new DatabaseHandlerJoinGroup(mSharedPreferences);
-        mDatabaseHandlerJoinGroup.updateGroupCounter(mDataSnapshot, mLikedIDs, mDatabaseReference);
-        mDatabaseHandlerJoinGroup.updateGroupCompletedUserList(mDataSnapshot, mDatabaseReference);
-        mDatabaseHandlerJoinGroup.updateGroupPeopleNumber(mDataSnapshot, mDatabaseReference);
+        DatabaseHandler mDatabaseHandler = new DatabaseHandler(mSharedPreferences);
+        mDatabaseHandler.updateGroupCounter(mDataSnapshot, mLikedIDs, mDatabaseReference);
+        mDatabaseHandler.updateGroupCompletedUserList(mDataSnapshot, mDatabaseReference);
+        mDatabaseHandler.updateGroupPeopleNumber(mDataSnapshot, mDatabaseReference);
         switchToPage3();
     }
 
     private void checkUserInputCode(String code) {
-        mJoinGroupCodeInputStatusHandler.checkStatus(code, mDataSnapshot, mTextViewCodeInputStatus, mCodeInputView, mTextViewJoinGroupButton);
+        mCodeInputHandler.checkStatus(code, mDataSnapshot, mTextViewCodeInputStatus, mCodeInputView, mTextViewJoinGroupButton);
     }
 
     private void checkIfGroupIsCompleted() {
@@ -130,7 +129,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
 
     private void loadResults() {
         if (mAllRecipesList == null) {
-            mAllRecipesList = Loader.loadRecipies(mContext);
+            mAllRecipesList = JsonLoader.loadRecipies(mContext);
         }
         mSwipeHandler.loadOnlineResults(mDataSnapshot, mAllRecipesList);
         mLinearLayoutPlaceholderResults.setVisibility(View.GONE);
@@ -220,10 +219,10 @@ public class ActivityJoinGroup extends AppCompatActivity {
     }
 
     private void setupSwipePlaceholderView() {
-        mJoinGroupCodeInputStatusHandler.loadSelectedIDs();
+        mCodeInputHandler.loadSelectedIDs();
         mSwipePlaceHolderView = findViewById(R.id.swipeView);
         mSwipePlaceHolderViewHandlerJoinGroup.setSwipePlaceHolderViewBuilder(mSwipePlaceHolderView);
-        mSwipePlaceHolderViewHandlerJoinGroup.loadSwipePlaceholderView(mJoinGroupCodeInputStatusHandler.mSelectedIDs, mAllRecipesList, mSwipePlaceHolderView);
+        mSwipePlaceHolderViewHandlerJoinGroup.loadSwipePlaceholderView(mCodeInputHandler.mSelectedIDs, mAllRecipesList, mSwipePlaceHolderView);
         mStackIDs = mSwipePlaceHolderViewHandlerJoinGroup.mStackIDs;
         mResolvers = mSwipePlaceHolderViewHandlerJoinGroup.mResolvers;
         mSwipePlaceHolderView.addItemRemoveListener(new ItemRemovedListener() {
@@ -237,7 +236,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
     }
 
     private void setupClasses() {
-        mJoinGroupCodeInputStatusHandler = new JoinGroupCodeInputStatusHandler(mContext, mSharedPreferences);
+        mCodeInputHandler = new CodeInputHandler(mContext, mSharedPreferences);
         mSwipePlaceHolderViewHandlerJoinGroup = new SwipePlaceHolderViewHandlerJoinGroup(mContext);
         mSwipeHandler = new SwipeHandler("Join", mSharedPreferences);
     }
@@ -245,7 +244,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private void setupLists() {
         mSwipeHandler.loadLikedIndices();
         mSwipeHandler.loadDislikedIndices();
-        mAllRecipesList = Loader.loadRecipies(mContext);
+        mAllRecipesList = JsonLoader.loadRecipies(mContext);
         mLikedIDs = mSwipeHandler.mLikedIDs;
         mDislikedIDs = mSwipeHandler.mDislikedIDs;
     }

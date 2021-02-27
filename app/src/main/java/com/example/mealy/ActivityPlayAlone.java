@@ -119,13 +119,13 @@ public class ActivityPlayAlone extends FragmentActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void saveFilterValue(View v)  {
-        mFilterLinearLayoutHandler.saveFilterValue(v, mFilterApplier, mTextViewRecipeCount);
+        mFilterLinearLayoutHandler.saveFilterValue(v, mFilterApplier, mTextViewRecipeCount, null);
         resetLikeDislikeList();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void saveFilterCountryValue(View v) {
-        mFilterLinearLayoutCountryHandler.saveCountryFilterValue(v, mFilterApplier, mTextViewRecipeCount);
+        mFilterLinearLayoutCountryHandler.saveCountryFilterValue(v, mFilterApplier, mTextViewRecipeCount, null);
         resetLikeDislikeList();
     }
 
@@ -139,27 +139,27 @@ public class ActivityPlayAlone extends FragmentActivity {
         mFilterLinearLayoutHandler.resetLayouts(mLinearLayoutList);
         mFilterLinearLayoutCountryHandler.resetCountryLayouts(mLinearLayoutCountryList);
         mFilterSeekBarHandler.resetSeekBarStates(mSeekBarCalories, mSeekBarTime);
-        mFilterSpinnerHandler.resetSpinnerStates(mSpinnerList, mFilterApplier, mTextViewRecipeCount, mSpinnerLayoutList);
+        mFilterSpinnerHandler.resetSpinnerStates(mSpinnerList, mFilterApplier, mTextViewRecipeCount, mSpinnerLayoutList, null);
         resetLikeDislikeList();
     }
 
     public void resetSpinnerAllergies(View v) {
-        mFilterSpinnerHandler.resetSpinner(findViewById(R.id.allergies_power_spinner), "AllergiesSpinner", mFilterApplier, mTextViewRecipeCount, mLinearLayoutAllergiesSpinner);
+        mFilterSpinnerHandler.resetSpinner(findViewById(R.id.allergies_power_spinner), "AllergiesSpinner", mFilterApplier, mTextViewRecipeCount, mLinearLayoutAllergiesSpinner, null);
         resetLikeDislikeList();
     }
 
     public void resetSpinnerPreparationType(View v) {
-        mFilterSpinnerHandler.resetSpinner(findViewById(R.id.preparation_type_power_spinner), "PreparationTypeSpinner", mFilterApplier, mTextViewRecipeCount, mLinearLayoutPreparationsSpinner);
+        mFilterSpinnerHandler.resetSpinner(findViewById(R.id.preparation_type_power_spinner), "PreparationTypeSpinner", mFilterApplier, mTextViewRecipeCount, mLinearLayoutPreparationsSpinner, null);
         resetLikeDislikeList();
     }
 
     public void resetSpinnerCategory(View v) {
-        mFilterSpinnerHandler.resetSpinner(findViewById(R.id.category_power_spinner), "CategorySpinner", mFilterApplier, mTextViewRecipeCount, mLinearLayoutCategoriesSpinner);
+        mFilterSpinnerHandler.resetSpinner(findViewById(R.id.category_power_spinner), "CategorySpinner", mFilterApplier, mTextViewRecipeCount, mLinearLayoutCategoriesSpinner, null);
         resetLikeDislikeList();
     }
 
     public void resetSpinnerEatingType(View v) {
-        mFilterSpinnerHandler.resetSpinner(findViewById(R.id.eating_type_power_spinner), "EatingTypeSpinner", mFilterApplier, mTextViewRecipeCount, mLinearLayoutEatingSpinner);
+        mFilterSpinnerHandler.resetSpinner(findViewById(R.id.eating_type_power_spinner), "EatingTypeSpinner", mFilterApplier, mTextViewRecipeCount, mLinearLayoutEatingSpinner, null);
         resetLikeDislikeList();
     }
 
@@ -238,7 +238,7 @@ public class ActivityPlayAlone extends FragmentActivity {
         loadFilter();
         setupBottomNavigationBar();
         loadCorrectPage();
-        mFilterApplier.applyFilter(mTextViewRecipeCount);
+        mFilterApplier.applyFilter(mTextViewRecipeCount, null);
     }
 
     private void setupSwipePlaceholderView() {
@@ -260,7 +260,7 @@ public class ActivityPlayAlone extends FragmentActivity {
     }
 
     private void setupLists() {
-        mAllRecipesList = Loader.loadRecipies(mContext);
+        mAllRecipesList = JsonLoader.loadRecipies(mContext);
         mLikedIDs = new ArrayList<>();
         mDislikedIDs = new ArrayList<>();
         mStackIDs = new ArrayList<>();
@@ -300,14 +300,14 @@ public class ActivityPlayAlone extends FragmentActivity {
         mSeekBarCalories.setOnRangeSeekbarChangeListener((minValue, maxValue) -> mTextViewCalories.setText(minValue+" - "+maxValue+" kcal"));
 
         mSeekBarCalories.setOnRangeSeekbarFinalValueListener((minValue, maxValue) -> {
-            mFilterSeekBarHandler.applyCaloriesSeekBar(mSeekBarCalories, minValue.intValue(), maxValue.intValue(), mFilterApplier, mTextViewRecipeCount);
+            mFilterSeekBarHandler.applyCaloriesSeekBar(mSeekBarCalories, minValue.intValue(), maxValue.intValue(), mFilterApplier, mTextViewRecipeCount, null);
             resetLikeDislikeList();
         });
 
         mSeekBarTime.setOnRangeSeekbarChangeListener((minValue, maxValue) -> mTextViewTime.setText(minValue+" - "+maxValue+" min"));
 
         mSeekBarTime.setOnRangeSeekbarFinalValueListener((minValue, maxValue) -> {
-            mFilterSeekBarHandler.applyTimeSeekBar(mSeekBarTime, minValue.intValue(), maxValue.intValue(), mFilterApplier, mTextViewRecipeCount);
+            mFilterSeekBarHandler.applyTimeSeekBar(mSeekBarTime, minValue.intValue(), maxValue.intValue(), mFilterApplier, mTextViewRecipeCount, null);
             resetLikeDislikeList();
         });
     }
@@ -353,25 +353,25 @@ public class ActivityPlayAlone extends FragmentActivity {
 
         mPowerSpinnerEating.setOnSpinnerItemSelectedListener((OnSpinnerItemSelectedListener<String>) (oldIndex, oldItem, newIndex, newItem) -> {
             mFilterSpinnerHandler.applySpinner("EatingTypeSpinner", newItem, newIndex, mLinearLayoutEatingSpinner);
-            mFilterApplier.applyFilter(mTextViewRecipeCount);
+            mFilterApplier.applyFilter(mTextViewRecipeCount, null);
             resetLikeDislikeList();
         });
 
         mPowerSpinnerCategories.setOnSpinnerItemSelectedListener((OnSpinnerItemSelectedListener<String>) (oldIndex, oldItem, newIndex, newItem) -> {
             mFilterSpinnerHandler.applySpinner("CategorySpinner", newItem, newIndex, mLinearLayoutCategoriesSpinner);
-            mFilterApplier.applyFilter(mTextViewRecipeCount);
+            mFilterApplier.applyFilter(mTextViewRecipeCount, null);
             resetLikeDislikeList();
         });
 
         mPowerSpinnerAllergies.setOnSpinnerItemSelectedListener((OnSpinnerItemSelectedListener<String>) (oldIndex, oldItem, newIndex, newItem) -> {
             mFilterSpinnerHandler.applySpinner("AllergiesSpinner", newItem, newIndex, mLinearLayoutAllergiesSpinner);
-            mFilterApplier.applyFilter(mTextViewRecipeCount);
+            mFilterApplier.applyFilter(mTextViewRecipeCount, null);
             resetLikeDislikeList();
         });
 
         mPowerSpinnerPreparation.setOnSpinnerItemSelectedListener((OnSpinnerItemSelectedListener<String>) (oldIndex, oldItem, newIndex, newItem) -> {
             mFilterSpinnerHandler.applySpinner("PreparationTypeSpinner", newItem, newIndex, mLinearLayoutPreparationsSpinner);
-            mFilterApplier.applyFilter(mTextViewRecipeCount);
+            mFilterApplier.applyFilter(mTextViewRecipeCount, null);
             resetLikeDislikeList();
         });
     }

@@ -26,7 +26,7 @@ public class FilterSpinnerHandler {
         this.mContext = context;
     }
 
-    public void resetSpinner(PowerSpinnerView powerSpinnerView, String key, FilterApplier filterApplier, TextView textView, LinearLayout layout) {
+    public void resetSpinner(PowerSpinnerView powerSpinnerView, String key, FilterApplier filterApplier, TextView textView, LinearLayout layout, TextView button) {
         powerSpinnerView.clearSelectedItem();
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putInt(key+mMode+"Index", -1);
@@ -34,7 +34,7 @@ public class FilterSpinnerHandler {
         editor.putBoolean("ChangeStatus"+mMode, true);
         editor.commit();
         setLayoutUnselected(layout);
-        filterApplier.applyFilter(textView);
+        filterApplier.applyFilter(textView, button);
     }
 
     public void applySpinner(String key, String newItem, int newIndex, LinearLayout layout) {
@@ -55,9 +55,9 @@ public class FilterSpinnerHandler {
         view4.selectItemByIndex(mSharedPreferences.getInt("EatingTypeSpinner"+mMode+"Index",-1));
     }
 
-    public void resetSpinnerStates(List<PowerSpinnerView> list, FilterApplier filterApplier, TextView textView, List<LinearLayout> layouts) {
+    public void resetSpinnerStates(List<PowerSpinnerView> list, FilterApplier filterApplier, TextView textView, List<LinearLayout> layouts, TextView button) {
         for (int i = 0; i < list.size(); i++) {
-            resetSpinner(list.get(i), this.SPINNER_KEYS[i], filterApplier, textView, layouts.get(i));
+            resetSpinner(list.get(i), this.SPINNER_KEYS[i], filterApplier, textView, layouts.get(i), button);
         }
         loadSpinnerStates(list.get(0), list.get(1), list.get(2), list.get(3));
     }

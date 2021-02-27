@@ -28,7 +28,7 @@ public class FilterLinearLayoutHandler {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void saveFilterValue(View v, FilterApplier filterApplier, TextView recipeCount)  {
+    public void saveFilterValue(View v, FilterApplier filterApplier, TextView recipeCount, TextView button)  {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         if (!mSharedPreferences.getBoolean(v.getTooltipText() +mMode,false)) {
             editor.putBoolean(v.getTooltipText() +mMode, true);
@@ -40,7 +40,7 @@ public class FilterLinearLayoutHandler {
         }
         editor.putBoolean("ChangeStatusOffline", true);
         editor.commit();
-        filterApplier.applyFilter(recipeCount);
+        filterApplier.applyFilter(recipeCount, button);
     }
 
     public void loadFilterLayoutStates(List<LinearLayout> list) {
@@ -57,7 +57,7 @@ public class FilterLinearLayoutHandler {
             editor.putBoolean(this.TOOLTIPS.get(i)+mMode, false);
             setLayoutUnselected(list.get(i));
         }
-        editor.putBoolean("ChangeStatusOffline", true);
+        editor.putBoolean("ChangeStatus"+mMode, true);
         editor.commit();
         loadFilterLayoutStates(list);
     }

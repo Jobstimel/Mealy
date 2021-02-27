@@ -7,11 +7,11 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.List;
 
-public class DatabaseHandlerJoinGroup {
+public class DatabaseHandler {
 
     private SharedPreferences mSharedPreferences;
 
-    public DatabaseHandlerJoinGroup(SharedPreferences mSharedPreferences) {
+    public DatabaseHandler(SharedPreferences mSharedPreferences) {
         this.mSharedPreferences = mSharedPreferences;
     }
 

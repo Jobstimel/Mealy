@@ -13,13 +13,13 @@ import com.raycoarana.codeinputview.CodeInputView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JoinGroupCodeInputStatusHandler {
+public class CodeInputHandler {
 
     private Context mContext;
     private SharedPreferences mSharedPreferences;
     public List<Integer> mSelectedIDs;
 
-    public JoinGroupCodeInputStatusHandler(Context mContext, SharedPreferences sharedPreferences) {
+    public CodeInputHandler(Context mContext, SharedPreferences sharedPreferences) {
         this.mContext = mContext;
         this.mSharedPreferences = sharedPreferences;
     }

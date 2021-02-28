@@ -421,6 +421,7 @@
                                     <com.skydoves.powerspinner.PowerSpinnerView
                                         style="@style/power_spinner"
                                         android:id="@+id/allergies_power_spinner"
+                                        android:hint="@string/allergies"
                                         app:spinner_arrow_tint="@color/filter_text_color"
                                         app:spinner_arrow_gravity="end"
                                         app:spinner_divider_color="@color/filter_border_color"
@@ -450,6 +451,7 @@
                                     <com.skydoves.powerspinner.PowerSpinnerView
                                         style="@style/power_spinner"
                                         android:id="@+id/preparation_type_power_spinner"
+                                        android:hint="@string/preparation"
                                         app:spinner_arrow_tint="@color/filter_text_color"
                                         app:spinner_arrow_gravity="end"
                                         app:spinner_divider_color="@color/filter_border_color"
@@ -487,6 +489,7 @@
                                     <com.skydoves.powerspinner.PowerSpinnerView
                                         style="@style/power_spinner"
                                         android:id="@+id/category_power_spinner"
+                                        android:hint="@string/category"
                                         app:spinner_arrow_tint="@color/filter_text_color"
                                         app:spinner_arrow_gravity="end"
                                         app:spinner_divider_color="@color/filter_border_color"
@@ -516,6 +519,7 @@
                                     <com.skydoves.powerspinner.PowerSpinnerView
                                         style="@style/power_spinner"
                                         android:id="@+id/eating_type_power_spinner"
+                                        android:hint="@string/nutrition"
                                         app:spinner_arrow_tint="@color/filter_text_color"
                                         app:spinner_arrow_gravity="end"
                                         app:spinner_divider_color="@color/filter_border_color"

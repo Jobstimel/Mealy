@@ -63,6 +63,15 @@ public class FilterSeekBarHandler {
         loadSeekBarStates(seekBarCalories, seekBarTime);
     }
 
+    public void resetSeekBarSharedPreferences() {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putInt("CaloriesSeekBar"+mMode+"Min", 0);
+        editor.putInt("CaloriesSeekBar"+mMode+"Max", this.MAX_CALORIES);
+        editor.putInt("TimeSeekBar"+mMode+"Min", 0);
+        editor.putInt("TimeSeekBar"+mMode+"Max", this.MAX_TIME);
+        editor.commit();
+    }
+
     public void loadSeekBarStates(CrystalRangeSeekbar seekBarCalories, CrystalRangeSeekbar seekBarTime) {
         int min_calories = mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Min",0);
         int max_calories = mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Max", this.MAX_CALORIES);

@@ -20,11 +20,10 @@
                 android:layout_weight="1"
                 app:tint="@color/filter_green"/>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                style="@style/image_view_top_bar"
-                android:src="@drawable/icon_swipe"
-                android:layout_weight="1"
-                app:tint="@color/filter_border_color"/>
+            <TextView
+                style="@style/text_view_top_bar_code"
+                android:id="@+id/text_view_group_code_1"
+                android:text="-"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 style="@style/image_view_top_bar"
@@ -177,11 +176,9 @@
                 android:layout_weight="1"
                 app:tint="@color/filter_border_color"/>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                style="@style/image_view_top_bar"
-                android:src="@drawable/icon_swipe"
-                android:layout_weight="1"
-                app:tint="@color/filter_green"/>
+            <TextView
+                style="@style/text_view_top_bar_code"
+                android:id="@+id/text_view_group_code_2"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 style="@style/image_view_top_bar"
@@ -213,11 +210,9 @@
                 android:layout_weight="1"
                 app:tint="@color/filter_border_color"/>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                style="@style/image_view_top_bar"
-                android:src="@drawable/icon_swipe"
-                android:layout_weight="1"
-                app:tint="@color/filter_border_color"/>
+            <TextView
+                style="@style/text_view_top_bar_code"
+                android:id="@+id/text_view_group_code_3"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 style="@style/image_view_top_bar"

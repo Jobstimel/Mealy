@@ -12,7 +12,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
@@ -22,6 +24,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mindorks.placeholderview.SwipePlaceHolderView;
+import com.mindorks.placeholderview.listeners.ItemRemovedListener;
 import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
 import com.skydoves.powerspinner.PowerSpinnerView;
 
@@ -40,8 +44,11 @@ public class ActivityCreateGroup extends AppCompatActivity {
     //Public
     public static List<Integer> mLikedIDs;
     public static List<Integer> mDislikedIDs;
+    public static List<Integer> mStackIDs;
+    public static List<Object> mResolvers;
 
     //Classes
+    private SwipePlaceHolderViewHandlerCreateGroup mSwipePlaceHolderViewHandlerCreateGroup;
     private FilterSpinnerHandler mFilterSpinnerHandler;
     private FilterApplier mFilterApplier;
     private FilterLinearLayoutHandler mFilterLinearLayoutHandler;
@@ -49,10 +56,33 @@ public class ActivityCreateGroup extends AppCompatActivity {
     private FilterSeekBarHandler mFilterSeekBarHandler;
     private SwipeHandler mSwipeHandler;
 
+    //Result
+    private TextView mTextViewTitle1;
+    private TextView mTextViewTitle2;
+    private TextView mTextViewTitle3;
+    private TextView mTextViewScore1;
+    private TextView mTextViewScore2;
+    private TextView mTextViewScore3;
+    private ImageView mImageViewPoster1;
+    private ImageView mImageViewPoster2;
+    private ImageView mImageViewPoster3;
+
     //Views
     private BottomNavigationView mBottomNavigationView;
+    private SwipePlaceHolderView mSwipePlaceHolderView;
     private TextView mTextViewRecipeCount;
     private TextView mTextViewCreateGroupButton;
+    private TextView mTextViewGroupCode1;
+    private TextView mTextViewGroupCode2;
+    private TextView mTextViewGroupCode3;
+    private TextView mTextViewCompleteCounter;
+    private TextView mTextViewCloseGroupButton;
+    private TextView mTextViewResultPageHeader;
+
+    //Pages
+    private LinearLayout mPage1;
+    private LinearLayout mPage2;
+    private LinearLayout mPage3;
 
     //Lists
     private List<Recipe> mAllRecipesList;
@@ -99,6 +129,10 @@ public class ActivityCreateGroup extends AppCompatActivity {
     private List<LinearLayout> mLinearLayoutList;
     private List<LinearLayout> mLinearLayoutCountryList;
 
+    private LinearLayout mLinearLayoutPlaceholderResults1;
+    private LinearLayout mLinearLayoutPlaceholderResults2;
+    private ScrollView mScrollViewResults;
+
     //Database
     private DatabaseReference mDatabaseReference;
     private DataSnapshot mDataSnapshot;
@@ -111,10 +145,22 @@ public class ActivityCreateGroup extends AppCompatActivity {
         setupElements();
     }
 
+    protected void onPause() {
+        mSwipeHandler.saveLikedIndices(mLikedIDs);
+        mSwipeHandler.saveDislikedIndices(mDislikedIDs);
+        super.onPause();
+    }
+
+    private void uploadRatings() {
+        String code = mSharedPreferences.getString("GroupCode", "");
+        DatabaseHandler mDatabaseHandler = new DatabaseHandler(mSharedPreferences);
+        mDatabaseHandler.updateGroupCounter(mDataSnapshot, mLikedIDs, mDatabaseReference, code);
+        mDatabaseHandler.updateGroupPeopleNumber(mDataSnapshot, mDatabaseReference, code);
+        switchToPage3();
+    }
+
     public void createGroup(View v) {
         mSwipeHandler.loadSelectedIndices();
-        RandomGenerator randomGenerator = new RandomGenerator(mSharedPreferences);
-        randomGenerator.generateRandomGroupCode();
         List<String> counter = new ArrayList<String>(Collections.nCopies(FilterApplier.MAX_RECIPES, "0"));
         List<String> voting_completed = new ArrayList<String>(Collections.nCopies(20, ""));
         List<String> selectedIndices = new ArrayList<>();
@@ -126,6 +172,59 @@ public class ActivityCreateGroup extends AppCompatActivity {
         mDatabaseReference.child(mSharedPreferences.getString("GroupCode", "")).child("voting_completed").setValue(voting_completed);
         mDatabaseReference.child(mSharedPreferences.getString("GroupCode", "")).child("people_number").setValue("0");
         mDatabaseReference.child(mSharedPreferences.getString("GroupCode", "")).child("group_status").setValue("open");
+        switchToPage2();
+    }
+
+    private void checkIfGroupIsCompleted() {
+        if (mDataSnapshot != null) {
+            String code = mSharedPreferences.getString("GroupCode", "");
+            String status = (String) mDataSnapshot.child(code).child("group_status").getValue();
+            if (status != null && status.equals("closed")) {
+                mLinearLayoutPlaceholderResults1.setVisibility(View.GONE);
+                mLinearLayoutPlaceholderResults2.setVisibility(View.GONE);
+                mScrollViewResults.setVisibility(View.VISIBLE);
+                mTextViewResultPageHeader.setText("Teilnehmer: "+String.valueOf(mDataSnapshot.child(code).child("people_number").getValue()));
+                mTextViewCloseGroupButton.setText("Gruppe löschen");
+                mTextViewCloseGroupButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        deleteGroup();
+                    }
+                });
+                loadResults();
+            }
+        }
+    }
+
+    private void loadResults() {
+        if (mAllRecipesList == null) {
+            mAllRecipesList = JsonLoader.loadRecipies(mContext);
+        }
+        setupResultPage();
+        mSwipeHandler.loadOnlineResults(mDataSnapshot, mAllRecipesList, "GroupCode");
+        ResultLoader mResultLoader = new ResultLoader(mContext);
+        mResultLoader.loadResult(mSwipeHandler.mOnlineResults.get(0), mTextViewTitle1, mTextViewScore1, mImageViewPoster1);
+        mResultLoader.loadResult(mSwipeHandler.mOnlineResults.get(1), mTextViewTitle2, mTextViewScore2, mImageViewPoster2);
+        mResultLoader.loadResult(mSwipeHandler.mOnlineResults.get(2), mTextViewTitle3, mTextViewScore3, mImageViewPoster3);
+    }
+
+    public void closeVoting() {
+        mDatabaseReference.child(mSharedPreferences.getString("GroupCode", "")).child("group_status").setValue("closed");
+    }
+
+    public void deleteGroup() {
+        mDatabaseReference.child(mSharedPreferences.getString("GroupCode", "")).removeValue();
+        deleteSavedOnlineData();
+        resetFilter();
+        restartActivity();
+    }
+
+    public void resetFilter() {
+        mFilterLinearLayoutHandler.resetLayoutSharedPreferences();
+        mFilterLinearLayoutCountryHandler.resetCountryLayoutsSharedPreferences();
+        mFilterSeekBarHandler.resetSeekBarSharedPreferences();
+        mFilterSpinnerHandler.resetSpinnerSharedPreferences();
+        resetLikeDislikeList();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -172,29 +271,117 @@ public class ActivityCreateGroup extends AppCompatActivity {
         mFilterSpinnerHandler.loadSpinnerStates(mPowerSpinnerAllergies, mPowerSpinnerPreparation, mPowerSpinnerCategories, mPowerSpinnerEating);
     }
 
+    private void savePage(int page) {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putInt("PageCreate", page);
+        editor.commit();
+    }
+
+    public void switchToPage2() {
+        savePage(2);
+        loadCorrectPage();
+    }
+
+    public void switchToPage3() {
+        savePage(3);
+        loadCorrectPage();
+    }
+
+    private void loadCorrectPage() {
+        Integer currentPage = mSharedPreferences.getInt("PageCreate", 1);
+        if (currentPage == 1) {
+            mPage1.setVisibility(View.VISIBLE);
+            mPage2.setVisibility(View.GONE);
+            mPage3.setVisibility(View.GONE);
+        }
+        else if (currentPage == 2) {
+            mPage1.setVisibility(View.GONE);
+            mPage2.setVisibility(View.VISIBLE);
+            mPage3.setVisibility(View.GONE);
+            setupLists();
+            setupSwipePlaceholderView();
+        }
+        else {
+            mPage1.setVisibility(View.GONE);
+            mPage2.setVisibility(View.GONE);
+            mPage3.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void generateGroupCode() {
+        if (mSharedPreferences.getString("GroupCode", "").equals("")) {
+            RandomGenerator randomGenerator = new RandomGenerator(mSharedPreferences);
+            randomGenerator.generateRandomGroupCode();
+        }
+        mTextViewGroupCode1.setText("-");
+        mTextViewGroupCode2.setText(mSharedPreferences.getString("GroupCode", ""));
+        mTextViewGroupCode3.setText(mSharedPreferences.getString("GroupCode", ""));
+    }
+
     private void setupElements() {
         mSharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
         mContext = getApplicationContext();
+        //resetSharedPreferences();
 
-        setupLists();
         setupClasses();
+        setupLists();
         setupViews();
         setupSeekBars();
         setupSpinners();
         setupLayouts();
         setupDatabase();
+        setupPages();
+        generateGroupCode();
         setupBottomNavigationBar();
+        loadCorrectPage();
         loadFilter();
         mFilterApplier.applyFilter(mTextViewRecipeCount, mTextViewCreateGroupButton);
     }
 
+    private void setupResultPage() {
+        mTextViewTitle1 = findViewById(R.id.text_view_recipe_title_1);
+        mTextViewTitle2 = findViewById(R.id.text_view_recipe_title_2);
+        mTextViewTitle3 = findViewById(R.id.text_view_recipe_title_3);
+        mTextViewScore1 = findViewById(R.id.text_view_recipe_score_1);
+        mTextViewScore2 = findViewById(R.id.text_view_recipe_score_2);
+        mTextViewScore3 = findViewById(R.id.text_view_recipe_score_3);
+        mImageViewPoster1 = findViewById(R.id.image_view_recipe_poster_1);
+        mImageViewPoster2 = findViewById(R.id.image_view_recipe_poster_2);
+        mImageViewPoster3 = findViewById(R.id.image_view_recipe_poster_3);
+    }
+
     private void setupClasses() {
+        mAllRecipesList = JsonLoader.loadRecipies(mContext);
         mFilterSpinnerHandler = new FilterSpinnerHandler("Online", mSharedPreferences, mContext);
         mFilterApplier = new FilterApplier("Online", mSharedPreferences, mAllRecipesList, mContext);
         mFilterLinearLayoutHandler = new FilterLinearLayoutHandler("Online", mSharedPreferences, mContext);
         mFilterLinearLayoutCountryHandler = new FilterLinearLayoutCountryHandler("Online", mSharedPreferences, mContext);
         mFilterSeekBarHandler = new FilterSeekBarHandler("Online", mSharedPreferences, mContext);
         mSwipeHandler = new SwipeHandler("Online", mSharedPreferences);
+        mSwipePlaceHolderViewHandlerCreateGroup = new SwipePlaceHolderViewHandlerCreateGroup(mContext);
+    }
+
+    private void setupSwipePlaceholderView() {
+        mSwipeHandler.loadSelectedIndices();
+        mSwipePlaceHolderView = findViewById(R.id.swipeView);
+        mSwipePlaceHolderViewHandlerCreateGroup.setSwipePlaceHolderViewBuilder(mSwipePlaceHolderView);
+        mSwipePlaceHolderViewHandlerCreateGroup.loadSwipePlaceholderView(mSwipeHandler.mSelectedIDs, mAllRecipesList, mSwipePlaceHolderView);
+        mStackIDs = mSwipePlaceHolderViewHandlerCreateGroup.mStackIDs;
+        mResolvers = mSwipePlaceHolderViewHandlerCreateGroup.mResolvers;
+        mSwipePlaceHolderView.addItemRemoveListener(new ItemRemovedListener() {
+            @Override
+            public void onItemRemoved(int count) {
+                if (mSwipePlaceHolderView.getAllResolvers().size() == 0) {
+                    uploadRatings();
+                }
+            }
+        });
+    }
+
+    private void setupPages() {
+        mPage1 = findViewById(R.id.page_1);
+        mPage2 = findViewById(R.id.page_2);
+        mPage3 = findViewById(R.id.page_3);
     }
 
     private void setupDatabase() {
@@ -204,6 +391,8 @@ public class ActivityCreateGroup extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mDataSnapshot = dataSnapshot;
+                checkIfGroupIsCompleted();
+                mTextViewCompleteCounter.setText("Bisherige Stimmenanzahl: "+(String) dataSnapshot.child(mSharedPreferences.getString("GroupCode", "")).child("people_number").getValue());
             }
 
             @Override
@@ -214,14 +403,27 @@ public class ActivityCreateGroup extends AppCompatActivity {
     }
 
     private void setupLists() {
-        mAllRecipesList = JsonLoader.loadRecipies(mContext);
-        mLikedIDs = new ArrayList<>();
-        mDislikedIDs = new ArrayList<>();
+        mSwipeHandler.loadLikedIndices();
+        mSwipeHandler.loadDislikedIndices();
+        mLikedIDs = mSwipeHandler.mLikedIDs;
+        mDislikedIDs = mSwipeHandler.mDislikedIDs;
     }
 
     private void setupViews() {
         mTextViewRecipeCount = findViewById(R.id.text_view_recipe_count);
         mTextViewCreateGroupButton = findViewById(R.id.text_view_create_group_button);
+        mTextViewGroupCode1 = findViewById(R.id.text_view_group_code_1);
+        mTextViewGroupCode2 = findViewById(R.id.text_view_group_code_2);
+        mTextViewGroupCode3 = findViewById(R.id.text_view_group_code_3);
+        mTextViewCompleteCounter = findViewById(R.id.text_view_complete_counter);
+        mTextViewResultPageHeader = findViewById(R.id.text_view_result_page_top);
+        mTextViewCloseGroupButton = findViewById(R.id.text_view_close_voting);
+        mTextViewCloseGroupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeVoting();
+            }
+        });
     }
 
     private void setupSeekBars() {
@@ -303,6 +505,11 @@ public class ActivityCreateGroup extends AppCompatActivity {
         mLinearLayoutGreece = findViewById(R.id.greece_linear_layout);
         mLinearLayoutIndia = findViewById(R.id.india_linear_layout);
 
+        mLinearLayoutPlaceholderResults1 = findViewById(R.id.linear_layout_result_page_placeholder1);
+        mLinearLayoutPlaceholderResults2 = findViewById(R.id.linear_layout_result_page_placeholder2);
+        mScrollViewResults = findViewById(R.id.scroll_view);
+        mScrollViewResults.setVisibility(View.GONE);
+
         mLinearLayoutList = Arrays.asList(mLinearLayoutLevel1,mLinearLayoutLevel2,mLinearLayoutLevel3,mLinearLayoutBreakfast,mLinearLayoutLunch,mLinearLayoutDinner,mLinearLayoutDessert,mLinearLayoutSnack,mLinearLayoutDrink);
         mLinearLayoutCountryList = Arrays.asList(mLinearLayoutGermany,mLinearLayoutSpain,mLinearLayoutAsia,mLinearLayoutItaly,mLinearLayoutFrance,mLinearLayoutGreece,mLinearLayoutIndia);
     }
@@ -328,5 +535,27 @@ public class ActivityCreateGroup extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void resetSharedPreferences() {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.clear();
+        editor.commit();
+    }
+
+    private void deleteSavedOnlineData() {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putInt("PageCreate", 1);
+        editor.putString("SelectedOnlineIDs", "");
+        editor.putString("LikedCreateIDs", "");
+        editor.putString("DislikedCreateIDs", "");
+        editor.commit();
+    }
+
+    private void restartActivity() {
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0,0);
     }
 }

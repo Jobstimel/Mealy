@@ -38,7 +38,7 @@ public class FilterLinearLayoutHandler {
             editor.putBoolean(v.getTooltipText() +mMode, false);
             setViewUnselected(v);
         }
-        editor.putBoolean("ChangeStatusOffline", true);
+        editor.putBoolean("ChangeStatus"+mMode, true);
         editor.commit();
         filterApplier.applyFilter(recipeCount, button);
     }
@@ -60,6 +60,14 @@ public class FilterLinearLayoutHandler {
         editor.putBoolean("ChangeStatus"+mMode, true);
         editor.commit();
         loadFilterLayoutStates(list);
+    }
+
+    public void resetLayoutSharedPreferences() {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        for (int i = 0; i < TOOLTIPS.size(); i++) {
+            editor.putBoolean(TOOLTIPS.get(i)+mMode, false);
+        }
+        editor.commit();
     }
 
     private void setLayoutSelected(LinearLayout layout) {

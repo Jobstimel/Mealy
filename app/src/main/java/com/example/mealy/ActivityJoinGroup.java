@@ -37,9 +37,9 @@ public class ActivityJoinGroup extends AppCompatActivity {
 
     //Public
     public static List<Integer> mStackIDs;
+    public static List<Object> mResolvers;
     public static List<Integer> mLikedIDs;
     public static List<Integer> mDislikedIDs;
-    public static List<Object> mResolvers;
 
     //Classes
     private CodeInputHandler mCodeInputHandler;
@@ -63,6 +63,9 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private TextView mTextViewLeaveGroupButton;
     private TextView mTextViewResultPageHeader;
     private ListView mResultListView;
+    private TextView mTextViewGroupCode1;
+    private TextView mTextViewGroupCode2;
+    private TextView mTextViewGroupCode3;
 
     //Result
     private TextView mTextViewTitle1;
@@ -104,10 +107,11 @@ public class ActivityJoinGroup extends AppCompatActivity {
     }
 
     private void uploadRatings() {
+        String code = mSharedPreferences.getString("JoinGroupCode", "");
         DatabaseHandler mDatabaseHandler = new DatabaseHandler(mSharedPreferences);
-        mDatabaseHandler.updateGroupCounter(mDataSnapshot, mLikedIDs, mDatabaseReference);
-        mDatabaseHandler.updateGroupCompletedUserList(mDataSnapshot, mDatabaseReference);
-        mDatabaseHandler.updateGroupPeopleNumber(mDataSnapshot, mDatabaseReference);
+        mDatabaseHandler.updateGroupCounter(mDataSnapshot, mLikedIDs, mDatabaseReference, code);
+        mDatabaseHandler.updateGroupCompletedUserList(mDataSnapshot, mDatabaseReference, code);
+        mDatabaseHandler.updateGroupPeopleNumber(mDataSnapshot, mDatabaseReference, code);
         switchToPage3();
     }
 
@@ -131,7 +135,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
         if (mAllRecipesList == null) {
             mAllRecipesList = JsonLoader.loadRecipies(mContext);
         }
-        mSwipeHandler.loadOnlineResults(mDataSnapshot, mAllRecipesList);
+        mSwipeHandler.loadOnlineResults(mDataSnapshot, mAllRecipesList, "JoinGroupCode");
         mLinearLayoutPlaceholderResults.setVisibility(View.GONE);
         setupResultPage();
         ResultLoader mResultLoader = new ResultLoader(mContext);
@@ -176,7 +180,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
             mPage1.setVisibility(View.GONE);
             mPage2.setVisibility(View.VISIBLE);
             mPage3.setVisibility(View.GONE);
-            Log.d("ONRESUME", "Size: "+mSharedPreferences.getString("LikedJoinIDs", ""));
+            mTextViewGroupCode2.setText(mSharedPreferences.getString("JoinGroupCode", ""));
             setupLists();
             setupSwipePlaceholderView();
         }
@@ -184,6 +188,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
             mPage1.setVisibility(View.GONE);
             mPage2.setVisibility(View.GONE);
             mPage3.setVisibility(View.VISIBLE);
+            mTextViewGroupCode3.setText(mSharedPreferences.getString("JoinGroupCode", ""));
             checkIfGroupIsCompleted();
         }
     }
@@ -259,6 +264,10 @@ public class ActivityJoinGroup extends AppCompatActivity {
         mBottomNavigationView = findViewById(R.id.bottom_navigation);
         mBottomNavigationView.setSelectedItemId(R.id.join_group);
         mResultListView = findViewById(R.id.list_view_result);
+
+        mTextViewGroupCode1 = findViewById(R.id.text_view_group_code_1);
+        mTextViewGroupCode2 = findViewById(R.id.text_view_group_code_2);
+        mTextViewGroupCode3 = findViewById(R.id.text_view_group_code_3);
 
         mTextViewCodeInputStatus = findViewById(R.id.text_view_code_status);
         mTextViewJoinGroupButton = findViewById(R.id.text_view_join_group);

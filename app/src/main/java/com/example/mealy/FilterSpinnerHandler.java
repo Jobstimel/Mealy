@@ -37,6 +37,15 @@ public class FilterSpinnerHandler {
         filterApplier.applyFilter(textView, button);
     }
 
+    public void resetSpinnerSharedPreferences() {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        for (int i = 0; i < SPINNER_KEYS.length; i++) {
+            editor.putInt(SPINNER_KEYS[i]+mMode+"Index",-1);
+            editor.putString(SPINNER_KEYS[i]+mMode+"Value", "");
+        }
+        editor.commit();
+    }
+
     public void applySpinner(String key, String newItem, int newIndex, LinearLayout layout) {
         if (!mSharedPreferences.getString(key+mMode+"Value", "").equals(newItem.toLowerCase())) {
             SharedPreferences.Editor editor = mSharedPreferences.edit();

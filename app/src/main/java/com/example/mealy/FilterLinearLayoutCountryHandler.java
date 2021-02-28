@@ -65,6 +65,14 @@ public class FilterLinearLayoutCountryHandler {
         loadCountryFilterLayoutStates(list);
     }
 
+    public void resetCountryLayoutsSharedPreferences() {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        for (int i = 0; i < TOOLTIPS.size(); i++) {
+            editor.putBoolean(this.TOOLTIPS.get(i)+mMode, false);
+        }
+        editor.commit();
+    }
+
     private void setLayoutSelected(LinearLayout layout) {
         layout.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_green));
     }

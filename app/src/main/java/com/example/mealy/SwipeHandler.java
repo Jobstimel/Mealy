@@ -95,8 +95,8 @@ public class SwipeHandler {
         }
     }
 
-    public void loadOnlineResults(DataSnapshot dataSnapshot, List<Recipe> recipes) {
-        String code = mSharedPreferences.getString("JoinGroupCode", "");
+    public void loadOnlineResults(DataSnapshot dataSnapshot, List<Recipe> recipes, String prefCode) {
+        String code = mSharedPreferences.getString(prefCode, "");
         List<String> counter = (List<String>) dataSnapshot.child(code).child("counter").getValue();
         List<String> selectedIDs = (List<String>) dataSnapshot.child(code).child("selected_ids").getValue();
         String peopleNumber = (String) dataSnapshot.child(code).child("people_number").getValue();

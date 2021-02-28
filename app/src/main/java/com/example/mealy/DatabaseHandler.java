@@ -15,8 +15,7 @@ public class DatabaseHandler {
         this.mSharedPreferences = mSharedPreferences;
     }
 
-    public void updateGroupCompletedUserList(DataSnapshot dataSnapshot, DatabaseReference databaseReference) {
-        String code = mSharedPreferences.getString("JoinGroupCode", "");
+    public void updateGroupCompletedUserList(DataSnapshot dataSnapshot, DatabaseReference databaseReference, String code) {
         List<String> votingCompleted = (List<String>) dataSnapshot.child(code).child("voting_completed").getValue();
 
         for (int i = 0; i < votingCompleted.size(); i++) {
@@ -29,8 +28,7 @@ public class DatabaseHandler {
         databaseReference.child(code).child("voting_completed").setValue(votingCompleted);
     }
 
-    public void updateGroupCounter(DataSnapshot dataSnapshot, List<Integer> likedIDs, DatabaseReference databaseReference) {
-        String code = mSharedPreferences.getString("JoinGroupCode", "");
+    public void updateGroupCounter(DataSnapshot dataSnapshot, List<Integer> likedIDs, DatabaseReference databaseReference, String code) {
         List<String> counter = (List<String>) dataSnapshot.child(code).child("counter").getValue();
         List<String> selectedIDs = (List<String>) dataSnapshot.child(code).child("selected_ids").getValue();
 
@@ -43,8 +41,7 @@ public class DatabaseHandler {
         databaseReference.child(code).child("counter").setValue(counter);
     }
 
-    public void updateGroupPeopleNumber(DataSnapshot dataSnapshot, DatabaseReference databaseReference) {
-        String code = mSharedPreferences.getString("JoinGroupCode", "");
+    public void updateGroupPeopleNumber(DataSnapshot dataSnapshot, DatabaseReference databaseReference, String code) {
         String number = (String) dataSnapshot.child(code).child("people_number").getValue();
         number = String.valueOf(Integer.parseInt(number) + 1);
         databaseReference.child(code).child("people_number").setValue(number);

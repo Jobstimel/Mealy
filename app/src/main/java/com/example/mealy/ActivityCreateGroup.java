@@ -55,6 +55,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
     private FilterLinearLayoutCountryHandler mFilterLinearLayoutCountryHandler;
     private FilterSeekBarHandler mFilterSeekBarHandler;
     private SwipeHandler mSwipeHandler;
+    private DatabaseHandler mDatabaseHandler;
 
     //Result
     private TextView mTextViewTitle1;
@@ -72,7 +73,6 @@ public class ActivityCreateGroup extends AppCompatActivity {
     private SwipePlaceHolderView mSwipePlaceHolderView;
     private TextView mTextViewRecipeCount;
     private TextView mTextViewCreateGroupButton;
-    private TextView mTextViewGroupCode1;
     private TextView mTextViewGroupCode2;
     private TextView mTextViewGroupCode3;
     private TextView mTextViewCompleteCounter;
@@ -153,7 +153,6 @@ public class ActivityCreateGroup extends AppCompatActivity {
 
     private void uploadRatings() {
         String code = mSharedPreferences.getString("GroupCode", "");
-        DatabaseHandler mDatabaseHandler = new DatabaseHandler(mSharedPreferences);
         mDatabaseHandler.updateGroupCounter(mDataSnapshot, mLikedIDs, mDatabaseReference, code);
         mDatabaseHandler.updateGroupPeopleNumber(mDataSnapshot, mDatabaseReference, code);
         switchToPage3();
@@ -161,17 +160,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
 
     public void createGroup(View v) {
         mSwipeHandler.loadSelectedIndices();
-        List<String> counter = new ArrayList<String>(Collections.nCopies(FilterApplier.MAX_RECIPES, "0"));
-        List<String> voting_completed = new ArrayList<String>(Collections.nCopies(20, ""));
-        List<String> selectedIndices = new ArrayList<>();
-        for (int i = 0; i < mSwipeHandler.mSelectedIDs.size(); i++) {
-            selectedIndices.add(String.valueOf(mSwipeHandler.mSelectedIDs.get(i)));
-        }
-        mDatabaseReference.child(mSharedPreferences.getString("GroupCode", "")).child("selected_ids").setValue(selectedIndices);
-        mDatabaseReference.child(mSharedPreferences.getString("GroupCode", "")).child("counter").setValue(counter);
-        mDatabaseReference.child(mSharedPreferences.getString("GroupCode", "")).child("voting_completed").setValue(voting_completed);
-        mDatabaseReference.child(mSharedPreferences.getString("GroupCode", "")).child("people_number").setValue("0");
-        mDatabaseReference.child(mSharedPreferences.getString("GroupCode", "")).child("group_status").setValue("open");
+        mDatabaseHandler.createGroup(mDatabaseReference, mSwipeHandler.mSelectedIDs, mSharedPreferences.getString("GroupCode", ""));
         switchToPage2();
     }
 
@@ -313,7 +302,6 @@ public class ActivityCreateGroup extends AppCompatActivity {
             RandomGenerator randomGenerator = new RandomGenerator(mSharedPreferences);
             randomGenerator.generateRandomGroupCode();
         }
-        mTextViewGroupCode1.setText("-");
         mTextViewGroupCode2.setText(mSharedPreferences.getString("GroupCode", ""));
         mTextViewGroupCode3.setText(mSharedPreferences.getString("GroupCode", ""));
     }
@@ -359,6 +347,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
         mFilterSeekBarHandler = new FilterSeekBarHandler("Online", mSharedPreferences, mContext);
         mSwipeHandler = new SwipeHandler("Online", mSharedPreferences);
         mSwipePlaceHolderViewHandlerCreateGroup = new SwipePlaceHolderViewHandlerCreateGroup(mContext);
+        mDatabaseHandler = new DatabaseHandler(mSharedPreferences);
     }
 
     private void setupSwipePlaceholderView() {
@@ -412,7 +401,6 @@ public class ActivityCreateGroup extends AppCompatActivity {
     private void setupViews() {
         mTextViewRecipeCount = findViewById(R.id.text_view_recipe_count);
         mTextViewCreateGroupButton = findViewById(R.id.text_view_create_group_button);
-        mTextViewGroupCode1 = findViewById(R.id.text_view_group_code_1);
         mTextViewGroupCode2 = findViewById(R.id.text_view_group_code_2);
         mTextViewGroupCode3 = findViewById(R.id.text_view_group_code_3);
         mTextViewCompleteCounter = findViewById(R.id.text_view_complete_counter);

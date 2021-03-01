@@ -154,14 +154,6 @@
 
     //Result Page - Result Entry
 
-    <style name="linear_layout_result_entry_container_outside">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/filter_background_color</item>
-        <item name="android:layout_marginBottom">20dp</item>
-        <item name="android:orientation">horizontal</item>
-    </style>
-
     <style name="linear_layout_result_entry_score_container">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>

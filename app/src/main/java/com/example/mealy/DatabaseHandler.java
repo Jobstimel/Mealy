@@ -5,9 +5,13 @@ import android.content.SharedPreferences;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DatabaseHandler {
+
+    public static final Integer MAX_RECIPES = 10;
 
     private SharedPreferences mSharedPreferences;
 
@@ -45,5 +49,19 @@ public class DatabaseHandler {
         String number = (String) dataSnapshot.child(code).child("people_number").getValue();
         number = String.valueOf(Integer.parseInt(number) + 1);
         databaseReference.child(code).child("people_number").setValue(number);
+    }
+
+    public void createGroup(DatabaseReference databaseReference, List<Integer> selectedIndicesInteger, String code) {
+        List<String> voting_completed = new ArrayList<>(Collections.nCopies(20, ""));
+        List<String> counter = new ArrayList<>(Collections.nCopies(MAX_RECIPES, "0"));
+        List<String> selectedIndices = new ArrayList<>();
+        for (int i = 0; i < selectedIndicesInteger.size(); i++) {
+            selectedIndices.add(String.valueOf(selectedIndicesInteger.get(i)));
+        }
+        databaseReference.child(code).child("selected_ids").setValue(selectedIndices);
+        databaseReference.child(code).child("counter").setValue(counter);
+        databaseReference.child(code).child("voting_completed").setValue(voting_completed);
+        databaseReference.child(code).child("people_number").setValue("0");
+        databaseReference.child(code).child("group_status").setValue("open");
     }
 }

@@ -168,6 +168,7 @@
 
         <LinearLayout
             style="@style/linear_layout_top_bar"
+            android:layout_marginBottom="0dp"
             android:weightSum="3">
 
             <androidx.appcompat.widget.AppCompatImageView

@@ -560,7 +560,7 @@
 
         <LinearLayout
             style="@style/linear_layout_top_bar"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="0dp"
             android:weightSum="3">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -627,15 +627,55 @@
                 style="@style/linear_layout_card_design_middle_part">
 
                 <LinearLayout
-                    style="@style/linear_layout_placeholder_results_container_outside"
-                    android:id="@+id/linear_layout_result_page_placeholder1">
+                    android:id="@+id/linear_layout_result_page_placeholder1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
-                        style="@style/linear_layout_placeholder_results_container_inside">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:background="@color/filter_border_color"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
 
-                        <TextView
-                            style="@style/text_view_placeholder_results"
-                            android:text="@string/result_placeholder_create_lobby"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/filter_background_color"
+                            android:orientation="vertical"
+                            android:layout_margin="2dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="5dp"
+                                android:textColor="@color/black"
+                                android:text="Die Abstimmung läuft noch."/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingHorizontal="5dp"
+                                android:textColor="@color/black"
+                                android:text="Sobald alle Teilnehmer ihre Stimme abgegeben haben kannst du die Abstimmung beenden."/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="5dp"
+                                android:textColor="@color/black"
+                                android:text="Klicke dazu auf die Schaltfläche 'Abstimmung beenden'."/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingHorizontal="5dp"
+                                android:paddingBottom="5dp"
+                                android:textColor="@color/black"
+                                android:text="Anschließend werden die Ergebnisse hier eingeblendet."/>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 

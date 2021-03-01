@@ -6,7 +6,7 @@
     android:layout_height="566dp"
     android:background="@drawable/background_round_corners"
     android:backgroundTint="@color/white_transparent"
-    android:layout_marginBottom="56dp">
+    android:layout_marginBottom="66dp">
 
     <ImageView
         android:layout_width="150dp"

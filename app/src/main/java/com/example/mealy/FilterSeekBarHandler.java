@@ -107,4 +107,5 @@ public class FilterSeekBarHandler {
         seekBar.setLeftThumbColor(ContextCompat.getColor(mContext, R.color.filter_border_color));
         seekBar.setRightThumbColor(ContextCompat.getColor(mContext, R.color.filter_border_color));
     }
+
 }

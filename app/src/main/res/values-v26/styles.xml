@@ -66,7 +66,7 @@
         <item name="android:layout_height">130dp</item>
         <item name="android:scaleType">centerCrop</item>
         <item name="android:layout_marginHorizontal">5dp</item>
-        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginBottom">30dp</item>
     </style>
 
 </resources>

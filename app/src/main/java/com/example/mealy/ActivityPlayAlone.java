@@ -80,6 +80,7 @@ public class ActivityPlayAlone extends FragmentActivity {
     private LinearLayout mPage1;
     private LinearLayout mPage2;
     private LinearLayout mPage3;
+    private LinearLayout mLoadScreen;
 
     //LinearLayouts
     private LinearLayout mLinearLayoutLevel1;
@@ -185,6 +186,7 @@ public class ActivityPlayAlone extends FragmentActivity {
 
     private void loadCorrectPage() {
         Integer currentPage = mSharedPreferences.getInt("PageOffline", 1);
+        mLoadScreen.setVisibility(View.GONE);
         if (currentPage == 1) {
             mPage1.setVisibility(View.VISIBLE);
             mPage2.setVisibility(View.GONE);
@@ -271,6 +273,7 @@ public class ActivityPlayAlone extends FragmentActivity {
         mPage1 = findViewById(R.id.page_1);
         mPage2 = findViewById(R.id.page_2);
         mPage3 = findViewById(R.id.page_3);
+        mLoadScreen = findViewById(R.id.load_screen);
     }
 
     private void setupViews() {
@@ -386,10 +389,12 @@ public class ActivityPlayAlone extends FragmentActivity {
                     case R.id.play_alone:
                         return true;
                     case R.id.join_group:
+                        showLoadScreen();
                         startActivity(new Intent(getApplicationContext(), ActivityJoinGroup.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.create_group:
+                        showLoadScreen();
                         startActivity(new Intent(getApplicationContext(), ActivityCreateGroup.class));
                         overridePendingTransition(0,0);
                         return true;
@@ -397,6 +402,13 @@ public class ActivityPlayAlone extends FragmentActivity {
                 return false;
             }
         });
+    }
+
+    private void showLoadScreen() {
+        mPage1.setVisibility(View.GONE);
+        mPage2.setVisibility(View.GONE);
+        mPage3.setVisibility(View.GONE);
+        mLoadScreen.setVisibility(View.VISIBLE);
     }
 
     private void resetSharedPreferences() {

@@ -681,6 +681,8 @@
 
     </LinearLayout>
 
+    <include layout="@layout/load_screen"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         style="@style/bottom_navigation_view"
         android:id="@+id/bottom_navigation"

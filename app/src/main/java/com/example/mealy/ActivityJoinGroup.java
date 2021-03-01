@@ -51,6 +51,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private LinearLayout mPage1;
     private LinearLayout mPage2;
     private LinearLayout mPage3;
+    private LinearLayout mLoadScreen;
 
     //Lists
     private List<Recipe> mAllRecipesList;
@@ -174,6 +175,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
 
     private void loadCorrectPage() {
         Integer currentPage = mSharedPreferences.getInt("PageJoin", 1);
+        mLoadScreen.setVisibility(View.GONE);
         if (currentPage == 1) {
             mPage1.setVisibility(View.VISIBLE);
             mPage2.setVisibility(View.GONE);
@@ -200,10 +202,11 @@ public class ActivityJoinGroup extends AppCompatActivity {
         mSharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
         mContext = getApplicationContext();
         //resetSharedPreferences();
+
+        setupPages();
         generateUserID();
         setupClasses();
         setupViews();
-        setupPages();
         setupLayouts();
         setupBottomNavigationBar();
         loadCorrectPage();
@@ -263,6 +266,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
         mPage1 = findViewById(R.id.page_1);
         mPage2 = findViewById(R.id.page_2);
         mPage3 = findViewById(R.id.page_3);
+        mLoadScreen = findViewById(R.id.load_screen);
     }
 
     private void setupViews() {
@@ -310,12 +314,14 @@ public class ActivityJoinGroup extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch(menuItem.getItemId()) {
                     case R.id.play_alone:
+                        showLoadScreen();
                         startActivity(new Intent(getApplicationContext(), ActivityPlayAlone.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.join_group:
                         return true;
                     case R.id.create_group:
+                        showLoadScreen();
                         startActivity(new Intent(getApplicationContext(), ActivityCreateGroup.class));
                         overridePendingTransition(0,0);
                         return true;
@@ -323,6 +329,13 @@ public class ActivityJoinGroup extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void showLoadScreen() {
+        mPage1.setVisibility(View.GONE);
+        mPage2.setVisibility(View.GONE);
+        mPage3.setVisibility(View.GONE);
+        mLoadScreen.setVisibility(View.VISIBLE);
     }
 
     private void restartActivity() {

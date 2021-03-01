@@ -48,6 +48,9 @@
     <string name="offline_participants">Teilnehmer: 1</string>
     <string name="tooltip_votes">Anzahl der Stimmen</string>
 
+    //Copyrights
+    <string name="app_icon">Icon made by "https://www.freepik.com" from "https://www.flaticon.com/"</string>
+
     <string-array name="meal_allergies">
         <item>Eier</item>
         <item>Fisch</item>

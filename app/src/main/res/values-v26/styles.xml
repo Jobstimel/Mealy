@@ -58,4 +58,15 @@
         <item name="android:layout_weight">8</item>
     </style>
 
+
+    //Result Page - Result Entry
+
+    <style name="image_view_result_entry_poster">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">130dp</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:layout_marginHorizontal">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+
 </resources>

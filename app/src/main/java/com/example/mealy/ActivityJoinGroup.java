@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -84,6 +85,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
 
     //Layouts
     private LinearLayout mLinearLayoutPlaceholderResults;
+    private ScrollView mScrollViewResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +127,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
             String status = (String) mDataSnapshot.child(code).child("group_status").getValue();
             if (status != null && status.equals("closed")) {
                 mLinearLayoutPlaceholderResults.setVisibility(View.GONE);
+                mScrollViewResults.setVisibility(View.VISIBLE);
                 mTextViewResultPageHeader.setText("Teilnehmer: "+String.valueOf(mDataSnapshot.child(code).child("people_number").getValue()));
                 loadResults();
             }
@@ -209,6 +212,8 @@ public class ActivityJoinGroup extends AppCompatActivity {
 
     private void setupLayouts() {
         mLinearLayoutPlaceholderResults = findViewById(R.id.linear_layout_result_page_placeholder);
+        mScrollViewResults = findViewById(R.id.scroll_view);
+        mScrollViewResults.setVisibility(View.GONE);
     }
 
     private void setupResultPage() {

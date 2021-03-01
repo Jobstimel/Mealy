@@ -214,8 +214,8 @@ public class ActivityCreateGroup extends AppCompatActivity {
 
     public void deleteGroup() {
         mDatabaseReference.child(mSharedPreferences.getString("GroupCode", "")).removeValue();
-        deleteSavedOnlineData();
         resetFilter();
+        deleteSavedOnlineData();
         restartActivity();
     }
 

@@ -84,7 +84,7 @@ public class FilterApplier {
             }
         }
         saveFilteredIDs();
-        if (mSharedPreferences.getBoolean("ChangeStatus"+mMode, false)) {
+        if (mSharedPreferences.getBoolean("ChangeStatus"+mMode, false) || mSharedPreferences.getString("Selected"+mMode+"IDs","").equals("")) {
             selectIndices(mFilteredIDs);
             deleteLikedIDs();
             deleteDislikedIDs();

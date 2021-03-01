@@ -181,4 +181,12 @@
         <item name="android:textSize">12dp</item>
     </style>
 
+    <style name="Theme.AppCompat.Light.NoActionBar.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+    </style>
+
 </resources>

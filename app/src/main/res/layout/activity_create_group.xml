@@ -555,7 +555,6 @@
 
     <LinearLayout
         style="@style/linear_layout_page"
-        android:layout_height="match_parent"
         android:id="@+id/page_2">
 
         <LinearLayout
@@ -893,6 +892,32 @@
                 android:layout_weight="14"/>
 
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/load_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginBottom="56dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:src="@drawable/mealy_app_icon"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:text="Die Gruppe wird gelöscht. Dieser Vorgang nimmt einige Sekunden Zeit in Anspruch. Bitte habe etwas Geduld."
+            android:gravity="center"/>
+
 
     </LinearLayout>
 

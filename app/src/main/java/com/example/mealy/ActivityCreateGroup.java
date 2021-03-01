@@ -3,19 +3,25 @@ package com.example.mealy;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -83,6 +89,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
     private LinearLayout mPage1;
     private LinearLayout mPage2;
     private LinearLayout mPage3;
+    private LinearLayout mLoadScreen;
 
     //Lists
     private List<Recipe> mAllRecipesList;
@@ -202,6 +209,8 @@ public class ActivityCreateGroup extends AppCompatActivity {
     }
 
     public void deleteGroup() {
+        mPage3.setVisibility(View.GONE);
+        mLoadScreen.setVisibility(View.VISIBLE);
         mDatabaseReference.child(mSharedPreferences.getString("GroupCode", "")).removeValue();
         resetFilter();
         deleteSavedOnlineData();
@@ -282,6 +291,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
             mPage1.setVisibility(View.VISIBLE);
             mPage2.setVisibility(View.GONE);
             mPage3.setVisibility(View.GONE);
+            mLoadScreen.setVisibility(View.GONE);
         }
         else if (currentPage == 2) {
             mPage1.setVisibility(View.GONE);
@@ -371,6 +381,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
         mPage1 = findViewById(R.id.page_1);
         mPage2 = findViewById(R.id.page_2);
         mPage3 = findViewById(R.id.page_3);
+        mLoadScreen = findViewById(R.id.load_screen);
     }
 
     private void setupDatabase() {

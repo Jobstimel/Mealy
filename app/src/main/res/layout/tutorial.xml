@@ -3,47 +3,47 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/tutorial"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginVertical="56dp"
+    android:layout_width="350dp"
+    android:layout_height="536dp"
+    android:background="@drawable/background_round_corners"
+    android:backgroundTint="@color/black"
+    android:layout_marginBottom="5dp"
+    android:layout_gravity="center"
     android:orientation="vertical"
-    android:weightSum="12"
+    android:weightSum="30"
     android:clickable="true">
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black_transparent"
-        android:orientation="vertical"
+        android:layout_marginTop="2dp"
+        android:layout_marginHorizontal="2dp"
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/background_round_corners_top"
+        android:backgroundTint="@color/white"
+        android:text="Tutorial"
         android:gravity="center"
-        android:layout_marginBottom="2.5dp"
-        android:layout_weight="11">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:textSize="20dp"
-            android:textColor="@color/yellow"
-            android:textStyle="bold"
-            android:text="Zugangscode"/>
-
-    </LinearLayout>
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_weight="14"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="2.5dp"
         android:orientation="horizontal"
-        android:layout_weight="1"
-        android:weightSum="2">
+        android:layout_marginTop="1dp"
+        android:layout_marginHorizontal="2dp"
+        android:layout_marginBottom="1dp"
+        android:weightSum="2"
+        android:layout_weight="2">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="2.5dp"
+            android:layout_marginRight="1dp"
+            android:background="@color/white"
             android:layout_weight="1"
-            android:background="@color/black_transparent"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -51,17 +51,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginHorizontal="20dp"
-                android:src="@drawable/icon_left"
-                app:tint="@color/yellow" />
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/icon_swipe_left"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:gravity="center_horizontal"
-                android:text="Dislike"
-                android:textColor="@color/yellow"
-                android:textSize="25dp"
+                android:text="Mag ich nicht"
+                android:textColor="@color/black"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -69,9 +69,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="2.5dp"
+            android:layout_marginLeft="1dp"
+            android:background="@color/white"
             android:gravity="center"
-            android:background="@color/black_transparent"
             android:orientation="vertical"
             android:layout_weight="1">
 
@@ -79,21 +79,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginHorizontal="20dp"
-                android:src="@drawable/icon_right"
-                app:tint="@color/yellow"/>
+                android:src="@drawable/icon_swipe_right"
+                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:gravity="center_horizontal"
-                android:text="Like"
-                android:textColor="@color/yellow"
-                android:textSize="25dp"
+                android:text="Mag ich"
+                android:textColor="@color/black"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="1dp"
+        android:layout_marginHorizontal="2dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/background_round_corners_bottom"
+        android:backgroundTint="@color/white"
+        android:text="Alles klar - los geht's!"
+        android:gravity="center"
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_weight="14"/>
 
 </LinearLayout>

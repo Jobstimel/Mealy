@@ -67,7 +67,6 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private TextView mTextViewLeaveGroupButton;
     private TextView mTextViewResultPageHeader;
     private ListView mResultListView;
-    private TextView mTextViewGroupCode1;
     private TextView mTextViewGroupCode2;
     private TextView mTextViewGroupCode3;
 
@@ -181,7 +180,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
             mPage1.setVisibility(View.GONE);
             mPage2.setVisibility(View.VISIBLE);
             mPage3.setVisibility(View.GONE);
-            mTextViewGroupCode2.setText(mSharedPreferences.getString("JoinGroupCode", ""));
+            mTextViewGroupCode2.setText("Gruppe: "+mSharedPreferences.getString("JoinGroupCode", ""));
             setupLists();
             setupSwipePlaceholderView();
         }
@@ -189,7 +188,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
             mPage1.setVisibility(View.GONE);
             mPage2.setVisibility(View.GONE);
             mPage3.setVisibility(View.VISIBLE);
-            mTextViewGroupCode3.setText(mSharedPreferences.getString("JoinGroupCode", ""));
+            mTextViewGroupCode3.setText("Gruppe: "+mSharedPreferences.getString("JoinGroupCode", ""));
             checkIfGroupIsCompleted();
         }
     }
@@ -274,7 +273,6 @@ public class ActivityJoinGroup extends AppCompatActivity {
         mBottomNavigationView.setSelectedItemId(R.id.join_group);
         mResultListView = findViewById(R.id.list_view_result);
 
-        mTextViewGroupCode1 = findViewById(R.id.text_view_group_code_1);
         mTextViewGroupCode2 = findViewById(R.id.text_view_group_code_2);
         mTextViewGroupCode3 = findViewById(R.id.text_view_group_code_3);
 
@@ -335,6 +333,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
         mPage1.setVisibility(View.GONE);
         mPage2.setVisibility(View.GONE);
         mPage3.setVisibility(View.GONE);
+        mTutorial.setVisibility(View.GONE);
         mLoadScreen.setVisibility(View.VISIBLE);
     }
 

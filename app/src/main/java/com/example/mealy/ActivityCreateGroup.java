@@ -83,6 +83,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
     private LinearLayout mPage2;
     private LinearLayout mPage3;
     private LinearLayout mLoadScreen;
+    private LinearLayout mTutorial;
 
     //Lists
     private List<Recipe> mAllRecipesList;
@@ -285,6 +286,9 @@ public class ActivityCreateGroup extends AppCompatActivity {
             mLoadScreen.setVisibility(View.GONE);
         }
         else if (currentPage == 2) {
+            if (!mSharedPreferences.getBoolean("CreateTutorial", false)) {
+                mTutorial.setVisibility(View.VISIBLE);
+            }
             mPage1.setVisibility(View.GONE);
             mPage2.setVisibility(View.VISIBLE);
             mPage3.setVisibility(View.GONE);
@@ -366,6 +370,17 @@ public class ActivityCreateGroup extends AppCompatActivity {
         mPage2 = findViewById(R.id.page_2);
         mPage3 = findViewById(R.id.page_3);
         mLoadScreen = findViewById(R.id.load_screen);
+        mTutorial = findViewById(R.id.tutorial);
+        mTutorial.setVisibility(View.GONE);
+        mTutorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTutorial.setVisibility(View.GONE);
+                SharedPreferences.Editor editor = mSharedPreferences.edit();
+                editor.putBoolean("CreateTutorial", true);
+                editor.commit();
+            }
+        });
     }
 
     private void setupDatabase() {
@@ -526,6 +541,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
         mPage1.setVisibility(View.GONE);
         mPage2.setVisibility(View.GONE);
         mPage3.setVisibility(View.GONE);
+        mTutorial.setVisibility(View.GONE);
         mLoadScreen.setVisibility(View.VISIBLE);
     }
 

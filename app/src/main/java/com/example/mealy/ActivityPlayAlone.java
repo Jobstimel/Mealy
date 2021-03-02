@@ -81,6 +81,7 @@ public class ActivityPlayAlone extends FragmentActivity {
     private LinearLayout mPage2;
     private LinearLayout mPage3;
     private LinearLayout mLoadScreen;
+    private LinearLayout mTutorial;
 
     //LinearLayouts
     private LinearLayout mLinearLayoutLevel1;
@@ -194,6 +195,9 @@ public class ActivityPlayAlone extends FragmentActivity {
             loadFilter();
         }
         else if (currentPage == 2) {
+            if (!mSharedPreferences.getBoolean("OfflineTutorial", false)) {
+                mTutorial.setVisibility(View.VISIBLE);
+            }
             mPage1.setVisibility(View.GONE);
             mPage2.setVisibility(View.VISIBLE);
             mPage3.setVisibility(View.GONE);
@@ -274,6 +278,17 @@ public class ActivityPlayAlone extends FragmentActivity {
         mPage2 = findViewById(R.id.page_2);
         mPage3 = findViewById(R.id.page_3);
         mLoadScreen = findViewById(R.id.load_screen);
+        mTutorial = findViewById(R.id.tutorial);
+        mTutorial.setVisibility(View.GONE);
+        mTutorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTutorial.setVisibility(View.GONE);
+                SharedPreferences.Editor editor = mSharedPreferences.edit();
+                editor.putBoolean("OfflineTutorial", true);
+                editor.commit();
+            }
+        });
     }
 
     private void setupViews() {
@@ -408,6 +423,7 @@ public class ActivityPlayAlone extends FragmentActivity {
         mPage1.setVisibility(View.GONE);
         mPage2.setVisibility(View.GONE);
         mPage3.setVisibility(View.GONE);
+        mTutorial.setVisibility(View.GONE);
         mLoadScreen.setVisibility(View.VISIBLE);
     }
 

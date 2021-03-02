@@ -11,29 +11,11 @@
         android:id="@+id/page_1">
 
         <LinearLayout
-            style="@style/linear_layout_top_bar"
-            android:weightSum="3">
+            style="@style/linear_layout_top_bar">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                style="@style/image_view_top_bar"
-                android:src="@drawable/icon_filter"
-                android:layout_weight="1"
-                android:onClick="switchPage1"
-                app:tint="@color/filter_green"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                style="@style/image_view_top_bar"
-                android:src="@drawable/icon_swipe"
-                android:layout_weight="1"
-                android:onClick="switchPage2"
-                app:tint="@color/filter_border_color"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                style="@style/image_view_top_bar"
-                android:src="@drawable/icon_results"
-                android:layout_weight="1"
-                android:onClick="switchPage3"
-                app:tint="@color/filter_border_color"/>
+            <TextView
+                style="@style/text_view_top_bar_code"
+                android:text="Solomodus"/>
 
         </LinearLayout>
 
@@ -564,29 +546,12 @@
 
         <LinearLayout
             style="@style/linear_layout_top_bar"
-            android:layout_marginBottom="0dp"
-            android:weightSum="3">
+            android:layout_marginBottom="0dp">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                style="@style/image_view_top_bar"
-                android:src="@drawable/icon_filter"
-                android:layout_weight="1"
-                android:onClick="switchPage1"
-                app:tint="@color/filter_border_color"/>
+            <TextView
+                style="@style/text_view_top_bar_code"
+                android:text="Solomodus"/>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                style="@style/image_view_top_bar"
-                android:src="@drawable/icon_swipe"
-                android:layout_weight="1"
-                android:onClick="switchPage2"
-                app:tint="@color/filter_green"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                style="@style/image_view_top_bar"
-                android:src="@drawable/icon_results"
-                android:layout_weight="1"
-                android:onClick="switchPage3"
-                app:tint="@color/filter_border_color"/>
 
         </LinearLayout>
 
@@ -612,29 +577,12 @@
         android:id="@+id/page_3">
 
         <LinearLayout
-            style="@style/linear_layout_top_bar"
-            android:weightSum="3">
+            style="@style/linear_layout_top_bar">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                style="@style/image_view_top_bar"
-                android:src="@drawable/icon_filter"
-                android:layout_weight="1"
-                android:onClick="switchPage1"
-                app:tint="@color/filter_border_color"/>
+            <TextView
+                style="@style/text_view_top_bar_code"
+                android:text="Solomodus"/>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                style="@style/image_view_top_bar"
-                android:src="@drawable/icon_swipe"
-                android:layout_weight="1"
-                android:onClick="switchPage2"
-                app:tint="@color/filter_border_color"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                style="@style/image_view_top_bar"
-                android:src="@drawable/icon_results"
-                android:layout_weight="1"
-                android:onClick="switchPage3"
-                app:tint="@color/filter_green"/>
 
         </LinearLayout>
 
@@ -682,6 +630,8 @@
     </LinearLayout>
 
     <include layout="@layout/load_screen"/>
+
+    <include layout="@layout/tutorial"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         style="@style/bottom_navigation_view"

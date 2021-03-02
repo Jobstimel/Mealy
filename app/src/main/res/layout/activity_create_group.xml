@@ -747,6 +747,8 @@
 
     <include layout="@layout/load_screen"/>
 
+    <include layout="@layout/tutorial"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         style="@style/bottom_navigation_view"
         android:id="@+id/bottom_navigation"

@@ -21,7 +21,7 @@
         android:layout_marginHorizontal="30dp"
         android:textSize="20dp"
         android:textColor="@color/white"
-        android:text="Loading. Please wait..."
+        android:text="Lädt. Bitte warten..."
         android:gravity="center"/>
 
 </LinearLayout>

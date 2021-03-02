@@ -121,8 +121,12 @@ public class SwipeHandler {
             }
         }
 
-        Random random = new Random();
-        int randomChoice = random.nextInt(tmp.size()-1);
+        int randomChoice = 0;
+
+        if (tmp.size() > 1) {
+            Random random = new Random();
+            randomChoice = random.nextInt(tmp.size()-1);
+        }
 
         mOnlineWinner = tmp.get(randomChoice);
     }

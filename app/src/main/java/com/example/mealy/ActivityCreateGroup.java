@@ -64,8 +64,14 @@ public class ActivityCreateGroup extends AppCompatActivity {
     private DatabaseHandler mDatabaseHandler;
 
     //Result
-    private ImageView mRecipePoster;
-    private TextView mRecipeTitle;
+    private ImageView mRecipePoster1;
+    private ImageView mRecipePoster2;
+    private ImageView mRecipePoster3;
+    private TextView mRecipeScore1;
+    private TextView mRecipeScore2;
+    private TextView mRecipeScore3;
+    private List<ImageView> mPosterList;
+    private List<TextView> mScoreList;
 
     //Views
     private BottomNavigationView mBottomNavigationView;
@@ -193,7 +199,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
         setupResultPage();
         mSwipeHandler.loadOnlineResults(mDataSnapshot, mAllRecipesList, "GroupCode");
         ResultLoader mResultLoader = new ResultLoader(mContext);
-        mResultLoader.loadResult(mSwipeHandler.mOnlineWinner, mRecipeTitle, mRecipePoster);
+        mResultLoader.loadResults(mSwipeHandler.mOnlineWinners, mPosterList, mScoreList);
     }
 
     public void closeVoting() {
@@ -203,16 +209,24 @@ public class ActivityCreateGroup extends AppCompatActivity {
     public void deleteGroup() {
         showLoadScreen();
         mDatabaseReference.child(mSharedPreferences.getString("GroupCode", "")).removeValue();
-        resetFilter();
+        resetSavedFilterData();
         deleteSavedOnlineData();
         restartActivity();
     }
 
-    public void resetFilter() {
+    public void resetSavedFilterData() {
         mFilterLinearLayoutHandler.resetLayoutSharedPreferences();
         mFilterLinearLayoutCountryHandler.resetCountryLayoutsSharedPreferences();
         mFilterSeekBarHandler.resetSeekBarSharedPreferences();
         mFilterSpinnerHandler.resetSpinnerSharedPreferences();
+        resetLikeDislikeList();
+    }
+
+    public void resetFilter(View v) {
+        mFilterLinearLayoutHandler.resetLayouts(mLinearLayoutList);
+        mFilterLinearLayoutCountryHandler.resetCountryLayouts(mLinearLayoutCountryList);
+        mFilterSeekBarHandler.resetSeekBarStates(mSeekBarCalories, mSeekBarTime);
+        mFilterSpinnerHandler.resetSpinnerStates(mSpinnerList, mFilterApplier, mTextViewRecipeCount, mSpinnerLayoutList, null);
         resetLikeDislikeList();
     }
 
@@ -332,8 +346,14 @@ public class ActivityCreateGroup extends AppCompatActivity {
     }
 
     private void setupResultPage() {
-        mRecipePoster = findViewById(R.id.recipe_image);
-        mRecipeTitle = findViewById(R.id.recipe_title);
+        mRecipePoster1 = findViewById(R.id.recipe_image_1);
+        mRecipePoster2 = findViewById(R.id.recipe_image_2);
+        mRecipePoster3 = findViewById(R.id.recipe_image_3);
+        mRecipeScore1 = findViewById(R.id.recipe_score_1);
+        mRecipeScore2 = findViewById(R.id.recipe_score_2);
+        mRecipeScore3 = findViewById(R.id.recipe_score_3);
+        mPosterList = Arrays.asList(mRecipePoster1,mRecipePoster2,mRecipePoster3);
+        mScoreList = Arrays.asList(mRecipeScore1,mRecipeScore2,mRecipeScore3);
     }
 
     private void setupClasses() {

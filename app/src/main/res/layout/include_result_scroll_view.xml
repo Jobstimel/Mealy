@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:background="@color/gold"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/icon_first"/>
+
+                    <TextView
+                        android:id="@+id/recipe_score_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:textColor="@color/white"
+                        android:text="-"
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/recipe_image_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="centerCrop"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_marginVertical="10dp"
+                android:background="@color/silver"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/icon_second"/>
+
+                    <TextView
+                        android:id="@+id/recipe_score_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:textColor="@color/white"
+                        android:text="-"
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/recipe_image_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="centerCrop"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/bronze"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/icon_third"/>
+
+                    <TextView
+                        android:id="@+id/recipe_score_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:textColor="@color/white"
+                        android:text="-"
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/recipe_image_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="centerCrop"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

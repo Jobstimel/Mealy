@@ -21,7 +21,7 @@ public class SwipeHandler {
     public List<Integer> mLikedIDs;
     public List<Integer> mDislikedIDs;
     public List<Recipe> mOfflineResults;
-    public Recipe mOnlineWinner;
+    public List<Recipe> mOnlineWinners;
 
     public SwipeHandler(String mMode, SharedPreferences mSharedPreferences) {
         this.mMode = mMode;
@@ -87,12 +87,26 @@ public class SwipeHandler {
         editor.commit();
     }
 
-    public void loadOfflineResults(List<Recipe> recipes, List<Integer> liked) {
+    public void loadOfflineResults(List<Recipe> recipes, List<Integer> liked, List<Integer> disliked) {
         mOfflineResults = new ArrayList<>();
         for (int i = 0; i < liked.size(); i++) {
             Recipe recipe = recipes.get(liked.get(i));
             recipe.setScore(1);
             mOfflineResults.add(recipe);
+            if (mOfflineResults.size() == 3) {
+                break;
+            }
+        }
+
+        if (mOfflineResults.size() < 3) {
+            for (int i = 0; i < disliked.size(); i++) {
+                Recipe recipe = recipes.get(disliked.get(i));
+                recipe.setScore(0);
+                mOfflineResults.add(recipe);
+                if (mOfflineResults.size() == 3) {
+                    break;
+                }
+            }
         }
     }
 
@@ -105,29 +119,21 @@ public class SwipeHandler {
     }
 
     private void calculateOnlineStandings(List<String> count, List<String> ids, String maxVotes, List<Recipe> recipes) {
-        List<Recipe> tmp = new ArrayList<>();
-        Boolean found = false;
+        mOnlineWinners = new ArrayList<>();
         for (int i = Integer.parseInt(maxVotes); i > -1; i--) {
             for (int y = 0; y < ids.size(); y++) {
                 if (Integer.parseInt(count.get(y)) == i) {
-                    found = true;
                     Recipe recipe = recipes.get(Integer.parseInt(ids.get(y)));
                     recipe.setScore(i);
-                    tmp.add(recipe);
+                    mOnlineWinners.add(recipe);
+                }
+                if (mOnlineWinners.size() == 3) {
+                    break;
                 }
             }
-            if (found) {
+            if (mOnlineWinners.size() == 3) {
                 break;
             }
         }
-
-        int randomChoice = 0;
-
-        if (tmp.size() > 1) {
-            Random random = new Random();
-            randomChoice = random.nextInt(tmp.size()-1);
-        }
-
-        mOnlineWinner = tmp.get(randomChoice);
     }
 }

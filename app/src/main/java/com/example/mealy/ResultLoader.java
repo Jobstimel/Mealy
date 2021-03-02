@@ -19,10 +19,15 @@ public class ResultLoader {
         this.mContext = mContext;
     }
 
-    public void loadResult(Recipe recipe, TextView title, ImageView poster) {
-        Glide.with(mContext).load(recipe.getUrl1()).into(poster);
-        title.setText(recipe.getTitle());
+    public void loadResults(List<Recipe> winners, List<ImageView> posters, List<TextView> scores) {
+        for (int i = 0; i < winners.size(); i++) {
+            loadResult(winners.get(i), posters.get(i), scores.get(i));
+        }
+    }
 
+    private void loadResult(Recipe recipe, ImageView poster, TextView score) {
+        Glide.with(mContext).load(recipe.getUrl1()).into(poster);
+        score.setText(String.valueOf(recipe.getScore()));
         poster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

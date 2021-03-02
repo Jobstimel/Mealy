@@ -211,43 +211,7 @@
 
                 </LinearLayout>
 
-                <ScrollView
-                    android:id="@+id/scroll_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:textSize="20dp"/>
-
-                        <ImageView
-                            android:id="@+id/recipe_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="150dp"
-                            android:layout_marginHorizontal="10dp"
-                            android:scaleType="centerCrop"/>
-
-                        <TextView
-                            android:id="@+id/recipe_title"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:textStyle="bold"
-                            android:textColor="@color/black"/>
-
-                    </LinearLayout>
-
-                </ScrollView>
+                <include layout="@layout/include_result_scroll_view"/>
 
             </LinearLayout>
 
@@ -262,9 +226,9 @@
 
     </LinearLayout>
 
-    <include layout="@layout/load_screen"/>
+    <include layout="@layout/include_load_screen"/>
 
-    <include layout="@layout/tutorial"/>
+    <include layout="@layout/include_tutorial"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         style="@style/bottom_navigation_view"

@@ -66,13 +66,18 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private TextView mTextViewJoinGroupButton;
     private TextView mTextViewLeaveGroupButton;
     private TextView mTextViewResultPageHeader;
-    private ListView mResultListView;
     private TextView mTextViewGroupCode2;
     private TextView mTextViewGroupCode3;
 
     //Result
-    private ImageView mRecipePoster;
-    private TextView mRecipeTitle;
+    private ImageView mRecipePoster1;
+    private ImageView mRecipePoster2;
+    private ImageView mRecipePoster3;
+    private TextView mRecipeScore1;
+    private TextView mRecipeScore2;
+    private TextView mRecipeScore3;
+    private List<ImageView> mPosterList;
+    private List<TextView> mScoreList;
 
     //Database
     private DatabaseReference mDatabaseReference;
@@ -137,7 +142,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
         mSwipeHandler.loadOnlineResults(mDataSnapshot, mAllRecipesList, "JoinGroupCode");
         mLinearLayoutPlaceholderResults.setVisibility(View.GONE);
         ResultLoader mResultLoader = new ResultLoader(mContext);
-        mResultLoader.loadResult(mSwipeHandler.mOnlineWinner, mRecipeTitle, mRecipePoster);
+        mResultLoader.loadResults(mSwipeHandler.mOnlineWinners, mPosterList, mScoreList);
         mTextViewLeaveGroupButton.setText("Gruppe verlassen");
         mTextViewLeaveGroupButton.setClickable(true);
     }
@@ -215,8 +220,14 @@ public class ActivityJoinGroup extends AppCompatActivity {
     }
 
     private void setupResultPage() {
-        mRecipePoster = findViewById(R.id.recipe_image);
-        mRecipeTitle = findViewById(R.id.recipe_title);
+        mRecipePoster1 = findViewById(R.id.recipe_image_1);
+        mRecipePoster2 = findViewById(R.id.recipe_image_2);
+        mRecipePoster3 = findViewById(R.id.recipe_image_3);
+        mRecipeScore1 = findViewById(R.id.recipe_score_1);
+        mRecipeScore2 = findViewById(R.id.recipe_score_2);
+        mRecipeScore3 = findViewById(R.id.recipe_score_3);
+        mPosterList = Arrays.asList(mRecipePoster1,mRecipePoster2,mRecipePoster3);
+        mScoreList = Arrays.asList(mRecipeScore1,mRecipeScore2,mRecipeScore3);
     }
 
     private void setupSwipePlaceholderView() {
@@ -271,7 +282,6 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private void setupViews() {
         mBottomNavigationView = findViewById(R.id.bottom_navigation);
         mBottomNavigationView.setSelectedItemId(R.id.join_group);
-        mResultListView = findViewById(R.id.list_view_result);
 
         mTextViewGroupCode2 = findViewById(R.id.text_view_group_code_2);
         mTextViewGroupCode3 = findViewById(R.id.text_view_group_code_3);

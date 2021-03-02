@@ -92,17 +92,20 @@ public class FilterApplier {
         int size = mFilteredIDs.size();
         if (size < 3) {
             textView.setTextColor(ContextCompat.getColor(mContext, R.color.red));
-            if (mMode.equals("Online")) {
-                button.setTextColor(ContextCompat.getColor(mContext, R.color.red));
-                button.setText("Zu wenige Treffer");
-                button.setClickable(false);
-            }
+            button.setTextColor(ContextCompat.getColor(mContext, R.color.red));
+            button.setText("Zu wenige Treffer");
+            button.setClickable(false);
         }
         else {
             textView.setTextColor(ContextCompat.getColor(mContext, R.color.filter_green));
             if (mMode.equals("Online")) {
                 button.setTextColor(ContextCompat.getColor(mContext, R.color.filter_green));
                 button.setText("Gruppe erstellen");
+                button.setClickable(true);
+            }
+            else {
+                button.setTextColor(ContextCompat.getColor(mContext, R.color.filter_green));
+                button.setText("Rezepte bewerten");
                 button.setClickable(true);
             }
         }

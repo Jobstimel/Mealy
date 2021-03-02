@@ -557,6 +557,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
         editor.putString("SelectedOnlineIDs", "");
         editor.putString("LikedCreateIDs", "");
         editor.putString("DislikedCreateIDs", "");
+        editor.putBoolean("CreateTutorial", false);
         editor.commit();
     }
 

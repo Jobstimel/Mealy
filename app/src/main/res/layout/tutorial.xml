@@ -61,7 +61,7 @@
                 android:gravity="center_horizontal"
                 android:text="Mag ich nicht"
                 android:textColor="@color/black"
-                android:textSize="20dp"
+                android:textSize="17dp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -89,7 +89,7 @@
                 android:gravity="center_horizontal"
                 android:text="Mag ich"
                 android:textColor="@color/black"
-                android:textSize="20dp"
+                android:textSize="17dp"
                 android:textStyle="bold" />
 
         </LinearLayout>

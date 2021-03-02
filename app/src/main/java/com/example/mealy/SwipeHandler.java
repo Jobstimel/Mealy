@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class SwipeHandler {
 
@@ -20,7 +21,7 @@ public class SwipeHandler {
     public List<Integer> mLikedIDs;
     public List<Integer> mDislikedIDs;
     public List<Recipe> mOfflineResults;
-    public List<Recipe> mOnlineResults;
+    public Recipe mOnlineWinner;
 
     public SwipeHandler(String mMode, SharedPreferences mSharedPreferences) {
         this.mMode = mMode;
@@ -104,21 +105,25 @@ public class SwipeHandler {
     }
 
     private void calculateOnlineStandings(List<String> count, List<String> ids, String maxVotes, List<Recipe> recipes) {
-        mOnlineResults = new ArrayList<>();
+        List<Recipe> tmp = new ArrayList<>();
+        Boolean found = false;
         for (int i = Integer.parseInt(maxVotes); i > -1; i--) {
             for (int y = 0; y < ids.size(); y++) {
                 if (Integer.parseInt(count.get(y)) == i) {
+                    found = true;
                     Recipe recipe = recipes.get(Integer.parseInt(ids.get(y)));
                     recipe.setScore(i);
-                    mOnlineResults.add(recipe);
-                    if (mOnlineResults.size() == 3) {
-                        break;
-                    }
+                    tmp.add(recipe);
                 }
             }
-            if (mOnlineResults.size() == 3) {
+            if (found) {
                 break;
             }
         }
+
+        Random random = new Random();
+        int randomChoice = random.nextInt(tmp.size()-1);
+
+        mOnlineWinner = tmp.get(randomChoice);
     }
 }

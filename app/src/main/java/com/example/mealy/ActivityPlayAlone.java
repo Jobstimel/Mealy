@@ -107,7 +107,6 @@ public class ActivityPlayAlone extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_alone);
         setupElements();

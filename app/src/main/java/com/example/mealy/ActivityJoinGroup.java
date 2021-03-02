@@ -27,6 +27,7 @@ import com.mindorks.placeholderview.listeners.ItemRemovedListener;
 import com.raycoarana.codeinputview.CodeInputView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ActivityJoinGroup extends AppCompatActivity {
@@ -52,6 +53,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private LinearLayout mPage2;
     private LinearLayout mPage3;
     private LinearLayout mLoadScreen;
+    private LinearLayout mTutorial;
 
     //Lists
     private List<Recipe> mAllRecipesList;
@@ -70,15 +72,8 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private TextView mTextViewGroupCode3;
 
     //Result
-    private TextView mTextViewTitle1;
-    private TextView mTextViewTitle2;
-    private TextView mTextViewTitle3;
-    private TextView mTextViewScore1;
-    private TextView mTextViewScore2;
-    private TextView mTextViewScore3;
-    private ImageView mImageViewPoster1;
-    private ImageView mImageViewPoster2;
-    private ImageView mImageViewPoster3;
+    private ImageView mRecipePoster;
+    private TextView mRecipeTitle;
 
     //Database
     private DatabaseReference mDatabaseReference;
@@ -90,7 +85,6 @@ public class ActivityJoinGroup extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_group);
 
@@ -140,13 +134,11 @@ public class ActivityJoinGroup extends AppCompatActivity {
         if (mAllRecipesList == null) {
             mAllRecipesList = JsonLoader.loadRecipies(mContext);
         }
+        setupResultPage();
         mSwipeHandler.loadOnlineResults(mDataSnapshot, mAllRecipesList, "JoinGroupCode");
         mLinearLayoutPlaceholderResults.setVisibility(View.GONE);
-        setupResultPage();
         ResultLoader mResultLoader = new ResultLoader(mContext);
-        mResultLoader.loadResult(mSwipeHandler.mOnlineResults.get(0), mTextViewTitle1, mTextViewScore1, mImageViewPoster1);
-        mResultLoader.loadResult(mSwipeHandler.mOnlineResults.get(1), mTextViewTitle2, mTextViewScore2, mImageViewPoster2);
-        mResultLoader.loadResult(mSwipeHandler.mOnlineResults.get(2), mTextViewTitle3, mTextViewScore3, mImageViewPoster3);
+        mResultLoader.loadResult(mSwipeHandler.mOnlineWinner, mRecipeTitle, mRecipePoster);
         mTextViewLeaveGroupButton.setText("Gruppe verlassen");
         mTextViewLeaveGroupButton.setClickable(true);
     }
@@ -183,6 +175,9 @@ public class ActivityJoinGroup extends AppCompatActivity {
             mPage3.setVisibility(View.GONE);
         }
         else if (currentPage == 2) {
+            if (!mSharedPreferences.getBoolean("JoinTutorial", false)) {
+                mTutorial.setVisibility(View.VISIBLE);
+            }
             mPage1.setVisibility(View.GONE);
             mPage2.setVisibility(View.VISIBLE);
             mPage3.setVisibility(View.GONE);
@@ -221,15 +216,8 @@ public class ActivityJoinGroup extends AppCompatActivity {
     }
 
     private void setupResultPage() {
-        mTextViewTitle1 = findViewById(R.id.text_view_recipe_title_1);
-        mTextViewTitle2 = findViewById(R.id.text_view_recipe_title_2);
-        mTextViewTitle3 = findViewById(R.id.text_view_recipe_title_3);
-        mTextViewScore1 = findViewById(R.id.text_view_recipe_score_1);
-        mTextViewScore2 = findViewById(R.id.text_view_recipe_score_2);
-        mTextViewScore3 = findViewById(R.id.text_view_recipe_score_3);
-        mImageViewPoster1 = findViewById(R.id.image_view_recipe_poster_1);
-        mImageViewPoster2 = findViewById(R.id.image_view_recipe_poster_2);
-        mImageViewPoster3 = findViewById(R.id.image_view_recipe_poster_3);
+        mRecipePoster = findViewById(R.id.recipe_image);
+        mRecipeTitle = findViewById(R.id.recipe_title);
     }
 
     private void setupSwipePlaceholderView() {
@@ -268,6 +256,17 @@ public class ActivityJoinGroup extends AppCompatActivity {
         mPage2 = findViewById(R.id.page_2);
         mPage3 = findViewById(R.id.page_3);
         mLoadScreen = findViewById(R.id.load_screen);
+        mTutorial = findViewById(R.id.tutorial);
+        mTutorial.setVisibility(View.GONE);
+        mTutorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTutorial.setVisibility(View.GONE);
+                SharedPreferences.Editor editor = mSharedPreferences.edit();
+                editor.putBoolean("JoinTutorial", true);
+                editor.commit();
+            }
+        });
     }
 
     private void setupViews() {
@@ -359,6 +358,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
         editor.putString("JoinGroupCode", "");
         editor.putString("LikedJoinIDs", "");
         editor.putString("DislikedJoinIDs", "");
+        editor.putBoolean("JoinTutorial", false);
         editor.commit();
     }
 }

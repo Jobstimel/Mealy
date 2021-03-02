@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.List;
+
 public class ResultLoader {
 
     private Context mContext;
@@ -17,15 +19,9 @@ public class ResultLoader {
         this.mContext = mContext;
     }
 
-    public void loadResult(Recipe recipe, TextView title, TextView score, ImageView poster) {
-        String recipe_title = recipe.getTitle();
-        if (recipe_title.length() > 45) {
-            recipe_title = recipe_title.substring(0, 41).trim();
-            recipe_title = recipe_title + "...";
-        }
-        title.setText(recipe_title);
-        score.setText(String.valueOf(recipe.getScore()));
+    public void loadResult(Recipe recipe, TextView title, ImageView poster) {
         Glide.with(mContext).load(recipe.getUrl1()).into(poster);
+        title.setText(recipe.getTitle());
 
         poster.setOnClickListener(new View.OnClickListener() {
             @Override

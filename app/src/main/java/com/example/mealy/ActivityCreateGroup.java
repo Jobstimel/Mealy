@@ -64,15 +64,8 @@ public class ActivityCreateGroup extends AppCompatActivity {
     private DatabaseHandler mDatabaseHandler;
 
     //Result
-    private TextView mTextViewTitle1;
-    private TextView mTextViewTitle2;
-    private TextView mTextViewTitle3;
-    private TextView mTextViewScore1;
-    private TextView mTextViewScore2;
-    private TextView mTextViewScore3;
-    private ImageView mImageViewPoster1;
-    private ImageView mImageViewPoster2;
-    private ImageView mImageViewPoster3;
+    private ImageView mRecipePoster;
+    private TextView mRecipeTitle;
 
     //Views
     private BottomNavigationView mBottomNavigationView;
@@ -146,7 +139,6 @@ public class ActivityCreateGroup extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_group);
 
@@ -200,9 +192,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
         setupResultPage();
         mSwipeHandler.loadOnlineResults(mDataSnapshot, mAllRecipesList, "GroupCode");
         ResultLoader mResultLoader = new ResultLoader(mContext);
-        mResultLoader.loadResult(mSwipeHandler.mOnlineResults.get(0), mTextViewTitle1, mTextViewScore1, mImageViewPoster1);
-        mResultLoader.loadResult(mSwipeHandler.mOnlineResults.get(1), mTextViewTitle2, mTextViewScore2, mImageViewPoster2);
-        mResultLoader.loadResult(mSwipeHandler.mOnlineResults.get(2), mTextViewTitle3, mTextViewScore3, mImageViewPoster3);
+        mResultLoader.loadResult(mSwipeHandler.mOnlineWinner, mRecipeTitle, mRecipePoster);
     }
 
     public void closeVoting() {
@@ -338,15 +328,8 @@ public class ActivityCreateGroup extends AppCompatActivity {
     }
 
     private void setupResultPage() {
-        mTextViewTitle1 = findViewById(R.id.text_view_recipe_title_1);
-        mTextViewTitle2 = findViewById(R.id.text_view_recipe_title_2);
-        mTextViewTitle3 = findViewById(R.id.text_view_recipe_title_3);
-        mTextViewScore1 = findViewById(R.id.text_view_recipe_score_1);
-        mTextViewScore2 = findViewById(R.id.text_view_recipe_score_2);
-        mTextViewScore3 = findViewById(R.id.text_view_recipe_score_3);
-        mImageViewPoster1 = findViewById(R.id.image_view_recipe_poster_1);
-        mImageViewPoster2 = findViewById(R.id.image_view_recipe_poster_2);
-        mImageViewPoster3 = findViewById(R.id.image_view_recipe_poster_3);
+        mRecipePoster = findViewById(R.id.recipe_image);
+        mRecipeTitle = findViewById(R.id.recipe_title);
     }
 
     private void setupClasses() {

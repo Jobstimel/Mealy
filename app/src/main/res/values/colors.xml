@@ -7,7 +7,7 @@
     <color name="teal_700">#018786</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="red">#EE1C25</color>
+    <color name="red">#FF0000</color>
     <color name="green">#32BA7C</color>
     <color name="grey">#BDBDBD</color>
     <color name="yellow">#FFF200</color>
@@ -20,10 +20,11 @@
     <color name="text_color">#80FFFFFF</color>
     <color name="post_it">#E9CB97</color>
 
-    <color name="black_transparent">#80000000</color>
+    <color name="black_transparent">#90000000</color>
     <color name="white_transparent">#80FFFFFF</color>
     <color name="green_transparent">#8000FF00</color>
     <color name="red_transparent">#80EE1C25</color>
+    <color name="yellow_transparent">#80FFF200</color>
 
     <color name="gradient_start">#243949</color>
     <color name="gradient_end">#517fa4</color>

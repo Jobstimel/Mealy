@@ -307,8 +307,8 @@ public class ActivityCreateGroup extends AppCompatActivity {
             RandomGenerator randomGenerator = new RandomGenerator(mSharedPreferences);
             randomGenerator.generateRandomGroupCode();
         }
-        mTextViewGroupCode2.setText(mSharedPreferences.getString("GroupCode", ""));
-        mTextViewGroupCode3.setText(mSharedPreferences.getString("GroupCode", ""));
+        mTextViewGroupCode2.setText("Zugangscode: "+mSharedPreferences.getString("GroupCode", ""));
+        mTextViewGroupCode3.setText("Zugangscode: "+mSharedPreferences.getString("GroupCode", ""));
     }
 
     private void setupElements() {

@@ -11,24 +11,11 @@
         android:id="@+id/page_1">
 
         <LinearLayout
-            style="@style/linear_layout_top_bar"
-            android:weightSum="3">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                style="@style/image_view_top_bar"
-                android:src="@drawable/icon_filter"
-                android:layout_weight="1"
-                app:tint="@color/filter_green"/>
+            style="@style/linear_layout_top_bar">
 
             <TextView
                 style="@style/text_view_top_bar_code"
-                android:text="-"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                style="@style/image_view_top_bar"
-                android:src="@drawable/icon_results"
-                android:layout_weight="1"
-                app:tint="@color/filter_border_color"/>
+                android:text="Gruppe erstellen"/>
 
         </LinearLayout>
 
@@ -559,24 +546,11 @@
 
         <LinearLayout
             style="@style/linear_layout_top_bar"
-            android:layout_marginBottom="0dp"
-            android:weightSum="3">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                style="@style/image_view_top_bar"
-                android:src="@drawable/icon_filter"
-                android:layout_weight="1"
-                app:tint="@color/filter_border_color"/>
+            android:layout_marginBottom="0dp">
 
             <TextView
                 style="@style/text_view_top_bar_code"
                 android:id="@+id/text_view_group_code_2"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                style="@style/image_view_top_bar"
-                android:src="@drawable/icon_results"
-                android:layout_weight="1"
-                app:tint="@color/filter_border_color"/>
 
         </LinearLayout>
 
@@ -592,24 +566,11 @@
         android:id="@+id/page_3">
 
         <LinearLayout
-            style="@style/linear_layout_top_bar"
-            android:weightSum="3">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                style="@style/image_view_top_bar"
-                android:src="@drawable/icon_filter"
-                android:layout_weight="1"
-                app:tint="@color/filter_border_color"/>
+            style="@style/linear_layout_top_bar">
 
             <TextView
                 style="@style/text_view_top_bar_code"
                 android:id="@+id/text_view_group_code_3"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                style="@style/image_view_top_bar"
-                android:src="@drawable/icon_results"
-                android:layout_weight="1"
-                app:tint="@color/filter_green"/>
 
         </LinearLayout>
 

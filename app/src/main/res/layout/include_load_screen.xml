@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/load_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
     android:layout_marginBottom="56dp"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:gravity="center"
+    android:orientation="vertical">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:src="@drawable/mealy_app_icon"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/mealy_app_icon" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:textSize="20dp"
+        android:gravity="center"
+        android:text="@string/loadScreen_standard"
         android:textColor="@color/white"
-        android:text="Lädt. Bitte warten..."
-        android:gravity="center"/>
+        android:textSize="20dp" />
 
 </LinearLayout>

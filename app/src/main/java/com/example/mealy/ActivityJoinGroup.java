@@ -96,10 +96,16 @@ public class ActivityJoinGroup extends AppCompatActivity {
         setupElements();
     }
 
+    @Override
     protected void onPause() {
         mSwipeHandler.saveLikedIndices(mLikedIDs);
         mSwipeHandler.saveDislikedIndices(mDislikedIDs);
         super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        overridePendingTransition(0,0);
     }
 
     private void generateUserID() {

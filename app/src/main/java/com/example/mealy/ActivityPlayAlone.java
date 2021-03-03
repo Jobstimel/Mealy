@@ -10,12 +10,14 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -123,10 +125,16 @@ public class ActivityPlayAlone extends FragmentActivity {
         setupElements();
     }
 
+    @Override
     protected void onPause() {
         mSwipeHandler.saveLikedIndices(mLikedIDs);
         mSwipeHandler.saveDislikedIndices(mDislikedIDs);
         super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        overridePendingTransition(0,0);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -147,6 +155,7 @@ public class ActivityPlayAlone extends FragmentActivity {
         mFilterSeekBarHandler.resetSeekBarStates(mSeekBarCalories, mSeekBarTime);
         mFilterSpinnerHandler.resetSpinnerStates(mSpinnerList, mFilterApplier, mTextViewRecipeCount, mSpinnerLayoutList, mTextViewRateRecipesButton);
         resetLikeDislikeList();
+        makeToast("Filter wurde zurückgesetzt");
     }
 
     public void resetSpinnerAllergies(View v) {
@@ -436,5 +445,11 @@ public class ActivityPlayAlone extends FragmentActivity {
         editor.putString("DislikedOfflineIDs", "");
         editor.putBoolean("OfflineTutorial", false);
         editor.commit();
+    }
+
+    private void makeToast(String text) {
+        Toast toast = Toast.makeText(mContext, text, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 }

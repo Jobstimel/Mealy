@@ -235,6 +235,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
         mFilterSeekBarHandler.resetSeekBarStates(mSeekBarCalories, mSeekBarTime);
         mFilterSpinnerHandler.resetSpinnerStates(mSpinnerList, mFilterApplier, mTextViewRecipeCount, mSpinnerLayoutList, mTextViewCreateGroupButton);
         resetLikeDislikeList();
+        makeToast("Filter wurde zurückgesetzt");
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -562,5 +563,11 @@ public class ActivityCreateGroup extends AppCompatActivity {
         overridePendingTransition(0, 0);
         startActivity(getIntent());
         overridePendingTransition(0,0);
+    }
+
+    private void makeToast(String text) {
+        Toast toast = Toast.makeText(mContext, text, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 }

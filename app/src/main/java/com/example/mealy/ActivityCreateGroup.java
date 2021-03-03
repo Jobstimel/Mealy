@@ -65,6 +65,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
     private PageHandler mPageHandler;
 
     //Result
+    private ScrollView mScrollViewResults;
     private ImageView mRecipePoster1;
     private ImageView mRecipePoster2;
     private ImageView mRecipePoster3;
@@ -139,7 +140,6 @@ public class ActivityCreateGroup extends AppCompatActivity {
 
     private LinearLayout mLinearLayoutPlaceholderResults1;
     private LinearLayout mLinearLayoutPlaceholderResults2;
-    private ScrollView mScrollViewResults;
 
     //Database
     private DatabaseReference mDatabaseReference;
@@ -344,7 +344,6 @@ public class ActivityCreateGroup extends AppCompatActivity {
         mSwipePlaceHolderViewHandlerCreateGroup = new SwipePlaceHolderViewHandlerCreateGroup(mContext);
         mDatabaseHandler = new DatabaseHandler(mSharedPreferences);
         mPageHandler = new PageHandler(mPage1, mPage2, mPage3, mTutorial, mLoadScreen, mSharedPreferences, "Create");
-
     }
 
     private void setupSwipePlaceholderView() {

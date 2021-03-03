@@ -49,6 +49,7 @@ public class ActivityPlayAlone extends FragmentActivity {
     private FilterLinearLayoutCountryHandler mFilterLinearLayoutCountryHandler;
     private FilterSeekBarHandler mFilterSeekBarHandler;
     private SwipePlaceHolderViewHandlerPlayAlone mSwipePlaceHolderViewHandler;
+    private PageHandler mPageHandler;
 
     //Result
     private ImageView mRecipePoster1;
@@ -140,12 +141,6 @@ public class ActivityPlayAlone extends FragmentActivity {
         resetLikeDislikeList();
     }
 
-    private void savePage(int page) {
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putInt("PageOffline", page);
-        editor.commit();
-    }
-
     public void resetFilter(View v) {
         mFilterLinearLayoutHandler.resetLayouts(mLinearLayoutList);
         mFilterLinearLayoutCountryHandler.resetCountryLayouts(mLinearLayoutCountryList);
@@ -187,37 +182,25 @@ public class ActivityPlayAlone extends FragmentActivity {
     }
 
     public void switchPage2(View v) {
-        savePage(2);
+        mPageHandler.savePage(2);
         loadCorrectPage();
     }
 
     public void switchPage3() {
-        savePage(3);
+        mPageHandler.savePage(3);
         loadCorrectPage();
     }
 
     private void loadCorrectPage() {
+        mPageHandler.loadCorrectPage();
         Integer currentPage = mSharedPreferences.getInt("PageOffline", 1);
-        mLoadScreen.setVisibility(View.GONE);
         if (currentPage == 1) {
-            mPage1.setVisibility(View.VISIBLE);
-            mPage2.setVisibility(View.GONE);
-            mPage3.setVisibility(View.GONE);
             loadFilter();
         }
         else if (currentPage == 2) {
-            if (!mSharedPreferences.getBoolean("OfflineTutorial", false)) {
-                mTutorial.setVisibility(View.VISIBLE);
-            }
-            mPage1.setVisibility(View.GONE);
-            mPage2.setVisibility(View.VISIBLE);
-            mPage3.setVisibility(View.GONE);
             setupSwipePlaceholderView();
         }
         else {
-            mPage1.setVisibility(View.GONE);
-            mPage2.setVisibility(View.GONE);
-            mPage3.setVisibility(View.VISIBLE);
             loadResults();
         }
     }
@@ -329,6 +312,7 @@ public class ActivityPlayAlone extends FragmentActivity {
         mFilterSeekBarHandler = new FilterSeekBarHandler("Offline", mSharedPreferences, mContext);
         mSwipeHandler = new SwipeHandler("Offline", mSharedPreferences);
         mSwipePlaceHolderViewHandler = new SwipePlaceHolderViewHandlerPlayAlone(mContext);
+        mPageHandler = new PageHandler(mPage1, mPage2, mPage3, mTutorial, mLoadScreen, mSharedPreferences, "Offline");
 
         mSwipeHandler.loadLikedIndices();
         mSwipeHandler.loadDislikedIndices();
@@ -424,12 +408,12 @@ public class ActivityPlayAlone extends FragmentActivity {
                     case R.id.play_alone:
                         return true;
                     case R.id.join_group:
-                        showLoadScreen();
+                        mPageHandler.showLoadScreen();
                         startActivity(new Intent(getApplicationContext(), ActivityJoinGroup.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.create_group:
-                        showLoadScreen();
+                        mPageHandler.showLoadScreen();
                         startActivity(new Intent(getApplicationContext(), ActivityCreateGroup.class));
                         overridePendingTransition(0,0);
                         return true;
@@ -437,14 +421,6 @@ public class ActivityPlayAlone extends FragmentActivity {
                 return false;
             }
         });
-    }
-
-    private void showLoadScreen() {
-        mPage1.setVisibility(View.GONE);
-        mPage2.setVisibility(View.GONE);
-        mPage3.setVisibility(View.GONE);
-        mTutorial.setVisibility(View.GONE);
-        mLoadScreen.setVisibility(View.VISIBLE);
     }
 
     private void resetSharedPreferences() {
@@ -458,7 +434,7 @@ public class ActivityPlayAlone extends FragmentActivity {
         editor.putInt("PageOffline", 1);
         editor.putString("LikedOfflineIDs", "");
         editor.putString("DislikedOfflineIDs", "");
-        editor.putBoolean("JoinTutorial", false);
+        editor.putBoolean("OfflineTutorial", false);
         editor.commit();
     }
 }

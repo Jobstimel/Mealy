@@ -47,6 +47,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private CodeInputHandler mCodeInputHandler;
     private SwipePlaceHolderViewHandlerJoinGroup mSwipePlaceHolderViewHandlerJoinGroup;
     private SwipeHandler mSwipeHandler;
+    private PageHandler mPageHandler;
 
     //Pages
     private LinearLayout mPage1;
@@ -155,44 +156,24 @@ public class ActivityJoinGroup extends AppCompatActivity {
     }
 
     public void switchToPage2(View v) {
-        savePage(2);
+        mPageHandler.savePage(2);
         loadCorrectPage();
     }
 
     private void switchToPage3() {
-        savePage(3);
+        mPageHandler.savePage(3);
         loadCorrectPage();
     }
 
-    private void savePage(int page) {
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putInt("PageJoin", page);
-        editor.commit();
-    }
-
     private void loadCorrectPage() {
+        mPageHandler.loadCorrectPage();
         Integer currentPage = mSharedPreferences.getInt("PageJoin", 1);
-        mLoadScreen.setVisibility(View.GONE);
-        if (currentPage == 1) {
-            mPage1.setVisibility(View.VISIBLE);
-            mPage2.setVisibility(View.GONE);
-            mPage3.setVisibility(View.GONE);
-        }
-        else if (currentPage == 2) {
-            if (!mSharedPreferences.getBoolean("JoinTutorial", false)) {
-                mTutorial.setVisibility(View.VISIBLE);
-            }
-            mPage1.setVisibility(View.GONE);
-            mPage2.setVisibility(View.VISIBLE);
-            mPage3.setVisibility(View.GONE);
+        if (currentPage == 2) {
             mTextViewGroupCode2.setText("Gruppe: "+mSharedPreferences.getString("JoinGroupCode", ""));
             setupLists();
             setupSwipePlaceholderView();
         }
-        else {
-            mPage1.setVisibility(View.GONE);
-            mPage2.setVisibility(View.GONE);
-            mPage3.setVisibility(View.VISIBLE);
+        else if (currentPage == 3) {
             mTextViewGroupCode3.setText("Gruppe: "+mSharedPreferences.getString("JoinGroupCode", ""));
             checkIfGroupIsCompleted();
         }
@@ -251,6 +232,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
         mCodeInputHandler = new CodeInputHandler(mContext, mSharedPreferences);
         mSwipePlaceHolderViewHandlerJoinGroup = new SwipePlaceHolderViewHandlerJoinGroup(mContext);
         mSwipeHandler = new SwipeHandler("Join", mSharedPreferences);
+        mPageHandler = new PageHandler(mPage1, mPage2, mPage3, mTutorial, mLoadScreen, mSharedPreferences, "Join");
     }
 
     private void setupLists() {
@@ -322,14 +304,14 @@ public class ActivityJoinGroup extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch(menuItem.getItemId()) {
                     case R.id.play_alone:
-                        showLoadScreen();
+                        mPageHandler.showLoadScreen();
                         startActivity(new Intent(getApplicationContext(), ActivityPlayAlone.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.join_group:
                         return true;
                     case R.id.create_group:
-                        showLoadScreen();
+                        mPageHandler.showLoadScreen();
                         startActivity(new Intent(getApplicationContext(), ActivityCreateGroup.class));
                         overridePendingTransition(0,0);
                         return true;
@@ -337,14 +319,6 @@ public class ActivityJoinGroup extends AppCompatActivity {
                 return false;
             }
         });
-    }
-
-    private void showLoadScreen() {
-        mPage1.setVisibility(View.GONE);
-        mPage2.setVisibility(View.GONE);
-        mPage3.setVisibility(View.GONE);
-        mTutorial.setVisibility(View.GONE);
-        mLoadScreen.setVisibility(View.VISIBLE);
     }
 
     private void restartActivity() {

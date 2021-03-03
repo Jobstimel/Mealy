@@ -62,6 +62,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
     private FilterSeekBarHandler mFilterSeekBarHandler;
     private SwipeHandler mSwipeHandler;
     private DatabaseHandler mDatabaseHandler;
+    private PageHandler mPageHandler;
 
     //Result
     private ImageView mRecipePoster1;
@@ -207,7 +208,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
     }
 
     public void deleteGroup() {
-        showLoadScreen();
+        mPageHandler.showLoadScreen();
         mDatabaseReference.child(mSharedPreferences.getString("GroupCode", "")).removeValue();
         resetSavedFilterData();
         deleteSavedOnlineData();
@@ -274,45 +275,21 @@ public class ActivityCreateGroup extends AppCompatActivity {
         mFilterSpinnerHandler.loadSpinnerStates(mPowerSpinnerAllergies, mPowerSpinnerPreparation, mPowerSpinnerCategories, mPowerSpinnerEating);
     }
 
-    private void savePage(int page) {
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putInt("PageCreate", page);
-        editor.commit();
-    }
-
     public void switchToPage2() {
-        savePage(2);
+        mPageHandler.savePage(2);
         loadCorrectPage();
     }
 
     public void switchToPage3() {
-        savePage(3);
+        mPageHandler.savePage(3);
         loadCorrectPage();
     }
 
     private void loadCorrectPage() {
-        Integer currentPage = mSharedPreferences.getInt("PageCreate", 1);
-        mLoadScreen.setVisibility(View.GONE);
-        if (currentPage == 1) {
-            mPage1.setVisibility(View.VISIBLE);
-            mPage2.setVisibility(View.GONE);
-            mPage3.setVisibility(View.GONE);
-            mLoadScreen.setVisibility(View.GONE);
-        }
-        else if (currentPage == 2) {
-            if (!mSharedPreferences.getBoolean("CreateTutorial", false)) {
-                mTutorial.setVisibility(View.VISIBLE);
-            }
-            mPage1.setVisibility(View.GONE);
-            mPage2.setVisibility(View.VISIBLE);
-            mPage3.setVisibility(View.GONE);
+        mPageHandler.loadCorrectPage();
+        if (mSharedPreferences.getInt("PageCreate", 1) == 2) {
             setupLists();
             setupSwipePlaceholderView();
-        }
-        else {
-            mPage1.setVisibility(View.GONE);
-            mPage2.setVisibility(View.GONE);
-            mPage3.setVisibility(View.VISIBLE);
         }
     }
 
@@ -366,6 +343,8 @@ public class ActivityCreateGroup extends AppCompatActivity {
         mSwipeHandler = new SwipeHandler("Online", mSharedPreferences);
         mSwipePlaceHolderViewHandlerCreateGroup = new SwipePlaceHolderViewHandlerCreateGroup(mContext);
         mDatabaseHandler = new DatabaseHandler(mSharedPreferences);
+        mPageHandler = new PageHandler(mPage1, mPage2, mPage3, mTutorial, mLoadScreen, mSharedPreferences, "Create");
+
     }
 
     private void setupSwipePlaceholderView() {
@@ -540,12 +519,12 @@ public class ActivityCreateGroup extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch(menuItem.getItemId()) {
                     case R.id.play_alone:
-                        showLoadScreen();
+                        mPageHandler.showLoadScreen();
                         startActivity(new Intent(getApplicationContext(), ActivityPlayAlone.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.join_group:
-                        showLoadScreen();
+                        mPageHandler.showLoadScreen();
                         startActivity(new Intent(getApplicationContext(), ActivityJoinGroup.class));
                         overridePendingTransition(0,0);
                         return true;
@@ -555,14 +534,6 @@ public class ActivityCreateGroup extends AppCompatActivity {
                 return false;
             }
         });
-    }
-
-    private void showLoadScreen() {
-        mPage1.setVisibility(View.GONE);
-        mPage2.setVisibility(View.GONE);
-        mPage3.setVisibility(View.GONE);
-        mTutorial.setVisibility(View.GONE);
-        mLoadScreen.setVisibility(View.VISIBLE);
     }
 
     private void resetSharedPreferences() {

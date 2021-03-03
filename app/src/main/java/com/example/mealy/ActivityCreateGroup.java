@@ -233,7 +233,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
         mFilterLinearLayoutHandler.resetLayouts(mLinearLayoutList);
         mFilterLinearLayoutCountryHandler.resetCountryLayouts(mLinearLayoutCountryList);
         mFilterSeekBarHandler.resetSeekBarStates(mSeekBarCalories, mSeekBarTime);
-        mFilterSpinnerHandler.resetSpinnerStates(mSpinnerList, mFilterApplier, mTextViewRecipeCount, mSpinnerLayoutList, null);
+        mFilterSpinnerHandler.resetSpinnerStates(mSpinnerList, mFilterApplier, mTextViewRecipeCount, mSpinnerLayoutList, mTextViewCreateGroupButton);
         resetLikeDislikeList();
     }
 

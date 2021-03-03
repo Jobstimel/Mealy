@@ -15,8 +15,8 @@ import java.util.List;
 public class FilterSpinnerHandler {
 
     private String mMode;
-    private SharedPreferences mSharedPreferences;
     private Context mContext;
+    private SharedPreferences mSharedPreferences;
 
     private final String[] SPINNER_KEYS = {"AllergiesSpinner", "PreparationTypeSpinner", "CategorySpinner", "EatingTypeSpinner"};
 

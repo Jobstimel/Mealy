@@ -57,7 +57,6 @@ public class RecipeListAdapter extends ArrayAdapter<Recipe> {
         String url1 = getItem(position).getUrl1();
         String place = getItem(position).getPlace();
         String proVotes = String.valueOf(getItem(position).getScore());
-        String againstVotes = String.valueOf(getItem(position).getAgainst());
         String title = getItem(position).getTitle();
         title = title.split(" mit ")[0].replaceAll("-", " ").trim();
         final String url2 = getItem(position).getUrl2();
@@ -72,7 +71,6 @@ public class RecipeListAdapter extends ArrayAdapter<Recipe> {
             result = convertView;
             holder = new ViewHolder();
             holder.proVotes = convertView.findViewById(R.id.recipe_votes_for);
-            holder.againstVotes = convertView.findViewById(R.id.recipe_votes_against);
             holder.title = convertView.findViewById(R.id.recipe_title);
             holder.url1 = convertView.findViewById(R.id.recipe_image);
 
@@ -98,11 +96,10 @@ public class RecipeListAdapter extends ArrayAdapter<Recipe> {
 
         imageLoader.displayImage(url1, holder.url1, options);
         holder.proVotes.setText(proVotes);
-        holder.againstVotes.setText(againstVotes);
         holder.title.setText(title);
 
-        if (getItem(position).getPlace().equals("1")) {
-            convertView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.gold));
+        if (getItem(position).getScore() == 0) {
+            holder.proVotes.setTextColor(ContextCompat.getColor(mContext, R.color.red));
         }
 
         convertView.setOnClickListener(new View.OnClickListener() {

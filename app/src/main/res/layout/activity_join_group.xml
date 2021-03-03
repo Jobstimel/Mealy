@@ -64,7 +64,7 @@
                                 android:paddingHorizontal="5dp"
                                 android:paddingBottom="5dp"
                                 android:textColor="@color/black"
-                                android:text="Gib diesen Code in das Eingabefeld ein. Sobald der Code überprüft wurde kannst der Gruppe mit einem Klick auf 'Gruppe beitreten' beitreten."/>
+                                android:text="Gib diesen Code in das Eingabefeld ein. Sobald der Code überprüft wurde kannst du er Gruppe mit einem Klick auf 'Gruppe beitreten' beitreten."/>
 
                         </LinearLayout>
 

@@ -30,6 +30,7 @@ import java.util.ArrayList;
 
 public class RecipeListAdapter extends ArrayAdapter<Recipe> {
 
+    private final String[] CONNECTIONS = {" mit ", " an ", " auf "};
     private Context mContext;
     private int mResource;
     private int lastPosition = -1;
@@ -55,10 +56,11 @@ public class RecipeListAdapter extends ArrayAdapter<Recipe> {
         setupImageLoader();
 
         String url1 = getItem(position).getUrl1();
-        String place = getItem(position).getPlace();
         String proVotes = String.valueOf(getItem(position).getScore());
-        String title = getItem(position).getTitle();
-        title = title.split(" mit ")[0].replaceAll("-", " ").trim();
+        String title = getItem(position).getTitle().replaceAll("-", " ").trim();
+        for (int i = 0; i < CONNECTIONS.length; i++) {
+            title = title.split(CONNECTIONS[i])[0];
+        }
         final String url2 = getItem(position).getUrl2();
 
         final View result;

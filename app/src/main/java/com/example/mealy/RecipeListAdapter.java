@@ -35,6 +35,7 @@ public class RecipeListAdapter extends ArrayAdapter<Recipe> {
     private int lastPosition = -1;
 
     static class ViewHolder {
+        ImageView url1;
         TextView place;
         TextView proVotes;
         TextView againstVotes;
@@ -52,10 +53,14 @@ public class RecipeListAdapter extends ArrayAdapter<Recipe> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
+        setupImageLoader();
+
+        String url1 = getItem(position).getUrl1();
         String place = getItem(position).getPlace();
         String proVotes = String.valueOf(getItem(position).getScore());
         String againstVotes = String.valueOf(getItem(position).getAgainst());
         String title = getItem(position).getTitle();
+        title = title.split(" mit ")[0].trim();
         final String url2 = getItem(position).getUrl2();
 
         final View result;
@@ -71,6 +76,7 @@ public class RecipeListAdapter extends ArrayAdapter<Recipe> {
             holder.proVotes = convertView.findViewById(R.id.recipe_votes_for);
             holder.againstVotes = convertView.findViewById(R.id.recipe_votes_against);
             holder.title = convertView.findViewById(R.id.recipe_title);
+            holder.url1 = convertView.findViewById(R.id.recipe_image);
 
             convertView.setTag(holder);
         }
@@ -83,14 +89,20 @@ public class RecipeListAdapter extends ArrayAdapter<Recipe> {
         result.startAnimation(animation);
         lastPosition = position;
 
+        int defaultImage = mContext.getResources().getIdentifier("@drawable/mealy_app_icon", null, mContext.getPackageName());
+
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true)
+                .cacheOnDisc(true).resetViewBeforeLoading(true)
+                .showImageForEmptyUri(defaultImage)
+                .showImageOnFail(defaultImage)
+                .showImageOnLoading(defaultImage).build();
+
+        imageLoader.displayImage(url1, holder.url1, options);
         holder.place.setText(place);
         holder.proVotes.setText(proVotes);
         holder.againstVotes.setText(againstVotes);
         holder.title.setText(title);
-
-        if (position%2 != 0) {
-            convertView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.result_list_background));
-        }
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,5 +114,20 @@ public class RecipeListAdapter extends ArrayAdapter<Recipe> {
         });
 
         return convertView;
+    }
+
+    private void setupImageLoader() {
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+                .cacheOnDisc(true).cacheInMemory(true)
+                .imageScaleType(ImageScaleType.EXACTLY)
+                .displayer(new FadeInBitmapDisplayer(300)).build();
+
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+                mContext)
+                .defaultDisplayImageOptions(defaultOptions)
+                .memoryCache(new WeakMemoryCache())
+                .discCacheSize(100 * 1024 * 1024).build();
+
+        ImageLoader.getInstance().init(config);
     }
 }

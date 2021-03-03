@@ -101,7 +101,6 @@ public class SwipeHandler {
             recipe.setScore(0);
             mOfflineResults.add(recipe);
         }
-        calculatePlaces(mOfflineResults);
     }
 
     public void loadOnlineResults(DataSnapshot dataSnapshot, List<Recipe> recipes, String prefCode) {
@@ -110,7 +109,6 @@ public class SwipeHandler {
         List<String> selectedIDs = (List<String>) dataSnapshot.child(code).child("selected_ids").getValue();
         String peopleNumber = (String) dataSnapshot.child(code).child("people_number").getValue();
         calculateOnlineStandings(counter, selectedIDs, peopleNumber, recipes);
-        calculatePlaces(mOnlineResults);
     }
 
     private void calculateOnlineStandings(List<String> count, List<String> ids, String maxVotes, List<Recipe> recipes) {
@@ -124,21 +122,6 @@ public class SwipeHandler {
                     mOnlineResults.add(recipe);
                 }
             }
-        }
-    }
-
-    private void calculatePlaces(List<Recipe> list) {
-        int place = 1;
-        int current = -1;
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getScore() != current) {
-                current = list.get(i).getScore();
-                list.get(i).setPlace(place+".");
-            }
-            else {
-                list.get(i).setPlace("");
-            }
-            place += 1;
         }
     }
 }

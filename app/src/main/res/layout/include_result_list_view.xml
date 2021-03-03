@@ -21,7 +21,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Durch einen Klick auf eine Tabellenzeile wirst du direkt zum Rezept weitergeleitet."
+        android:text="Durch einen Klick auf eine Tabellenzeile wirst du direkt zum entsprechenden Rezept weitergeleitet."
         android:textColor="@color/black"
         android:background="@color/yellow"
         android:gravity="center"

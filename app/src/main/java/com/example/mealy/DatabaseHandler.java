@@ -64,4 +64,10 @@ public class DatabaseHandler {
         databaseReference.child(code).child("people_number").setValue("0");
         databaseReference.child(code).child("group_status").setValue("open");
     }
+
+    public void deleteGroup(DataSnapshot dataSnapshot, DatabaseReference databaseReference, String code) {
+        String group_counter = (String) dataSnapshot.child("stats").child("group_counter").getValue();
+        databaseReference.child("stats").child("group_counter").setValue(String.valueOf(Integer.parseInt(group_counter)+1));
+        databaseReference.child(mSharedPreferences.getString(code, "")).removeValue();
+    }
 }

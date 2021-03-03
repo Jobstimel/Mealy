@@ -38,19 +38,46 @@ public class ActivityPlayAlone extends FragmentActivity {
     private Context mContext;
 
     //Public
+    public static List<Integer> mDislikedIDs;
     public static List<Integer> mStackIDs;
     public static List<Integer> mLikedIDs;
-    public static List<Integer> mDislikedIDs;
     public static List<Object> mResolvers;
 
+    //LinearLayouts
+    private LinearLayout mLinearLayoutPreparationsSpinner;
+    private LinearLayout mLinearLayoutCategoriesSpinner;
+    private LinearLayout mLinearLayoutAllergiesSpinner;
+    private LinearLayout mLinearLayoutEatingSpinner;
+    private LinearLayout mLinearLayoutBreakfast;
+    private LinearLayout mLinearLayoutDessert;
+    private LinearLayout mLinearLayoutGermany;
+    private LinearLayout mLinearLayoutLevel1;
+    private LinearLayout mLinearLayoutLevel2;
+    private LinearLayout mLinearLayoutLevel3;
+    private LinearLayout mLinearLayoutDinner;
+    private LinearLayout mLinearLayoutFrance;
+    private LinearLayout mLinearLayoutGreece;
+    private LinearLayout mLinearLayoutLunch;
+    private LinearLayout mLinearLayoutSnack;
+    private LinearLayout mLinearLayoutDrink;
+    private LinearLayout mLinearLayoutSpain;
+    private LinearLayout mLinearLayoutItaly;
+    private LinearLayout mLinearLayoutIndia;
+    private LinearLayout mLinearLayoutAsia;
+    private LinearLayout mLoadScreen;
+    private LinearLayout mTutorial;
+    private LinearLayout mPage1;
+    private LinearLayout mPage2;
+    private LinearLayout mPage3;
+
     //Class Objects
-    private SwipeHandler mSwipeHandler;
-    private FilterApplier mFilterApplier;
-    private FilterSpinnerHandler mFilterSpinnerHandler;
-    private FilterLinearLayoutHandler mFilterLinearLayoutHandler;
     private FilterLinearLayoutCountryHandler mFilterLinearLayoutCountryHandler;
-    private FilterSeekBarHandler mFilterSeekBarHandler;
     private SwipePlaceHolderViewHandlerPlayAlone mSwipePlaceHolderViewHandler;
+    private FilterLinearLayoutHandler mFilterLinearLayoutHandler;
+    private FilterSpinnerHandler mFilterSpinnerHandler;
+    private FilterSeekBarHandler mFilterSeekBarHandler;
+    private FilterApplier mFilterApplier;
+    private SwipeHandler mSwipeHandler;
     private PageHandler mPageHandler;
 
     //Views
@@ -63,51 +90,21 @@ public class ActivityPlayAlone extends FragmentActivity {
     private ListView mListView;
 
     //Lists
-    private List<Recipe> mAllRecipesList;
-    private List<LinearLayout> mLinearLayoutList;
     private List<LinearLayout> mLinearLayoutCountryList;
-    private List<PowerSpinnerView> mSpinnerList;
     private List<LinearLayout> mSpinnerLayoutList;
+    private List<LinearLayout> mLinearLayoutList;
+    private List<PowerSpinnerView> mSpinnerList;
+    private List<Recipe> mAllRecipesList;
 
     //Spinners
-    private PowerSpinnerView mPowerSpinnerAllergies;
     private PowerSpinnerView mPowerSpinnerPreparation;
     private PowerSpinnerView mPowerSpinnerCategories;
+    private PowerSpinnerView mPowerSpinnerAllergies;
     private PowerSpinnerView mPowerSpinnerEating;
 
     //SeekBars
-    private CrystalRangeSeekbar mSeekBarTime;
     private CrystalRangeSeekbar mSeekBarCalories;
-
-    //Pages
-    private LinearLayout mPage1;
-    private LinearLayout mPage2;
-    private LinearLayout mPage3;
-    private LinearLayout mLoadScreen;
-    private LinearLayout mTutorial;
-
-    //LinearLayouts
-    private LinearLayout mLinearLayoutLevel1;
-    private LinearLayout mLinearLayoutLevel2;
-    private LinearLayout mLinearLayoutLevel3;
-    private LinearLayout mLinearLayoutBreakfast;
-    private LinearLayout mLinearLayoutLunch;
-    private LinearLayout mLinearLayoutDinner;
-    private LinearLayout mLinearLayoutDessert;
-    private LinearLayout mLinearLayoutSnack;
-    private LinearLayout mLinearLayoutDrink;
-    private LinearLayout mLinearLayoutGermany;
-    private LinearLayout mLinearLayoutSpain;
-    private LinearLayout mLinearLayoutAsia;
-    private LinearLayout mLinearLayoutItaly;
-    private LinearLayout mLinearLayoutFrance;
-    private LinearLayout mLinearLayoutGreece;
-    private LinearLayout mLinearLayoutIndia;
-
-    private LinearLayout mLinearLayoutAllergiesSpinner;
-    private LinearLayout mLinearLayoutPreparationsSpinner;
-    private LinearLayout mLinearLayoutCategoriesSpinner;
-    private LinearLayout mLinearLayoutEatingSpinner;
+    private CrystalRangeSeekbar mSeekBarTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,10 +138,10 @@ public class ActivityPlayAlone extends FragmentActivity {
     }
 
     public void resetFilter(View v) {
-        mFilterLinearLayoutHandler.resetLayouts(mLinearLayoutList);
+        mFilterSpinnerHandler.resetSpinnerStates(mSpinnerList, mFilterApplier, mTextViewRecipeCount, mSpinnerLayoutList, mTextViewRateRecipesButton);
         mFilterLinearLayoutCountryHandler.resetCountryLayouts(mLinearLayoutCountryList);
         mFilterSeekBarHandler.resetSeekBarStates(mSeekBarCalories, mSeekBarTime);
-        mFilterSpinnerHandler.resetSpinnerStates(mSpinnerList, mFilterApplier, mTextViewRecipeCount, mSpinnerLayoutList, mTextViewRateRecipesButton);
+        mFilterLinearLayoutHandler.resetLayouts(mLinearLayoutList);
         resetLikeDislikeList();
         makeToast("Filter wurde zurückgesetzt");
     }

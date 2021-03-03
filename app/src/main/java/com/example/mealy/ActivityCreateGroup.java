@@ -50,91 +50,82 @@ public class ActivityCreateGroup extends AppCompatActivity {
     private Context mContext;
 
     //Public
-    public static List<Integer> mLikedIDs;
     public static List<Integer> mDislikedIDs;
+    public static List<Integer> mLikedIDs;
     public static List<Integer> mStackIDs;
     public static List<Object> mResolvers;
 
-    //Classes
-    private SwipePlaceHolderViewHandlerCreateGroup mSwipePlaceHolderViewHandlerCreateGroup;
-    private FilterSpinnerHandler mFilterSpinnerHandler;
-    private FilterApplier mFilterApplier;
-    private FilterLinearLayoutHandler mFilterLinearLayoutHandler;
-    private FilterLinearLayoutCountryHandler mFilterLinearLayoutCountryHandler;
-    private FilterSeekBarHandler mFilterSeekBarHandler;
-    private SwipeHandler mSwipeHandler;
-    private DatabaseHandler mDatabaseHandler;
-    private PageHandler mPageHandler;
-
-    //Result
+    //LinearLayouts
+    private LinearLayout mLinearLayoutPreparationsSpinner;
+    private LinearLayout mLinearLayoutPlaceholderResults1;
+    private LinearLayout mLinearLayoutPlaceholderResults2;
+    private LinearLayout mLinearLayoutCategoriesSpinner;
+    private LinearLayout mLinearLayoutAllergiesSpinner;
+    private LinearLayout mLinearLayoutEatingSpinner;
     private LinearLayout mLinearLayoutResultTable;
-    private ListView mListView;
+    private LinearLayout mLinearLayoutBreakfast;
+    private LinearLayout mLinearLayoutDessert;
+    private LinearLayout mLinearLayoutGermany;
+    private LinearLayout mLinearLayoutLevel1;
+    private LinearLayout mLinearLayoutLevel2;
+    private LinearLayout mLinearLayoutLevel3;
+    private LinearLayout mLinearLayoutDinner;
+    private LinearLayout mLinearLayoutFrance;
+    private LinearLayout mLinearLayoutGreece;
+    private LinearLayout mLinearLayoutLunch;
+    private LinearLayout mLinearLayoutSnack;
+    private LinearLayout mLinearLayoutDrink;
+    private LinearLayout mLinearLayoutSpain;
+    private LinearLayout mLinearLayoutItaly;
+    private LinearLayout mLinearLayoutIndia;
+    private LinearLayout mLinearLayoutAsia;
+    private LinearLayout mLoadScreen;
+    private LinearLayout mTutorial;
+    private LinearLayout mPage1;
+    private LinearLayout mPage2;
+    private LinearLayout mPage3;
 
     //Views
     private BottomNavigationView mBottomNavigationView;
     private SwipePlaceHolderView mSwipePlaceHolderView;
-    private TextView mTextViewRecipeCount;
     private TextView mTextViewCreateGroupButton;
-    private TextView mTextViewGroupCode2;
-    private TextView mTextViewGroupCode3;
-    private TextView mTextViewCompleteCounter;
     private TextView mTextViewCloseGroupButton;
     private TextView mTextViewResultPageHeader;
-
-    //Pages
-    private LinearLayout mPage1;
-    private LinearLayout mPage2;
-    private LinearLayout mPage3;
-    private LinearLayout mLoadScreen;
-    private LinearLayout mTutorial;
-
-    //Lists
-    private List<Recipe> mAllRecipesList;
-    private List<PowerSpinnerView> mSpinnerList;
-
-    //SeekBars
-    private CrystalRangeSeekbar mSeekBarTime;
-    private CrystalRangeSeekbar mSeekBarCalories;
-
+    private TextView mTextViewCompleteCounter;
+    private TextView mTextViewRecipeCount;
+    private TextView mTextViewGroupCode2;
+    private TextView mTextViewGroupCode3;
     private TextView mTextViewCalories;
     private TextView mTextViewTime;
+    private ListView mListView;
+
+    //Classes
+    private SwipePlaceHolderViewHandlerCreateGroup mSwipePlaceHolderViewHandlerCreateGroup;
+    private FilterLinearLayoutCountryHandler mFilterLinearLayoutCountryHandler;
+    private FilterLinearLayoutHandler mFilterLinearLayoutHandler;
+    private FilterSpinnerHandler mFilterSpinnerHandler;
+    private FilterSeekBarHandler mFilterSeekBarHandler;
+    private DatabaseHandler mDatabaseHandler;
+    private FilterApplier mFilterApplier;
+    private SwipeHandler mSwipeHandler;
+    private PageHandler mPageHandler;
+
+    //Lists
+    private List<LinearLayout> mLinearLayoutCountryList;
+    private List<LinearLayout> mSpinnerLayoutList;
+    private List<LinearLayout> mLinearLayoutList;
+    private List<PowerSpinnerView> mSpinnerList;
+    private List<Recipe> mAllRecipesList;
 
     //Spinners
-    private PowerSpinnerView mPowerSpinnerAllergies;
     private PowerSpinnerView mPowerSpinnerPreparation;
     private PowerSpinnerView mPowerSpinnerCategories;
+    private PowerSpinnerView mPowerSpinnerAllergies;
     private PowerSpinnerView mPowerSpinnerEating;
 
-    private LinearLayout mLinearLayoutAllergiesSpinner;
-    private LinearLayout mLinearLayoutPreparationsSpinner;
-    private LinearLayout mLinearLayoutCategoriesSpinner;
-    private LinearLayout mLinearLayoutEatingSpinner;
-
-    private List<LinearLayout> mSpinnerLayoutList;
-
-    //Layouts
-    private LinearLayout mLinearLayoutLevel1;
-    private LinearLayout mLinearLayoutLevel2;
-    private LinearLayout mLinearLayoutLevel3;
-    private LinearLayout mLinearLayoutBreakfast;
-    private LinearLayout mLinearLayoutLunch;
-    private LinearLayout mLinearLayoutDinner;
-    private LinearLayout mLinearLayoutDessert;
-    private LinearLayout mLinearLayoutSnack;
-    private LinearLayout mLinearLayoutDrink;
-    private LinearLayout mLinearLayoutGermany;
-    private LinearLayout mLinearLayoutSpain;
-    private LinearLayout mLinearLayoutAsia;
-    private LinearLayout mLinearLayoutItaly;
-    private LinearLayout mLinearLayoutFrance;
-    private LinearLayout mLinearLayoutGreece;
-    private LinearLayout mLinearLayoutIndia;
-
-    private List<LinearLayout> mLinearLayoutList;
-    private List<LinearLayout> mLinearLayoutCountryList;
-
-    private LinearLayout mLinearLayoutPlaceholderResults1;
-    private LinearLayout mLinearLayoutPlaceholderResults2;
+    //SeekBars
+    private CrystalRangeSeekbar mSeekBarCalories;
+    private CrystalRangeSeekbar mSeekBarTime;
 
     //Database
     private DatabaseReference mDatabaseReference;
@@ -144,8 +135,24 @@ public class ActivityCreateGroup extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_group);
+        mSharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        mContext = getApplicationContext();
 
-        setupElements();
+        setupLinearLayouts();
+        setupClasses();
+        setupSpinners();
+        setupViews();
+        setupSeekBars();
+        setupDatabase();
+        generateGroupCode();
+        setupLists();
+        setupBottomNavigationBar();
+
+        setupVisibilities();
+        setupListeners();
+        loadCorrectPage();
+        loadFilter();
+        mFilterApplier.applyFilter(mTextViewRecipeCount, mTextViewCreateGroupButton);
     }
 
     @Override
@@ -209,25 +216,25 @@ public class ActivityCreateGroup extends AppCompatActivity {
 
     public void deleteGroup() {
         mPageHandler.showLoadScreen();
-        mDatabaseReference.child(mSharedPreferences.getString("GroupCode", "")).removeValue();
-        resetSavedFilterData();
+        mDatabaseHandler.deleteGroup(mDataSnapshot, mDatabaseReference, "GroupCode");
         deleteSavedOnlineData();
+        resetSavedFilterData();
         restartActivity();
     }
 
     public void resetSavedFilterData() {
-        mFilterLinearLayoutHandler.resetLayoutSharedPreferences();
         mFilterLinearLayoutCountryHandler.resetCountryLayoutsSharedPreferences();
+        mFilterLinearLayoutHandler.resetLayoutSharedPreferences();
         mFilterSeekBarHandler.resetSeekBarSharedPreferences();
         mFilterSpinnerHandler.resetSpinnerSharedPreferences();
         resetLikeDislikeList();
     }
 
     public void resetFilter(View v) {
-        mFilterLinearLayoutHandler.resetLayouts(mLinearLayoutList);
+        mFilterSpinnerHandler.resetSpinnerStates(mSpinnerList, mFilterApplier, mTextViewRecipeCount, mSpinnerLayoutList, mTextViewCreateGroupButton);
         mFilterLinearLayoutCountryHandler.resetCountryLayouts(mLinearLayoutCountryList);
         mFilterSeekBarHandler.resetSeekBarStates(mSeekBarCalories, mSeekBarTime);
-        mFilterSpinnerHandler.resetSpinnerStates(mSpinnerList, mFilterApplier, mTextViewRecipeCount, mSpinnerLayoutList, mTextViewCreateGroupButton);
+        mFilterLinearLayoutHandler.resetLayouts(mLinearLayoutList);
         resetLikeDislikeList();
         makeToast("Filter wurde zurückgesetzt");
     }
@@ -303,37 +310,60 @@ public class ActivityCreateGroup extends AppCompatActivity {
         mTextViewGroupCode3.setText("Zugangscode: "+mSharedPreferences.getString("GroupCode", ""));
     }
 
-    private void setupElements() {
-        mSharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        mContext = getApplicationContext();
-        //resetSharedPreferences();
-
-        setupPages();
-        setupClasses();
-        setupLists();
-        setupViews();
-        setupSeekBars();
-        setupSpinners();
-        setupLayouts();
-        setupDatabase();
-        generateGroupCode();
-        setupBottomNavigationBar();
-        loadCorrectPage();
-        loadFilter();
-        mFilterApplier.applyFilter(mTextViewRecipeCount, mTextViewCreateGroupButton);
+    private void setupLinearLayouts() {
+        mLinearLayoutPlaceholderResults1 = findViewById(R.id.linear_layout_result_page_placeholder1);
+        mLinearLayoutPlaceholderResults2 = findViewById(R.id.linear_layout_result_page_placeholder2);
+        mLinearLayoutPreparationsSpinner = findViewById(R.id.preparation_linear_layout);
+        mLinearLayoutAllergiesSpinner = findViewById(R.id.allergies_linear_layout);
+        mLinearLayoutCategoriesSpinner = findViewById(R.id.category_linear_layout);
+        mLinearLayoutResultTable = findViewById(R.id.linear_layout_result_table);
+        mLinearLayoutEatingSpinner = findViewById(R.id.eating_linear_layout);
+        mLinearLayoutBreakfast = findViewById(R.id.breakfast_linear_layout);
+        mLinearLayoutDessert = findViewById(R.id.dessert_linear_layout);
+        mLinearLayoutGermany = findViewById(R.id.germany_linear_layout);
+        mLinearLayoutDinner = findViewById(R.id.dinner_linear_layout);
+        mLinearLayoutLevel1 = findViewById(R.id.diff1_linear_layout);
+        mLinearLayoutLevel2 = findViewById(R.id.diff2_linear_layout);
+        mLinearLayoutLevel3 = findViewById(R.id.diff3_linear_layout);
+        mLinearLayoutFrance = findViewById(R.id.france_linear_layout);
+        mLinearLayoutGreece = findViewById(R.id.greece_linear_layout);
+        mLinearLayoutLunch = findViewById(R.id.lunch_linear_layout);
+        mLinearLayoutSnack = findViewById(R.id.snack_linear_layout);
+        mLinearLayoutDrink = findViewById(R.id.drink_linear_layout);
+        mLinearLayoutSpain = findViewById(R.id.spain_linear_layout);
+        mLinearLayoutItaly = findViewById(R.id.italy_linear_layout);
+        mLinearLayoutIndia = findViewById(R.id.india_linear_layout);
+        mLinearLayoutAsia = findViewById(R.id.asia_linear_layout);
+        mLoadScreen = findViewById(R.id.load_screen);
+        mTutorial = findViewById(R.id.tutorial);
+        mPage1 = findViewById(R.id.page_1);
+        mPage2 = findViewById(R.id.page_2);
+        mPage3 = findViewById(R.id.page_3);
     }
 
     private void setupClasses() {
         mAllRecipesList = JsonLoader.loadRecipies(mContext);
-        mFilterSpinnerHandler = new FilterSpinnerHandler("Online", mSharedPreferences, mContext);
-        mFilterApplier = new FilterApplier("Online", mSharedPreferences, mAllRecipesList, mContext);
-        mFilterLinearLayoutHandler = new FilterLinearLayoutHandler("Online", mSharedPreferences, mContext);
         mFilterLinearLayoutCountryHandler = new FilterLinearLayoutCountryHandler("Online", mSharedPreferences, mContext);
-        mFilterSeekBarHandler = new FilterSeekBarHandler("Online", mSharedPreferences, mContext);
-        mSwipeHandler = new SwipeHandler("Online", mSharedPreferences);
-        mSwipePlaceHolderViewHandlerCreateGroup = new SwipePlaceHolderViewHandlerCreateGroup(mContext);
-        mDatabaseHandler = new DatabaseHandler(mSharedPreferences);
         mPageHandler = new PageHandler(mPage1, mPage2, mPage3, mTutorial, mLoadScreen, mSharedPreferences, "Create");
+        mFilterLinearLayoutHandler = new FilterLinearLayoutHandler("Online", mSharedPreferences, mContext);
+        mFilterApplier = new FilterApplier("Online", mSharedPreferences, mAllRecipesList, mContext);
+        mFilterSeekBarHandler = new FilterSeekBarHandler("Online", mSharedPreferences, mContext);
+        mFilterSpinnerHandler = new FilterSpinnerHandler("Online", mSharedPreferences, mContext);
+        mSwipePlaceHolderViewHandlerCreateGroup = new SwipePlaceHolderViewHandlerCreateGroup(mContext);
+        mSwipeHandler = new SwipeHandler("Online", mSharedPreferences);
+        mDatabaseHandler = new DatabaseHandler(mSharedPreferences);
+
+        mSwipeHandler.loadDislikedIndices();
+        mSwipeHandler.loadLikedIndices();
+    }
+
+    private void setupLists() {
+        mLinearLayoutList = Arrays.asList(mLinearLayoutLevel1,mLinearLayoutLevel2,mLinearLayoutLevel3,mLinearLayoutBreakfast,mLinearLayoutLunch,mLinearLayoutDinner,mLinearLayoutDessert,mLinearLayoutSnack,mLinearLayoutDrink);
+        mLinearLayoutCountryList = Arrays.asList(mLinearLayoutGermany,mLinearLayoutSpain,mLinearLayoutAsia,mLinearLayoutItaly,mLinearLayoutFrance,mLinearLayoutGreece,mLinearLayoutIndia);
+        mSpinnerLayoutList = Arrays.asList(mLinearLayoutAllergiesSpinner, mLinearLayoutPreparationsSpinner, mLinearLayoutCategoriesSpinner, mLinearLayoutEatingSpinner);
+        mSpinnerList = Arrays.asList(mPowerSpinnerAllergies, mPowerSpinnerPreparation, mPowerSpinnerCategories, mPowerSpinnerEating);
+        mDislikedIDs = mSwipeHandler.mDislikedIDs;
+        mLikedIDs = mSwipeHandler.mLikedIDs;
     }
 
     private void setupSwipePlaceholderView() {
@@ -349,24 +379,6 @@ public class ActivityCreateGroup extends AppCompatActivity {
                 if (mSwipePlaceHolderView.getAllResolvers().size() == 0) {
                     uploadRatings();
                 }
-            }
-        });
-    }
-
-    private void setupPages() {
-        mPage1 = findViewById(R.id.page_1);
-        mPage2 = findViewById(R.id.page_2);
-        mPage3 = findViewById(R.id.page_3);
-        mLoadScreen = findViewById(R.id.load_screen);
-        mTutorial = findViewById(R.id.tutorial);
-        mTutorial.setVisibility(View.GONE);
-        mTutorial.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTutorial.setVisibility(View.GONE);
-                SharedPreferences.Editor editor = mSharedPreferences.edit();
-                editor.putBoolean("CreateTutorial", true);
-                editor.commit();
             }
         });
     }
@@ -389,35 +401,22 @@ public class ActivityCreateGroup extends AppCompatActivity {
         });
     }
 
-    private void setupLists() {
-        mSwipeHandler.loadLikedIndices();
-        mSwipeHandler.loadDislikedIndices();
-        mLikedIDs = mSwipeHandler.mLikedIDs;
-        mDislikedIDs = mSwipeHandler.mDislikedIDs;
-    }
-
     private void setupViews() {
-        mListView = findViewById(R.id.list_view);
-        mTextViewRecipeCount = findViewById(R.id.text_view_recipe_count);
         mTextViewCreateGroupButton = findViewById(R.id.text_view_create_group_button);
-        mTextViewGroupCode2 = findViewById(R.id.text_view_group_code_2);
-        mTextViewGroupCode3 = findViewById(R.id.text_view_group_code_3);
         mTextViewCompleteCounter = findViewById(R.id.text_view_complete_counter);
         mTextViewResultPageHeader = findViewById(R.id.text_view_result_page_top);
         mTextViewCloseGroupButton = findViewById(R.id.text_view_close_voting);
-        mTextViewCloseGroupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                closeVoting();
-            }
-        });
+        mTextViewRecipeCount = findViewById(R.id.text_view_recipe_count);
+        mTextViewGroupCode2 = findViewById(R.id.text_view_group_code_2);
+        mTextViewGroupCode3 = findViewById(R.id.text_view_group_code_3);
+        mListView = findViewById(R.id.list_view);
     }
 
     private void setupSeekBars() {
-        mSeekBarTime = findViewById(R.id.time_seek_bar);
-        mSeekBarCalories = findViewById(R.id.calories_seek_bar);
         mTextViewCalories = findViewById(R.id.calories_text_view);
+        mSeekBarCalories = findViewById(R.id.calories_seek_bar);
         mTextViewTime = findViewById(R.id.time_text_view);
+        mSeekBarTime = findViewById(R.id.time_seek_bar);
 
         mSeekBarCalories.setOnRangeSeekbarChangeListener((minValue, maxValue) -> mTextViewCalories.setText(minValue+" - "+maxValue+" kcal"));
 
@@ -435,12 +434,10 @@ public class ActivityCreateGroup extends AppCompatActivity {
     }
 
     private void setupSpinners() {
-        mPowerSpinnerAllergies = findViewById(R.id.allergies_power_spinner);
         mPowerSpinnerPreparation = findViewById(R.id.preparation_type_power_spinner);
+        mPowerSpinnerAllergies = findViewById(R.id.allergies_power_spinner);
         mPowerSpinnerCategories = findViewById(R.id.category_power_spinner);
         mPowerSpinnerEating = findViewById(R.id.eating_type_power_spinner);
-
-        mSpinnerList = Arrays.asList(mPowerSpinnerAllergies, mPowerSpinnerPreparation, mPowerSpinnerCategories, mPowerSpinnerEating);
 
         mPowerSpinnerEating.setOnSpinnerItemSelectedListener((OnSpinnerItemSelectedListener<String>) (oldIndex, oldItem, newIndex, newItem) -> {
             mFilterSpinnerHandler.applySpinner("EatingTypeSpinner", newItem, newIndex, mLinearLayoutEatingSpinner);
@@ -465,40 +462,6 @@ public class ActivityCreateGroup extends AppCompatActivity {
             mFilterApplier.applyFilter(mTextViewRecipeCount, mTextViewCreateGroupButton);
             resetLikeDislikeList();
         });
-
-        mLinearLayoutAllergiesSpinner = findViewById(R.id.allergies_linear_layout);
-        mLinearLayoutPreparationsSpinner = findViewById(R.id.preparation_linear_layout);
-        mLinearLayoutCategoriesSpinner = findViewById(R.id.category_linear_layout);
-        mLinearLayoutEatingSpinner = findViewById(R.id.eating_linear_layout);
-
-        mSpinnerLayoutList = Arrays.asList(mLinearLayoutAllergiesSpinner, mLinearLayoutPreparationsSpinner, mLinearLayoutCategoriesSpinner, mLinearLayoutEatingSpinner);
-    }
-
-    private void setupLayouts() {
-        mLinearLayoutLevel1 = findViewById(R.id.diff1_linear_layout);
-        mLinearLayoutLevel2 = findViewById(R.id.diff2_linear_layout);
-        mLinearLayoutLevel3 = findViewById(R.id.diff3_linear_layout);
-        mLinearLayoutBreakfast = findViewById(R.id.breakfast_linear_layout);
-        mLinearLayoutLunch = findViewById(R.id.lunch_linear_layout);
-        mLinearLayoutDinner = findViewById(R.id.dinner_linear_layout);
-        mLinearLayoutDessert = findViewById(R.id.dessert_linear_layout);
-        mLinearLayoutSnack = findViewById(R.id.snack_linear_layout);
-        mLinearLayoutDrink = findViewById(R.id.drink_linear_layout);
-        mLinearLayoutGermany = findViewById(R.id.germany_linear_layout);
-        mLinearLayoutSpain = findViewById(R.id.spain_linear_layout);
-        mLinearLayoutAsia = findViewById(R.id.asia_linear_layout);
-        mLinearLayoutItaly = findViewById(R.id.italy_linear_layout);
-        mLinearLayoutFrance = findViewById(R.id.france_linear_layout);
-        mLinearLayoutGreece = findViewById(R.id.greece_linear_layout);
-        mLinearLayoutIndia = findViewById(R.id.india_linear_layout);
-
-        mLinearLayoutPlaceholderResults1 = findViewById(R.id.linear_layout_result_page_placeholder1);
-        mLinearLayoutPlaceholderResults2 = findViewById(R.id.linear_layout_result_page_placeholder2);
-        mLinearLayoutResultTable = findViewById(R.id.linear_layout_result_table);
-        mLinearLayoutResultTable.setVisibility(View.GONE);
-
-        mLinearLayoutList = Arrays.asList(mLinearLayoutLevel1,mLinearLayoutLevel2,mLinearLayoutLevel3,mLinearLayoutBreakfast,mLinearLayoutLunch,mLinearLayoutDinner,mLinearLayoutDessert,mLinearLayoutSnack,mLinearLayoutDrink);
-        mLinearLayoutCountryList = Arrays.asList(mLinearLayoutGermany,mLinearLayoutSpain,mLinearLayoutAsia,mLinearLayoutItaly,mLinearLayoutFrance,mLinearLayoutGreece,mLinearLayoutIndia);
     }
 
     private void setupBottomNavigationBar() {
@@ -526,10 +489,28 @@ public class ActivityCreateGroup extends AppCompatActivity {
         });
     }
 
-    private void resetSharedPreferences() {
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.clear();
-        editor.commit();
+    private void setupVisibilities() {
+        mLinearLayoutResultTable.setVisibility(View.GONE);
+        mTutorial.setVisibility(View.GONE);
+    }
+
+    private void setupListeners() {
+        mTutorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTutorial.setVisibility(View.GONE);
+                SharedPreferences.Editor editor = mSharedPreferences.edit();
+                editor.putBoolean("CreateTutorial", true);
+                editor.commit();
+            }
+        });
+
+        mTextViewCloseGroupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeVoting();
+            }
+        });
     }
 
     private void deleteSavedOnlineData() {

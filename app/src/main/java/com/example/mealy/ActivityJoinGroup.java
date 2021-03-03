@@ -39,48 +39,46 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private Context mContext;
 
     //Public
+    public static List<Integer> mDislikedIDs;
     public static List<Integer> mStackIDs;
     public static List<Object> mResolvers;
     public static List<Integer> mLikedIDs;
-    public static List<Integer> mDislikedIDs;
-
-    //Classes
-    private CodeInputHandler mCodeInputHandler;
-    private SwipePlaceHolderViewHandlerJoinGroup mSwipePlaceHolderViewHandlerJoinGroup;
-    private SwipeHandler mSwipeHandler;
-    private PageHandler mPageHandler;
-
-    //Pages
-    private LinearLayout mPage1;
-    private LinearLayout mPage2;
-    private LinearLayout mPage3;
-    private LinearLayout mLoadScreen;
-    private LinearLayout mTutorial;
-
-    //Lists
-    private List<Recipe> mAllRecipesList;
 
     //Views
     private BottomNavigationView mBottomNavigationView;
     private SwipePlaceHolderView mSwipePlaceHolderView;
-    private CodeInputView mCodeInputView;
-    private TextView mTextViewCodeInputStatus;
-    private TextView mTextViewJoinGroupButton;
     private TextView mTextViewLeaveGroupButton;
     private TextView mTextViewResultPageHeader;
+    private TextView mTextViewCodeInputStatus;
+    private TextView mTextViewJoinGroupButton;
+    private CodeInputView mCodeInputView;
     private TextView mTextViewGroupCode2;
     private TextView mTextViewGroupCode3;
 
-    //Result
+    //LinearLayouts
+    private LinearLayout mLinearLayoutPlaceholderResults;
     private LinearLayout mLinearLayoutResultTable;
-    private ListView mListView;
+    private LinearLayout mLoadScreen;
+    private LinearLayout mTutorial;
+    private LinearLayout mPage1;
+    private LinearLayout mPage2;
+    private LinearLayout mPage3;
+
+    //Classes
+    private SwipePlaceHolderViewHandlerJoinGroup mSwipePlaceHolderViewHandlerJoinGroup;
+    private CodeInputHandler mCodeInputHandler;
+    private SwipeHandler mSwipeHandler;
+    private PageHandler mPageHandler;
 
     //Database
     private DatabaseReference mDatabaseReference;
     private DataSnapshot mDataSnapshot;
 
-    //Layouts
-    private LinearLayout mLinearLayoutPlaceholderResults;
+    //Lists
+    private List<Recipe> mAllRecipesList;
+
+    //ListView
+    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -12,10 +12,12 @@
     <color name="grey">#BDBDBD</color>
     <color name="yellow">#FFF200</color>
     <color name="orange">#DC7633</color>
-    <color name="gold">#FFD700</color>
+    <color name="gold">#FFE27A</color>
     <color name="silver">#C0C0C0</color>
     <color name="bronze">#DAA520</color>
 
+
+    <color name="result_list_background">#E6E6E6</color>
     <color name="foreground">#BDBDBD</color>
     <color name="text_color">#80FFFFFF</color>
     <color name="skin">#F7CAA5</color>

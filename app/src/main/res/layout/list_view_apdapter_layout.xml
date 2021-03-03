@@ -1,84 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/filter_background_color"
-    android:orientation="horizontal">
+    android:layout_height="50dp"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:id="@+id/background_color"
+    <TextView
+        android:id="@+id/recipe_place"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:text="10."
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:gravity="center_vertical|end"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/recipe_votes_for"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:text="9"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:gravity="center_vertical|end"
+        android:textColor="@color/filter_green"/>
+
+    <TextView
+        android:id="@+id/recipe_votes_against"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:text="3"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:gravity="center_vertical|end"
+        android:textColor="@color/red"/>
+
+    <TextView
+        android:id="@+id/recipe_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="2dp"
-        android:orientation="horizontal"
-        android:background="@color/filter_green_transparent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="2dp"
-            android:background="@color/filter_background_color"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_margin="5dp"
-                android:orientation="horizontal"
-                android:weightSum="10">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/filter_border_color"
-                    android:layout_marginRight="2.5dp"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/text_view_recipe_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:textSize="12dp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:tooltipText="@string/tooltip_votes"
-                    android:background="@color/filter_border_color"
-                    android:layout_marginLeft="2.5dp"
-                    android:layout_weight="9">
-
-                    <TextView
-                        android:id="@+id/text_view_recipe_score"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:gravity="center"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:textSize="12dp"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/image_view_recipe_poster"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginBottom="5dp"
-                android:scaleType="centerCrop"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
+        android:paddingLeft="15dp"
+        android:paddingRight="5dp"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:textColor="@color/black"/>
 
 </LinearLayout>

@@ -14,11 +14,21 @@ public class Recipe {
     private String[] tags;
     private String ingredients;
     private Integer score;
+    private Integer against;
+    private String place;
     private String calories;
     private String carbs;
     private String protein;
     private String fiber;
     private String fat;
+
+    public Integer getAgainst() {
+        return against;
+    }
+
+    public String getPlace() {
+        return place;
+    }
 
     public Integer getIndex() {
         return index;
@@ -78,6 +88,14 @@ public class Recipe {
 
     public String getFat() {
         return fat;
+    }
+
+    public void setAgainst(Integer against) {
+        this.against = against;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
     }
 
     public void setIndex(Integer index) {

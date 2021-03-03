@@ -20,8 +20,8 @@ public class SwipeHandler {
     public List<Integer> mSelectedIDs;
     public List<Integer> mLikedIDs;
     public List<Integer> mDislikedIDs;
-    public List<Recipe> mOfflineResults;
-    public List<Recipe> mOnlineWinners;
+    public ArrayList<Recipe> mOfflineResults;
+    public ArrayList<Recipe> mOnlineResults;
 
     public SwipeHandler(String mMode, SharedPreferences mSharedPreferences) {
         this.mMode = mMode;
@@ -87,27 +87,21 @@ public class SwipeHandler {
         editor.commit();
     }
 
-    public void loadOfflineResults(List<Recipe> recipes, List<Integer> liked, List<Integer> disliked) {
+    public void loadOfflineResults(List<Recipe> recipes) {
         mOfflineResults = new ArrayList<>();
-        for (int i = 0; i < liked.size(); i++) {
-            Recipe recipe = recipes.get(liked.get(i));
+        loadLikedIndices();
+        loadDislikedIndices();
+        for (int i = 0; i < mLikedIDs.size(); i++) {
+            Recipe recipe = recipes.get(mLikedIDs.get(i));
             recipe.setScore(1);
             mOfflineResults.add(recipe);
-            if (mOfflineResults.size() == 3) {
-                break;
-            }
         }
-
-        if (mOfflineResults.size() < 3) {
-            for (int i = 0; i < disliked.size(); i++) {
-                Recipe recipe = recipes.get(disliked.get(i));
-                recipe.setScore(0);
-                mOfflineResults.add(recipe);
-                if (mOfflineResults.size() == 3) {
-                    break;
-                }
-            }
+        for (int i = 0; i < mDislikedIDs.size(); i++) {
+            Recipe recipe = recipes.get(mDislikedIDs.get(i));
+            recipe.setScore(0);
+            mOfflineResults.add(recipe);
         }
+        calculatePlaces(mOfflineResults);
     }
 
     public void loadOnlineResults(DataSnapshot dataSnapshot, List<Recipe> recipes, String prefCode) {
@@ -116,24 +110,35 @@ public class SwipeHandler {
         List<String> selectedIDs = (List<String>) dataSnapshot.child(code).child("selected_ids").getValue();
         String peopleNumber = (String) dataSnapshot.child(code).child("people_number").getValue();
         calculateOnlineStandings(counter, selectedIDs, peopleNumber, recipes);
+        calculatePlaces(mOnlineResults);
     }
 
     private void calculateOnlineStandings(List<String> count, List<String> ids, String maxVotes, List<Recipe> recipes) {
-        mOnlineWinners = new ArrayList<>();
+        mOnlineResults = new ArrayList<>();
         for (int i = Integer.parseInt(maxVotes); i > -1; i--) {
             for (int y = 0; y < ids.size(); y++) {
                 if (Integer.parseInt(count.get(y)) == i) {
                     Recipe recipe = recipes.get(Integer.parseInt(ids.get(y)));
                     recipe.setScore(i);
-                    mOnlineWinners.add(recipe);
-                }
-                if (mOnlineWinners.size() == 3) {
-                    break;
+                    recipe.setAgainst(Integer.parseInt(maxVotes)-i);
+                    mOnlineResults.add(recipe);
                 }
             }
-            if (mOnlineWinners.size() == 3) {
-                break;
+        }
+    }
+
+    private void calculatePlaces(List<Recipe> list) {
+        int place = 1;
+        int current = -1;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getScore() != current) {
+                current = list.get(i).getScore();
+                list.get(i).setPlace(place+".");
             }
+            else {
+                list.get(i).setPlace("");
+            }
+            place += 1;
         }
     }
 }

@@ -53,16 +53,6 @@ public class ActivityPlayAlone extends FragmentActivity {
     private SwipePlaceHolderViewHandlerPlayAlone mSwipePlaceHolderViewHandler;
     private PageHandler mPageHandler;
 
-    //Result
-    private ImageView mRecipePoster1;
-    private ImageView mRecipePoster2;
-    private ImageView mRecipePoster3;
-    private TextView mRecipeScore1;
-    private TextView mRecipeScore2;
-    private TextView mRecipeScore3;
-    private List<ImageView> mPosterList;
-    private List<TextView> mScoreList;
-
     //Views
     private BottomNavigationView mBottomNavigationView;
     private SwipePlaceHolderView mSwipePlaceHolderView;
@@ -70,6 +60,7 @@ public class ActivityPlayAlone extends FragmentActivity {
     private TextView mTextViewRecipeCount;
     private TextView mTextViewCalories;
     private TextView mTextViewTime;
+    private ListView mListView;
 
     //Lists
     private List<Recipe> mAllRecipesList;
@@ -197,6 +188,8 @@ public class ActivityPlayAlone extends FragmentActivity {
 
     public void switchPage3() {
         mPageHandler.savePage(3);
+        mSwipeHandler.saveLikedIndices(mLikedIDs);
+        mSwipeHandler.saveDislikedIndices(mDislikedIDs);
         loadCorrectPage();
     }
 
@@ -215,10 +208,9 @@ public class ActivityPlayAlone extends FragmentActivity {
     }
 
     private void loadResults() {
-        setupResultPage();
-        mSwipeHandler.loadOfflineResults(mAllRecipesList, mLikedIDs, mDislikedIDs);
-        ResultLoader mResultLoader = new ResultLoader(mContext);
-        mResultLoader.loadResults(mSwipeHandler.mOfflineResults, mPosterList, mScoreList);
+        mSwipeHandler.loadOfflineResults(mAllRecipesList);
+        RecipeListAdapter adapter = new RecipeListAdapter(this, R.layout.list_view_apdapter_layout, mSwipeHandler.mOfflineResults);
+        mListView.setAdapter(adapter);
     }
 
     private void loadFilter() {
@@ -245,17 +237,6 @@ public class ActivityPlayAlone extends FragmentActivity {
         setupBottomNavigationBar();
         loadCorrectPage();
         mFilterApplier.applyFilter(mTextViewRecipeCount, mTextViewRateRecipesButton);
-    }
-
-    private void setupResultPage() {
-        mRecipePoster1 = findViewById(R.id.recipe_image_1);
-        mRecipePoster2 = findViewById(R.id.recipe_image_2);
-        mRecipePoster3 = findViewById(R.id.recipe_image_3);
-        mRecipeScore1 = findViewById(R.id.recipe_score_1);
-        mRecipeScore2 = findViewById(R.id.recipe_score_2);
-        mRecipeScore3 = findViewById(R.id.recipe_score_3);
-        mPosterList = Arrays.asList(mRecipePoster1,mRecipePoster2,mRecipePoster3);
-        mScoreList = Arrays.asList(mRecipeScore1,mRecipeScore2,mRecipeScore3);
     }
 
     private void setupSwipePlaceholderView() {
@@ -307,6 +288,7 @@ public class ActivityPlayAlone extends FragmentActivity {
     }
 
     private void setupViews() {
+        mListView = findViewById(R.id.list_view);
         mTextViewRateRecipesButton = findViewById(R.id.text_view_create_group_button);
         mTextViewRecipeCount = findViewById(R.id.text_view_recipe_count);
         mTextViewCalories = findViewById(R.id.calories_text_view);

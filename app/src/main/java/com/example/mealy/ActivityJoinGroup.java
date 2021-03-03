@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -71,14 +72,8 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private TextView mTextViewGroupCode3;
 
     //Result
-    private ImageView mRecipePoster1;
-    private ImageView mRecipePoster2;
-    private ImageView mRecipePoster3;
-    private TextView mRecipeScore1;
-    private TextView mRecipeScore2;
-    private TextView mRecipeScore3;
-    private List<ImageView> mPosterList;
-    private List<TextView> mScoreList;
+    private LinearLayout mLinearLayoutResultTable;
+    private ListView mListView;
 
     //Database
     private DatabaseReference mDatabaseReference;
@@ -86,7 +81,6 @@ public class ActivityJoinGroup extends AppCompatActivity {
 
     //Layouts
     private LinearLayout mLinearLayoutPlaceholderResults;
-    private ScrollView mScrollViewResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +128,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
             String status = (String) mDataSnapshot.child(code).child("group_status").getValue();
             if (status != null && status.equals("closed")) {
                 mLinearLayoutPlaceholderResults.setVisibility(View.GONE);
-                mScrollViewResults.setVisibility(View.VISIBLE);
+                mLinearLayoutResultTable.setVisibility(View.VISIBLE);
                 mTextViewResultPageHeader.setText("Teilnehmer: "+String.valueOf(mDataSnapshot.child(code).child("people_number").getValue()));
                 loadResults();
             }
@@ -145,11 +139,10 @@ public class ActivityJoinGroup extends AppCompatActivity {
         if (mAllRecipesList == null) {
             mAllRecipesList = JsonLoader.loadRecipies(mContext);
         }
-        setupResultPage();
-        mSwipeHandler.loadOnlineResults(mDataSnapshot, mAllRecipesList, "JoinGroupCode");
         mLinearLayoutPlaceholderResults.setVisibility(View.GONE);
-        ResultLoader mResultLoader = new ResultLoader(mContext);
-        mResultLoader.loadResults(mSwipeHandler.mOnlineWinners, mPosterList, mScoreList);
+        mSwipeHandler.loadOnlineResults(mDataSnapshot, mAllRecipesList, "JoinGroupCode");
+        RecipeListAdapter adapter = new RecipeListAdapter(this, R.layout.list_view_apdapter_layout, mSwipeHandler.mOnlineResults);
+        mListView.setAdapter(adapter);
         mTextViewLeaveGroupButton.setText("Gruppe verlassen");
         mTextViewLeaveGroupButton.setClickable(true);
     }
@@ -202,19 +195,8 @@ public class ActivityJoinGroup extends AppCompatActivity {
 
     private void setupLayouts() {
         mLinearLayoutPlaceholderResults = findViewById(R.id.linear_layout_result_page_placeholder);
-        mScrollViewResults = findViewById(R.id.scroll_view);
-        mScrollViewResults.setVisibility(View.GONE);
-    }
-
-    private void setupResultPage() {
-        mRecipePoster1 = findViewById(R.id.recipe_image_1);
-        mRecipePoster2 = findViewById(R.id.recipe_image_2);
-        mRecipePoster3 = findViewById(R.id.recipe_image_3);
-        mRecipeScore1 = findViewById(R.id.recipe_score_1);
-        mRecipeScore2 = findViewById(R.id.recipe_score_2);
-        mRecipeScore3 = findViewById(R.id.recipe_score_3);
-        mPosterList = Arrays.asList(mRecipePoster1,mRecipePoster2,mRecipePoster3);
-        mScoreList = Arrays.asList(mRecipeScore1,mRecipeScore2,mRecipeScore3);
+        mLinearLayoutResultTable = findViewById(R.id.linear_layout_result_table);
+        mLinearLayoutResultTable.setVisibility(View.GONE);
     }
 
     private void setupSwipePlaceholderView() {
@@ -268,6 +250,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
     }
 
     private void setupViews() {
+        mListView = findViewById(R.id.list_view);
         mBottomNavigationView = findViewById(R.id.bottom_navigation);
         mBottomNavigationView.setSelectedItemId(R.id.join_group);
 

@@ -17,8 +17,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,15 +67,8 @@ public class ActivityCreateGroup extends AppCompatActivity {
     private PageHandler mPageHandler;
 
     //Result
-    private ScrollView mScrollViewResults;
-    private ImageView mRecipePoster1;
-    private ImageView mRecipePoster2;
-    private ImageView mRecipePoster3;
-    private TextView mRecipeScore1;
-    private TextView mRecipeScore2;
-    private TextView mRecipeScore3;
-    private List<ImageView> mPosterList;
-    private List<TextView> mScoreList;
+    private LinearLayout mLinearLayoutResultTable;
+    private ListView mListView;
 
     //Views
     private BottomNavigationView mBottomNavigationView;
@@ -185,7 +180,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
             if (status != null && status.equals("closed")) {
                 mLinearLayoutPlaceholderResults1.setVisibility(View.GONE);
                 mLinearLayoutPlaceholderResults2.setVisibility(View.GONE);
-                mScrollViewResults.setVisibility(View.VISIBLE);
+                mLinearLayoutResultTable.setVisibility(View.VISIBLE);
                 mTextViewResultPageHeader.setText("Teilnehmer: "+String.valueOf(mDataSnapshot.child(code).child("people_number").getValue()));
                 mTextViewCloseGroupButton.setText("Gruppe löschen");
                 mTextViewCloseGroupButton.setOnClickListener(new View.OnClickListener() {
@@ -203,10 +198,9 @@ public class ActivityCreateGroup extends AppCompatActivity {
         if (mAllRecipesList == null) {
             mAllRecipesList = JsonLoader.loadRecipies(mContext);
         }
-        setupResultPage();
         mSwipeHandler.loadOnlineResults(mDataSnapshot, mAllRecipesList, "GroupCode");
-        ResultLoader mResultLoader = new ResultLoader(mContext);
-        mResultLoader.loadResults(mSwipeHandler.mOnlineWinners, mPosterList, mScoreList);
+        RecipeListAdapter adapter = new RecipeListAdapter(this, R.layout.list_view_apdapter_layout, mSwipeHandler.mOnlineResults);
+        mListView.setAdapter(adapter);
     }
 
     public void closeVoting() {
@@ -329,17 +323,6 @@ public class ActivityCreateGroup extends AppCompatActivity {
         mFilterApplier.applyFilter(mTextViewRecipeCount, mTextViewCreateGroupButton);
     }
 
-    private void setupResultPage() {
-        mRecipePoster1 = findViewById(R.id.recipe_image_1);
-        mRecipePoster2 = findViewById(R.id.recipe_image_2);
-        mRecipePoster3 = findViewById(R.id.recipe_image_3);
-        mRecipeScore1 = findViewById(R.id.recipe_score_1);
-        mRecipeScore2 = findViewById(R.id.recipe_score_2);
-        mRecipeScore3 = findViewById(R.id.recipe_score_3);
-        mPosterList = Arrays.asList(mRecipePoster1,mRecipePoster2,mRecipePoster3);
-        mScoreList = Arrays.asList(mRecipeScore1,mRecipeScore2,mRecipeScore3);
-    }
-
     private void setupClasses() {
         mAllRecipesList = JsonLoader.loadRecipies(mContext);
         mFilterSpinnerHandler = new FilterSpinnerHandler("Online", mSharedPreferences, mContext);
@@ -414,6 +397,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
     }
 
     private void setupViews() {
+        mListView = findViewById(R.id.list_view);
         mTextViewRecipeCount = findViewById(R.id.text_view_recipe_count);
         mTextViewCreateGroupButton = findViewById(R.id.text_view_create_group_button);
         mTextViewGroupCode2 = findViewById(R.id.text_view_group_code_2);
@@ -510,8 +494,8 @@ public class ActivityCreateGroup extends AppCompatActivity {
 
         mLinearLayoutPlaceholderResults1 = findViewById(R.id.linear_layout_result_page_placeholder1);
         mLinearLayoutPlaceholderResults2 = findViewById(R.id.linear_layout_result_page_placeholder2);
-        mScrollViewResults = findViewById(R.id.scroll_view);
-        mScrollViewResults.setVisibility(View.GONE);
+        mLinearLayoutResultTable = findViewById(R.id.linear_layout_result_table);
+        mLinearLayoutResultTable.setVisibility(View.GONE);
 
         mLinearLayoutList = Arrays.asList(mLinearLayoutLevel1,mLinearLayoutLevel2,mLinearLayoutLevel3,mLinearLayoutBreakfast,mLinearLayoutLunch,mLinearLayoutDinner,mLinearLayoutDessert,mLinearLayoutSnack,mLinearLayoutDrink);
         mLinearLayoutCountryList = Arrays.asList(mLinearLayoutGermany,mLinearLayoutSpain,mLinearLayoutAsia,mLinearLayoutItaly,mLinearLayoutFrance,mLinearLayoutGreece,mLinearLayoutIndia);

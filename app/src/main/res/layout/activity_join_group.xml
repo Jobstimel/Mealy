@@ -211,7 +211,22 @@
 
                 </LinearLayout>
 
-                <include layout="@layout/include_result_scroll_view"/>
+                <LinearLayout
+                    android:id="@+id/linear_layout_result_table"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@color/filter_border_color">
+
+                    <ListView
+                        android:id="@+id/list_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="2dp"
+                        android:background="@color/white"
+                        android:divider="@android:color/transparent"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 

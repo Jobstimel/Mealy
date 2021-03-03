@@ -105,12 +105,6 @@
 
     <include layout="@layout/include_tutorial"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        style="@style/bottom_navigation_view"
-        android:id="@+id/bottom_navigation"
-        app:itemBackground="@color/white"
-        app:itemTextColor="@drawable/selector_menu_bottom_navigation"
-        app:itemIconTint="@drawable/selector_menu_bottom_navigation"
-        app:menu="@menu/menu_bottom_navigation"/>
+    <include layout="@layout/include_bottom_navigation_view"/>
 
 </FrameLayout>

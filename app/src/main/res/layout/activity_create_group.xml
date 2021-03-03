@@ -106,32 +106,24 @@
                             android:layout_margin="2dp">
 
                             <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                style="@style/text_view_placeholder"
                                 android:padding="5dp"
-                                android:textColor="@color/black"
                                 android:text="Die Abstimmung läuft noch."/>
 
                             <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                style="@style/text_view_placeholder"
                                 android:paddingHorizontal="5dp"
-                                android:textColor="@color/black"
                                 android:text="Sobald alle Teilnehmer ihre Stimme abgegeben haben kannst du die Abstimmung beenden."/>
 
                             <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                style="@style/text_view_placeholder"
                                 android:padding="5dp"
-                                android:textColor="@color/black"
                                 android:text="Klicke dazu auf die Schaltfläche 'Abstimmung beenden'."/>
 
                             <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                style="@style/text_view_placeholder"
                                 android:paddingHorizontal="5dp"
                                 android:paddingBottom="5dp"
-                                android:textColor="@color/black"
                                 android:text="Anschließend werden die Ergebnisse hier eingeblendet."/>
 
                         </LinearLayout>
@@ -175,12 +167,6 @@
 
     <include layout="@layout/include_tutorial"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        style="@style/bottom_navigation_view"
-        android:id="@+id/bottom_navigation"
-        app:itemBackground="@color/white"
-        app:itemTextColor="@drawable/selector_menu_bottom_navigation"
-        app:itemIconTint="@drawable/selector_menu_bottom_navigation"
-        app:menu="@menu/menu_bottom_navigation"/>
+    <include layout="@layout/include_bottom_navigation_view"/>
 
 </FrameLayout>

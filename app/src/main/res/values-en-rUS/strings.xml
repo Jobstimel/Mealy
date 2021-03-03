@@ -37,4 +37,7 @@
     <string name="result_placeholder_join_lobby">The vote is still ongoing. As soon as the host closes voting, you can view the results here.</string>
     <string name="result_placeholder_create_lobby">The vote is still ongoing. As soon as all participants have uploaded their data, you can close the voting by clicking on \\ \'End voting \\\'. The results will then be published here.</string>
     <string name="app_icon">Icon made by \"https://www.freepik.com\" from \"https://www.flaticon.com/\"</string>
+    <string name="like">Like</string>
+    <string name="dislike">Dislike</string>
+    <string name="lets_go">All right - let\'s go!</string>
 </resources>

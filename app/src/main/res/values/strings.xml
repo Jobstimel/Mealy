@@ -40,6 +40,11 @@
     //Swipe
     <string name="swipe_placeholder">Keine Filter Treffer</string>
 
+    //Tutorial
+    <string name="like">Mag ich</string>
+    <string name="dislike">Mag ich nicht</string>
+    <string name="lets_go">Alles klar - los geht\'s!</string>
+
     //Result
     <string name="result_placeholder">Du musst erst Rezepte bewerten bevor du hier Ergebnisse sehen kannst.</string>
     <string name="result_placeholder_join_lobby">Die Abstimmung läuft noch. Die Ergebnisse werden veröffentlicht sobald der Host die Abtimmung beendet hat.</string>

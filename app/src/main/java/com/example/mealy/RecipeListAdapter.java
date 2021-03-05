@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
-import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -52,8 +48,6 @@ public class RecipeListAdapter extends ArrayAdapter<Recipe> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
-        setupImageLoader();
 
         String url1 = getItem(position).getUrl1();
         String proVotes = String.valueOf(getItem(position).getScore());
@@ -89,20 +83,9 @@ public class RecipeListAdapter extends ArrayAdapter<Recipe> {
 
         int defaultImage = mContext.getResources().getIdentifier("@drawable/mealy_app_icon", null, mContext.getPackageName());
 
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true)
-                .cacheOnDisc(true).resetViewBeforeLoading(true)
-                .showImageForEmptyUri(defaultImage)
-                .showImageOnFail(defaultImage)
-                .showImageOnLoading(defaultImage).build();
-
-        imageLoader.displayImage(url1, holder.url1, options);
+        Glide.with(mContext).load(url1).into(holder.url1);
         holder.proVotes.setText(proVotes);
         holder.title.setText(title);
-
-        if (proVotes.equals("0")) {
-            holder.proVotes.setTextColor(ContextCompat.getColor(mContext, R.color.red));
-        }
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,20 +97,5 @@ public class RecipeListAdapter extends ArrayAdapter<Recipe> {
         });
 
         return convertView;
-    }
-
-    private void setupImageLoader() {
-        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
-                .cacheOnDisc(true).cacheInMemory(true)
-                .imageScaleType(ImageScaleType.EXACTLY)
-                .displayer(new FadeInBitmapDisplayer(300)).build();
-
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
-                mContext)
-                .defaultDisplayImageOptions(defaultOptions)
-                .memoryCache(new WeakMemoryCache())
-                .discCacheSize(100 * 1024 * 1024).build();
-
-        ImageLoader.getInstance().init(config);
     }
 }

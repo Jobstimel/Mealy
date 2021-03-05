@@ -77,7 +77,7 @@
 
                 </LinearLayout>
 
-                <include layout="@layout/include_result_list_view"/>
+                <include layout="@layout/include_result_page"/>
 
             </LinearLayout>
 

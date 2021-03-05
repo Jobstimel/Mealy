@@ -19,8 +19,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:gravity="center"
+        android:fontFamily="@font/poppins_light"
         android:text="@string/loadScreen_standard"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20dp" />
 
 </LinearLayout>

@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -60,7 +61,6 @@ public class ActivityCreateGroup extends AppCompatActivity {
     private LinearLayout mLinearLayoutCategoriesSpinner;
     private LinearLayout mLinearLayoutAllergiesSpinner;
     private LinearLayout mLinearLayoutEatingSpinner;
-    private LinearLayout mLinearLayoutResultTable;
     private LinearLayout mLinearLayoutBreakfast;
     private LinearLayout mLinearLayoutDessert;
     private LinearLayout mLinearLayoutGermany;
@@ -87,10 +87,12 @@ public class ActivityCreateGroup extends AppCompatActivity {
     private BottomNavigationView mBottomNavigationView;
     private SwipePlaceHolderView mSwipePlaceHolderView;
     private TextView mTextViewCreateGroupButton;
-    private TextView mTextViewCloseGroupButton;
+    private TextView mResultPagePlaceholder1;
+    private TextView mResultPagePlaceholder2;
+    private TextView mTextViewResultPageHead;
+    private TextView mTextViewSwipePageHead;
     private TextView mTextViewRecipeCount;
-    private TextView mTextViewGroupCode2;
-    private TextView mTextViewGroupCode3;
+    private TextView mResultPageButton;
     private TextView mTextViewCalories;
     private TextView mTextViewTime;
     private ListView mListView;
@@ -180,10 +182,12 @@ public class ActivityCreateGroup extends AppCompatActivity {
         if (mDataSnapshot != null) {
             String code = mSharedPreferences.getString("GroupCode", "");
             String status = (String) mDataSnapshot.child(code).child("group_status").getValue();
+            String counter = (String) mDataSnapshot.child(code).child("people_number").getValue();
+            mResultPagePlaceholder2.setText("Bisherige Stimmenzahl: "+counter);
             if (status != null && status.equals("closed")) {
-                mLinearLayoutResultTable.setVisibility(View.VISIBLE);
-                mTextViewCloseGroupButton.setText("Gruppe löschen");
-                mTextViewCloseGroupButton.setOnClickListener(new View.OnClickListener() {
+                mListView.setVisibility(View.VISIBLE);
+                mResultPageButton.setText("Gruppe löschen");
+                mResultPageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         deleteGroup();
@@ -299,13 +303,14 @@ public class ActivityCreateGroup extends AppCompatActivity {
             RandomGenerator randomGenerator = new RandomGenerator(mSharedPreferences);
             randomGenerator.generateRandomGroupCode();
         }
+        mTextViewResultPageHead.setText(mSharedPreferences.getString("GroupCode", ""));
+        mTextViewSwipePageHead.setText(mSharedPreferences.getString("GroupCode", ""));
     }
 
     private void setupLinearLayouts() {
         mLinearLayoutPreparationsSpinner = findViewById(R.id.preparation_linear_layout);
         mLinearLayoutAllergiesSpinner = findViewById(R.id.allergies_linear_layout);
         mLinearLayoutCategoriesSpinner = findViewById(R.id.category_linear_layout);
-        mLinearLayoutResultTable = findViewById(R.id.linear_layout_result_table);
         mLinearLayoutEatingSpinner = findViewById(R.id.eating_linear_layout);
         mLinearLayoutBreakfast = findViewById(R.id.breakfast_linear_layout);
         mLinearLayoutDessert = findViewById(R.id.dessert_linear_layout);
@@ -391,11 +396,15 @@ public class ActivityCreateGroup extends AppCompatActivity {
 
     private void setupViews() {
         mTextViewCreateGroupButton = findViewById(R.id.text_view_create_group_button);
-        mTextViewCloseGroupButton = findViewById(R.id.text_view_close_voting);
+        mResultPagePlaceholder1 = findViewById(R.id.result_page_placeholder_1);
+        mResultPagePlaceholder2 = findViewById(R.id.result_page_placeholder_2);
         mTextViewRecipeCount = findViewById(R.id.text_view_recipe_count);
-        mTextViewGroupCode2 = findViewById(R.id.text_view_group_code_2);
-        mTextViewGroupCode3 = findViewById(R.id.text_view_group_code_3);
+        mTextViewResultPageHead = findViewById(R.id.result_page_head);
+        mTextViewSwipePageHead = findViewById(R.id.swipe_page_head);
+        mResultPageButton = findViewById(R.id.result_page_button);
         mListView = findViewById(R.id.list_view);
+        mResultPageButton.setText("Abstimmung beenden");
+        mResultPagePlaceholder1.setText("Die Abstimmung läuft noch.\nSobald alle Teilnehmer abgestimmt haben kannst du die Abstimmung durch einen Klick auf 'Abstimmung beenden' abschließen.\nDanach werden die Ergebnisse hier veröffentlicht.");
     }
 
     private void setupSeekBars() {
@@ -476,7 +485,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
     }
 
     private void setupVisibilities() {
-        mLinearLayoutResultTable.setVisibility(View.GONE);
+        mListView.setVisibility(View.GONE);
         mTutorial.setVisibility(View.GONE);
     }
 
@@ -491,7 +500,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
             }
         });
 
-        mTextViewCloseGroupButton.setOnClickListener(new View.OnClickListener() {
+        mResultPageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 closeVoting();

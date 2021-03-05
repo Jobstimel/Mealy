@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout style="@style/linear_layout_page"
+    android:id="@+id/page_3"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"/>
+
+        <TextView
+            android:id="@+id/result_page_head"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="21dp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins_light" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="2dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/poppins_light"
+        android:text="Auswertung"
+        android:textColor="#00B0F4"
+        android:textStyle="bold"
+        android:textSize="16dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="56dp"
+        android:layout_marginHorizontal="10dp"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <LinearLayout
+            android:id="@+id/linear_layout_result_table"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ListView
+                android:id="@+id/list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@android:color/transparent"
+                android:scrollbars="none"/>
+
+
+            <LinearLayout
+                android:id="@+id/result_page_placeholder_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/result_page_placeholder_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:textSize="15dp"
+                    android:paddingTop="10dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/result_page_placeholder_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:textSize="15dp"
+                    android:paddingTop="10dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:textColor="@color/green"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="9">
+
+            <TextView
+                android:id="@+id/result_page_button"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="30dp"
+                android:fontFamily="@font/poppins_light"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/background_round_corners"
+                android:backgroundTint="#00B0F0"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

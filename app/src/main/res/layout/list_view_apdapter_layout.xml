@@ -16,7 +16,7 @@
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="72.5dp"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
             android:layout_marginVertical="5dp"

@@ -4,6 +4,7 @@
     android:id="@+id/linear_layout_result_table"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="56dp"
     android:layout_marginHorizontal="10dp"
     android:orientation="vertical">
 
@@ -12,6 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@android:color/transparent"
-        android:background="@color/white"/>
+        android:scrollbars="none"/>
 
 </LinearLayout>

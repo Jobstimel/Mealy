@@ -100,7 +100,7 @@ public class RecipeListAdapter extends ArrayAdapter<Recipe> {
         holder.proVotes.setText(proVotes);
         holder.title.setText(title);
 
-        if (getItem(position).getScore() == 0) {
+        if (proVotes.equals("0")) {
             holder.proVotes.setTextColor(ContextCompat.getColor(mContext, R.color.red));
         }
 

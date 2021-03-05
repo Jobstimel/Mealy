@@ -44,12 +44,13 @@ public class SwipePlaceHolderViewHandlerJoinGroup {
     public void setSwipePlaceHolderViewBuilder(SwipePlaceHolderView swipePlaceHolderView) {
         swipePlaceHolderView.getBuilder()
                 .setDisplayViewCount(3)
-                .setIsUndoEnabled(true)
+                .setIsUndoEnabled(false)
                 .setSwipeDecor(new SwipeDecor()
                         .setRelativeScale(0.01f)
                         .setSwipeInMsgLayoutId(R.layout.swipe_yes)
                         .setSwipeOutMsgLayoutId(R.layout.swipe_no)
                         .setSwipeRotationAngle(0)
+                        .setPaddingTop(15)
                         .setSwipeDistToDisplayMsg(100)
                         .setSwipeAnimTime(200));
     }

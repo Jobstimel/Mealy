@@ -34,7 +34,7 @@
     <string name="carbohydrates">Kohlenhydrate</string>
     <string name="protein">Eiweiss</string>
     <string name="fiber">Ballaststoffe</string>
-    <string name="time_total">Gesamtzeit</string>
+    <string name="time_total">Zubereitungszeit</string>
     <string name="time_preparation">Vorbereitungszeit</string>
 
     //Swipe

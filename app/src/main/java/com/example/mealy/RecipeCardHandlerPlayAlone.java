@@ -31,9 +31,6 @@ public class RecipeCardHandlerPlayAlone {
     @View(R.id.recipe_total)
     private TextView recipeTotal;
 
-    @View(R.id.recipe_prepare)
-    private TextView recipePrepare;
-
     @View(R.id.recipe_difficulty)
     private TextView recipeDifficulty;
 
@@ -71,7 +68,6 @@ public class RecipeCardHandlerPlayAlone {
         Glide.with(mContext).load(mRecipe.getUrl1()).into(recipeImage);
         recipeTitle.setText(mRecipe.getTitle());
         recipeTotal.setText(mRecipe.getTotal()+" min");
-        recipePrepare.setText(mRecipe.getTotal()+" min");
         recipeDifficulty.setText(mRecipe.getDifficulty());
         recipeIngredients.setText(mRecipe.getIngredients());
         recipeCalories.setText(mRecipe.getCalories());

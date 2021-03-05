@@ -292,6 +292,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
                 switch(menuItem.getItemId()) {
                     case R.id.play_alone:
                         mPageHandler.showLoadScreen();
+                        overridePendingTransition(0,0);
                         startActivity(new Intent(getApplicationContext(), ActivityPlayAlone.class));
                         overridePendingTransition(0,0);
                         return true;
@@ -299,6 +300,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
                         return true;
                     case R.id.create_group:
                         mPageHandler.showLoadScreen();
+                        overridePendingTransition(0,0);
                         startActivity(new Intent(getApplicationContext(), ActivityCreateGroup.class));
                         overridePendingTransition(0,0);
                         return true;

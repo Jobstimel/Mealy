@@ -49,27 +49,27 @@ public class CodeInputHandler {
 
     private void setStatusFound(TextView status, CodeInputView codeInputView, TextView button) {
         status.setText("Status: Gruppe gefunden");
-        status.setBackgroundColor(ContextCompat.getColor(mContext, R.color.filter_green));
+        status.setTextColor(ContextCompat.getColor(mContext, R.color.filter_green));
         codeInputView.setTextColor(ContextCompat.getColor(mContext, R.color.filter_green));
         button.setText("Gruppe beitreten");
         button.setClickable(true);
     }
 
     private void setStatusAlreadyCompleted(TextView status, CodeInputView codeInputView) {
-        status.setText("Status: Bereits abgestimmt");
-        status.setBackgroundColor(ContextCompat.getColor(mContext, R.color.orange));
+        status.setText("Bereits abgestimmt");
+        status.setTextColor(ContextCompat.getColor(mContext, R.color.orange));
         codeInputView.setEditable(true);
     }
 
     private void setStatusClosed(TextView status, CodeInputView codeInputView) {
-        status.setText("Status: Gruppe wurde geschlossen");
-        status.setBackgroundColor(ContextCompat.getColor(mContext, R.color.orange));
+        status.setText("Gruppe wurde geschlossen");
+        status.setTextColor(ContextCompat.getColor(mContext, R.color.orange));
         codeInputView.setEditable(true);
     }
 
     private void setStatusNotFound(TextView status, CodeInputView codeInputView) {
-        status.setText("Status: Keine Gruppe gefunden");
-        status.setBackgroundColor(ContextCompat.getColor(mContext, R.color.red));
+        status.setText("Keine Gruppe gefunden");
+        status.setTextColor(ContextCompat.getColor(mContext, R.color.red));
         codeInputView.setEditable(true);
     }
 

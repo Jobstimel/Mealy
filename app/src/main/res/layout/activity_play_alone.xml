@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/container"
     tools:context=".ActivityPlayAlone"
-    android:background="@color/background">
+    android:background="@color/white">
 
     <LinearLayout
         style="@style/linear_layout_page"

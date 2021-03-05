@@ -27,7 +27,7 @@
     <string name="carbohydrates">Carbohydrates</string>
     <string name="protein">Protein</string>
     <string name="fiber">Fiber</string>
-    <string name="time_total">Total time</string>
+    <string name="time_total">Preparation Time</string>
     <string name="time_preparation">Preparation Time</string>
     <string name="result_placeholder">You have to swipe recipes before you can see results here.</string>
     <string name="results">Results</string>

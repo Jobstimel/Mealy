@@ -75,20 +75,26 @@ public class FilterTextViewHandler {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void setTextViewSelected(TextView textView) {
         textView.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.blue));
+        textView.setTextColor(ContextCompat.getColor(mContext, R.color.white));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void setTextViewUnselected(TextView textView) {
         textView.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.white));
+        textView.setTextColor(ContextCompat.getColor(mContext, R.color.black));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void setViewSelected(View view) {
         view.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.blue));
+        TextView textView = (TextView) view;
+        textView.setTextColor(ContextCompat.getColor(mContext, R.color.white));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void setViewUnselected(View view) {
         view.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.white));
+        TextView textView = (TextView) view;
+        textView.setTextColor(ContextCompat.getColor(mContext, R.color.black));
     }
 }

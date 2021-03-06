@@ -24,7 +24,7 @@
         android:layout_marginBottom="56dp"
         android:background="@color/white"
         android:orientation="vertical"
-        android:weightSum="10">
+        android:weightSum="8">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -482,50 +482,57 @@
 
         </ScrollView>
 
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="10dp"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="5dp"
-            app:cardUseCompatPadding="true"
-            android:layout_weight="9">
+            android:gravity="center"
+            android:layout_weight="7">
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Zurücksetzen"
-                    android:background="@drawable/selector_button_touch"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:fontFamily="@font/poppins_light"
-                    android:textStyle="bold"
-                    android:textSize="18dp"
-                    android:layout_weight="1"
-                    android:onClick="resetFilter"/>
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
-                <TextView
-                    android:id="@+id/text_view_create_group_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Swipen"
-                    android:background="@drawable/selector_button_touch"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:fontFamily="@font/poppins_light"
-                    android:textStyle="bold"
-                    android:textSize="18dp"
-                    android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Zurücksetzen"
+                        android:background="@drawable/selector_button_touch"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_light"
+                        android:textStyle="bold"
+                        android:textSize="18dp"
+                        android:layout_weight="1"
+                        android:onClick="resetFilter"/>
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/text_view_create_group_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Swipen"
+                        android:background="@drawable/selector_button_touch"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_light"
+                        android:textStyle="bold"
+                        android:textSize="18dp"
+                        android:layout_weight="1"/>
 
-        </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
 
     </LinearLayout>
 

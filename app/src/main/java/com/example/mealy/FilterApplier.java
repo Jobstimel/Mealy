@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 
@@ -94,6 +96,12 @@ public class FilterApplier {
             textView.setTextColor(ContextCompat.getColor(mContext, R.color.red));
             button.setTextColor(ContextCompat.getColor(mContext, R.color.red));
             button.setText("Filter anpassen");
+            if (mMode.equals("Online")) {
+                makeToast("Damit eine Gruppe erstellt werden kann muss es mindestens 3 Filter Treffer geben");
+            }
+            else {
+                makeToast("Es muss mindestens 3 Filter Treffer geben, damit du swipen kannst");
+            }
             button.setClickable(false);
         }
         else {
@@ -243,5 +251,13 @@ public class FilterApplier {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putString("Disliked"+mMode+"IDs", "");
         editor.commit();
+    }
+
+    private void makeToast(String text) {
+        Toast toast = Toast.makeText(mContext, text, Toast.LENGTH_LONG);
+        TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+        v.setGravity(Gravity.CENTER);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 }

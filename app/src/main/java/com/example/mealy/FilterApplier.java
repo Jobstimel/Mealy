@@ -16,34 +16,34 @@ import java.util.Random;
 
 public class FilterApplier {
 
-    public static final Integer MAX_RECIPES = 10;
-    public final Integer MAX_TIME = 300;
-    public final Integer MAX_CALORIES = 2000;
-    private final String[] TYPES = {"Frühstück","Mittagessen","Abendessen","Dessert","Snack","Getränk"};
     private final String[] COUNTRIES = {"Deutschland","Spanien","Asien","Italien","Frankreich","Italien","Griechenland","Indien"};
+    private final String[] TYPES = {"Frühstück","Mittagessen","Abendessen","Dessert","Snack","Getränk"};
     private final String[] DIFFICULTIES = {"Einfach","Mittel","Schwierig"};
+    public static final Integer MAX_RECIPES = 10;
+    public final Integer MAX_CALORIES = 2000;
+    public final Integer MAX_TIME = 300;
 
-    private String mMode;
-    private Context mContext;
     private SharedPreferences mSharedPreferences;
     private List<Recipe> mAllRecipesList;
-    private List<Recipe> mFilteredRecipeList;
+    private Context mContext;
+    private String mMode;
+
     private List<Integer> mFilteredIDs;
     private List<Integer> mSelectedIDs;
 
-    public FilterApplier(String mode, SharedPreferences sharedPreferences, List<Recipe> allRecipesList, Context context) {
-        this.mMode = mode;
+    public FilterApplier(SharedPreferences sharedPreferences, List<Recipe> allRecipesList, Context context, String mode) {
         this.mSharedPreferences = sharedPreferences;
         this.mAllRecipesList = allRecipesList;
         this.mContext = context;
+        this.mMode = mode;
     }
 
     public void applyFilter(TextView textView, TextView button) {
 
         mFilteredIDs = new ArrayList<>();
         List<String> mTypeFilter = getFilterValues(TYPES);
-        List<String> mCounFilter = getFilterValues(COUNTRIES);
-        List<String> mDiffFilter = getFilterValues(DIFFICULTIES);
+        List<String> mCountryFilter = getFilterValues(COUNTRIES);
+        List<String> mDifficultyFilter = getFilterValues(DIFFICULTIES);
 
         for (int i = 0; i < this.mAllRecipesList.size(); i++) {
 
@@ -54,11 +54,11 @@ public class FilterApplier {
             if (mTypeFilter.size() > 0) {
                 status = checkTagsMultipleSelections(tags, mTypeFilter);
             }
-            if (status && mDiffFilter.size() > 0) {
-                status = checkDifficulty(recipe, mDiffFilter);
+            if (status && mDifficultyFilter.size() > 0) {
+                status = checkDifficulty(recipe, mDifficultyFilter);
             }
-            if (status && mCounFilter.size() > 0) {
-                status = checkTagsMultipleSelections(tags, mCounFilter);
+            if (status && mCountryFilter.size() > 0) {
+                status = checkTagsMultipleSelections(tags, mCountryFilter);
             }
             if (status) {
                 status = checkTime(recipe);
@@ -67,16 +67,16 @@ public class FilterApplier {
                 status = checkCalories(recipe);
             }
             if (status) {
-                status = checkTagsSingleValue(recipe.getAllergies(), "AllergiesSpinner"+this.mMode+"Value");
+                status = checkTagsSingleValue(recipe.getAllergies(), "AllergiesSpinner"+mMode+"Value");
             }
             if (status) {
-                status = checkTagsSingleValue(tags, "PreparationTypeSpinner"+this.mMode+"Value");
+                status = checkTagsSingleValue(tags, "PreparationTypeSpinner"+mMode+"Value");
             }
             if (status) {
-                status = checkTagsSingleValue(tags, "CategorySpinner"+this.mMode+"Value");
+                status = checkTagsSingleValue(tags, "CategorySpinner"+mMode+"Value");
             }
             if (status) {
-                status = checkTagsSingleValue(tags, "EatingTypeSpinner"+this.mMode+"Value");
+                status = checkTagsSingleValue(tags, "EatingTypeSpinner"+mMode+"Value");
             }
 
             if (status) {
@@ -93,21 +93,20 @@ public class FilterApplier {
         if (size < 3) {
             textView.setTextColor(ContextCompat.getColor(mContext, R.color.red));
             button.setTextColor(ContextCompat.getColor(mContext, R.color.red));
-            button.setText("Zu wenige Treffer");
+            button.setText("Filter anpassen");
             button.setClickable(false);
         }
         else {
-            textView.setTextColor(ContextCompat.getColor(mContext, R.color.filter_green));
+            textView.setTextColor(ContextCompat.getColor(mContext, R.color.green));
             if (mMode.equals("Online")) {
-                button.setTextColor(ContextCompat.getColor(mContext, R.color.filter_green));
+                button.setTextColor(ContextCompat.getColor(mContext, R.color.white));
                 button.setText("Gruppe erstellen");
-                button.setClickable(true);
             }
             else {
-                button.setTextColor(ContextCompat.getColor(mContext, R.color.filter_green));
-                button.setText("Rezepte bewerten");
-                button.setClickable(true);
+                button.setTextColor(ContextCompat.getColor(mContext, R.color.white));
+                button.setText("Swipen");
             }
+            button.setClickable(true);
         }
         textView.setText(size + " Rezepte gefunden");
     }

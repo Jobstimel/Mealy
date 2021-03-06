@@ -14,8 +14,8 @@ import java.util.Random;
 
 public class SwipeHandler {
 
-    private String mMode;
     private SharedPreferences mSharedPreferences;
+    private String mMode;
 
     public List<Integer> mSelectedIDs;
     public List<Integer> mLikedIDs;
@@ -23,9 +23,9 @@ public class SwipeHandler {
     public ArrayList<Recipe> mOfflineResults;
     public ArrayList<Recipe> mOnlineResults;
 
-    public SwipeHandler(String mMode, SharedPreferences mSharedPreferences) {
-        this.mMode = mMode;
-        this.mSharedPreferences = mSharedPreferences;
+    public SwipeHandler(SharedPreferences sharedPreferences, String mode) {
+        this.mSharedPreferences = sharedPreferences;
+        this.mMode = mode;
     }
 
     public void loadSelectedIndices() {

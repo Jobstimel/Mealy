@@ -13,17 +13,17 @@ public class FilterSeekBarHandler {
     private final Integer MAX_CALORIES = 2000;
     private final Integer MAX_TIME = 300;
 
-    private String mMode;
     private SharedPreferences mSharedPreferences;
     private Context mContext;
+    private String mMode;
 
-    public FilterSeekBarHandler(String mMode, SharedPreferences mSharedPreferences, Context mContext) {
-        this.mMode = mMode;
-        this.mSharedPreferences = mSharedPreferences;
-        this.mContext = mContext;
+    public FilterSeekBarHandler(SharedPreferences sharedPreferences, Context context, String mode) {
+        this.mSharedPreferences = sharedPreferences;
+        this.mContext = context;
+        this.mMode = mode;
     }
 
-    public void applyCaloriesSeekBar(CrystalRangeSeekbar seekBarCalories, int min, int max, FilterApplier filterApplier, TextView textView, TextView button) {
+    public void saveCaloriesSeekBarState(CrystalRangeSeekbar seekBarCalories, int min, int max, FilterApplier filterApplier, TextView textView, TextView button) {
         if (!(mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Min", 0) == min) || !(mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Max", MAX_CALORIES) == max)) {
             SharedPreferences.Editor editor = mSharedPreferences.edit();
             editor.putInt("CaloriesSeekBar"+mMode+"Min", min);
@@ -38,7 +38,7 @@ public class FilterSeekBarHandler {
         filterApplier.applyFilter(textView, button);
     }
 
-    public void applyTimeSeekBar(CrystalRangeSeekbar seekBarTime, int min, int max, FilterApplier filterApplier, TextView textView, TextView button) {
+    public void saveTimeSeekBarState(CrystalRangeSeekbar seekBarTime, int min, int max, FilterApplier filterApplier, TextView textView, TextView button) {
         if (!(mSharedPreferences.getInt("TimeSeekBar"+mMode+"Min", 0) == min) || !(mSharedPreferences.getInt("TimeSeekBar"+mMode+"Max", MAX_TIME) == max)) {
             SharedPreferences.Editor editor = mSharedPreferences.edit();
             editor.putInt("TimeSeekBar"+mMode+"Min", min);
@@ -56,9 +56,9 @@ public class FilterSeekBarHandler {
     public void resetSeekBarStates(CrystalRangeSeekbar seekBarCalories, CrystalRangeSeekbar seekBarTime) {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putInt("CaloriesSeekBar"+mMode+"Min", 0);
-        editor.putInt("CaloriesSeekBar"+mMode+"Max", this.MAX_CALORIES);
+        editor.putInt("CaloriesSeekBar"+mMode+"Max", MAX_CALORIES);
         editor.putInt("TimeSeekBar"+mMode+"Min", 0);
-        editor.putInt("TimeSeekBar"+mMode+"Max", this.MAX_TIME);
+        editor.putInt("TimeSeekBar"+mMode+"Max", MAX_TIME);
         editor.commit();
         loadSeekBarStates(seekBarCalories, seekBarTime);
     }
@@ -66,21 +66,21 @@ public class FilterSeekBarHandler {
     public void resetSeekBarSharedPreferences() {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putInt("CaloriesSeekBar"+mMode+"Min", 0);
-        editor.putInt("CaloriesSeekBar"+mMode+"Max", this.MAX_CALORIES);
+        editor.putInt("CaloriesSeekBar"+mMode+"Max", MAX_CALORIES);
         editor.putInt("TimeSeekBar"+mMode+"Min", 0);
-        editor.putInt("TimeSeekBar"+mMode+"Max", this.MAX_TIME);
+        editor.putInt("TimeSeekBar"+mMode+"Max", MAX_TIME);
         editor.commit();
     }
 
     public void loadSeekBarStates(CrystalRangeSeekbar seekBarCalories, CrystalRangeSeekbar seekBarTime) {
         int min_calories = mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Min",0);
-        int max_calories = mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Max", this.MAX_CALORIES);
+        int max_calories = mSharedPreferences.getInt("CaloriesSeekBar"+mMode+"Max", MAX_CALORIES);
         seekBarCalories.setMinStartValue(min_calories);
         seekBarCalories.setMaxStartValue(max_calories);
         seekBarCalories.apply();
 
         int min_time = mSharedPreferences.getInt("TimeSeekBar"+mMode+"Min",0);
-        int max_time = mSharedPreferences.getInt("TimeSeekBar"+mMode+"Max", this.MAX_TIME);
+        int max_time = mSharedPreferences.getInt("TimeSeekBar"+mMode+"Max", MAX_TIME);
         seekBarTime.setMinStartValue(min_time);
         seekBarTime.setMaxStartValue(max_time);
         seekBarTime.apply();
@@ -97,15 +97,15 @@ public class FilterSeekBarHandler {
     }
 
     private void setSeekBarSelected(CrystalRangeSeekbar seekBar) {
-        seekBar.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.filter_green));
-        seekBar.setLeftThumbColor(ContextCompat.getColor(mContext, R.color.filter_green));
-        seekBar.setRightThumbColor(ContextCompat.getColor(mContext, R.color.filter_green));
+        seekBar.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.blue));
+        seekBar.setLeftThumbColor(ContextCompat.getColor(mContext, R.color.blue));
+        seekBar.setRightThumbColor(ContextCompat.getColor(mContext, R.color.blue));
     }
 
     private void setSeekBarUnselected(CrystalRangeSeekbar seekBar) {
-        seekBar.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.filter_border_color));
-        seekBar.setLeftThumbColor(ContextCompat.getColor(mContext, R.color.filter_border_color));
-        seekBar.setRightThumbColor(ContextCompat.getColor(mContext, R.color.filter_border_color));
+        seekBar.setBarHighlightColor(ContextCompat.getColor(mContext, R.color.seek_bar_color));
+        seekBar.setLeftThumbColor(ContextCompat.getColor(mContext, R.color.seek_bar_color));
+        seekBar.setRightThumbColor(ContextCompat.getColor(mContext, R.color.seek_bar_color));
     }
 
 }

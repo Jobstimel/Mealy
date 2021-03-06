@@ -37,6 +37,7 @@
     <color name="background">#FFFFFF</color>
 
     //Filter
+    <color name="seek_bar_color">#F2F2F2</color>
     <color name="filter_text_color">#000000</color>
     <color name="filter_border_color">#BDBDBD</color>
     <color name="filter_background_color">#FFFFFF</color>

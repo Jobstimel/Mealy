@@ -102,13 +102,4 @@ public class CodeInputHandler {
             }
         }
     }
-
-    public void deleteSavedOnlineData() {
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putString("JoinGroupIDs", "");
-        editor.putString("JoinGroupCode", "");
-        editor.putString("LikedJoinIDs", "");
-        editor.putString("DislikedJoinIDs", "");
-        editor.commit();
-    }
 }

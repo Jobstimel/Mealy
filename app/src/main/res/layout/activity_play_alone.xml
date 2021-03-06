@@ -10,33 +10,7 @@
         style="@style/linear_layout_page"
         android:id="@+id/page_1">
 
-        <LinearLayout
-            style="@style/linear_layout_top_bar">
-
-            <TextView
-                style="@style/text_view_top_bar_code"
-                android:text="Solomodus"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/linear_layout_card_design">
-
-            <TextView
-                style="@style/text_view_top_bot"
-                android:id="@+id/text_view_recipe_count"
-                android:background="@drawable/background_round_corners_top"/>
-
-            <include layout="@layout/include_filter"/>
-
-            <TextView
-                style="@style/text_view_top_bot"
-                android:id="@+id/text_view_create_group_button"
-                android:text="Rezepte bewerten"
-                android:background="@drawable/selector_reset_filter_button"
-                android:onClick="switchPage2"/>
-
-        </LinearLayout>
+        <include layout="@layout/include_filter"/>
 
     </LinearLayout>
 
@@ -52,7 +26,6 @@
                 style="@style/text_view_top_bar_code"
                 android:text="Solomodus"/>
 
-
         </LinearLayout>
 
         <com.mindorks.placeholderview.SwipePlaceHolderView
@@ -62,63 +35,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        style="@style/linear_layout_page"
-        android:id="@+id/page_3">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:orientation="horizontal"
-            android:weightSum="5">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="12345678"
-                android:textSize="21dp"
-                android:textColor="@color/black"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_light" />
-
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"/>
-
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginBottom="2dp"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/poppins_light"
-            android:text="Auswertung"
-            android:textColor="#00B0F4"
-            android:textStyle="bold"
-            android:textSize="16dp"/>
-
-        <include layout="@layout/include_result_page"/>
-
-        <TextView
-            style="@style/text_view_top_bot"
-            android:id="@+id/text_view_close_voting"
-            android:background="@drawable/selector_reset_filter_button"
-            android:text="Abstimmung beenden"
-            android:layout_weight="14"/>
-
-    </LinearLayout>
+    <include layout="@layout/include_result_page"/>
 
     <include layout="@layout/include_load_screen"/>
 

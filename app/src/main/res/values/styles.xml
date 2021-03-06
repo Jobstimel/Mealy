@@ -107,9 +107,9 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">17dp</item>
+        <item name="android:textSize">21dp</item>
         <item name="android:layout_weight">1</item>
+        <item name="android:fontFamily">@font/poppins_light</item>
     </style>
 
     <style name="text_view_placeholder">
@@ -133,9 +133,10 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:padding">5dp</item>
-        <item name="android:textColor">@color/filter_text_color</item>
-        <item name="android:textColorHint">@color/filter_text_color</item>
-        <item name="android:textSize">14.5sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/black</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:fontFamily">@font/poppins_light</item>
         <item name="android:layout_weight">2</item>
     </style>
 

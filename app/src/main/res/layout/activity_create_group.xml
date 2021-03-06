@@ -10,32 +10,7 @@
         style="@style/linear_layout_page"
         android:id="@+id/page_1">
 
-        <LinearLayout
-            style="@style/linear_layout_top_bar">
-
-            <TextView
-                style="@style/text_view_top_bar_code"
-                android:text="Gruppe erstellen"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/linear_layout_card_design">
-
-            <TextView
-                style="@style/text_view_top_bot"
-                android:id="@+id/text_view_recipe_count"
-                android:background="@drawable/background_round_corners_top"/>
-
-            <include layout="@layout/include_filter"/>
-
-            <TextView
-                style="@style/text_view_top_bot"
-                android:id="@+id/text_view_create_group_button"
-                android:background="@drawable/selector_reset_filter_button"
-                android:onClick="createGroup"/>
-
-        </LinearLayout>
+        <include layout="@layout/include_filter"/>
 
     </LinearLayout>
 
@@ -44,32 +19,12 @@
         android:id="@+id/page_2">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:orientation="horizontal"
-            android:background="@android:color/transparent"
-            android:weightSum="5">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"/>
+            style="@style/linear_layout_top_bar"
+            android:layout_marginBottom="0dp">
 
             <TextView
-                android:id="@+id/swipe_page_head"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textSize="21dp"
-                android:textColor="@color/black"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_light" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"/>
+                style="@style/text_view_top_bar_code"
+                android:id="@+id/swipe_page_head"/>
 
         </LinearLayout>
 

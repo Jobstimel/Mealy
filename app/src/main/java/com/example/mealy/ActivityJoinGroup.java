@@ -54,6 +54,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private TextView mTextViewCodeInputStatus;
     private TextView mTextViewJoinGroupButton;
     private CodeInputView mCodeInputView;
+    private TextView mSwipePageHead;
 
     //LinearLayouts
     private LinearLayout mLoadScreen;
@@ -161,6 +162,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
         mPageHandler.loadCorrectPage();
         Integer currentPage = mSharedPreferences.getInt("PageJoin", 1);
         if (currentPage == 2) {
+            mSwipePageHead.setText(mSharedPreferences.getString(MODE+"GroupCode", ""));
             setupLists();
             setupSwipePlaceholderView();
         }
@@ -243,6 +245,8 @@ public class ActivityJoinGroup extends AppCompatActivity {
         mTextViewJoinGroupButton = findViewById(R.id.text_view_join_group);
         mTextViewJoinGroupButton.setClickable(false);
 
+        mSwipePageHead = findViewById(R.id.swipe_page_head);
+
         mTextViewLeaveGroupButton = findViewById(R.id.result_page_button);
         mTextViewLeaveGroupButton.setText("Gruppe verlassen");
         mTextViewLeaveGroupButton.setClickable(false);
@@ -260,7 +264,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
         mCodeInputView.addOnCompleteListener(code -> checkUserInputCode(code));
 
         mTextViewResultPlaceholder = findViewById(R.id.result_page_placeholder_1);
-        mTextViewResultPlaceholder.setText("Die Abstimmung läuft noch, sobald der Host die Abstimmung beendet hat werden die Ergebnisse hier angezeigt.");
+        mTextViewResultPlaceholder.setText("Du hast alle Rezepte bewertet und deine Daten wurden erfolgreich hochgeladen.\nDie Abstimmung läuft aktuell noch, sobald der Host sie beendet hat werden dir die Ergebnisse hier angezeigt.");
     }
 
     private void setupDatabase() {

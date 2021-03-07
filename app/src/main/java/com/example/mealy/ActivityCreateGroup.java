@@ -121,6 +121,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
     private PageHandler mPageHandler;
 
     //Pages
+    private LinearLayout mCloseVotingLoadScreen;
     private LinearLayout mLoadScreen;
     private LinearLayout mTutorial;
     private LinearLayout mPage1;
@@ -178,7 +179,6 @@ public class ActivityCreateGroup extends AppCompatActivity {
             mResultPagePlaceholder1.setText(PLACEHOLDER_1_TEXT);
             mResultPagePlaceholder2.setText("Bisherige Stimmenzahl: "+counter);
             if (status != null && status.equals("closed")) {
-                mListView.setVisibility(View.VISIBLE);
                 mTextViewResultPageHead.setText("Teilnehmer: "+(String) mDataSnapshot.child(code).child("people_number").getValue());
                 mResultPageButton.setText("Gruppe löschen");
                 mResultPageButton.setOnClickListener(new View.OnClickListener() {
@@ -199,9 +199,12 @@ public class ActivityCreateGroup extends AppCompatActivity {
         mSwipeHandler.loadOnlineResults(mDataSnapshot, mAllRecipesList, "GroupCode");
         RecipeListAdapter adapter = new RecipeListAdapter(this, R.layout.list_view_apdapter_layout, mSwipeHandler.mOnlineResults);
         mListView.setAdapter(adapter);
+        mCloseVotingLoadScreen.setVisibility(View.GONE);
+        mListView.setVisibility(View.VISIBLE);
     }
 
     public void closeVoting() {
+        mResultPagePlaceholder1.setVisibility(View.GONE);
         mDatabaseReference.child(mSharedPreferences.getString("GroupCode", "")).child("group_status").setValue("closed");
     }
 
@@ -340,6 +343,8 @@ public class ActivityCreateGroup extends AppCompatActivity {
         mPage1 = findViewById(R.id.page_1);
         mPage2 = findViewById(R.id.page_2);
         mPage3 = findViewById(R.id.page_3);
+        mCloseVotingLoadScreen = findViewById(R.id.close_voting_load_screen);
+        mCloseVotingLoadScreen.setVisibility(View.GONE);
         mLoadScreen = findViewById(R.id.load_screen);
         mTutorial = findViewById(R.id.tutorial);
         mTutorial.setVisibility(View.GONE);
@@ -563,7 +568,9 @@ public class ActivityCreateGroup extends AppCompatActivity {
     }
 
     private void makeToast(String text) {
-        Toast toast = Toast.makeText(mContext, text, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(mContext, text, Toast.LENGTH_LONG);
+        TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+        v.setGravity(Gravity.CENTER);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }

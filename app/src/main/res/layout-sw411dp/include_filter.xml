@@ -505,30 +505,14 @@
                     android:weightSum="2">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        style="@style/text_view_filter_page_buttons"
                         android:text="Zurücksetzen"
-                        android:background="@drawable/selector_button_touch"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/poppins_light"
-                        android:textStyle="bold"
-                        android:textSize="18dp"
-                        android:layout_weight="1"
                         android:onClick="resetFilter"/>
 
                     <TextView
+                        style="@style/text_view_filter_page_buttons"
                         android:id="@+id/text_view_create_group_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="Swipen"
-                        android:background="@drawable/selector_button_touch"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/poppins_light"
-                        android:textStyle="bold"
-                        android:textSize="18dp"
-                        android:layout_weight="1"/>
+                        android:text="Swipen"/>
 
                 </LinearLayout>
 

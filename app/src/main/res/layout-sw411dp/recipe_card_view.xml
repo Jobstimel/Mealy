@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginBottom="56dp">
+
+    <androidx.cardview.widget.CardView
+        android:orientation="vertical"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:backgroundTint="@color/white"
+                    android:elevation="3dp"
+                    android:background="@drawable/background_round_corners_top"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/recipe_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/poppins_light"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="12dp"
+                        android:layout_marginHorizontal="15dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:elevation="3dp"
+                    android:background="@color/blue">
+
+                    <ImageView
+                        android:id="@+id/recipe_image"
+                        android:layout_margin="1dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@color/white"
+                    android:elevation="3dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="2dp"
+                            android:src="@drawable/icon_time_total"
+                            android:tooltipText="@string/time_total"
+                            android:paddingVertical="10dp"
+                            app:tint="@color/blue"/>
+
+                        <TextView
+                            android:id="@+id/recipe_total"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/poppins_light"
+                            android:textStyle="bold"
+                            android:textSize="12dp"
+                            android:gravity="center"
+                            android:textColor="@color/blue"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:tooltipText="@string/difficulty"
+                            android:paddingVertical="10dp"
+                            android:src="@drawable/icon_level"
+                            android:layout_marginRight="2dp"
+                            app:tint="@color/blue"/>
+
+                        <TextView
+                            android:id="@+id/recipe_difficulty"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/poppins_light"
+                            android:textStyle="bold"
+                            android:textSize="12dp"
+                            android:gravity="center"
+                            android:textColor="@color/blue"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginHorizontal="5dp">
+
+                    <TextView
+                        android:id="@+id/recipe_ingredients"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="10dp"
+                        android:fontFamily="@font/poppins_light"
+                        android:textStyle="bold"
+                        android:textSize="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/black"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginHorizontal="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_weight="2"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="@string/calories"
+                            android:fontFamily="@font/poppins_light"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/blue"
+                            android:textSize="12dp"
+                            android:layout_marginLeft="5dp"/>
+
+                        <TextView
+                            android:id="@+id/text_view_calories"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="end|center_vertical"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/poppins_light"
+                            android:textSize="12dp"
+                            android:layout_marginRight="5dp"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_weight="2"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="@string/fat"
+                            android:fontFamily="@font/poppins_light"
+                            android:textColor="@color/blue"
+                            android:textSize="12dp"
+                            android:layout_marginLeft="5dp"/>
+
+                        <TextView
+                            android:id="@+id/text_view_fat"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="end|center_vertical"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_light"
+                            android:textColor="@color/black"
+                            android:textSize="12dp"
+                            android:layout_marginRight="5dp"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_weight="2"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="@string/carbohydrates"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/blue"
+                            android:fontFamily="@font/poppins_light"
+                            android:textSize="12dp"
+                            android:layout_marginLeft="5dp"/>
+
+                        <TextView
+                            android:id="@+id/text_view_carbs"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="end|center_vertical"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/poppins_light"
+                            android:textSize="12dp"
+                            android:layout_marginRight="5dp"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_weight="2"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="@string/protein"
+                            android:textColor="@color/blue"
+                            android:fontFamily="@font/poppins_light"
+                            android:textSize="12dp"
+                            android:layout_marginLeft="5dp"/>
+
+                        <TextView
+                            android:id="@+id/text_view_protein"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="end|center_vertical"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/poppins_light"
+                            android:textSize="12dp"
+                            android:layout_marginRight="5dp"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_weight="2"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="@string/fiber"
+                            android:textColor="@color/blue"
+                            android:fontFamily="@font/poppins_light"
+                            android:textSize="12dp"
+                            android:layout_marginLeft="5dp"/>
+
+                        <TextView
+                            android:id="@+id/text_view_fiber"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="end|center_vertical"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/poppins_light"
+                            android:textSize="12dp"
+                            android:layout_marginRight="5dp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+</FrameLayout>

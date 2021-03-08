@@ -29,7 +29,7 @@ public class FilterSpinnerHandler {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void saveSpinnerState(String key, String newItem, int newIndex, LinearLayout layout) {
+    public void saveSpinnerState(String key, String newItem, int newIndex, PowerSpinnerView powerSpinnerView) {
         if (!mSharedPreferences.getString(key + mMode + "Value", "").equals(newItem.toLowerCase())) {
             SharedPreferences.Editor editor = mSharedPreferences.edit();
             editor.putInt(key + mMode + "Index", newIndex);
@@ -37,18 +37,18 @@ public class FilterSpinnerHandler {
             editor.putBoolean("ChangeStatus" + mMode, true);
             editor.commit();
         }
-        setLayoutSelected(layout);
+        setSpinnerSelected(powerSpinnerView);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void resetSpinnerState(PowerSpinnerView powerSpinnerView, String key, FilterApplier filterApplier, TextView textView, LinearLayout layout, TextView button) {
+    public void resetSpinnerState(PowerSpinnerView powerSpinnerView, String key, FilterApplier filterApplier, TextView textView, TextView button) {
         powerSpinnerView.clearSelectedItem();
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putInt(key + mMode + "Index", -1);
         editor.putString(key + mMode + "Value", "");
         editor.putBoolean("ChangeStatus" + mMode, true);
         editor.commit();
-        setLayoutUnselected(layout);
+        setSpinnerUnselected(powerSpinnerView);
         filterApplier.applyFilter(textView, button);
     }
 
@@ -69,20 +69,20 @@ public class FilterSpinnerHandler {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void resetSpinnerStates(List<PowerSpinnerView> list, FilterApplier filterApplier, TextView textView, List<LinearLayout> layouts, TextView button) {
+    public void resetSpinnerStates(List<PowerSpinnerView> list, FilterApplier filterApplier, TextView textView, TextView button) {
         for (int i = 0; i < list.size(); i++) {
-            resetSpinnerState(list.get(i), this.SPINNER_KEYS[i], filterApplier, textView, layouts.get(i), button);
+            resetSpinnerState(list.get(i), this.SPINNER_KEYS[i], filterApplier, textView, button);
         }
         loadSpinnerStates(list.get(0), list.get(1), list.get(2), list.get(3));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void setLayoutSelected(LinearLayout layout) {
-        layout.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.blue));
+    private void setSpinnerSelected(PowerSpinnerView powerSpinnerView) {
+        powerSpinnerView.setTextColor(ContextCompat.getColor(mContext, R.color.blue));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void setLayoutUnselected(LinearLayout layout) {
-        layout.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.white));
+    private void setSpinnerUnselected(PowerSpinnerView powerSpinnerView) {
+        powerSpinnerView.setTextColor(ContextCompat.getColor(mContext, R.color.black));
     }
 }

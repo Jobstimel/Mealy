@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/container"
+    tools:context=".ActivityCreateGroup"
+    android:background="@color/white">
+
+    <LinearLayout
+        style="@style/linear_layout_page"
+        android:id="@+id/page_1">
+
+        <include layout="@layout/include_filter"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/linear_layout_page"
+        android:id="@+id/page_2">
+
+        <LinearLayout
+            style="@style/linear_layout_top_bar"
+            android:layout_marginBottom="0dp"
+            android:weightSum="5">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"/>
+
+            <TextView
+                style="@style/text_view_top_bar_code"
+                android:id="@+id/swipe_page_head"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"/>
+
+        </LinearLayout>
+
+        <com.mindorks.placeholderview.SwipePlaceHolderView
+            android:id="@+id/swipeView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/include_result_page"/>
+
+    <include layout="@layout/include_load_screen"/>
+
+    <include layout="@layout/include_tutorial"/>
+
+    <include layout="@layout/include_bottom_navigation_view"/>
+
+</FrameLayout>

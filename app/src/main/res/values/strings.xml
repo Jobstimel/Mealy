@@ -69,19 +69,19 @@
     </string-array>
 
     <string-array name="preparation_type">
-        <item>backen</item>
-        <item>braten</item>
-        <item>grillen</item>
-        <item>kochen</item>
-        <item>roh</item>
+        <item>Backen</item>
+        <item>Braten</item>
+        <item>Grillen</item>
+        <item>Kochen</item>
+        <item>Roh</item>
     </string-array>
 
     <string-array name="eating_type">
-        <item>abnehmen</item>
-        <item>fettarm</item>
-        <item>lowcarb</item>
-        <item>vegan</item>
-        <item>vegetarisch</item>
+        <item>Abnehmen</item>
+        <item>Fettarm</item>
+        <item>Lowcarb</item>
+        <item>Vegan</item>
+        <item>Vegetarisch</item>
     </string-array>
 
     <string-array name="meal_category">

@@ -11,9 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Mealy">
-        <activity android:name=".ActivityPlayAlone" />
-        <activity android:name=".ActivityCreateGroup" />
-        <activity android:name=".ActivityJoinGroup">
+        <activity android:name=".ActivityPlayAlone"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ActivityCreateGroup"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ActivityJoinGroup"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

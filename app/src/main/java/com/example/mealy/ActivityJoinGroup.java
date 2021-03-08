@@ -56,7 +56,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private CodeInputView mCodeInputView;
     private TextView mSwipePageHead;
 
-    //LinearLayouts
+    //Pages
     private LinearLayout mLoadScreen;
     private LinearLayout mTutorial;
     private LinearLayout mPage1;
@@ -128,19 +128,23 @@ public class ActivityJoinGroup extends AppCompatActivity {
                 mTextViewResultPageHeader.setText("Teilnehmer: "+String.valueOf(mDataSnapshot.child(code).child("people_number").getValue()));
                 loadResults();
             }
+            else {
+                mTextViewResultPageHeader.setText(mSharedPreferences.getString(MODE+"GroupCode", ""));
+            }
         }
     }
 
     private void loadResults() {
+        mTextViewResultPlaceholder.setText("Ergebnisse werden abgerufen...");
         if (mAllRecipesList == null) {
             mAllRecipesList = JsonLoader.loadRecipies(mContext);
         }
-        mTextViewResultPlaceholder.setVisibility(View.GONE);
         mSwipeHandler.loadOnlineResults(mDataSnapshot, mAllRecipesList, MODE+"GroupCode");
         RecipeListAdapter adapter = new RecipeListAdapter(this, R.layout.list_view_apdapter_layout, mSwipeHandler.mOnlineResults);
-        mListView.setAdapter(adapter);
         mTextViewLeaveGroupButton.setText("Gruppe verlassen");
         mTextViewLeaveGroupButton.setClickable(true);
+        mListView.setAdapter(adapter);
+        mTextViewResultPlaceholder.setVisibility(View.GONE);
     }
 
     public void leaveGroup() {
@@ -258,7 +262,6 @@ public class ActivityJoinGroup extends AppCompatActivity {
         });
 
         mTextViewResultPageHeader = findViewById(R.id.result_page_head);
-        mTextViewResultPageHeader.setText(mSharedPreferences.getString(MODE+"GroupCode", ""));
 
         mCodeInputView = findViewById(R.id.code_input_view);
         mCodeInputView.addOnCompleteListener(code -> checkUserInputCode(code));

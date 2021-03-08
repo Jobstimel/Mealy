@@ -48,7 +48,7 @@ public class ActivityCreateGroup extends AppCompatActivity {
     //General
     private static final String TAG = "CREATE_GROUP_ACTIVITY";
     private static final String MODE = "Online";
-    private static final String PLACEHOLDER_1_TEXT = "Die Abstimmung läuft noch.\nSobald alle Teilnehmer abgestimmt haben kannst du die Abstimmung durch einen Klick auf 'Abstimmung beenden' abschließen.\nDanach werden die Ergebnisse hier veröffentlicht.";
+    private static final String PLACEHOLDER_1_TEXT = "Du hast alle Rezepte bewertet und deine Daten wurden erfolgreich hochgeladen.\nDie Abstimmung läuft aktuell noch. Du kannst sie jederzeit durch einen Klick auf 'Abstimmung beenden' schließen.\nDu solltest das jedoch erst dann machen, wenn alle Teilnehmer ihre Stimme abgegeben haben.\nAnschließend werden die Ergebnisse hier veröffentlicht.";
     private SharedPreferences mSharedPreferences;
     private Context mContext;
 
@@ -121,7 +121,6 @@ public class ActivityCreateGroup extends AppCompatActivity {
     private PageHandler mPageHandler;
 
     //Pages
-    private LinearLayout mCloseVotingLoadScreen;
     private LinearLayout mLoadScreen;
     private LinearLayout mTutorial;
     private LinearLayout mPage1;
@@ -199,12 +198,12 @@ public class ActivityCreateGroup extends AppCompatActivity {
         mSwipeHandler.loadOnlineResults(mDataSnapshot, mAllRecipesList, "GroupCode");
         RecipeListAdapter adapter = new RecipeListAdapter(this, R.layout.list_view_apdapter_layout, mSwipeHandler.mOnlineResults);
         mListView.setAdapter(adapter);
-        mCloseVotingLoadScreen.setVisibility(View.GONE);
         mListView.setVisibility(View.VISIBLE);
     }
 
     public void closeVoting() {
-        mResultPagePlaceholder1.setVisibility(View.GONE);
+        mResultPagePlaceholder1.setText("Ergebnisse werden abgerufen...");
+        mResultPagePlaceholder2.setVisibility(View.GONE);
         mDatabaseReference.child(mSharedPreferences.getString("GroupCode", "")).child("group_status").setValue("closed");
     }
 
@@ -343,8 +342,6 @@ public class ActivityCreateGroup extends AppCompatActivity {
         mPage1 = findViewById(R.id.page_1);
         mPage2 = findViewById(R.id.page_2);
         mPage3 = findViewById(R.id.page_3);
-        mCloseVotingLoadScreen = findViewById(R.id.close_voting_load_screen);
-        mCloseVotingLoadScreen.setVisibility(View.GONE);
         mLoadScreen = findViewById(R.id.load_screen);
         mTutorial = findViewById(R.id.tutorial);
         mTutorial.setVisibility(View.GONE);

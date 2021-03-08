@@ -64,7 +64,7 @@
                 android:textStyle="bold"
                 android:fontFamily="@font/poppins_light"
                 android:gravity="center"
-                android:textColor="@color/filter_green"
+                android:textColor="@color/green"
                 android:layout_weight="8"/>
 
         </LinearLayout>

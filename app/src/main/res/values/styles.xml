@@ -63,15 +63,6 @@
 
     //TextViews
 
-    <style name="text_view_filter_6_3">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_margin">2dp</item>
-        <item name="backgroundColor">@color/filter_background_color</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/filter_text_color</item>
-    </style>
-
     <style name="text_view_top_bot">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -136,6 +127,19 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textColorHint">@color/black</item>
         <item name="android:textSize">15dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/poppins_light</item>
+        <item name="android:layout_weight">2</item>
+    </style>
+
+    <style name="power_spinner_360dp">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/black</item>
+        <item name="android:textSize">12dp</item>
         <item name="android:fontFamily">@font/poppins_light</item>
         <item name="android:layout_weight">2</item>
     </style>

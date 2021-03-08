@@ -27,14 +27,13 @@ import java.util.ArrayList;
 public class RecipeListAdapter extends ArrayAdapter<Recipe> {
 
     private final String[] CONNECTIONS = {" mit ", " an ", " auf "};
+    private int lastPosition = -1;
     private Context mContext;
     private int mResource;
-    private int lastPosition = -1;
 
     static class ViewHolder {
-        ImageView url1;
         TextView proVotes;
-        TextView againstVotes;
+        ImageView url1;
         TextView title;
     }
 
@@ -80,8 +79,6 @@ public class RecipeListAdapter extends ArrayAdapter<Recipe> {
         Animation animation = AnimationUtils.loadAnimation(mContext,(position > lastPosition) ? R.anim.animation_load_down : R.anim.animation_load_up);
         result.startAnimation(animation);
         lastPosition = position;
-
-        int defaultImage = mContext.getResources().getIdentifier("@drawable/mealy_app_icon", null, mContext.getPackageName());
 
         Glide.with(mContext).load(url1).into(holder.url1);
         holder.proVotes.setText(proVotes);

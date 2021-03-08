@@ -10,8 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         android:layout_weight="1">
 
         <ImageView
@@ -59,7 +59,7 @@
                     android:id="@+id/code_input_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="1dp"
+                    android:layout_margin="2dp"
                     android:background="@drawable/background_filter_round_corners"
                     android:fontFamily="@font/poppins_light"
                     app:code_text_size="25dp"

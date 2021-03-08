@@ -210,8 +210,12 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private void setupClasses() {
         mCodeInputHandler = new CodeInputHandler(mContext, mSharedPreferences);
         mSwipePlaceHolderViewHandlerJoinGroup = new SwipePlaceHolderViewHandlerJoinGroup(mContext);
-        mSwipeHandler = new SwipeHandler(mSharedPreferences, MODE);
         mPageHandler = new PageHandler(mPage1, mPage2, mPage3, mTutorial, mLoadScreen, mSharedPreferences, MODE);
+        mSwipeHandler = new SwipeHandler(mSharedPreferences, MODE);
+        mSwipeHandler.loadLikedIndices();
+        mSwipeHandler.loadDislikedIndices();
+        mLikedIDs = mSwipeHandler.mLikedIDs;
+        mDislikedIDs = mSwipeHandler.mDislikedIDs;
     }
 
     private void setupSwipePlaceholderView() {

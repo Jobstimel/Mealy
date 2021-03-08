@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    //LinearLayouts
-
     <style name="linear_layout_top_bar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">56dp</item>
@@ -11,15 +9,6 @@
         <item name="android:background">@color/filter_background_color</item>
         <item name="android:layout_marginBottom">20dp</item>
         <item name="android:elevation">5dp</item>
-    </style>
-
-    <style name="linear_layout_result_entry_container_outside">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/filter_background_color</item>
-        <item name="android:layout_marginBottom">20dp</item>
-        <item name="android:elevation">10dp</item>
-        <item name="android:orientation">horizontal</item>
     </style>
 
     <style name="text_view_filter">

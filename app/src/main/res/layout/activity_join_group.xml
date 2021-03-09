@@ -14,27 +14,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        style="@style/linear_layout_page"
-        android:layout_height="match_parent"
-        android:id="@+id/page_2">
-
-        <LinearLayout
-            style="@style/linear_layout_top_bar"
-            android:layout_marginBottom="0dp">
-
-            <TextView
-                style="@style/text_view_top_bar_code"
-                android:id="@+id/swipe_page_head"/>
-
-        </LinearLayout>
-
-        <com.mindorks.placeholderview.SwipePlaceHolderView
-            android:id="@+id/swipeView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </LinearLayout>
+    <include layout="@layout/include_swipe_page"/>
 
     <include layout="@layout/include_result_page"/>
 

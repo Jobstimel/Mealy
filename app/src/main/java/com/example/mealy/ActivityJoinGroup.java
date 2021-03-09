@@ -36,6 +36,8 @@ public class ActivityJoinGroup extends AppCompatActivity {
     //General
     private static final String TAG = "JOIN_LOBBY_ACTIVITY";
     private static final String MODE = "Join";
+    private static final String PLACEHOLDER_UPLOAD = "Du hast alle Rezepte bewertet und deine Daten wurden erfolgreich hochgeladen.\nDie Abstimmung läuft aktuell noch, sobald der Host sie beendet hat werden dir die Ergebnisse hier angezeigt.";
+    private static final String PLACEHOLDER_NO_UPLOAD = "Die Abstimmung wurde bereits geschlossen, deshalb wurden deine Stimme nicht mehr gezählt.\nDie Ergebnisse werden gerade abgerufen...";
     private SharedPreferences mSharedPreferences;
     private Context mContext;
 
@@ -108,10 +110,16 @@ public class ActivityJoinGroup extends AppCompatActivity {
 
     private void uploadRatings() {
         String code = mSharedPreferences.getString("JoinGroupCode", "");
-        DatabaseHandler mDatabaseHandler = new DatabaseHandler(mSharedPreferences);
-        mDatabaseHandler.updateGroupCounter(mDataSnapshot, mLikedIDs, mDatabaseReference, code);
-        mDatabaseHandler.updateGroupCompletedUserList(mDataSnapshot, mDatabaseReference, code);
-        mDatabaseHandler.updateGroupPeopleNumber(mDataSnapshot, mDatabaseReference, code);
+        String status = (String) mDataSnapshot.child(code).child("group_status").getValue();
+        if (status != null && status.equals("open")) {
+            DatabaseHandler mDatabaseHandler = new DatabaseHandler(mSharedPreferences);
+            mDatabaseHandler.updateGroupCounter(mDataSnapshot, mLikedIDs, mDatabaseReference, code);
+            mDatabaseHandler.updateGroupCompletedUserList(mDataSnapshot, mDatabaseReference, code);
+            mDatabaseHandler.updateGroupPeopleNumber(mDataSnapshot, mDatabaseReference, code);
+        }
+        else {
+            mTextViewResultPlaceholder.setText(PLACEHOLDER_NO_UPLOAD);
+        }
         switchToPage3();
     }
 
@@ -271,7 +279,7 @@ public class ActivityJoinGroup extends AppCompatActivity {
         mCodeInputView.addOnCompleteListener(code -> checkUserInputCode(code));
 
         mTextViewResultPlaceholder = findViewById(R.id.result_page_placeholder_1);
-        mTextViewResultPlaceholder.setText("Du hast alle Rezepte bewertet und deine Daten wurden erfolgreich hochgeladen.\nDie Abstimmung läuft aktuell noch, sobald der Host sie beendet hat werden dir die Ergebnisse hier angezeigt.");
+        mTextViewResultPlaceholder.setText(PLACEHOLDER_UPLOAD);
     }
 
     private void setupDatabase() {

@@ -93,6 +93,7 @@ public class ActivityPlayAlone extends FragmentActivity {
     private SwipePlaceHolderView mSwipePlaceHolderView;
     private TextView mTextViewRateRecipesButton;
     private TextView mTextViewResultPageHead;
+    private TextView mTextViewSwipePageHead;
     private TextView mResultPageButton;
     private ListView mListView;
 
@@ -318,6 +319,9 @@ public class ActivityPlayAlone extends FragmentActivity {
 
         mTextViewResultPageHead = findViewById(R.id.result_page_head);
         mTextViewResultPageHead.setText("Solomodus");
+
+        mTextViewSwipePageHead = findViewById(R.id.swipe_page_head);
+        mTextViewSwipePageHead.setText("Solomodus");
 
         mListView = findViewById(R.id.list_view);
 

@@ -57,11 +57,10 @@
                 android:layout_marginVertical="2dp"
                 android:layout_marginRight="1dp"
                 android:layout_marginLeft="2dp"
-                android:textSize="16dp"
+                android:textSize="12dp"
                 android:textStyle="bold"
                 android:fontFamily="@font/poppins_light"
                 android:gravity="center"
-                android:textColor="@color/green"
                 android:layout_weight="8"/>
 
         </LinearLayout>

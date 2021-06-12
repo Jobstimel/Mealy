@@ -171,6 +171,9 @@ public class ActivityJoinGroup extends AppCompatActivity {
     }
 
     private void loadCorrectPage() {
+        if (mPageHandler == null) {
+            mPageHandler = new PageHandler(mPage1, mPage2, mPage3, mTutorial, mLoadScreen, mSharedPreferences, MODE);
+        }
         mPageHandler.loadCorrectPage();
         Integer currentPage = mSharedPreferences.getInt("PageJoin", 1);
         if (currentPage == 2) {
@@ -218,7 +221,6 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private void setupClasses() {
         mCodeInputHandler = new CodeInputHandler(mContext, mSharedPreferences);
         mSwipePlaceHolderViewHandlerJoinGroup = new SwipePlaceHolderViewHandlerJoinGroup(mContext);
-        mPageHandler = new PageHandler(mPage1, mPage2, mPage3, mTutorial, mLoadScreen, mSharedPreferences, MODE);
         mSwipeHandler = new SwipeHandler(mSharedPreferences, MODE);
         mSwipeHandler.loadLikedIndices();
         mSwipeHandler.loadDislikedIndices();
@@ -254,8 +256,6 @@ public class ActivityJoinGroup extends AppCompatActivity {
     private void setupViews() {
         mListView = findViewById(R.id.list_view);
         mListView.setVisibility(View.GONE);
-        mBottomNavigationView = findViewById(R.id.bottom_navigation);
-        mBottomNavigationView.setSelectedItemId(R.id.join_group);
 
         mTextViewCodeInputStatus = findViewById(R.id.text_view_code_status);
         mTextViewJoinGroupButton = findViewById(R.id.text_view_join_group);
@@ -300,6 +300,8 @@ public class ActivityJoinGroup extends AppCompatActivity {
     }
 
     private void setupBottomNavigationBar() {
+        mBottomNavigationView = findViewById(R.id.bottom_navigation);
+        mBottomNavigationView.setSelectedItemId(R.id.join_group);
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

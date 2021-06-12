@@ -2,6 +2,7 @@ package com.example.mealy;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
@@ -26,7 +27,6 @@ import java.util.ArrayList;
 
 public class RecipeListAdapter extends ArrayAdapter<Recipe> {
 
-    private final String[] CONNECTIONS = {" mit ", " an ", " auf "};
     private int lastPosition = -1;
     private Context mContext;
     private int mResource;
@@ -49,11 +49,8 @@ public class RecipeListAdapter extends ArrayAdapter<Recipe> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         String url1 = getItem(position).getUrl1();
-        String proVotes = String.valueOf(getItem(position).getScore());
-        String title = getItem(position).getTitle().replaceAll("-", " ").trim();
-        for (int i = 0; i < CONNECTIONS.length; i++) {
-            title = title.split(CONNECTIONS[i])[0];
-        }
+        Integer proVotes = getItem(position).getScore();
+        String title = getItem(position).getTitle();
         final String url2 = getItem(position).getUrl2();
 
         final View result;
@@ -81,8 +78,14 @@ public class RecipeListAdapter extends ArrayAdapter<Recipe> {
         lastPosition = position;
 
         Glide.with(mContext).load(url1).into(holder.url1);
-        holder.proVotes.setText(proVotes);
+        holder.proVotes.setText(String.valueOf(proVotes));
         holder.title.setText(title);
+
+        holder.proVotes.setTextColor(Color.parseColor("#32BA7C"));
+
+        if (proVotes <= 0) {
+            holder.proVotes.setTextColor(Color.parseColor("#FF0006"));
+        }
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

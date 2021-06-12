@@ -117,8 +117,10 @@ public class ActivityPlayAlone extends FragmentActivity {
 
     @Override
     protected void onPause() {
-        mSwipeHandler.saveLikedIndices(mLikedIDs);
-        mSwipeHandler.saveDislikedIndices(mDislikedIDs);
+        mSwipeHandler.loadLikedIndices();
+        mSwipeHandler.loadDislikedIndices();
+        mSwipeHandler.saveLikedIndices(mSwipeHandler.mLikedIDs);
+        mSwipeHandler.saveDislikedIndices(mSwipeHandler.mDislikedIDs);
         super.onPause();
     }
 
